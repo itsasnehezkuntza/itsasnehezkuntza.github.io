@@ -26,7 +26,7 @@ const elements = {
   restoreSettings: document.getElementById("restore-settings")
 };
 
-function clampNumber(value, min, max, fallback) {
+function clampNumber(value, min, max, fallback) { 
   const numberValue = Number(value);
   if (Number.isNaN(numberValue)) return fallback;
   return Math.min(Math.max(numberValue, min), max);

@@ -44,7 +44,7 @@ function goToDesk() {
   }, 700);
   setTimeout(function () { blackout.classList.remove("show") }, 1250);
   setTimeout(function () {
-    typeText("deskTypedText", 120, function () {
+    typeText("deskTypedText", 80, function () {
       setTimeout(function () { if (emailAlert) emailAlert.classList.add("ready") }, 900)
     })
   }, 3200)
@@ -54,7 +54,9 @@ function openComputer() {
   const emailAlert = document.getElementById("emailAlert");
   if (emailAlert) emailAlert.classList.remove("ready");
   if (computerWindow) computerWindow.classList.add("show")
-} function openEmail() {
+} 
+
+function openEmail() {
   const inboxView = document.getElementById("inboxView");
   const emailDraftView = document.getElementById("emailDraftView");
   const itzalaChatView = document.getElementById("itzalaChatView");
@@ -71,8 +73,9 @@ function openComputer() {
   } if (typedEmail) {
     typedEmail.textContent = "";
     typedEmail.classList.remove("interrupted")
-  } typeEmailUntilError("academyEmailTyped", 34, 0.95, function () { triggerErrorAndChat() })
-} function triggerErrorAndChat() {
+  } typeEmailUntilError("academyEmailTyped", 80, 0.95, function () { triggerErrorAndChat() })
+}
+function triggerErrorAndChat() {
   const emailDraftView = document.getElementById("emailDraftView");
   const errorGlitch = document.getElementById("errorGlitch");
   const itzalaChatView = document.getElementById("itzalaChatView");
@@ -83,7 +86,9 @@ function openComputer() {
       emailDraftView.style.display = "none"
     } if (errorGlitch) errorGlitch.classList.remove("show"); if (itzalaChatView) { itzalaChatView.classList.add("show"); startItzalaChat() }
   }, 1900)
-} function startItzalaChat() {
+}
+
+function startItzalaChat() {
   const messages = [
     { speaker: "itzala", type: "danger", label: "ITZALA", text: "JA JA JA...\nBerandu zabiltza...\nNire tranpan guztiz erori zara!" },
     { speaker: "alumna", type: "", label: "NI", text: "Zer? Zer gertatu da?\nNor zara zu?" },

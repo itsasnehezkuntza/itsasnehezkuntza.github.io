@@ -73,7 +73,7 @@ function openEmail() {
     } if (typedEmail) {
     typedEmail.textContent = "";
     typedEmail.classList.remove("interrupted")
-  } typeEmailUntilError("academyEmailTyped", 250, 0.95, function () { triggerErrorAndChat() })
+  } typeEmailUntilError("academyEmailTyped", 150, 0.95, function () { triggerErrorAndChat() })
 }
 function triggerErrorAndChat() {
   const emailDraftView = document.getElementById("emailDraftView");

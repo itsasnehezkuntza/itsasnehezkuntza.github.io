@@ -20,7 +20,7 @@ function startAutoIntro() {
   if (storyCard) storyCard.classList.remove("revealed");
   if (autoProgress) autoProgress.classList.remove("revealed");
   setTimeout(function () {
-    typeText("schoolTypedText", 50, function () {
+    typeText("schoolTypedText", 60, function () {
       if (storyCard) storyCard.classList.add("revealed");
       setTimeout(function () { if (autoProgress) autoProgress.classList.add("revealed") }, 900)
     })
@@ -44,7 +44,7 @@ function goToDesk() {
   }, 700);
   setTimeout(function () { blackout.classList.remove("show") }, 1250);
   setTimeout(function () {
-    typeText("deskTypedText", 30, function () {
+    typeText("deskTypedText", 50, function () {
       setTimeout(function () { if (emailAlert) emailAlert.classList.add("ready") }, 900)
     })
   }, 3200)
@@ -73,7 +73,7 @@ function openEmail() {
     } if (typedEmail) {
     typedEmail.textContent = "";
     typedEmail.classList.remove("interrupted")
-  } typeEmailUntilError("academyEmailTyped", 300, 0.95, function () { triggerErrorAndChat() })
+  } typeEmailUntilError("academyEmailTyped", 250, 0.95, function () { triggerErrorAndChat() })
 }
 function triggerErrorAndChat() {
   const emailDraftView = document.getElementById("emailDraftView");

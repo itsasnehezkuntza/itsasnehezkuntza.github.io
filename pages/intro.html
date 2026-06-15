@@ -1,0 +1,2693 @@
+<!DOCTYPE html>
+<html lang="eu">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&family=Sora:wght@400;500;600;700;800&display=swap');
+
+    :root {
+      --stage-navy: #101735;
+      --stage-navy-two: #1E254F;
+      --deep-violet: #5D4B93;
+      --soft-violet: #EEE9FA;
+      --line-violet: #D8CEE8;
+      --peach: #E58B77;
+      --soft-peach: #FFF0EC;
+      --paper: #FCFBF7;
+      --ink: #1F2333;
+      --graphite: #2F3040;
+      --muted: #6E6F7A;
+      --door-left: 42%;
+      --door-top: 50%;
+      --door-width: 32%;
+      --door-height: 30%;
+      --alert-left: 34%;
+      --alert-top: 36%;
+      --alert-width: 340px;
+
+      --alumna-avatar-url: url("https://static.wixstatic.com/media/22f1ea_d9aa2b4518d546ea8955f8d71c398bbf~mv2.png");
+      --itzala-avatar-url: url("https://static.wixstatic.com/media/22f1ea_888b71b756434004b247ce76b645c429~mv2.png");
+      --refuse-scene-url: url("https://static.wixstatic.com/media/22f1ea_c54aa05505e84033a49d654b12e4d295~mv2.png");
+      --academy-logo-url: url("https://static.wixstatic.com/media/22f1ea_fd63e07ab8244f3bad2fc4ef79823c85~mv2.png");
+    }
+
+    * {
+      box-sizing: border-box
+    }
+
+    body {
+      margin: 0;
+      background: #101735;
+      font-family: "Poppins", "Inter", "Segoe UI", Arial, sans-serif
+    }
+
+    .intro-app {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      min-height: 850px;
+      overflow: hidden;
+      background: var(--stage-navy);
+      color: #fff
+    }
+
+    .scene {
+      position: absolute;
+      inset: 0;
+      display: none;
+      overflow: hidden
+    }
+
+    .scene.active {
+      display: block;
+      animation: sceneIn .9s ease forwards
+    }
+
+    @keyframes sceneIn {
+      from {
+        opacity: 0;
+        transform: scale(1.015)
+      }
+
+      to {
+        opacity: 1;
+        transform: scale(1)
+      }
+    }
+
+    .bg-image {
+      position: absolute;
+      inset: 0;
+      background-size: cover;
+      background-position: center;
+      transform: scale(1.04);
+      animation: slowZoom 12s ease forwards
+    }
+
+    @keyframes slowZoom {
+      from {
+        transform: scale(1.06)
+      }
+
+      to {
+        transform: scale(1)
+      }
+    }
+
+    .school-bg {
+      background-image: linear-gradient(90deg, rgba(16, 23, 53, .72), rgba(16, 23, 53, .22), rgba(16, 23, 53, .10)), var(--school-url)
+    }
+
+    .desk-bg {
+      background-image: linear-gradient(90deg, rgba(16, 23, 53, .52), rgba(16, 23, 53, .08), rgba(16, 23, 53, .18)), var(--desk-url)
+    }
+
+    .soft-vignette {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 50% 42%, transparent 35%, rgba(16, 23, 53, .24) 70%), linear-gradient(180deg, rgba(16, 23, 53, .15), rgba(16, 23, 53, .42));
+      pointer-events: none
+    }
+
+    .story-text {
+      position: absolute;
+      left: clamp(24px, 6vw, 76px);
+      bottom: clamp(56px, 9vw, 110px);
+      width: min(620px, 86%);
+      z-index: 5
+    }
+
+    .desk-text {
+      position: absolute;
+      left: clamp(24px, 6vw, 76px);
+      top: clamp(64px, 12vw, 120px);
+      width: min(520px, 82%);
+      z-index: 5
+    }
+
+    .label {
+      display: inline-flex;
+      padding: 8px 13px;
+      border-radius: 999px;
+      background: rgba(255, 240, 236, .92);
+      color: var(--deep-violet);
+      font-size: .78rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: .05em;
+      margin-bottom: 18px;
+      text-shadow: none
+    }
+
+    h1 {
+      margin: 0 0 14px 0;
+      font-size: clamp(2.3rem, 6vw, 5rem);
+      line-height: .93;
+      letter-spacing: -.02em;
+      color: #fff;
+      text-shadow: 0 16px 42px rgba(0, 0, 0, .42)
+    }
+
+    p {
+      margin: 0;
+      color: rgba(255, 255, 255, .88);
+      line-height: 1.65;
+      font-size: clamp(.98rem, 1.5vw, 1.12rem);
+      text-shadow: 0 10px 28px rgba(0, 0, 0, .32)
+    }
+
+    .line {
+      opacity: 0;
+      transform: translateY(14px);
+      animation: lineIn .85s ease forwards
+    }
+
+    .line-1 {
+      animation-delay: .8s
+    }
+
+    .line-2 {
+      animation-delay: 3s
+    }
+
+    @keyframes lineIn {
+      to {
+        opacity: 1;
+        transform: translateY(0)
+      }
+    }
+
+    .typed-text {
+      min-height: 3.4em;
+      white-space: normal;
+      overflow-wrap: break-word;
+      opacity: 0
+    }
+
+    .typed-text.typing,
+    .typed-text.done {
+      opacity: 1
+    }
+
+    .typed-text::after {
+      content: "";
+      display: inline-block;
+      width: 2px;
+      height: 1em;
+      margin-left: 4px;
+      vertical-align: -.12em;
+      background: rgba(255, 255, 255, .9);
+      opacity: 0
+    }
+
+    .typed-text.typing::after {
+      opacity: 1;
+      animation: cursorBlink .8s step-end infinite
+    }
+
+    .typed-text.done::after {
+      opacity: 0;
+      animation: none
+    }
+
+    @keyframes cursorBlink {
+
+      0%,
+      100% {
+        opacity: 1
+      }
+
+      50% {
+        opacity: 0
+      }
+    }
+
+    .story-card {
+      margin-top: 22px;
+      padding: 20px;
+      border-radius: 22px;
+      background: rgba(252, 251, 247, .92);
+      border-left: 5px solid var(--peach);
+      box-shadow: 0 18px 46px rgba(0, 0, 0, .24);
+      opacity: 0;
+      transform: translateY(16px)
+    }
+
+    .story-card p {
+      color: var(--graphite);
+      text-shadow: none
+    }
+
+    .story-card.revealed {
+      animation: cardIn .85s ease forwards
+    }
+
+    .desk-hint {
+      margin-top: 22px;
+      padding: 18px 20px;
+      border-radius: 22px;
+      background: rgba(252, 251, 247, .92);
+      border-left: 5px solid var(--peach);
+      box-shadow: 0 18px 46px rgba(0, 0, 0, .24);
+      color: var(--graphite);
+      text-shadow: none;
+      opacity: 0;
+      transform: translateY(14px)
+    }
+
+    .desk-hint.revealed {
+      animation: cardIn .85s ease forwards
+    }
+
+    @keyframes cardIn {
+      to {
+        opacity: 1;
+        transform: translateY(0)
+      }
+    }
+
+    .auto-progress {
+      width: min(360px, 100%);
+      height: 6px;
+      margin-top: 22px;
+      border-radius: 999px;
+      overflow: hidden;
+      background: rgba(252, 251, 247, .24);
+      opacity: 0
+    }
+
+    .auto-progress span {
+      display: block;
+      height: 100%;
+      width: 0;
+      border-radius: 999px;
+      background: var(--peach)
+    }
+
+    .auto-progress.revealed {
+      animation: progressAppears .6s ease forwards
+    }
+
+    .auto-progress.revealed span {
+      animation: autoProgress 3.6s linear forwards
+    }
+
+    @keyframes progressAppears {
+      to {
+        opacity: 1
+      }
+    }
+
+    @keyframes autoProgress {
+      to {
+        width: 100%
+      }
+    }
+
+    .door-close-zone {
+      position: absolute;
+      left: var(--door-left);
+      top: var(--door-top);
+      width: var(--door-width);
+      height: var(--door-height);
+      z-index: 4;
+      pointer-events: none;
+      overflow: hidden;
+      opacity: .72
+    }
+
+    .door-panel {
+      position: absolute;
+      top: 0;
+      width: 50%;
+      height: 100%;
+      background: linear-gradient(90deg, rgba(255, 255, 255, .10), rgba(16, 23, 53, .50)), rgba(16, 23, 53, .34);
+      backdrop-filter: blur(1px);
+      border: 1px solid rgba(255, 255, 255, .10)
+    }
+
+    .door-left {
+      left: -50%;
+      animation: closeDoorLeft 1.6s ease forwards;
+      animation-delay: 1.2s
+    }
+
+    .door-right {
+      right: -50%;
+      animation: closeDoorRight 1.6s ease forwards;
+      animation-delay: 1.2s
+    }
+
+    .door-seam {
+      position: absolute;
+      left: 50%;
+      top: 0;
+      width: 2px;
+      height: 100%;
+      background: rgba(255, 255, 255, .24);
+      transform: translateX(-50%);
+      opacity: 0;
+      animation: seamIn .4s ease forwards;
+      animation-delay: 2.75s
+    }
+
+    @keyframes closeDoorLeft {
+      to {
+        left: 0
+      }
+    }
+
+    @keyframes closeDoorRight {
+      to {
+        right: 0
+      }
+    }
+
+    @keyframes seamIn {
+      to {
+        opacity: 1
+      }
+    }
+
+    .blackout {
+      position: absolute;
+      inset: 0;
+      z-index: 50;
+      background: #050713;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .75s ease
+    }
+
+    .blackout.show {
+      opacity: 1
+    }
+
+    #deskScene .desk-text .label,
+    #deskScene .desk-text h1 {
+      opacity: 0;
+      transform: translateY(14px)
+    }
+
+    #deskScene.active .desk-text .label {
+      animation: lineIn .8s ease forwards;
+      animation-delay: .7s
+    }
+
+    #deskScene.active .desk-text h1 {
+      animation: lineIn .8s ease forwards;
+      animation-delay: 1.8s
+    }
+
+    #deskScene .desk-text p.typed-text {
+      transform: none
+    }
+
+    #deskScene .desk-text p.typed-text.typing,
+    #deskScene .desk-text p.typed-text.done {
+      opacity: 1
+    }
+
+    /* Solo el email especial de Taupada Akademia */
+    .email-body,
+    .email-typed-text,
+    .academy-card {
+      font-family: 'Sora', sans-serif;
+    }
+
+    .email-body strong,
+    .email-typed-text strong {
+      font-family: 'Sora', sans-serif;
+      color: var(--stage-navy);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+    }
+
+    .email-script-line {
+      display: block;
+      font-family: 'Sora', sans-serif;
+      font-size: 1.18rem;
+      line-height: 1.45;
+      font-weight: 800;
+      color: var(--deep-violet);
+      letter-spacing: -0.025em;
+      margin-bottom: 12px;
+    }
+
+    .email-alert {
+      position: absolute;
+      left: var(--alert-left);
+      top: var(--alert-top);
+      width: var(--alert-width);
+      z-index: 12;
+      display: grid;
+      grid-template-columns: 44px 1fr;
+      gap: 12px;
+      align-items: center;
+      padding: 14px;
+      border: 1px solid rgba(255, 255, 255, .18);
+      border-radius: 20px;
+      background: linear-gradient(135deg, rgba(16, 23, 53, .96), rgba(30, 37, 79, .96));
+      color: #fff;
+      box-shadow: 0 22px 48px rgba(0, 0, 0, .34);
+      cursor: pointer;
+      opacity: 0;
+      transform: translateY(18px) scale(.96);
+      pointer-events: none;
+      font-family: inherit;
+      text-align: left
+    }
+
+    .email-alert.ready {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+      pointer-events: auto;
+      animation: alertIn .7s ease forwards, alertPulse 1.8s ease-in-out infinite .8s
+    }
+
+    .alert-icon {
+      width: 44px;
+      height: 44px;
+      display: grid;
+      place-items: center;
+      border-radius: 15px;
+      background: var(--soft-peach);
+      color: var(--deep-violet);
+      font-weight: 900;
+      font-size: 1rem
+    }
+
+    .alert-text strong {
+      display: block;
+      font-size: .95rem;
+      margin-bottom: 3px
+    }
+
+    .alert-text span {
+      display: block;
+      color: rgba(255, 255, 255, .76);
+      font-size: .82rem;
+      line-height: 1.35
+    }
+
+    .email-alert:hover {
+      filter: brightness(1.04)
+    }
+
+    @keyframes alertIn {
+      from {
+        opacity: 0;
+        transform: translateY(18px) scale(.96)
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1)
+      }
+    }
+
+    @keyframes alertPulse {
+
+      0%,
+      100% {
+        box-shadow: 0 22px 48px rgba(0, 0, 0, .34), 0 0 0 0 rgba(229, 139, 119, .45)
+      }
+
+      50% {
+        box-shadow: 0 22px 48px rgba(0, 0, 0, .34), 0 0 0 12px rgba(229, 139, 119, 0)
+      }
+    }
+
+    .computer-window {
+      position: absolute;
+      inset: clamp(36px, 6vw, 70px);
+      z-index: 20;
+      display: none;
+      border-radius: 28px;
+      overflow: hidden;
+      background: rgba(252, 251, 247, .97);
+      border: 1px solid rgba(216, 206, 232, .95);
+      box-shadow: 0 34px 90px rgba(0, 0, 0, .42);
+      color: var(--ink)
+    }
+
+    .computer-window.show {
+      display: block;
+      animation: windowIn .55s ease forwards
+    }
+
+    @keyframes windowIn {
+      from {
+        opacity: 0;
+        transform: translateY(24px) scale(.96)
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1)
+      }
+    }
+
+    .window-topbar {
+      height: 48px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 0 18px;
+      background: var(--stage-navy);
+      color: #fff
+    }
+
+    .traffic {
+      width: 11px;
+      height: 11px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, .42)
+    }
+
+    .window-title {
+      margin-left: 10px;
+      font-size: .86rem;
+      font-weight: 900;
+      color: rgba(255, 255, 255, .82)
+    }
+
+    .window-body {
+      position: relative;
+      height: calc(100% - 48px);
+      min-height: 500px;
+      padding: 24px;
+      overflow: auto
+    }
+
+    .inbox-title {
+      color: var(--stage-navy);
+      font-size: clamp(1.7rem, 4vw, 2.6rem);
+      line-height: 1;
+      letter-spacing: -.05em;
+      margin: 0 0 18px 0
+    }
+
+    .mail-list {
+      display: grid;
+      gap: 12px
+    }
+
+    .mail-row {
+      display: grid;
+      grid-template-columns: 42px 1fr auto;
+      gap: 14px;
+      align-items: center;
+      padding: 15px;
+      border-radius: 18px;
+      background: white;
+      border: 1px solid var(--line-violet);
+      cursor: pointer;
+      transition: transform .15s ease, box-shadow .15s ease
+    }
+
+    .mail-row:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 26px rgba(16, 23, 53, .10)
+    }
+
+    .mail-icon {
+      width: 42px;
+      height: 42px;
+      display: grid;
+      place-items: center;
+      border-radius: 14px;
+      background: var(--soft-peach);
+      color: var(--deep-violet);
+      font-weight: 900
+    }
+
+    .mail-title {
+      font-weight: 900;
+      color: var(--stage-navy)
+    }
+
+    .mail-sub {
+      margin-top: 3px;
+      color: var(--muted);
+      font-size: .9rem
+    }
+
+    .tag {
+      padding: 7px 10px;
+      border-radius: 999px;
+      background: var(--soft-violet);
+      color: var(--deep-violet);
+      font-size: .78rem;
+      font-weight: 900;
+      white-space: nowrap
+    }
+
+    .email-letter {
+      display: none;
+      padding: 24px;
+      border-radius: 22px;
+      background: white;
+      border-left: 5px solid var(--peach);
+      box-shadow: 0 12px 30px rgba(16, 23, 53, .08)
+    }
+
+    .email-letter.show {
+      display: block;
+      animation: windowIn .45s ease forwards
+    }
+
+    .email-meta {
+      color: var(--muted);
+      font-size: .86rem;
+      margin-bottom: 16px
+    }
+
+    .email-typed-text strong {
+      font-family: 'Sora', sans-serif;
+      color: var(--stage-navy);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+    }
+
+    .email-typed-text::after {
+      content: "";
+      display: inline-block;
+      width: 2px;
+      height: 1em;
+      margin-left: 4px;
+      vertical-align: -.12em;
+      background: var(--deep-violet);
+      animation: cursorBlink .8s step-end infinite
+    }
+
+    .email-typed-text.interrupted::after {
+      background: var(--peach);
+      animation: cursorBlink .18s step-end infinite
+    }
+
+    .email-letter.corrupting {
+      animation: emailCorrupt .22s linear 5
+    }
+
+    @keyframes emailCorrupt {
+
+      0%,
+      100% {
+        transform: translate(0, 0);
+        filter: none
+      }
+
+      25% {
+        transform: translate(3px, -1px);
+        filter: contrast(1.2)
+      }
+
+      50% {
+        transform: translate(-3px, 2px);
+        filter: brightness(1.1)
+      }
+
+      75% {
+        transform: translate(2px, 2px);
+        filter: hue-rotate(8deg)
+      }
+    }
+
+    .error-glitch {
+      position: absolute;
+      inset: 0;
+      z-index: 35;
+      display: none;
+      place-items: center;
+      overflow: hidden;
+      background: linear-gradient(180deg, rgba(5, 7, 19, .72), rgba(5, 7, 19, .92)), repeating-linear-gradient(0deg, rgba(255, 255, 255, .05) 0, rgba(255, 255, 255, .05) 1px, transparent 2px, transparent 5px);
+      color: white
+    }
+
+    .error-glitch.show {
+      display: grid;
+      animation: errorFlash 1.55s steps(2, end) forwards, screenShake .22s linear 3
+    }
+
+    .error-noise {
+      position: absolute;
+      inset: -20%;
+      opacity: .18;
+      background: repeating-linear-gradient(90deg, transparent 0, transparent 8px, rgba(229, 139, 119, .28) 9px, transparent 12px), repeating-linear-gradient(0deg, transparent 0, transparent 10px, rgba(255, 255, 255, .18) 11px, transparent 14px);
+      animation: noiseMove .28s linear infinite
+    }
+
+    .error-box {
+      position: relative;
+      z-index: 2;
+      width: min(520px, 86%);
+      padding: 26px;
+      border-radius: 22px;
+      background: linear-gradient(135deg, rgba(16, 23, 53, .96), rgba(30, 37, 79, .96));
+      border: 1px solid rgba(229, 139, 119, .52);
+      box-shadow: 0 26px 70px rgba(0, 0, 0, .45), 0 0 36px rgba(229, 139, 119, .24);
+      text-align: center
+    }
+
+    .error-small {
+      margin-bottom: 10px;
+      color: rgba(255, 255, 255, .7);
+      font-size: .78rem;
+      font-weight: 900;
+      letter-spacing: .18em
+    }
+
+    .error-title {
+      font-size: clamp(2.8rem, 8vw, 5.4rem);
+      line-height: .9;
+      font-weight: 900;
+      letter-spacing: -.06em;
+      color: var(--peach);
+      text-shadow: 3px 0 rgba(93, 75, 147, .8), -3px 0 rgba(255, 255, 255, .3);
+      animation: textGlitch .55s steps(2, end) infinite
+    }
+
+    .error-subtitle {
+      margin-top: 10px;
+      margin-bottom: 18px;
+      font-size: clamp(1.1rem, 3vw, 1.7rem);
+      font-weight: 900;
+      letter-spacing: .04em
+    }
+
+    .error-line {
+      color: rgba(255, 255, 255, .78);
+      font-size: .98rem;
+      line-height: 1.5
+    }
+
+    @keyframes errorFlash {
+      0% {
+        opacity: 0;
+        filter: brightness(1)
+      }
+
+      8% {
+        opacity: 1;
+        filter: brightness(1.6)
+      }
+
+      24% {
+        opacity: .65;
+        filter: brightness(.9)
+      }
+
+      42% {
+        opacity: 1;
+        filter: brightness(1.8)
+      }
+
+      82% {
+        opacity: 1;
+        filter: brightness(1)
+      }
+
+      100% {
+        opacity: 0;
+        filter: brightness(.7)
+      }
+    }
+
+    @keyframes screenShake {
+      0% {
+        transform: translate(0, 0)
+      }
+
+      25% {
+        transform: translate(4px, -2px)
+      }
+
+      50% {
+        transform: translate(-3px, 2px)
+      }
+
+      75% {
+        transform: translate(2px, 3px)
+      }
+
+      100% {
+        transform: translate(0, 0)
+      }
+    }
+
+    @keyframes noiseMove {
+      from {
+        transform: translate(0, 0)
+      }
+
+      to {
+        transform: translate(-26px, 18px)
+      }
+    }
+
+    @keyframes textGlitch {
+
+      0%,
+      100% {
+        transform: translate(0, 0)
+      }
+
+      20% {
+        transform: translate(-2px, 1px)
+      }
+
+      40% {
+        transform: translate(3px, -1px)
+      }
+
+      60% {
+        transform: translate(-1px, -2px)
+      }
+
+      80% {
+        transform: translate(2px, 2px)
+      }
+    }
+
+    .chat-view {
+      display: none;
+      height: 100%;
+      min-height: 500px;
+      border-radius: 22px;
+      overflow: hidden;
+      background: radial-gradient(circle at 90% 10%, rgba(229, 139, 119, .18), transparent 28%), linear-gradient(135deg, #101735, #1E254F);
+      color: white;
+      box-shadow: 0 12px 30px rgba(16, 23, 53, .18)
+    }
+
+    .chat-view.show {
+      display: grid;
+      grid-template-rows: auto 1fr auto;
+      animation: windowIn .55s ease forwards
+    }
+
+    .chat-header {
+      display: grid;
+      grid-template-columns: 48px 1fr auto;
+      align-items: center;
+      gap: 12px;
+      padding: 16px 18px;
+      border-bottom: 1px solid rgba(255, 255, 255, .12);
+      background: rgba(5, 7, 19, .35)
+    }
+
+    .chat-avatar {
+      width: 48px;
+      height: 48px;
+      display: grid;
+      place-items: center;
+      border-radius: 16px;
+      background: var(--soft-peach);
+      color: var(--deep-violet);
+      font-weight: 900;
+      letter-spacing: -.04em
+    }
+
+    .chat-name {
+      font-weight: 900;
+      color: white
+    }
+
+    .chat-status {
+      margin-top: 3px;
+      color: rgba(255, 255, 255, .62);
+      font-size: .82rem
+    }
+
+    .chat-tag {
+      padding: 7px 10px;
+      border-radius: 999px;
+      background: rgba(229, 139, 119, .14);
+      color: var(--soft-peach);
+      border: 1px solid rgba(229, 139, 119, .34);
+      font-size: .72rem;
+      font-weight: 900;
+      letter-spacing: .08em
+    }
+
+    .chat-messages {
+      padding: 20px;
+      overflow-y: auto;
+      display: grid;
+      align-content: start;
+      gap: 10px
+    }
+
+    .chat-bubble {
+      width: fit-content;
+      max-width: min(520px, 92%);
+      padding: 12px 14px;
+      border-radius: 17px 17px 17px 5px;
+      background: rgba(255, 255, 255, .10);
+      border: 1px solid rgba(255, 255, 255, .12);
+      color: rgba(255, 255, 255, .92);
+      line-height: 1.55;
+      font-size: .96rem;
+      box-shadow: 0 12px 26px rgba(0, 0, 0, .18);
+      animation: bubbleIn .25s ease forwards
+    }
+
+    .chat-bubble.danger {
+      background: rgba(229, 139, 119, .14);
+      border-color: rgba(229, 139, 119, .38)
+    }
+
+    .chat-bubble.final {
+      background: rgba(252, 251, 247, .94);
+      color: var(--stage-navy);
+      border-color: rgba(229, 139, 119, .45);
+      font-weight: 800
+    }
+
+    .chat-bubble.typing::after {
+      content: "";
+      display: inline-block;
+      width: 2px;
+      height: 1em;
+      margin-left: 4px;
+      vertical-align: -.12em;
+      background: rgba(255, 255, 255, .88);
+      animation: cursorBlink .6s step-end infinite
+    }
+
+    .chat-bubble.final.typing::after {
+      background: var(--deep-violet)
+    }
+
+    @keyframes bubbleIn {
+      from {
+        opacity: 0;
+        transform: translateY(8px) scale(.98)
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1)
+      }
+    }
+
+    .chat-actions {
+      display: none;
+      padding: 14px 18px 18px 18px;
+      border-top: 1px solid rgba(255, 255, 255, .12);
+      background: rgba(5, 7, 19, .25)
+    }
+
+    .chat-actions.show {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap
+    }
+
+    .btn {
+      border: 0;
+      border-radius: 999px;
+      padding: 14px 20px;
+      font-family: inherit;
+      font-weight: 900;
+      cursor: pointer;
+      transition: transform .16s ease, filter .16s ease, box-shadow .16s ease
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      filter: brightness(1.04)
+    }
+
+    .btn-primary {
+      background: var(--deep-violet);
+      color: white;
+      box-shadow: 0 14px 30px rgba(93, 75, 147, .32)
+    }
+
+    .btn-secondary {
+      background: var(--soft-peach);
+      color: var(--stage-navy)
+    }
+
+    .skip-button {
+      position: absolute;
+      right: 18px;
+      bottom: 18px;
+      z-index: 30;
+      border: 0;
+      border-radius: 999px;
+      padding: 10px 14px;
+      background: rgba(252, 251, 247, .86);
+      color: var(--stage-navy);
+      font-family: inherit;
+      font-weight: 900;
+      cursor: pointer
+    }
+
+    @media(max-width:760px) {
+      .intro-app {
+        min-height: 920px
+      }
+
+      .story-text,
+      .desk-text {
+        left: 22px;
+        right: 22px;
+        width: auto
+      }
+
+      .story-text {
+        bottom: 48px
+      }
+
+      .desk-text {
+        top: 62px
+      }
+
+      .email-alert {
+        left: 22px;
+        right: 22px;
+        top: auto;
+        bottom: 120px;
+        width: auto
+      }
+
+      .computer-window {
+        inset: 26px 14px;
+        border-radius: 22px
+      }
+
+      .window-body {
+        min-height: 620px;
+        padding: 18px
+      }
+
+      .mail-row {
+        grid-template-columns: 38px 1fr
+      }
+
+      .tag {
+        grid-column: 2;
+        width: fit-content
+      }
+
+      .chat-header {
+        grid-template-columns: 42px 1fr
+      }
+
+      .chat-tag {
+        grid-column: 2;
+        width: fit-content
+      }
+
+      .btn {
+        width: 100%;
+        justify-content: center
+      }
+    }
+
+    /* =========================
+   GMAIL-STYLE INBOX + MESSAGE
+========================= */
+    .gmail-shell {
+      min-height: 520px;
+      border-radius: 22px;
+      overflow: hidden;
+      background: #f6f8fc;
+      color: var(--ink);
+      border: 1px solid rgba(216, 206, 232, .9);
+    }
+
+    .gmail-top {
+      height: 58px;
+      display: grid;
+      grid-template-columns: 150px 1fr 48px;
+      align-items: center;
+      gap: 14px;
+      padding: 0 18px;
+      background: #ffffff;
+      border-bottom: 1px solid #e7e9f2;
+    }
+
+    .gmail-brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: #3c4043;
+      font-weight: 800;
+      font-size: 1.05rem;
+    }
+
+    .gmail-mark {
+      width: 34px;
+      height: 26px;
+      display: grid;
+      place-items: center;
+      border-radius: 8px;
+      background: linear-gradient(135deg, #ffffff, var(--soft-peach));
+      border: 1px solid #e2d8d5;
+      color: var(--deep-violet);
+      font-weight: 900;
+    }
+
+    .gmail-search {
+      height: 40px;
+      display: flex;
+      align-items: center;
+      padding: 0 18px;
+      border-radius: 999px;
+      background: #eef3fb;
+      color: #6e6f7a;
+      font-size: .9rem;
+    }
+
+    .gmail-account {
+      width: 38px;
+      height: 38px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: var(--deep-violet);
+      color: white;
+      font-weight: 900;
+      font-size: .82rem;
+    }
+
+    .gmail-layout {
+      display: grid;
+      grid-template-columns: 190px 1fr;
+      min-height: 462px;
+    }
+
+    .gmail-sidebar {
+      padding: 16px 12px;
+      background: #f6f8fc;
+      border-right: 1px solid #e7e9f2;
+    }
+
+    .compose-btn {
+      width: 100%;
+      border: 0;
+      border-radius: 18px;
+      padding: 13px 14px;
+      margin-bottom: 16px;
+      background: var(--soft-peach);
+      color: var(--stage-navy);
+      font-family: inherit;
+      font-weight: 900;
+      text-align: left;
+      box-shadow: 0 8px 20px rgba(229, 139, 119, .12);
+    }
+
+    .side-item {
+      display: flex;
+      justify-content: space-between;
+      padding: 10px 12px;
+      border-radius: 999px;
+      color: #4b4f5c;
+      font-size: .9rem;
+      font-weight: 700;
+    }
+
+    .side-item.active {
+      background: #fce8e6;
+      color: var(--stage-navy);
+    }
+
+    .gmail-inbox {
+      padding: 16px;
+      background: #ffffff;
+    }
+
+    .gmail-toolbar {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 4px 2px 16px 2px;
+      color: var(--muted);
+      border-bottom: 1px solid #eef0f6;
+    }
+
+    .toolbar-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 3px;
+      border: 2px solid #8a8f9f;
+    }
+
+    .toolbar-title {
+      font-weight: 900;
+      color: var(--stage-navy);
+    }
+
+    .toolbar-count {
+      margin-left: auto;
+      font-size: .82rem;
+    }
+
+    .gmail-mail-list {
+      margin-top: 12px;
+    }
+
+    .gmail-row {
+      grid-template-columns: 18px 42px 1fr auto;
+      border-radius: 0;
+      border-left: 0;
+      border-right: 0;
+      border-top: 0;
+      box-shadow: none;
+      background: #fff;
+    }
+
+    .gmail-row.unread {
+      background: #fff7f4;
+      border-left: 4px solid var(--peach);
+    }
+
+    .gmail-row.unread .mail-title {
+      color: var(--stage-navy);
+    }
+
+    .mail-checkbox {
+      width: 14px;
+      height: 14px;
+      border: 2px solid #b9bdca;
+      border-radius: 4px;
+    }
+
+    .taupada-icon {
+      background-color: var(--soft-peach);
+      background-image: var(--academy-logo-url);
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      color: transparent;
+      box-shadow: inset 0 0 0 1px rgba(229, 139, 119, .22);
+    }
+
+    .new-tag {
+      background: var(--deep-violet);
+      color: white;
+    }
+
+    .gmail-message-view {
+      display: none;
+      padding: 0 !important;
+      border-left: 0 !important;
+      border-radius: 22px;
+      overflow: hidden;
+      background: #ffffff;
+    }
+
+    .gmail-message-toolbar {
+      height: 44px;
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      padding: 0 18px;
+      background: #f6f8fc;
+      border-bottom: 1px solid #e7e9f2;
+      color: #5f6368;
+      font-size: .82rem;
+      font-weight: 800;
+    }
+
+    .gmail-message-content {
+      padding: 24px;
+    }
+
+    .gmail-message-subject {
+      margin: 0 0 18px 0;
+      color: var(--stage-navy);
+      font-size: clamp(1.5rem, 3.5vw, 2.3rem);
+      line-height: 1.05;
+      letter-spacing: -.04em;
+    }
+
+    .gmail-message-meta-card {
+      display: grid;
+      grid-template-columns: 48px 1fr auto;
+      gap: 14px;
+      align-items: start;
+      padding: 14px;
+      border-radius: 18px;
+      background: #f8f9fd;
+      border: 1px solid #e7e9f2;
+      margin-bottom: 18px;
+    }
+
+    .sender-avatar {
+      width: 48px;
+      height: 48px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background-color: var(--soft-peach);
+      background-image: var(--academy-logo-url);
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      color: transparent;
+      font-weight: 900;
+      border: 1px solid rgba(229, 139, 119, .28);
+    }
+
+    .meta-lines {
+      display: grid;
+      gap: 4px;
+      color: var(--graphite);
+      font-size: .9rem;
+    }
+
+    .meta-main span,
+    .meta-row span,
+    .meta-time {
+      color: var(--muted);
+      font-size: .82rem;
+    }
+
+    .meta-row span {
+      display: inline-block;
+      width: 100px;
+      font-weight: 900;
+    }
+
+    .academy-card {
+      position: relative;
+      padding: 22px;
+      border-radius: 24px;
+      background:
+        radial-gradient(circle at 88% 10%, rgba(229, 139, 119, .16), transparent 22%),
+        linear-gradient(180deg, #fff, #fcfbf7);
+      border: 1px solid var(--line-violet);
+      box-shadow: 0 14px 34px rgba(16, 23, 53, .08);
+    }
+
+    .academy-card-header {
+      display: grid;
+      grid-template-columns: 52px 1fr auto;
+      gap: 14px;
+      align-items: center;
+    }
+
+    .academy-seal {
+      width: 52px;
+      height: 52px;
+      display: grid;
+      place-items: center;
+      border-radius: 18px;
+      background-color: var(--soft-peach);
+      background-image: var(--academy-logo-url);
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      color: transparent;
+      border: 1px solid rgba(229, 139, 119, .28);
+      font-weight: 900;
+    }
+
+    .academy-title {
+      color: var(--stage-navy);
+      font-weight: 900;
+      font-size: 1.08rem;
+    }
+
+    .academy-subtitle {
+      color: var(--muted);
+      font-size: .86rem;
+      margin-top: 2px;
+    }
+
+    .academy-chip {
+      padding: 8px 10px;
+      border-radius: 999px;
+      background: var(--soft-violet);
+      color: var(--deep-violet);
+      font-size: .72rem;
+      font-weight: 900;
+      white-space: nowrap;
+    }
+
+    .academy-divider {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--line-violet), transparent);
+      margin: 18px 0;
+    }
+
+
+    .attachment-row {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      margin-top: 14px;
+      padding: 12px;
+      border-radius: 16px;
+      background: #fff7f4;
+      border: 1px dashed rgba(229, 139, 119, .45);
+    }
+
+    .attachment-icon {
+      width: 36px;
+      height: 36px;
+      display: grid;
+      place-items: center;
+      border-radius: 12px;
+      background: var(--soft-peach);
+      color: var(--deep-violet);
+      font-weight: 900;
+    }
+
+    .attachment-row strong {
+      display: block;
+      color: var(--stage-navy);
+      font-size: .9rem;
+    }
+
+    .attachment-row span {
+      display: block;
+      color: var(--muted);
+      font-size: .78rem;
+      margin-top: 2px;
+    }
+
+    @media (max-width:760px) {
+      .gmail-top {
+        grid-template-columns: 110px 1fr 40px;
+        padding: 0 12px;
+        gap: 8px;
+      }
+
+      .gmail-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .gmail-sidebar {
+        display: none;
+      }
+
+      .gmail-inbox {
+        padding: 12px;
+      }
+
+      .gmail-row {
+        grid-template-columns: 18px 38px 1fr;
+      }
+
+      .gmail-row .tag {
+        grid-column: 3;
+        width: fit-content;
+      }
+
+      .gmail-message-content {
+        padding: 18px;
+      }
+
+      .gmail-message-meta-card,
+      .academy-card-header {
+        grid-template-columns: 44px 1fr;
+      }
+
+      .meta-time,
+      .academy-chip {
+        grid-column: 2;
+        width: fit-content;
+      }
+
+    }
+
+
+    /* =========================
+   CHAT CON AVATARES DE IMAGEN
+========================= */
+    .chat-header .chat-avatar-img,
+    .profile-avatar {
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+
+    .chat-header .chat-avatar-img.has-image span,
+    .profile-avatar.has-image span {
+      display: none;
+    }
+
+    .chat-row {
+      display: flex;
+      gap: 10px;
+      align-items: flex-end;
+      width: 100%;
+    }
+
+    .chat-row.itzala {
+      justify-content: flex-start;
+    }
+
+    .chat-row.alumna {
+      justify-content: flex-end;
+    }
+
+    .profile-avatar {
+      flex: 0 0 auto;
+      width: 42px;
+      height: 42px;
+      display: grid;
+      place-items: center;
+      border-radius: 15px;
+      font-weight: 900;
+      font-size: .82rem;
+      box-shadow: 0 10px 22px rgba(0, 0, 0, .18);
+    }
+
+    .profile-avatar.itzala-avatar,
+    .chat-avatar.itzala-avatar {
+      background-color: #101735;
+      background-image:
+        var(--itzala-avatar-url),
+        radial-gradient(circle at 70% 25%, rgba(229, 139, 119, .34), transparent 32%),
+        linear-gradient(135deg, #101735, #1E254F);
+      background-size: cover, cover, cover;
+      background-position: center, center, center;
+      background-repeat: no-repeat;
+      color: var(--soft-peach);
+      border: 1px solid rgba(229, 139, 119, .38);
+    }
+
+    .profile-avatar.alumna-avatar {
+      background-color: var(--soft-peach);
+      background-image:
+        var(--alumna-avatar-url),
+        radial-gradient(circle at 70% 20%, rgba(255, 255, 255, .7), transparent 28%),
+        linear-gradient(135deg, var(--soft-peach), var(--soft-violet));
+      background-size: cover, cover, cover;
+      background-position: center, center, center;
+      background-repeat: no-repeat;
+      color: var(--deep-violet);
+      border: 1px solid rgba(216, 206, 232, .75);
+    }
+
+    .chat-row.alumna .profile-avatar {
+      order: 2;
+    }
+
+    .chat-row.alumna .chat-bubble {
+      border-radius: 17px 17px 5px 17px;
+      background: rgba(255, 240, 236, .94);
+      border-color: rgba(229, 139, 119, .35);
+      color: var(--stage-navy);
+    }
+
+    .chat-row.itzala .chat-bubble {
+      border-radius: 17px 17px 17px 5px;
+    }
+
+    .chat-bubble {
+      white-space: pre-line;
+    }
+
+    .chat-bubble.alumna.typing::after {
+      background: var(--deep-violet);
+    }
+
+    .chat-bubble .speaker-label {
+      display: block;
+      margin-bottom: 6px;
+      font-size: .72rem;
+      font-weight: 900;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      opacity: .72;
+    }
+
+    @media(max-width:760px) {
+      .profile-avatar {
+        width: 36px;
+        height: 36px;
+        border-radius: 13px;
+        font-size: .72rem;
+      }
+
+      .chat-bubble {
+        max-width: calc(100% - 52px);
+      }
+    }
+
+
+
+    /* =========================
+   ALERTA FINAL + PANTALLA DE RECHAZO
+========================= */
+    .chat-actions {
+      display: none;
+      padding: 14px 18px 18px 18px;
+      border-top: 1px solid rgba(255, 255, 255, .12);
+      background: rgba(5, 7, 19, .25);
+    }
+
+    .chat-actions.show {
+      display: block;
+    }
+
+    .challenge-alert {
+      border-radius: 22px;
+      padding: 18px;
+      background:
+        radial-gradient(circle at 92% 0%, rgba(229, 139, 119, .24), transparent 34%),
+        rgba(252, 251, 247, .94);
+      color: var(--stage-navy);
+      border: 1px solid rgba(229, 139, 119, .38);
+      box-shadow: 0 18px 42px rgba(0, 0, 0, .24);
+    }
+
+    .challenge-kicker {
+      font-size: .72rem;
+      font-weight: 900;
+      letter-spacing: .11em;
+      color: var(--deep-violet);
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    .challenge-alert h3 {
+      margin: 0 0 8px 0;
+      font-size: clamp(1.25rem, 3vw, 1.75rem);
+      line-height: 1.05;
+      letter-spacing: -.04em;
+    }
+
+    .challenge-alert p {
+      color: var(--graphite);
+      text-shadow: none;
+      font-size: .94rem;
+      line-height: 1.55;
+      margin: 0;
+    }
+
+    .challenge-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 16px;
+    }
+
+    .refuse-scene {
+      position: absolute;
+      inset: 0;
+      z-index: 45;
+      display: none;
+      overflow: hidden;
+      color: white;
+      background: var(--stage-navy);
+    }
+
+    .refuse-scene.show {
+      display: block;
+      animation: sceneIn .75s ease forwards;
+    }
+
+    .refuse-overlay {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 72% 18%, rgba(229, 139, 119, .20), transparent 26%),
+        linear-gradient(90deg, rgba(5, 7, 19, .86), rgba(16, 23, 53, .52), rgba(16, 23, 53, .72)),
+        repeating-linear-gradient(0deg, rgba(255, 255, 255, .035) 0px, rgba(255, 255, 255, .035) 1px, transparent 2px, transparent 7px);
+      pointer-events: none;
+    }
+
+    .refuse-content {
+      position: relative;
+      z-index: 3;
+      min-height: 100%;
+      width: min(720px, 88%);
+      display: grid;
+      align-content: center;
+      padding: clamp(28px, 7vw, 76px);
+    }
+
+    .refuse-content h1 {
+      margin-bottom: 18px;
+    }
+
+    .refuse-card {
+      max-width: 620px;
+    }
+
+    .refuse-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 22px;
+      opacity: 0;
+      transform: translateY(14px);
+    }
+
+    .refuse-actions.show {
+      animation: cardIn .75s ease forwards;
+    }
+
+    .refuse-bg-image {
+      position: absolute;
+      inset: 0;
+      background-image: var(--refuse-scene-url);
+      background-size: cover;
+      background-position: center;
+      transform: scale(1.03);
+      filter: brightness(1.10) saturate(1.06);
+    }
+
+    .refuse-overlay {
+      background:
+        radial-gradient(circle at 50% 24%, rgba(229, 139, 119, 0.16), transparent 20%),
+        linear-gradient(180deg, rgba(16, 23, 53, 0.16), rgba(5, 7, 19, 0.36)),
+        linear-gradient(90deg, rgba(16, 23, 53, 0.22), rgba(16, 23, 53, 0.05), rgba(16, 23, 53, 0.22));
+    }
+
+    @media(max-width:760px) {
+
+      .challenge-buttons,
+      .refuse-actions {
+        flex-direction: column;
+      }
+    }
+
+
+    /* =========================
+       ALERTA FINAL FULLSCREEN
+       Sustituye la tarjeta pequeña por una pantalla completa estilo ERROR
+    ========================= */
+    .chat-actions {
+      position: fixed !important;
+      inset: 0 !important;
+      z-index: 120 !important;
+      display: none !important;
+      padding: clamp(18px, 5vw, 58px) !important;
+      border: 0 !important;
+      background: transparent !important;
+      pointer-events: none;
+    }
+
+    .chat-actions.show {
+      display: grid !important;
+      place-items: center;
+      pointer-events: auto;
+      animation: finalOverlayIn .55s ease forwards;
+    }
+
+    .challenge-alert {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+      border-radius: 0 !important;
+      padding: clamp(22px, 5vw, 70px) !important;
+      color: white !important;
+      border: 0 !important;
+      background:
+        radial-gradient(circle at 78% 14%, rgba(229, 139, 119, .28), transparent 25%),
+        radial-gradient(circle at 18% 76%, rgba(93, 75, 147, .34), transparent 29%),
+        linear-gradient(135deg, rgba(5, 7, 19, .96), rgba(16, 23, 53, .94), rgba(30, 37, 79, .96)) !important;
+      box-shadow: inset 0 0 100px rgba(0, 0, 0, .62) !important;
+    }
+
+    .challenge-alert::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        repeating-linear-gradient(0deg, rgba(255, 255, 255, .045) 0px, rgba(255, 255, 255, .045) 1px, transparent 2px, transparent 6px),
+        linear-gradient(90deg, transparent, rgba(229, 139, 119, .12), transparent);
+      mix-blend-mode: screen;
+      opacity: .75;
+      pointer-events: none;
+    }
+
+    .challenge-alert::after {
+      content: "";
+      position: absolute;
+      inset: -20%;
+      background:
+        repeating-linear-gradient(90deg, transparent 0, transparent 9px, rgba(229, 139, 119, .18) 10px, transparent 13px),
+        repeating-linear-gradient(0deg, transparent 0, transparent 16px, rgba(255, 255, 255, .10) 17px, transparent 20px);
+      opacity: .16;
+      animation: challengeNoiseMove .35s linear infinite;
+      pointer-events: none;
+    }
+
+    .challenge-noise {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 50% 50%, transparent 0 34%, rgba(5, 7, 19, .32) 68%),
+        repeating-linear-gradient(135deg, rgba(255, 255, 255, .035) 0 1px, transparent 1px 8px);
+      opacity: .9;
+      pointer-events: none;
+    }
+
+    .challenge-scan {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: -20%;
+      height: 20%;
+      background: linear-gradient(180deg, transparent, rgba(229, 139, 119, .20), transparent);
+      filter: blur(1px);
+      animation: challengeScan 2.6s linear infinite;
+      pointer-events: none;
+    }
+
+    .challenge-panel {
+      position: relative;
+      z-index: 3;
+      width: min(760px, 92%);
+      padding: clamp(24px, 5vw, 44px);
+      border-radius: 30px;
+      background:
+        radial-gradient(circle at 96% 5%, rgba(229, 139, 119, .18), transparent 30%),
+        linear-gradient(135deg, rgba(16, 23, 53, .88), rgba(30, 37, 79, .84));
+      border: 1px solid rgba(229, 139, 119, .48);
+      box-shadow:
+        0 36px 90px rgba(0, 0, 0, .52),
+        0 0 44px rgba(229, 139, 119, .22),
+        inset 0 0 0 1px rgba(255, 255, 255, .06);
+      text-align: center;
+      animation: challengePanelIn .75s cubic-bezier(.2, .9, .2, 1) forwards, challengePanelPulse 2.4s ease-in-out infinite .9s;
+    }
+
+    .challenge-kicker {
+      display: inline-flex;
+      width: fit-content;
+      margin: 0 auto 14px auto !important;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(229, 139, 119, .14);
+      color: var(--soft-peach) !important;
+      border: 1px solid rgba(229, 139, 119, .36);
+      font-size: .74rem !important;
+      font-weight: 900;
+      letter-spacing: .14em !important;
+      text-transform: uppercase;
+    }
+
+    .challenge-title {
+      margin-bottom: 12px;
+      color: var(--peach);
+      font-size: clamp(2.2rem, 7vw, 5.2rem);
+      line-height: .88;
+      font-weight: 900;
+      letter-spacing: -.07em;
+      text-shadow:
+        3px 0 rgba(93, 75, 147, .72),
+        -3px 0 rgba(255, 255, 255, .18);
+      animation: challengeTextGlitch .7s steps(2, end) infinite;
+    }
+
+    .challenge-alert h3 {
+      margin: 0 0 14px 0 !important;
+      color: white;
+      font-size: clamp(1.7rem, 4vw, 3rem) !important;
+      line-height: 1 !important;
+      letter-spacing: -.05em !important;
+    }
+
+    .challenge-alert p {
+      max-width: 610px;
+      margin: 0 auto !important;
+      color: rgba(255, 255, 255, .82) !important;
+      text-shadow: none !important;
+      white-space: pre-line;
+      font-size: clamp(.96rem, 1.5vw, 1.08rem) !important;
+      line-height: 1.65 !important;
+    }
+
+    .challenge-choice-line {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: center;
+      gap: 16px;
+      margin: 24px auto 0 auto;
+      width: min(520px, 100%);
+      color: rgba(255, 255, 255, .58);
+      font-size: .72rem;
+      font-weight: 900;
+      letter-spacing: .14em;
+    }
+
+    .challenge-choice-line::before,
+    .challenge-choice-line::after {
+      content: "";
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(229, 139, 119, .58), transparent);
+    }
+
+    .challenge-buttons {
+      justify-content: center;
+      margin-top: 18px !important;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .challenge-buttons .btn {
+      min-width: 180px;
+      border: 1px solid rgba(255, 255, 255, .14);
+    }
+
+    .challenge-accept {
+      background: linear-gradient(135deg, var(--deep-violet), #7c67b5) !important;
+      color: white !important;
+      box-shadow: 0 18px 36px rgba(93, 75, 147, .38), 0 0 22px rgba(229, 139, 119, .16) !important;
+    }
+
+    .challenge-refuse {
+      background: rgba(252, 251, 247, .92) !important;
+      color: var(--stage-navy) !important;
+    }
+
+    @keyframes finalOverlayIn {
+      from {
+        opacity: 0;
+        filter: brightness(1.8);
+      }
+
+      to {
+        opacity: 1;
+        filter: brightness(1);
+      }
+    }
+
+    @keyframes challengePanelIn {
+      from {
+        opacity: 0;
+        transform: translateY(34px) scale(.94) skewX(-1.5deg);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1) skewX(0);
+      }
+    }
+
+    @keyframes challengePanelPulse {
+
+      0%,
+      100% {
+        box-shadow: 0 36px 90px rgba(0, 0, 0, .52), 0 0 44px rgba(229, 139, 119, .18), inset 0 0 0 1px rgba(255, 255, 255, .06);
+      }
+
+      50% {
+        box-shadow: 0 36px 90px rgba(0, 0, 0, .52), 0 0 68px rgba(229, 139, 119, .32), inset 0 0 0 1px rgba(255, 255, 255, .10);
+      }
+    }
+
+    @keyframes challengeNoiseMove {
+      from {
+        transform: translate(0, 0);
+      }
+
+      to {
+        transform: translate(-28px, 18px);
+      }
+    }
+
+    @keyframes challengeScan {
+      from {
+        transform: translateY(0);
+        opacity: 0;
+      }
+
+      18% {
+        opacity: 1;
+      }
+
+      82% {
+        opacity: 1;
+      }
+
+      to {
+        transform: translateY(650%);
+        opacity: 0;
+      }
+    }
+
+    @keyframes challengeTextGlitch {
+
+      0%,
+      100% {
+        transform: translate(0, 0);
+      }
+
+      22% {
+        transform: translate(-2px, 1px);
+      }
+
+      44% {
+        transform: translate(3px, -1px);
+      }
+
+      66% {
+        transform: translate(-1px, -2px);
+      }
+
+      82% {
+        transform: translate(2px, 2px);
+      }
+    }
+
+    @media(max-width:760px) {
+      .chat-actions {
+        padding: 14px !important;
+      }
+
+      .challenge-panel {
+        width: 100%;
+        padding: 22px;
+        border-radius: 24px;
+      }
+
+      .challenge-buttons {
+        flex-direction: column;
+      }
+
+      .challenge-buttons .btn {
+        width: 100%;
+      }
+    }
+
+    .academy-logo-target.has-image {
+      background-color: #ffffff !important;
+      background-image: var(--academy-logo-url) !important;
+      background-size: 86% 86% !important;
+      background-position: center !important;
+      background-repeat: no-repeat !important;
+      color: transparent !important;
+      border: 2px solid #ffffff !important;
+      box-shadow:
+        0 10px 22px rgba(16, 23, 53, .12),
+        inset 0 0 0 1px rgba(16, 23, 53, .06) !important;
+    }
+
+    .profile-avatar.itzala-avatar.has-image,
+    .chat-avatar.itzala-avatar.has-image {
+      background-color: #ffffff !important;
+      background-image: var(--itzala-avatar-url) !important;
+      background-size: cover !important;
+      background-position: center !important;
+      background-repeat: no-repeat !important;
+      border: 2px solid #ffffff !important;
+      color: transparent !important;
+      box-shadow:
+        0 10px 24px rgba(0, 0, 0, .20),
+        inset 0 0 0 1px rgba(16, 23, 53, .06);
+    }
+
+    .profile-avatar.alumna-avatar.has-image {
+      background-color: #ffffff !important;
+      background-image: var(--alumna-avatar-url) !important;
+      background-size: cover !important;
+      background-position: center !important;
+      background-repeat: no-repeat !important;
+      border: 2px solid #ffffff !important;
+      color: transparent !important;
+      box-shadow:
+        0 10px 24px rgba(0, 0, 0, .16),
+        inset 0 0 0 1px rgba(16, 23, 53, .06);
+    }
+
+    .challenge-avatar {
+      width: 84px;
+      height: 84px;
+      display: grid;
+      place-items: center;
+      margin: 0 auto 18px auto;
+      border-radius: 26px;
+      background-color: #ffffff;
+      background-image: var(--itzala-avatar-url);
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      color: var(--stage-navy);
+      font-weight: 900;
+      border: 2px solid #ffffff;
+      box-shadow:
+        0 20px 46px rgba(0, 0, 0, .34),
+        0 0 28px rgba(229, 139, 119, .22),
+        inset 0 0 0 1px rgba(16, 23, 53, .06);
+    }
+
+    .challenge-avatar.has-image span {
+      display: none;
+    }
+  </style>
+</head>
+
+<body>
+  <main class="intro-app">
+    <section id="schoolScene" class="scene active">
+      <div class="bg-image school-bg"></div>
+      <div class="soft-vignette"></div>
+      <div class="door-close-zone">
+        <div class="door-panel door-left"></div>
+        <div class="door-panel door-right"></div>
+        <div class="door-seam"></div>
+      </div>
+      <div class="story-text">
+        <div class="label line line-1">Ikasturtea amaitu da</div>
+        <h1 class="line line-2">ESKOLAKO ATEAK ITXI DIRA</h1>
+        <p id="schoolTypedText" class="typed-text"
+          data-text="Azken eguna pasa da. Pasilloak isildu, koadernoak itxi eta uda hasi da."></p>
+        <div id="storyCard" class="story-card">
+          <p>Baina uda hau ez da edozein uda izango...</p>
+        </div>
+        <div id="autoProgress" class="auto-progress" aria-hidden="true"><span></span></div>
+      </div>
+    </section>
+    <section id="deskScene" class="scene">
+      <div class="bg-image desk-bg"></div>
+      <div class="soft-vignette"></div>
+      <div class="desk-text">
+        <div class="label">3 EGUNEN BURUAN</div>
+        <h1>ORDENAGAILU AURREAN ZAUDE</h1>
+        <p id="deskTypedText" class="typed-text"
+          data-text="Pantaila piztuta dago. Hasieran dena isilik dago… baina bat-batean, mezu arraro bat agertu da.">
+        </p>
+      </div><button id="emailAlert" class="email-alert" onclick="openComputer()"
+        aria-label="Taupada Akademiaren mezua ireki">
+        <div class="alert-icon academy-logo-target">T</div>
+        <div class="alert-text"><strong>Mezu berria</strong><span>Taupada Akademia</span></div>
+      </button>
+      <section id="computerWindow" class="computer-window">
+        <div class="window-topbar">
+          <div class="traffic"></div>
+          <div class="traffic"></div>
+          <div class="traffic"></div>
+          <div class="window-title">Sarrera-ontzia</div>
+        </div>
+        <div class="window-body">
+          <div id="inboxView" class="gmail-shell">
+            <div class="gmail-top">
+              <div class="gmail-brand">
+                <span class="gmail-mark">M</span>
+                <span>Gmail</span>
+              </div>
+              <div class="gmail-search">Bilatu posta elektronikoan</div>
+              <div class="gmail-account">H08</div>
+            </div>
+
+            <div class="gmail-layout">
+              <aside class="gmail-sidebar">
+                <button class="compose-btn">+ Idatzi</button>
+                <div class="side-item active">Sarrera-ontzia <span>2</span></div>
+                <div class="side-item">Izardunak</div>
+                <div class="side-item">Bidaliak</div>
+                <div class="side-item">Zirriborroak</div>
+              </aside>
+
+              <section class="gmail-inbox">
+                <div class="gmail-toolbar">
+                  <span class="toolbar-dot"></span>
+                  <span class="toolbar-title">Sarrera-ontzia</span>
+                  <span class="toolbar-count">2 mezu</span>
+                </div>
+
+                <div class="mail-list gmail-mail-list">
+                  <div class="mail-row gmail-row">
+                    <div class="mail-checkbox"></div>
+                    <div class="mail-icon">C</div>
+                    <div>
+                      <div class="mail-title">Classroom</div>
+                      <div class="mail-sub">Uda honetako entrenamendu-koadernoa prest dago.</div>
+                    </div>
+                    <div class="tag">irakurrita</div>
+                  </div>
+
+                  <div class="mail-row gmail-row unread" onclick="openEmail()">
+                    <div class="mail-checkbox"></div>
+                    <div class="mail-icon taupada-icon academy-logo-target">T</div>
+                    <div>
+                      <div class="mail-title">Taupada Akademia</div>
+                      <div class="mail-sub"><strong>Garrantzitsua:</strong> Lehen-fasearen ebazpena.</div>
+                    </div>
+                    <div class="tag new-tag">berria</div>
+                  </div>
+                </div>
+              </section>
+            </div>
+          </div>
+
+          <div id="emailDraftView" class="email-letter gmail-message-view">
+            <div class="gmail-message-toolbar">
+              <span onclick="backToInbox()" style="cursor:pointer;">←</span>
+              <span>Artxibatu</span>
+              <span>Salatu</span>
+              <span>Ezabatu</span>
+            </div>
+
+            <div class="gmail-message-content">
+              <h2 class="gmail-message-subject">Lehen-fasearen ebazpena</h2>
+
+              <div class="gmail-message-meta-card">
+                <div class="sender-avatar academy-logo-target">TA</div>
+                <div class="meta-lines">
+                  <div class="meta-main"><strong>Taupada Akademia</strong>
+                    <span>&lt;sarrera@taupada-akademia.eus&gt;</span>
+                  </div>
+                  <div class="meta-row"><span>Igorlea:</span> Taupada Akademia</div>
+                  <div class="meta-row"><span>Hartzailea:</span> Hautagaia 08</div>
+                  <div class="meta-row"><span>Gaia:</span> Lehen-fasearen ebazpena</div>
+                </div>
+                <div class="meta-time">gaur · 18:08</div>
+              </div>
+
+              <div class="academy-card">
+                <div class="academy-card-header">
+                  <div class="academy-seal academy-logo-target">TA</div>
+                  <div>
+                    <div class="academy-title">Taupada Akademia</div>
+                    <div class="academy-subtitle">Azken Oholtzarako sarbide-protokoloa</div>
+                  </div>
+                  <div class="academy-chip">PROFILA AKTIBATUTA</div>
+                </div>
+
+                <div class="academy-divider"></div>
+
+                <div id="academyEmailTyped" class="email-typed-text"></div>
+
+                <div class="attachment-row">
+                  <div class="attachment-icon">🎞️</div>
+                  <div>
+                    <strong>taupada_akademia_koreografia.mp4</strong>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div id="errorGlitch" class="error-glitch" aria-hidden="true">
+            <div class="error-noise"></div>
+            <div class="error-box">
+              <div class="error-small">SYSTEM WARNING</div>
+              <div class="error-title">ERROR 08</div>
+              <div class="error-subtitle">TAUPADA OSATU GABEA</div>
+              <div class="error-line">Koreografia ezin da ireki.</div>
+              <div class="error-line">Sarbidea norbaitek blokeatu du.</div>
+            </div>
+          </div>
+          <div id="itzalaChatView" class="chat-view">
+            <div class="chat-header">
+              <div id="itzalaHeaderAvatar" class="chat-avatar chat-avatar-img itzala-avatar"><span>I8</span></div>
+              <div>
+                <div class="chat-name">ITZALA</div>
+                <div class="chat-status">Konektatuta</div>
+              </div>
+              <div class="chat-tag">INTERCEPTED</div>
+            </div>
+            <div id="chatMessages" class="chat-messages"></div>
+            <div id="chatActions" class="chat-actions">
+              <div class="challenge-alert">
+                <div class="challenge-noise" aria-hidden="true"></div>
+                <div class="challenge-scan" aria-hidden="true"></div>
+                
+                <div class="challenge-panel">
+                  <div id="challengeAvatar" class="challenge-avatar itzala-avatar">
+                    <span>I8</span>
+                  </div>
+
+                  <div class="challenge-title">ZURE AZKEN AUKERA</div>
+                  <h3>Onartuko duzu… ala beldur zara?</h3>
+
+                  <div class="challenge-buttons">
+                    <button class="btn btn-primary challenge-accept" onclick="acceptChallenge()">ONARTU</button>
+                    <button class="btn btn-secondary challenge-refuse" onclick="showRefuseScene()">UKO EGIN</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+      </section>
+    </section>
+    <section id="refuseScene" class="refuse-scene" aria-label="Itzalaren erantzuna">
+      <div class="bg-image refuse-bg-image"></div>
+      <div class="refuse-overlay"></div>
+      <div class="refuse-content">
+        <div class="label">Taupada Akademia</div>
+        <h1>Pasabidea itxi da</h1>
+        <p id="refuseTypedText" class="typed-text" data-text="Zalantzak atea itxi du. Baina ametsa ez da desagertu.">
+        </p>
+        <div class="story-card revealed">
+          <p>
+            Urrunetik musika entzuten da oraindik. Azken Oholtza ez da itzali,
+            baina lehen taupada berreskuratzeko ausardia behar da.
+          </p>
+        </div>
+        <div id="refuseActions" class="refuse-actions"><button class="btn btn-secondary"
+            onclick="returnToChat()">Txatera itzuli</button><button class="btn btn-primary"
+            onclick="acceptChallenge()">Erronka onartu</button></div>
+      </div>
+    </section>
+    <div id="blackout" class="blackout"></div><button class="skip-button" onclick="goToDesk()">Introa saltatu</button>
+  </main>
+  <script>
+    const SCHOOL_IMAGE = "https://static.wixstatic.com/media/22f1ea_4630dfd9fc254d0da77849195ea4bb04~mv2.png";
+    const DESK_IMAGE = "https://static.wixstatic.com/media/22f1ea_a9f7b1dcd82d47e4822a7310c845beaf~mv2.png";
+    /*
+      AVATARES DEL CHAT
+      Ahora se controlan desde CSS, igual que los fondos.
+      Busca estas variables en :root y cambia `none` por:
+      url("URL_DE_TU_AVATAR")
+    
+      --alumna-avatar-url:none;
+      --itzala-avatar-url:none;
+    */
+    document.documentElement.style.setProperty("--school-url", `url("${SCHOOL_IMAGE}")`);
+    document.documentElement.style.setProperty("--desk-url", `url("${DESK_IMAGE}")`);
+    const AUTO_TO_DESK_MS = 15500;
+    const ACCEPT_URL = "https://itsasnehezkuntza.wixsite.com/escape-room-mate/panela";
+
+    const typeIntervals = {};
+    let introTimer = null;
+    window.addEventListener("load", function () { applyAvatarImages(); startAutoIntro() });
+    function startAutoIntro() {
+      clearTimers(); resetTypedText("schoolTypedText");
+      const storyCard = document.getElementById("storyCard");
+      const autoProgress = document.getElementById("autoProgress");
+      if (storyCard) storyCard.classList.remove("revealed");
+      if (autoProgress) autoProgress.classList.remove("revealed");
+      setTimeout(function () {
+        typeText("schoolTypedText", 50, function () {
+          if (storyCard) storyCard.classList.add("revealed");
+          setTimeout(function () { if (autoProgress) autoProgress.classList.add("revealed") }, 900)
+        })
+      }, 5800);
+      introTimer = setTimeout(function () { goToDesk() }, AUTO_TO_DESK_MS)
+    } function clearTimers() {
+      if (introTimer) {
+        clearTimeout(introTimer);
+        introTimer = null
+      }
+    } function goToDesk() {
+      clearTimers(); const blackout = document.getElementById("blackout");
+      const emailAlert = document.getElementById("emailAlert");
+      if (emailAlert) emailAlert.classList.remove("ready");
+      resetTypedText("deskTypedText");
+      blackout.classList.add("show"); setTimeout(function () {
+        document.getElementById("schoolScene").classList.remove("active");
+        document.getElementById("deskScene").classList.add("active")
+      }, 700);
+      setTimeout(function () { blackout.classList.remove("show") }, 1250);
+      setTimeout(function () {
+        typeText("deskTypedText", 120, function () {
+          setTimeout(function () { if (emailAlert) emailAlert.classList.add("ready") }, 900)
+        })
+      }, 3200)
+    } function openComputer() {
+      const computerWindow = document.getElementById("computerWindow");
+      const emailAlert = document.getElementById("emailAlert");
+      if (emailAlert) emailAlert.classList.remove("ready");
+      if (computerWindow) computerWindow.classList.add("show")
+    } function openEmail() {
+      const inboxView = document.getElementById("inboxView");
+      const emailDraftView = document.getElementById("emailDraftView");
+      const itzalaChatView = document.getElementById("itzalaChatView");
+      const chatMessages = document.getElementById("chatMessages");
+      const chatActions = document.getElementById("chatActions");
+      const typedEmail = document.getElementById("academyEmailTyped");
+      if (inboxView) inboxView.style.display = "none";
+      if (itzalaChatView) itzalaChatView.classList.remove("show");
+      if (chatMessages) chatMessages.innerHTML = "";
+      if (chatActions) chatActions.classList.remove("show");
+      if (emailDraftView) {
+        emailDraftView.style.display = "block"; emailDraftView.classList.add("show");
+        emailDraftView.classList.remove("corrupting")
+      } if (typedEmail) {
+        typedEmail.textContent = "";
+        typedEmail.classList.remove("interrupted")
+      } typeEmailUntilError("academyEmailTyped", 34, 0.95, function () { triggerErrorAndChat() })
+    } function triggerErrorAndChat() {
+      const emailDraftView = document.getElementById("emailDraftView");
+      const errorGlitch = document.getElementById("errorGlitch");
+      const itzalaChatView = document.getElementById("itzalaChatView");
+      if (emailDraftView) { emailDraftView.classList.add("corrupting") } setTimeout(function () { if (errorGlitch) errorGlitch.classList.add("show") }, 250);
+      setTimeout(function () {
+        if (emailDraftView) {
+          emailDraftView.classList.remove("show"); emailDraftView.classList.remove("corrupting");
+          emailDraftView.style.display = "none"
+        } if (errorGlitch) errorGlitch.classList.remove("show"); if (itzalaChatView) { itzalaChatView.classList.add("show"); startItzalaChat() }
+      }, 1900)
+    } function startItzalaChat() {
+      const messages = [
+        { speaker: "itzala", type: "danger", label: "ITZALA", text: "JA JA JA...\nBerandu zabiltza...\nNire tranpan guztiz erori zara!" },
+        { speaker: "alumna", type: "", label: "NI", text: "Zer? Zer gertatu da?\nNor zara zu?" },
+        { speaker: "itzala", type: "danger", label: "ITZALA", text: "Itzala naiz.\nBaina horrek ez du garrantzirik." },
+        { speaker: "alumna", type: "", label: "NI", text: "Zer nahi duzu nigandik?" },
+        { speaker: "itzala", type: "danger", label: "ITZALA", text: "Zuregandik?\nZurengandik, EZER EZ." },
+        { speaker: "itzala", type: "danger", label: "ITZALA", text: "Zure sarbidea nahi nuen.\nEta orain... blokeatuta dago." },
+        { speaker: "alumna", type: "", label: "NI", text: "Nola? Blokeatuta? Hori ezin da izan!\nNola ireki dezaket?" },
+        { speaker: "itzala", type: "", label: "ITZALA", text: "Ez da hain erraza izango.\nAkademiak ez du edonor onartzen. Zure balioa frogatu beharko duzu." },
+        { speaker: "alumna", type: "", label: "NI", text: "Zer frogatu behar dut?" },
+        { speaker: "itzala", type: "", label: "ITZALA", text: "Erritmoa kontrolatzen duzula.\nBurua hotz mantentzen duzula.\nEta presiopean ez zarela apurtzen." },
+        { speaker: "alumna", type: "", label: "NI", text: "Eta hori lortzen badut?" },
+        { speaker: "itzala", type: "", label: "ITZALA", text: "Orduan, agian...\nlehen atea irekiko da." },
+        { speaker: "itzala", type: "final", label: "ITZALA", text: "Orain ez dago atzera egiterik.\nSartuko zara... ala itzalaren aurrean kikilduko zara?" }
+      ];
+      const chatMessages = document.getElementById("chatMessages");
+      const chatActions = document.getElementById("chatActions");
+      if (!chatMessages) return; chatMessages.innerHTML = "";
+      if (chatActions) chatActions.classList.remove("show");
+      let index = 0;
+      function nextMessage() {
+        if (index >= messages.length) { if (chatActions) chatActions.classList.add("show"); return } const item = messages[index];
+        const row = createChatRow(item);
+        chatMessages.appendChild(row);
+        const bubble = row.querySelector(".chat-bubble");
+        typeIntoBubble(bubble, item.text, 80, function () {
+          bubble.classList.remove("typing");
+          chatMessages.scrollTop = chatMessages.scrollHeight;
+          index++;
+          setTimeout(nextMessage, 550)
+        });
+        chatMessages.scrollTop = chatMessages.scrollHeight
+      } nextMessage()
+    }
+    function createChatRow(item) {
+      const row = document.createElement("div"); row.className = "chat-row " + item.speaker; const avatar = document.createElement("div"); avatar.className = "profile-avatar " + (item.speaker === "alumna" ? "alumna-avatar" : "itzala-avatar");
+      const avatarSpan = document.createElement("span");
+      avatarSpan.textContent = item.speaker === "alumna" ? "H08" : "I8";
+      avatar.appendChild(avatarSpan); if (item.speaker === "alumna" && cssAvatarIsSet("--alumna-avatar-url")) avatar.classList.add("has-image"); if (item.speaker === "itzala" && cssAvatarIsSet("--itzala-avatar-url")) avatar.classList.add("has-image"); const bubble = document.createElement("div");
+      bubble.className = "chat-bubble typing"; if (item.type) bubble.classList.add(item.type); if (item.speaker === "alumna") bubble.classList.add("alumna"); bubble.dataset.label = item.label; row.appendChild(avatar); row.appendChild(bubble); return row
+    }
+    function cssAvatarIsSet(varName) {
+      const value = getComputedStyle(document.documentElement).getPropertyValue(varName).trim();
+      return value && value !== "none" && !value.includes("PEGA_AQUI") && !value.includes('url("")') && !value.includes("url('')")
+    }
+    function applyAvatarImages() {
+      const headerAvatar = document.getElementById("itzalaHeaderAvatar");
+      const challengeAvatar = document.getElementById("challengeAvatar");
+
+      if (headerAvatar && cssAvatarIsSet("--itzala-avatar-url")) {
+        headerAvatar.classList.add("has-image");
+      }
+
+      if (challengeAvatar && cssAvatarIsSet("--itzala-avatar-url")) {
+        challengeAvatar.classList.add("has-image");
+      }
+
+      if (cssAvatarIsSet("--academy-logo-url")) {
+        document.querySelectorAll(".academy-logo-target").forEach(function (element) {
+          element.classList.add("has-image");
+        });
+      }
+    }
+    function acceptChallenge() { window.open(ACCEPT_URL, '_self') }
+    function showRefuseScene() {
+      const refuseScene = document.getElementById("refuseScene");
+      const computerWindow = document.getElementById("computerWindow");
+      const refuseActions = document.getElementById("refuseActions");
+      const chatActions = document.getElementById("chatActions");
+
+      if (chatActions) chatActions.classList.remove("show");
+      if (computerWindow) computerWindow.classList.remove("show");
+      if (refuseActions) refuseActions.classList.remove("show");
+
+      resetTypedText("refuseTypedText");
+
+      if (refuseScene) refuseScene.classList.add("show");
+
+      setTimeout(function () {
+        typeText("refuseTypedText", 38, function () {
+          setTimeout(function () {
+            if (refuseActions) refuseActions.classList.add("show")
+          }, 650)
+        })
+      }, 650)
+    }
+    function returnToChat() {
+      const refuseScene = document.getElementById("refuseScene");
+      const computerWindow = document.getElementById("computerWindow");
+      const chatActions = document.getElementById("chatActions");
+
+      if (refuseScene) refuseScene.classList.remove("show");
+      if (computerWindow) computerWindow.classList.add("show");
+      if (chatActions) {
+        setTimeout(function () {
+          chatActions.classList.add("show")
+        }, 350)
+      }
+    }
+    function backToInbox() {
+      const inboxView = document.getElementById("inboxView");
+      const emailDraftView = document.getElementById("emailDraftView");
+      const itzalaChatView = document.getElementById("itzalaChatView");
+      const errorGlitch = document.getElementById("errorGlitch");
+      const typedEmail = document.getElementById("academyEmailTyped");
+      const chatMessages = document.getElementById("chatMessages");
+      const chatActions = document.getElementById("chatActions");
+      if (emailDraftView) {
+        emailDraftView.classList.remove("show");
+        emailDraftView.classList.remove("corrupting");
+        emailDraftView.style.display = "none"
+      } if (itzalaChatView) itzalaChatView.classList.remove("show");
+      if (errorGlitch) errorGlitch.classList.remove("show");
+      if (typedEmail) {
+        typedEmail.textContent = "";
+        typedEmail.classList.remove("interrupted")
+      } if (chatMessages) chatMessages.innerHTML = "";
+      if (chatActions) chatActions.classList.remove("show");
+      if (inboxView) inboxView.style.display = "block"
+    }
+    function typeText(elementId, speed = 80, onDone = null) {
+      const element = document.getElementById(elementId);
+      if (!element) return;
+      if (typeIntervals[elementId]) { clearInterval(typeIntervals[elementId]) }
+      const text = element.getAttribute("data-text") || "";
+      element.dataset.started = "true";
+      element.textContent = ""; element.classList.remove("done");
+      element.classList.add("typing");
+      let index = 0;
+      typeIntervals[elementId] = setInterval(function () {
+        element.textContent += text.charAt(index);
+        index++; if (index >= text.length) {
+          clearInterval(typeIntervals[elementId]);
+          delete typeIntervals[elementId];
+          element.classList.remove("typing");
+          element.classList.add("done");
+          if (typeof onDone === "function") { setTimeout(onDone, 450) }
+        }
+      }, speed)
+    } function resetTypedText(elementId) {
+      const element = document.getElementById(elementId);
+      if (!element) return; if (typeIntervals[elementId]) {
+        clearInterval(typeIntervals[elementId]);
+        delete typeIntervals[elementId]
+      } element.dataset.started = "false";
+      element.textContent = ""; element.classList.remove("typing");
+      element.classList.remove("done")
+    }
+
+    const ACADEMY_EMAIL_PARTS = [
+    {
+      text: "Mezu hau irakurtzen ari bazara, ez da kasualitatea.\n",
+      className: "email-script-line"
+    },
+
+    { text: "Zure profila ez da oharkabean pasa. " },
+    { text: "Taupada Akademiaren hautaketa-batzordeak zure eskaera aztertu du eta... " },
+    { strong: "lehen aukeraketa-faserako onartua izan zara!\n" },
+
+    { text: "Hautagaien kopurua oso handia izan da, eta gutxi batzuk soilik pasatu dira hurrengo fasera. " },
+    { text: "Hemendik aurrera, aukera berezi bat duzu: " },
+    { strong: "Akademiako hautaketa-proban zure lekua defendatzea" },
+    { text: ".\n" },
+
+    { text: "Proba horretarako, Akademiak " },
+    { strong: "koreografia ofiziala" },
+    { text: " prestatu du zuretzat. Koreografia horrek zure erritmoa, zehaztasuna eta kontrola neurtuko ditu.\n" },
+
+    { strong: "Erritmoa ez da nahikoa izango" },
+    { text: ": arreta, kontrola eta burua ere beharko dituzu. " },
+    { text: "Pauso bakoitzak, eten bakoitzak eta taupada bakoitzak garrantzia izango du.\n" },
+
+    { text: "Zure lana argia izango da: " },
+    { strong: "koreografia ikasi, entrenatu eta azken oholtzan zehaztasunez aurkeztea" },
+    { text: ".\n" },
+
+    { text: "Mezu honekin batera, zure sarbide-fitxategia aurkituko duzu:\n" },
+    ];
+
+
+    function appendFormattedText(parent, text) {
+      const pieces = text.split("\n");
+      pieces.forEach(function (piece, i) {
+        if (i > 0) parent.appendChild(document.createElement("br"));
+        if (piece.length > 0) parent.appendChild(document.createTextNode(piece))
+      })
+    }
+    function renderAcademyEmail(element, parts, count) {
+      element.innerHTML = "";
+
+      let remaining = count;
+
+      for (const part of parts) {
+        const value = part.text || part.strong || "";
+        if (remaining <= 0) break;
+
+        const slice = value.slice(0, remaining);
+
+        let node;
+
+        if (part.strong) {
+          node = document.createElement("strong");
+        } else if (part.className) {
+          node = document.createElement("span");
+          node.className = part.className;
+        } else {
+          node = document.createElement("span");
+        }
+
+        appendFormattedText(node, slice);
+        element.appendChild(node);
+
+        remaining -= slice.length;
+      }
+    }
+    function typeEmailUntilError(elementId, speed = 34, interruptAt = .88, onInterrupt = null) {
+      const element = document.getElementById(elementId); if (!element) return;
+      const total = ACADEMY_EMAIL_PARTS.reduce(function (sum, part) { return sum + (part.text || part.strong || "").length }, 0);
+      const stopIndex = Math.floor(total * interruptAt); element.innerHTML = "";
+      element.classList.remove("interrupted");
+      let index = 0;
+      const interval = setInterval(function () {
+        index++;
+        renderAcademyEmail(element, ACADEMY_EMAIL_PARTS, index);
+        if (index >= stopIndex) {
+          clearInterval(interval); element.classList.add("interrupted");
+          if (typeof onInterrupt === "function") { setTimeout(onInterrupt, 350) }
+        }
+      }, speed)
+    }
+    function typeIntoBubble(element, text, speed = 80, onDone = null) {
+      let index = 0;
+      const label = element.dataset.label || "";
+      element.innerHTML = "";
+      if (label) {
+        const labelEl = document.createElement("span");
+        labelEl.className = "speaker-label";
+        labelEl.textContent = label;
+        element.appendChild(labelEl)
+      }
+      const textNode = document.createTextNode("");
+      element.appendChild(textNode);
+      const interval = setInterval(function () {
+        textNode.nodeValue += text.charAt(index);
+        index++; if (index >= text.length) {
+          clearInterval(interval);
+          if (typeof onDone === "function") { onDone() }
+        }
+      }, speed)
+    }
+  </script>
+</body>
+</html>

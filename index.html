@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="eu">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Taupada Akademia | Sarrera</title>
+  <link rel="stylesheet" href="assets/css/intro.css" />
+</head>
+
+<body>
+  <main class="intro-app">
+    <section id="schoolScene" class="scene active">
+      <div class="bg-image school-bg"></div>
+      <div class="soft-vignette"></div>
+      <div class="door-close-zone">
+        <div class="door-panel door-left"></div>
+        <div class="door-panel door-right"></div>
+        <div class="door-seam"></div>
+      </div>
+      <div class="story-text">
+        <div class="label line line-1">Ikasturtea amaitu da</div>
+        <h1 class="line line-2">ESKOLAKO ATEAK ITXI DIRA</h1>
+        <p id="schoolTypedText" class="typed-text"
+          data-text="Azken eguna pasa da. Pasilloak isildu, koadernoak itxi eta uda hasi da."></p>
+        <div id="storyCard" class="story-card">
+          <p>Baina uda hau ez da edozein uda izango...</p>
+        </div>
+        <div id="autoProgress" class="auto-progress" aria-hidden="true"><span></span></div>
+      </div>
+    </section>
+    <section id="deskScene" class="scene">
+      <div class="bg-image desk-bg"></div>
+      <div class="soft-vignette"></div>
+      <div class="desk-text">
+        <div class="label">3 EGUNEN BURUAN</div>
+        <h1>ORDENAGAILU AURREAN ZAUDE</h1>
+        <p id="deskTypedText" class="typed-text"
+          data-text="Pantaila piztuta dago. Hasieran dena isilik dago… baina bat-batean, mezu arraro bat agertu da.">
+        </p>
+      </div><button id="emailAlert" class="email-alert" onclick="openComputer()"
+        aria-label="Taupada Akademiaren mezua ireki">
+        <div class="alert-icon academy-logo-target">T</div>
+        <div class="alert-text"><strong>Mezu berria</strong><span>Taupada Akademia</span></div>
+      </button>
+      <section id="computerWindow" class="computer-window">
+        <div class="window-topbar">
+          <div class="traffic"></div>
+          <div class="traffic"></div>
+          <div class="traffic"></div>
+          <div class="window-title">Sarrera-ontzia</div>
+        </div>
+        <div class="window-body">
+          <div id="inboxView" class="gmail-shell">
+            <div class="gmail-top">
+              <div class="gmail-brand">
+                <span class="gmail-mark">M</span>
+                <span>Gmail</span>
+              </div>
+              <div class="gmail-search">Bilatu posta elektronikoan</div>
+              <div class="gmail-account">H08</div>
+            </div>
+
+            <div class="gmail-layout">
+              <aside class="gmail-sidebar">
+                <button class="compose-btn">+ Idatzi</button>
+                <div class="side-item active">Sarrera-ontzia <span>2</span></div>
+                <div class="side-item">Izardunak</div>
+                <div class="side-item">Bidaliak</div>
+                <div class="side-item">Zirriborroak</div>
+              </aside>
+
+              <section class="gmail-inbox">
+                <div class="gmail-toolbar">
+                  <span class="toolbar-dot"></span>
+                  <span class="toolbar-title">Sarrera-ontzia</span>
+                  <span class="toolbar-count">2 mezu</span>
+                </div>
+
+                <div class="mail-list gmail-mail-list">
+                  <div class="mail-row gmail-row">
+                    <div class="mail-checkbox"></div>
+                    <div class="mail-icon">C</div>
+                    <div>
+                      <div class="mail-title">Classroom</div>
+                      <div class="mail-sub">Uda honetako entrenamendu-koadernoa prest dago.</div>
+                    </div>
+                    <div class="tag">irakurrita</div>
+                  </div>
+
+                  <div class="mail-row gmail-row unread" onclick="openEmail()">
+                    <div class="mail-checkbox"></div>
+                    <div class="mail-icon taupada-icon academy-logo-target">T</div>
+                    <div>
+                      <div class="mail-title">Taupada Akademia</div>
+                      <div class="mail-sub"><strong>Garrantzitsua:</strong> Lehen-fasearen ebazpena.</div>
+                    </div>
+                    <div class="tag new-tag">berria</div>
+                  </div>
+                </div>
+              </section>
+            </div>
+          </div>
+
+          <div id="emailDraftView" class="email-letter gmail-message-view">
+            <div class="gmail-message-toolbar">
+              <span onclick="backToInbox()" style="cursor:pointer;">←</span>
+              <span>Artxibatu</span>
+              <span>Salatu</span>
+              <span>Ezabatu</span>
+            </div>
+
+            <div class="gmail-message-content">
+              <h2 class="gmail-message-subject">Lehen-fasearen ebazpena</h2>
+
+              <div class="gmail-message-meta-card">
+                <div class="sender-avatar academy-logo-target">TA</div>
+                <div class="meta-lines">
+                  <div class="meta-main"><strong>Taupada Akademia</strong>
+                    <span>&lt;sarrera@taupada-akademia.eus&gt;</span>
+                  </div>
+                  <div class="meta-row"><span>Igorlea:</span> Taupada Akademia</div>
+                  <div class="meta-row"><span>Hartzailea:</span> Hautagaia 08</div>
+                  <div class="meta-row"><span>Gaia:</span> Lehen-fasearen ebazpena</div>
+                </div>
+                <div class="meta-time">gaur · 18:08</div>
+              </div>
+
+              <div class="academy-card">
+                <div class="academy-card-header">
+                  <div class="academy-seal academy-logo-target">TA</div>
+                  <div>
+                    <div class="academy-title">Taupada Akademia</div>
+                    <div class="academy-subtitle">Azken Oholtzarako sarbide-protokoloa</div>
+                  </div>
+                  <div class="academy-chip">PROFILA AKTIBATUTA</div>
+                </div>
+
+                <div class="academy-divider"></div>
+
+                <div id="academyEmailTyped" class="email-typed-text"></div>
+
+                <div class="attachment-row">
+                  <div class="attachment-icon">🎞️</div>
+                  <div>
+                    <strong>taupada_akademia_koreografia.mp4</strong>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div id="errorGlitch" class="error-glitch" aria-hidden="true">
+            <div class="error-noise"></div>
+            <div class="error-box">
+              <div class="error-small">SYSTEM WARNING</div>
+              <div class="error-title">ERROR 08</div>
+              <div class="error-subtitle">TAUPADA OSATU GABEA</div>
+              <div class="error-line">Koreografia ezin da ireki.</div>
+              <div class="error-line">Sarbidea norbaitek blokeatu du.</div>
+            </div>
+          </div>
+          <div id="itzalaChatView" class="chat-view">
+            <div class="chat-header">
+              <div id="itzalaHeaderAvatar" class="chat-avatar chat-avatar-img itzala-avatar"><span>I8</span></div>
+              <div>
+                <div class="chat-name">ITZALA</div>
+                <div class="chat-status">Konektatuta</div>
+              </div>
+              <div class="chat-tag">INTERCEPTED</div>
+            </div>
+            <div id="chatMessages" class="chat-messages"></div>
+            <div id="chatActions" class="chat-actions">
+              <div class="challenge-alert">
+                <div class="challenge-noise" aria-hidden="true"></div>
+                <div class="challenge-scan" aria-hidden="true"></div>
+                
+                <div class="challenge-panel">
+                  <div id="challengeAvatar" class="challenge-avatar itzala-avatar">
+                    <span>I8</span>
+                  </div>
+
+                  <div class="challenge-title">ZURE AZKEN AUKERA</div>
+                  <h3>Onartuko duzu… ala beldur zara?</h3>
+
+                  <div class="challenge-buttons">
+                    <button class="btn btn-primary challenge-accept" onclick="acceptChallenge()">ONARTU</button>
+                    <button class="btn btn-secondary challenge-refuse" onclick="showRefuseScene()">UKO EGIN</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+      </section>
+    </section>
+    <section id="refuseScene" class="refuse-scene" aria-label="Itzalaren erantzuna">
+      <div class="bg-image refuse-bg-image"></div>
+      <div class="refuse-overlay"></div>
+      <div class="refuse-content">
+        <div class="label">Taupada Akademia</div>
+        <h1>Pasabidea itxi da</h1>
+        <p id="refuseTypedText" class="typed-text" data-text="Zalantzak atea itxi du. Baina ametsa ez da desagertu.">
+        </p>
+        <div class="story-card revealed">
+          <p>
+            Urrunetik musika entzuten da oraindik. Azken Oholtza ez da itzali,
+            baina lehen taupada berreskuratzeko ausardia behar da.
+          </p>
+        </div>
+        <div id="refuseActions" class="refuse-actions"><button class="btn btn-secondary"
+            onclick="returnToChat()">Txatera itzuli</button><button class="btn btn-primary"
+            onclick="acceptChallenge()">Erronka onartu</button></div>
+      </div>
+    </section>
+    <div id="blackout" class="blackout"></div><button class="skip-button" onclick="goToDesk()">Introa saltatu</button>
+  </main>
+  <script src="assets/js/intro.js"></script>
+</body>
+
+</html>

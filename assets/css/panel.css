@@ -26,9 +26,9 @@
       --choreo-visual-url: url("https://static.wixstatic.com/media/xxxxx.png");
       --itzala-panel-url: url("https://static.wixstatic.com/media/xxxxx.png");
     */
-    --panel-bg-url: url("https://static.wixstatic.com/media/22f1ea_d5e48e7cbf174876927c85c800d0ab69~mv2.png");
-    --choreo-visual-url: url("https://static.wixstatic.com/media/22f1ea_d7c2839369774a8594a80bff6dca0d8d~mv2.png");
-    --itzala-panel-url: url("https://static.wixstatic.com/media/22f1ea_888b71b756434004b247ce76b645c429~mv2.png");
+    --panel-bg-url: url("../img/backgrounds/3_BackStage.png");
+    --choreo-visual-url: url("../img/Coreografia.png");
+    --itzala-panel-url: url("../img/avatars/Itzala.png");
   }
 
   * {
@@ -45,6 +45,10 @@
 
   a {
     color: inherit;
+  }
+
+  h1 {
+  font-weight: 500;
   }
 
   .academy-page {
@@ -97,74 +101,65 @@
     padding-right: 6px;
   }
 
-  .top-system-bar {
-    display: flex;
-    justify-content: space-between;
-    gap: 18px;
-    align-items: center;
+  .challenge-header {
     margin-bottom: 20px;
-    padding: 14px 18px;
-    border: 1px solid rgba(255,255,255,0.13);
-    border-radius: 24px;
-    background: rgba(5,7,19,0.32);
-    backdrop-filter: blur(14px);
-    box-shadow: 0 20px 60px rgba(0,0,0,0.22);
+    padding: clamp(24px, 4vw, 36px);
+    border-radius: 28px;
+    background:
+      linear-gradient(135deg, rgba(252,251,247,0.08), rgba(252,251,247,0.02));
+    border: 1px solid rgba(229,139,119,0.18);
+    box-shadow: 0 20px 50px rgba(0,0,0,0.18);
+    backdrop-filter: blur(12px);
   }
 
-  .brand-block {
+  .challenge-content {
     display: flex;
+    flex-direction: column;
     gap: 14px;
+  }
+
+  .challenge-label {
+    display: inline-flex;
     align-items: center;
-  }
-
-  .brand-mark {
-    width: 48px;
-    height: 48px;
-    display: grid;
-    place-items: center;
-    border-radius: 18px;
-    background: var(--soft-peach);
-    color: var(--deep-violet);
+    gap: 8px;
+    width: fit-content;
+    padding: 10px 14px;
+    border-radius: 999px;
+    background: rgba(229,139,119,0.12);
+    border: 1px solid rgba(229,139,119,0.26);
+    color: var(--soft-peach);
+    font-size: 0.74rem;
     font-weight: 900;
-    box-shadow: 0 14px 26px rgba(229,139,119,0.16);
-  }
-
-  .brand-kicker {
-    color: rgba(255,255,255,0.62);
-    font-size: 0.77rem;
-    font-weight: 900;
-    letter-spacing: 0.18em;
+    letter-spacing: 0.1em;
     text-transform: uppercase;
   }
 
-  .brand-title {
-    margin-top: 2px;
-    font-size: clamp(1.35rem, 3vw, 2.4rem);
-    line-height: 0.96;
-    font-weight: 900;
-    letter-spacing: -0.055em;
+  .challenge-title {
+    margin: 0;
+    color: white;
+    font-size: clamp(2rem, 6vw, 3.2rem);
+    line-height: 1.1;
+    letter-spacing: 0.01em;
+    font-weight: 800;
   }
 
-  .system-chip {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    padding: 11px 14px;
-    border-radius: 999px;
-    border: 1px solid rgba(229,139,119,0.38);
-    background: rgba(229,139,119,0.10);
-    color: var(--soft-peach);
-    font-weight: 900;
-    font-size: 0.82rem;
-    white-space: nowrap;
+  .challenge-text {
+    margin: 0;
+    color: rgba(255,255,255,0.76);
+    font-size: clamp(0.98rem, 1.5vw, 1.08rem);
+    line-height: 1.58;
+  }
+
+  .challenge-text strong {
+    color: white;
   }
 
   .system-dot {
-    width: 10px;
-    height: 10px;
+    width: 8px;
+    height: 8px;
     border-radius: 999px;
     background: var(--peach);
-    box-shadow: 0 0 0 6px rgba(229,139,119,0.12);
+    box-shadow: 0 0 0 5px rgba(229,139,119,0.12);
     animation: pulseDot 1.6s ease-in-out infinite;
   }
 
@@ -173,54 +168,83 @@
     50% { transform: scale(1.12); opacity: 1; }
   }
 
-  .hero-intro {
-    margin-bottom: 20px;
-    padding: clamp(20px, 3vw, 34px);
-    border-radius: 32px;
-    background:
-      linear-gradient(135deg, rgba(252,251,247,0.10), rgba(252,251,247,0.04));
-    border: 1px solid rgba(255,255,255,0.14);
-    box-shadow: 0 26px 70px rgba(0,0,0,0.20);
-    backdrop-filter: blur(14px);
-  }
-
-  .hero-label {
-    display: inline-flex;
-    margin-bottom: 12px;
-    padding: 8px 12px;
-    border-radius: 999px;
-    background: rgba(255,240,236,0.92);
-    color: var(--deep-violet);
-    font-size: 0.76rem;
-    font-weight: 900;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-  }
-
-  .hero-title {
-    margin: 0;
-    max-width: 880px;
-    color: white;
-    font-size: clamp(2.3rem, 7vw, 5.8rem);
-    line-height: 0.9;
-    letter-spacing: -0.075em;
-  }
-
-  .hero-text {
-    max-width: 760px;
-    margin: 18px 0 0 0;
-    color: rgba(255,255,255,0.78);
-    font-size: clamp(0.98rem, 1.5vw, 1.12rem);
-    line-height: 1.65;
-  }
-
   .hero-text strong {
     color: white;
   }
 
+  .progress-section {
+    margin-bottom: 18px;
+    padding: 18px 20px;
+    border-radius: 24px;
+    background: rgba(5,7,19,0.20);
+    border: 1px solid rgba(255,255,255,0.10);
+    box-shadow: 0 14px 40px rgba(0,0,0,0.15);
+    backdrop-filter: blur(12px);
+  }
+
+  .progress-compact {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 24px;
+    align-items: center;
+  }
+
+  .progress-info {
+    display: grid;
+    gap: 4px;
+  }
+
+  .progress-label {
+    color: rgba(255,255,255,0.52);
+    font-size: 0.76rem;
+    font-weight: 900;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .progress-numbers {
+    font-size: 2.2rem;
+    font-weight: 900;
+    line-height: 0.95;
+    letter-spacing: -0.055em;
+    background: linear-gradient(135deg, var(--soft-peach), rgba(229,139,119,0.8));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .progress-bar-wrapper {
+    display: grid;
+    gap: 8px;
+  }
+
+  .progress-bar-track {
+    height: 12px;
+    border-radius: 999px;
+    overflow: hidden;
+    background: rgba(255,255,255,0.10);
+    box-shadow: inset 0 2px 6px rgba(0,0,0,0.3);
+  }
+
+  .progress-bar-fill {
+    width: 0%;
+    height: 100%;
+    border-radius: 999px;
+    background: linear-gradient(90deg, var(--peach), var(--deep-violet));
+    box-shadow: 0 0 16px rgba(229,139,119,0.4);
+    transition: width 0.4s ease;
+  }
+
+  .progress-status {
+    color: rgba(255,255,255,0.58);
+    font-size: 0.76rem;
+    font-weight: 800;
+    letter-spacing: 0.04em;
+  }
+
   .main-grid {
     display: grid;
-    grid-template-columns: minmax(230px, 0.76fr) minmax(340px, 1.48fr) minmax(250px, 0.88fr);
+    grid-template-columns: minmax(340px, 1.6fr) minmax(250px, 1fr);
     gap: 18px;
     align-items: stretch;
   }
@@ -270,112 +294,21 @@
     font-weight: 800;
   }
 
-  .status-stack {
-    display: grid;
-    gap: 12px;
-  }
 
-  .status-row {
-    padding: 13px 14px;
-    border-radius: 18px;
-    background: rgba(5,7,19,0.24);
-    border: 1px solid rgba(255,255,255,0.09);
-  }
-
-  .status-label {
-    display: block;
-    margin-bottom: 5px;
-    color: rgba(255,255,255,0.46);
-    font-size: 0.74rem;
-    font-weight: 900;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-  }
-
-  .status-value {
-    color: white;
-    font-weight: 900;
-  }
-
-  .danger-value {
-    color: var(--peach);
-  }
-
-  .progress-block {
-    margin-top: 16px;
-    padding: 15px;
-    border-radius: 22px;
-    background: rgba(5,7,19,0.28);
-    border: 1px solid rgba(229,139,119,0.16);
-  }
-
-  .progress-top {
-    display: flex;
-    align-items: baseline;
-    justify-content: space-between;
-    gap: 12px;
-    margin-bottom: 10px;
-  }
-
-  .progress-number {
-    font-size: 2.4rem;
-    line-height: 1;
-    font-weight: 900;
-    letter-spacing: -0.06em;
-  }
-
-  .progress-caption {
-    color: rgba(255,255,255,0.58);
-    font-size: 0.78rem;
-    font-weight: 800;
-  }
-
-  .progress-track {
-    height: 9px;
-    border-radius: 999px;
-    overflow: hidden;
-    background: rgba(255,255,255,0.14);
-  }
-
-  .progress-fill {
-    width: 0%;
-    height: 100%;
-    border-radius: 999px;
-    background: linear-gradient(90deg, var(--peach), var(--deep-violet));
-  }
-
-  .mini-inventory {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 8px;
-    margin-top: 14px;
-  }
-
-  .inventory-item {
-    height: 42px;
-    display: grid;
-    place-items: center;
-    border-radius: 14px;
-    background: rgba(255,255,255,0.06);
-    border: 1px solid rgba(255,255,255,0.09);
-    color: rgba(255,255,255,0.38);
-    font-size: 1rem;
-    font-weight: 900;
-  }
-
-  .inventory-item.active {
-    background: rgba(229,139,119,0.14);
-    border-color: rgba(229,139,119,0.36);
-    color: var(--soft-peach);
-  }
 
   .choreo-card {
-    min-height: 520px;
+    min-height: auto;
+    grid-column: 1;
+    grid-row: 1;
+  }
+
+  .status-card {
+    display: none;
   }
 
   .choreo-stage {
     position: relative;
-    min-height: 438px;
+    height: 560px;
     border-radius: 26px;
     overflow: hidden;
     background:
@@ -527,38 +460,14 @@
   .itzala-card {
     display: grid;
     grid-template-rows: auto 1fr auto;
-    min-height: 520px;
-  }
-
-  .itzala-visual {
-    min-height: 150px;
-    border-radius: 22px;
-    margin-bottom: 16px;
-    background:
-      linear-gradient(180deg, rgba(5,7,19,0.10), rgba(5,7,19,0.62)),
-      var(--itzala-panel-url),
-      radial-gradient(circle at 70% 26%, rgba(229,139,119,0.18), transparent 27%),
-      linear-gradient(135deg, #101735, #1E254F);
-    background-size: cover;
-    background-position: center;
-    border: 1px solid rgba(229,139,119,0.18);
-    overflow: hidden;
-    position: relative;
+    min-height: 580px;
+    grid-column: 2;
+    grid-row: 1;
   }
 
   .itzala-visual::after {
-    content: "ITZALA_08";
-    position: absolute;
-    left: 14px;
-    bottom: 12px;
-    padding: 7px 10px;
-    border-radius: 999px;
-    background: rgba(5,7,19,0.46);
-    border: 1px solid rgba(255,255,255,0.12);
-    color: rgba(255,255,255,0.78);
-    font-size: 0.72rem;
-    font-weight: 900;
-    letter-spacing: 0.1em;
+    content: "";
+    display: none;
   }
 
   .message-text {
@@ -569,6 +478,60 @@
 
   .message-text strong {
     color: white;
+  }
+
+  .itzala-card > .panel-inner {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+
+  .itzala-profile-box {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 16px;
+    align-items: center;
+    padding: 18px;
+    border-radius: 22px;
+    background: rgba(229,139,119,0.08);
+    border: 1px solid rgba(229,139,119,0.24);
+  }
+
+  .itzala-visual {
+    width: 120px;
+    height: 120px;
+    border-radius: 999px;
+    background:
+      linear-gradient(180deg, rgba(5,7,19,0.10), rgba(5,7,19,0.62)),
+      var(--itzala-panel-url),
+      radial-gradient(circle at 70% 26%, rgba(229,139,119,0.18), transparent 27%),
+      linear-gradient(135deg, #101735, #1E254F);
+    background-size: cover;
+    background-position: center;
+    border: 2px solid rgba(229,139,119,0.28);
+    overflow: hidden;
+    position: relative;
+    flex-shrink: 0;
+  }
+
+  .itzala-info {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .itzala-name {
+    color: white;
+    font-size: 1.1rem;
+    font-weight: 900;
+    letter-spacing: 0.08em;
+  }
+
+  .itzala-role {
+    color: rgba(255,255,255,0.56);
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
   }
 
   .message-box {
@@ -710,7 +673,8 @@
     margin-top: 16px;
     font-size: 1.02rem;
     line-height: 1.12;
-    font-weight: 900;
+    font-weight: 670;
+    letter-spacing: 0.03em;
   }
 
   .taupada-sub {
@@ -748,28 +712,32 @@
 
   @media (max-width: 1120px) {
     .main-grid {
-      grid-template-columns: 1fr 1.25fr;
+      grid-template-columns: 1fr;
     }
 
     .itzala-card {
-      grid-column: 1 / -1;
+      grid-column: 1;
       min-height: auto;
     }
 
     .itzala-card .panel-inner {
       display: grid;
-      grid-template-columns: 240px 1fr;
+      grid-template-columns: auto 1fr;
       gap: 18px;
-      align-items: stretch;
+      align-items: flex-start;
     }
 
     .itzala-visual {
-      min-height: 100%;
       margin-bottom: 0;
     }
 
     .module-grid {
       grid-template-columns: repeat(2, 1fr);
+    }
+
+    .progress-compact {
+      grid-template-columns: 1fr;
+      gap: 12px;
     }
   }
 
@@ -778,26 +746,21 @@
       padding: 14px;
     }
 
-    .top-system-bar {
-      align-items: flex-start;
-      flex-direction: column;
+    .challenge-header {
+      padding: clamp(18px, 3vw, 28px);
+      margin-bottom: 18px;
     }
 
-    .system-chip {
-      white-space: normal;
+    .challenge-title {
+      font-size: clamp(1.6rem, 5vw, 2.4rem);
     }
 
     .main-grid {
       grid-template-columns: 1fr;
     }
 
-    .choreo-card,
-    .itzala-card {
-      min-height: auto;
-    }
-
     .choreo-stage {
-      min-height: 380px;
+      height: 420px;
     }
 
     .itzala-card .panel-inner {
@@ -805,16 +768,11 @@
     }
 
     .itzala-visual {
-      min-height: 170px;
       margin-bottom: 16px;
     }
 
     .module-grid {
       grid-template-columns: 1fr;
-    }
-
-    .mini-inventory {
-      grid-template-columns: repeat(4, 1fr);
     }
 
     .recovery-node {

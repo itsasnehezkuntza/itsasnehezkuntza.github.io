@@ -3,7 +3,7 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&family=Sora:wght@400;500;600;700;800&display=swap');
 
-:root {
+  :root {
     --stage-navy: #101735;
     --stage-navy-2: #1E254F;
     --deep-violet: #5D4B93;
@@ -18,14 +18,6 @@
     --success: #A7D8C9;
     --warning: #E8C46E;
 
-    /*
-      FONDOS / IMÁGENES
-      Cambia none por url("URL_DE_WIX") cuando tengas tus imágenes.
-      Ejemplo:
-      --panel-bg-url: url("https://static.wixstatic.com/media/xxxxx.png");
-      --choreo-visual-url: url("https://static.wixstatic.com/media/xxxxx.png");
-      --itzala-panel-url: url("https://static.wixstatic.com/media/xxxxx.png");
-    */
     --panel-bg-url: url("../img/backgrounds/3_BackStage.png");
     --choreo-visual-url: url("../img/Coreografia.png");
     --itzala-panel-url: url("../img/avatars/Itzala.png");

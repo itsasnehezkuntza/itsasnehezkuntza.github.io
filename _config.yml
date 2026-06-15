@@ -1,0 +1,21 @@
+# GitHub Pages configuration for Taupada Akademia
+# Ensure all assets are served correctly
+
+# Disable Jekyll processing to avoid breaking static assets
+safe: false
+
+# Ensure all files are included
+include:
+  - "assets"
+  - "pages"
+  - "index.html"
+
+# Set encoding
+encoding: utf-8
+
+# Disable automatic CNAME generation
+keep_files:
+  - "CNAME"
+  - "assets"
+  - "pages"
+  - "index.html"

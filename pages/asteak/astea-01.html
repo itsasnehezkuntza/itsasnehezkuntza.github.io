@@ -239,7 +239,7 @@
       inset: 0;
       z-index: 40;
       display: grid;
-      place-items: end center;
+      place-items: center;
       padding: clamp(18px, 4vw, 42px);
       background:
         radial-gradient(circle at 50% 42%, rgba(93,75,147,0.16), transparent 34%),
@@ -272,56 +272,51 @@
     }
 
     .itzala-transmission {
-      align-self: end;
-      width: min(760px, 100%);
+      align-self: center;
+      width: min(1040px, 100%);
       gap: 14px;
     }
 
     .chat-window {
       display: grid;
-      gap: 14px;
+      grid-template-columns: auto minmax(0, 1fr);
+      align-items: center;
+      gap: clamp(18px, 4vw, 44px);
       width: 100%;
-      padding: clamp(16px, 3vw, 24px);
-      border-radius: 28px;
-      background: rgba(5,7,19,0.58);
-      border: 1px solid rgba(255,255,255,0.12);
-      box-shadow: 0 34px 90px rgba(0,0,0,0.42);
-      backdrop-filter: blur(16px);
+      min-height: min(760px, calc(100vh - 56px));
+      padding: clamp(14px, 4vw, 34px);
     }
 
-    .chat-header {
+    .transmission-profile {
       display: flex;
+      flex-direction: column;
       align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      padding-bottom: 10px;
-      border-bottom: 1px solid rgba(255,255,255,0.10);
-    }
-
-    .chat-header .signal-label {
-      margin: 0;
-      flex: 0 0 auto;
-    }
-
-    .chat-identity {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      min-width: 0;
+      gap: 14px;
+      width: clamp(120px, 18vw, 210px);
     }
 
     .chat-avatar-mini {
-      width: 42px;
-      height: 42px;
+      width: clamp(94px, 15vw, 170px);
+      height: clamp(94px, 15vw, 170px);
       display: grid;
       place-items: center;
       flex: 0 0 auto;
-      border-radius: 16px;
-      background: rgba(229,139,119,0.16);
-      border: 1px solid rgba(229,139,119,0.28);
+      border-radius: 999px;
+      background:
+        linear-gradient(180deg, rgba(5,7,19,0.02), rgba(5,7,19,0.52)),
+        url("../../assets/img/avatars/Itzala.png"),
+        rgba(229,139,119,0.16);
+      background-size: cover;
+      background-position: center;
+      border: 2px solid rgba(229,139,119,0.32);
       color: var(--soft-peach);
+      font-size: 0;
       font-weight: 900;
       letter-spacing: 0.04em;
+      box-shadow:
+        0 26px 70px rgba(0,0,0,0.36),
+        0 0 0 12px rgba(229,139,119,0.08);
+      overflow: hidden;
     }
 
     .chat-name {
@@ -338,23 +333,86 @@
 
     .chat-thread {
       display: grid;
-      gap: 10px;
+      align-content: start;
+      gap: 16px;
+      min-height: 0;
+      overflow: auto;
+      padding: clamp(10px, 2vw, 18px);
+      border-radius: 28px;
+      background: rgba(5,7,19,0.44);
+      border: 1px solid rgba(255,255,255,0.10);
+      box-shadow: 0 34px 90px rgba(0,0,0,0.34);
+      backdrop-filter: blur(14px);
+    }
+
+    .chat-row-full {
+      display: grid;
+      grid-template-columns: auto minmax(0, 1fr);
+      gap: 12px;
+      align-items: end;
+      max-width: min(760px, 100%);
+      animation: chatBubbleIn 0.45s ease both;
+    }
+
+    .chat-row-full.alumna {
+      grid-template-columns: minmax(0, 1fr) auto;
+      justify-self: end;
+    }
+
+    .chat-row-full.alumna .chat-avatar-large {
+      order: 2;
+    }
+
+    .chat-row-full.alumna .chat-bubble {
+      justify-self: end;
+      border-bottom-right-radius: 6px;
+      border-bottom-left-radius: 18px;
+      background: rgba(246,239,231,0.94);
+      color: var(--stage-navy);
+    }
+
+    .chat-avatar-large {
+      width: 54px;
+      height: 54px;
+      display: grid;
+      place-items: center;
+      border-radius: 18px;
+      background:
+        linear-gradient(180deg, rgba(5,7,19,0.05), rgba(5,7,19,0.52)),
+        url("../../assets/img/avatars/Itzala.png"),
+        rgba(229,139,119,0.16);
+      background-size: cover;
+      background-position: center;
+      border: 1px solid rgba(229,139,119,0.32);
+      color: var(--soft-peach);
+      font-size: 0.78rem;
+      font-weight: 900;
+      box-shadow: 0 16px 34px rgba(0,0,0,0.24);
+      overflow: hidden;
+    }
+
+    .chat-row-full.alumna .chat-avatar-large {
+      background:
+        linear-gradient(180deg, rgba(5,7,19,0.05), rgba(5,7,19,0.50)),
+        url("../../assets/img/avatars/Ikaslea.png"),
+        rgba(255,255,255,0.12);
+      background-size: cover;
+      background-position: center;
+      border-color: rgba(255,255,255,0.22);
+      color: white;
     }
 
     .chat-bubble {
       width: fit-content;
       max-width: min(620px, 100%);
-      padding: 13px 15px;
+      min-height: 48px;
+      padding: 13px 16px;
       border-radius: 18px;
       color: rgba(255,255,255,0.86);
       line-height: 1.58;
       box-shadow: 0 16px 34px rgba(0,0,0,0.18);
-      animation: chatBubbleIn 0.5s ease both;
+      white-space: pre-line;
     }
-
-    .chat-bubble:nth-child(2) { animation-delay: 0.18s; }
-    .chat-bubble:nth-child(3) { animation-delay: 0.36s; }
-    .chat-bubble:nth-child(4) { animation-delay: 0.54s; }
 
     @keyframes chatBubbleIn {
       from { opacity: 0; transform: translateY(10px); }
@@ -380,9 +438,14 @@
     }
 
     .chat-reply-row {
+      grid-column: 2;
       display: flex;
       justify-content: flex-end;
       padding-top: 4px;
+    }
+
+    .chat-reply-row.hidden {
+      display: none;
     }
 
     .signal-label {
@@ -517,13 +580,14 @@
     }
 
     .interactive-room {
+      --repair-progress: 0%;
       position: relative;
       min-height: 100vh;
       border-radius: 0;
       overflow: hidden;
       background:
-        linear-gradient(180deg, rgba(5,7,19,0.08), rgba(5,7,19,0.34)),
-        url("../../assets/img/backgrounds/entsegu-gela-01.png"),
+        linear-gradient(180deg, rgba(5,7,19,0.03), rgba(5,7,19,0.30)),
+        url("../../assets/img/backgrounds/entsegu-gela-01-desorekatuta.png"),
         linear-gradient(135deg, rgba(16,23,53,0.86), rgba(5,7,19,0.88));
       background-size: cover;
       background-position: center;
@@ -531,10 +595,67 @@
       box-shadow: none;
     }
 
+    .interactive-room::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      background:
+        linear-gradient(180deg, rgba(5,7,19,0.02), rgba(5,7,19,0.18)),
+        url("../../assets/img/backgrounds/entsegu-gela-01.png");
+      background-size: cover;
+      background-position: center;
+      opacity: 0;
+      transition: opacity 1.1s ease;
+      pointer-events: none;
+    }
+
+    .interactive-room.room-fixed::before {
+      opacity: 1;
+    }
+
+    .repair-reveal {
+      --repair-x: 50%;
+      --repair-y: 50%;
+      --repair-radius: 12%;
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      background:
+        linear-gradient(180deg, rgba(5,7,19,0.02), rgba(5,7,19,0.12)),
+        url("../../assets/img/backgrounds/entsegu-gela-01.png");
+      background-size: cover;
+      background-position: center;
+      opacity: 0;
+      pointer-events: none;
+      -webkit-mask-image:
+        radial-gradient(
+          circle at var(--repair-x) var(--repair-y),
+          #000 0,
+          #000 var(--repair-radius),
+          rgba(0,0,0,0.74) calc(var(--repair-radius) + 3%),
+          transparent calc(var(--repair-radius) + 8%)
+        );
+      mask-image:
+        radial-gradient(
+          circle at var(--repair-x) var(--repair-y),
+          #000 0,
+          #000 var(--repair-radius),
+          rgba(0,0,0,0.74) calc(var(--repair-radius) + 3%),
+          transparent calc(var(--repair-radius) + 8%)
+        );
+      transition: opacity 0.7s ease;
+    }
+
+    .repair-reveal.active {
+      opacity: 1;
+    }
+
     .interactive-room::after {
       content: "";
       position: absolute;
       inset: 0;
+      z-index: 3;
       background:
         radial-gradient(circle at 50% 52%, transparent 28%, rgba(5,7,19,0.30) 78%),
         linear-gradient(180deg, rgba(5,7,19,0.02), rgba(5,7,19,0.36));
@@ -543,21 +664,35 @@
 
     .inspect-hotspot {
       position: absolute;
-      z-index: 2;
+      z-index: 4;
       width: clamp(70px, 8vw, 130px);
       height: clamp(70px, 8vw, 130px);
       display: grid;
       place-items: center;
       border-radius: 999px;
       border: 1px solid rgba(255,255,255,0);
-      background: rgba(229,139,119,0.02);
+      background: rgba(229,139,119,0.04);
       color: transparent;
       font-family: inherit;
       font-size: 0;
       font-weight: 900;
       cursor: pointer;
-      box-shadow: none;
-      transition: transform 0.18s ease, background 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+      box-shadow:
+        0 0 0 0 rgba(229,139,119,0.0),
+        inset 0 0 28px rgba(229,139,119,0.05);
+      animation: unstableSignal 2.6s ease-in-out infinite;
+      transition: transform 0.18s ease, background 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease, opacity 0.18s ease;
+    }
+
+    .inspect-hotspot::before {
+      content: "";
+      position: absolute;
+      inset: 20%;
+      border-radius: inherit;
+      border: 1px solid rgba(246,239,231,0.24);
+      opacity: 0;
+      transform: scale(0.72);
+      transition: opacity 0.18s ease, transform 0.18s ease;
     }
 
     .inspect-hotspot:hover,
@@ -571,12 +706,25 @@
         0 0 0 12px rgba(229,139,119,0.12);
     }
 
+    .inspect-hotspot:hover::before,
+    .inspect-hotspot:focus-visible::before {
+      opacity: 1;
+      transform: scale(1);
+    }
+
     .inspect-hotspot.open {
       border-color: rgba(167,216,201,0.55);
       background: rgba(167,216,201,0.10);
       box-shadow:
         0 18px 38px rgba(0,0,0,0.36),
         0 0 0 10px rgba(167,216,201,0.10);
+      animation: none;
+      opacity: 0.82;
+    }
+
+    .interactive-room.room-fixed .inspect-hotspot {
+      opacity: 0;
+      pointer-events: none;
     }
 
     .hotspot-mirror { left: 50%; top: 40%; transform: translate(-50%, -50%); }
@@ -588,7 +736,7 @@
       position: absolute;
       right: clamp(16px, 3vw, 34px);
       bottom: clamp(16px, 3vw, 30px);
-      z-index: 2;
+      z-index: 4;
       width: min(390px, calc(100% - 32px));
       padding: 14px 16px;
       border-radius: 20px;
@@ -597,6 +745,48 @@
       color: rgba(255,255,255,0.82);
       line-height: 1.5;
       backdrop-filter: blur(10px);
+      transition: opacity 0.35s ease;
+    }
+
+    .interactive-room.room-fixed .room-caption {
+      opacity: 0;
+    }
+
+    .repair-progress {
+      display: grid;
+      gap: 8px;
+      margin-top: 14px;
+    }
+
+    .repair-progress-label {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      color: rgba(246,239,231,0.84);
+      font-size: 0.78rem;
+      font-weight: 900;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .repair-track {
+      position: relative;
+      height: 8px;
+      overflow: hidden;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.10);
+      border: 1px solid rgba(255,255,255,0.10);
+    }
+
+    .repair-track::before {
+      content: "";
+      position: absolute;
+      inset: 0 auto 0 0;
+      width: var(--repair-progress);
+      border-radius: inherit;
+      background: linear-gradient(90deg, rgba(229,139,119,0.88), rgba(167,216,201,0.95));
+      box-shadow: 0 0 18px rgba(229,139,119,0.30);
+      transition: width 0.55s ease;
     }
 
     .inspection-output {
@@ -615,6 +805,14 @@
       box-shadow: 0 22px 60px rgba(0,0,0,0.28);
     }
 
+    .math-rule-kicker {
+      color: rgba(167,216,201,0.92);
+      font-size: 0.78rem;
+      font-weight: 900;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
     .inspection-output h3 {
       margin: 0;
       color: white;
@@ -629,12 +827,53 @@
       line-height: 1.65;
     }
 
+    .repair-state {
+      display: inline-flex;
+      align-items: center;
+      width: fit-content;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: rgba(167,216,201,0.10);
+      color: rgba(246,239,231,0.92);
+      border: 1px solid rgba(167,216,201,0.24);
+      font-size: 0.72rem;
+      font-weight: 900;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
     .room-actions {
       position: absolute;
       left: clamp(16px, 3vw, 34px);
       bottom: clamp(16px, 3vw, 30px);
       z-index: 5;
       margin: 0;
+    }
+
+    .interactive-room.repair-pulse {
+      animation: roomRepairPulse 0.7s ease;
+    }
+
+    @keyframes unstableSignal {
+      0%, 100% {
+        box-shadow:
+          0 0 0 0 rgba(229,139,119,0),
+          inset 0 0 28px rgba(229,139,119,0.04);
+      }
+      45% {
+        box-shadow:
+          0 0 0 8px rgba(229,139,119,0.10),
+          inset 0 0 34px rgba(229,139,119,0.12);
+      }
+      58% {
+        opacity: 0.86;
+      }
+    }
+
+    @keyframes roomRepairPulse {
+      0% { filter: saturate(1) brightness(1); }
+      45% { filter: saturate(1.16) brightness(1.08); }
+      100% { filter: saturate(1) brightness(1); }
     }
 
     .hidden {
@@ -830,6 +1069,19 @@
         grid-template-columns: 1fr;
       }
 
+      .chat-window {
+        grid-template-columns: 1fr;
+        align-content: center;
+      }
+
+      .transmission-profile {
+        width: 100%;
+      }
+
+      .chat-reply-row {
+        grid-column: 1;
+      }
+
       .director-portrait {
         max-height: 320px;
         width: min(240px, 70vw);
@@ -857,20 +1109,35 @@
       }
 
       .interactive-room {
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        min-height: 100vh;
+        display: block;
+        min-height: 158vh;
       }
+
+      .inspect-hotspot {
+        width: 64px;
+        height: 64px;
+      }
+
+      .hotspot-lights { left: 50%; top: 52vh; }
+      .hotspot-mirror { left: 50%; top: 62vh; }
+      .hotspot-speakers { left: 76%; top: 72vh; }
+      .hotspot-floor { left: 48%; top: 86vh; }
 
       .room-caption {
         display: none;
       }
 
+      .inspection-output {
+        margin-top: 68vh;
+      }
+
       .room-actions {
-        left: 14px;
-        right: 14px;
-        bottom: 14px;
+        position: relative;
+        left: auto;
+        right: auto;
+        bottom: auto;
+        width: calc(100% - 28px);
+        margin: 14px;
       }
     }
   </style>
@@ -885,7 +1152,7 @@
             ASTEA 01
           </div>
           <h1 class="challenge-title">1. ataza — Lehen entsegu-gela</h1>
-          <p class="challenge-text">Erritmoaren oinarria aktibatu. Signos, parentesiak eta eragiketen hierarkia kontrolatu.</p>
+          <p class="challenge-text">Erritmoaren oinarria aktibatu. Zeinuak, parentesiak eta eragiketen hierarkia kontrolatu.</p>
         </div>
       </header>
 
@@ -895,7 +1162,7 @@
             <div class="section-title">Aste 1eko aurrerapena</div>
             <div class="status-list">
               <div class="status-item" data-status="connected"><span class="status-dot"></span>Sarbidea konektatuta</div>
-              <div class="status-item" data-status="roomExplored"><span class="status-dot"></span>Gela aztertuta</div>
+              <div class="status-item" data-status="roomExplored"><span class="status-dot"></span>Gela egonkortuta</div>
               <div class="status-item" data-status="firstCode"><span class="status-dot"></span>Lehen taupada aktibatuta</div>
               <div class="status-item" data-status="lightsSynced"><span class="status-dot"></span>Argi-panela sinkronizatuta</div>
               <div class="status-item" data-status="finalCode"><span class="status-dot"></span>Lehen koreografia-zatia berreskuratuta</div>
@@ -909,10 +1176,10 @@
             <div class="section-body">
               <div class="hero-label">LEHEN TAUPADA // SARBIDEA ESKATZEN</div>
               <h1>Lehen entsegua</h1>
-              <p>Koreografia zatituta dago eta lehen gela ez da modu normalean ireki. Sistemak seinale bat jaso du: norbaitek entsegu-gelaren oinarria desorekatu du.</p>
-              <p class="status-banner">Taupada seinalea bilatzen... Ispilu digitala pizten... Argiak kalibratzen... Transmisioa prestatzen...</p>
+              <p>Berreskuratze-panelean lehen taupada aukeratu duzu. Sistemak entsegu-gela 01 irekitzeko protokoloa bidali du, baina seinalea ez da garbi iritsi.</p>
+              <p class="status-banner">Panelaren aukera jasota... Sarbide-protokoloa bidaltzen... Entsegu-gela 01 bilatzen... Transmisio ezezaguna atzemanda...</p>
               <div class="card-actions">
-                <button id="enter-room" class="btn btn-primary" type="button">Transmisioa ireki</button>
+                <button id="enter-room" class="btn btn-primary" type="button">Seinalea ireki</button>
                 <a class="btn btn-secondary" href="../panel.html">Panela itzuli</a>
               </div>
             </div>
@@ -921,27 +1188,19 @@
           <section class="scene-card hidden" id="room-scene-card">
             <div class="cinematic-briefing" aria-live="polite">
               <article class="briefing-panel itzala-transmission active" id="itzala-briefing">
-                <div class="chat-window">
-                  <div class="chat-header">
-                    <div class="chat-identity">
-                      <div class="chat-avatar-mini">I8</div>
-                      <div>
-                        <div class="chat-name">ITZALA_08</div>
-                        <div class="chat-status">seinalea atzemanda</div>
-                      </div>
+                  <div class="chat-window">
+                  <div class="transmission-profile">
+                    <div class="chat-avatar-mini">I8</div>
+                    <div>
+                      <div class="chat-name">ITZALA_08</div>
+                      <div class="chat-status" id="itzala-week-status">transmisioa irekitzen...</div>
                     </div>
-                    <div class="signal-label">INTERCEPTED</div>
                   </div>
 
-                  <div class="chat-thread">
-                    <div class="chat-bubble system">01 // LEHEN ENTSEGUA</div>
-                    <div class="chat-bubble incoming">Entsegu-gela ireki da... baina ez dago sinkronizatuta.</div>
-                    <div class="chat-bubble incoming">Oinarria gaizki badago, koreografia osoa erortzen da.</div>
-                    <div class="chat-bubble incoming">Ez bilatu zortea. Bilatu ordena.</div>
-                  </div>
+                  <div class="chat-thread" id="itzala-week-chat" aria-live="polite"></div>
 
-                  <div class="chat-reply-row">
-                    <button id="continue-briefing" class="btn btn-primary" type="button">Erantzun seinaleari</button>
+                  <div class="chat-reply-row hidden" id="itzala-week-actions">
+                    <button id="continue-briefing" class="btn btn-primary" type="button">Seinale ofiziala berreskuratu</button>
                   </div>
                 </div>
               </article>
@@ -949,14 +1208,15 @@
               <article class="briefing-panel director-transmission" id="director-briefing">
                 <div class="director-portrait" aria-hidden="true"></div>
                 <div class="director-copy">
-                  <div class="signal-label">TAUPADA AKADEMIA // ZUZENDARIA</div>
-                  <h2>Entsegu-gela ez dago prest.</h2>
+                  <div class="signal-label">TAUPADA AKADEMIA // SEINALE OFIZIALA</div>
+                  <h2>Zure sarbidea berreskuratu dugu.</h2>
                   <p>
-                    Argiak, bozgorailuak eta ispilu digitala desorekatuta daude. Lehenik, gela entzun
-                    behar duzu: begiratu inguruan, ukitu seinaleak eta ulertu zer dagoen hautsi baino lehen.
+                    Panelak lehen taupada aktibatu duenean, ITZALA_08k entsegu-gelako oinarrizko sistema
+                    desorekatu du. Ez du gela itxi: barrutik nahastu du.
                   </p>
                   <p>
-                    Fitxako kodeak ez dira hemen asmatzen. Gela honek zer kontrolatu behar duzun erakutsiko dizu.
+                    Nik ezin dut urrunetik konpondu. Zuk sartu behar duzu eta desorekatuta dauden lau sistemak
+                    egonkortu. Konponketa bakoitzak fitxan behar duzun arau matematiko bat irekiko du.
                   </p>
                   <button id="start-exploration" class="btn btn-primary" type="button">Entsegu-gela ireki</button>
                 </div>
@@ -967,52 +1227,69 @@
           <section class="inspect-section hidden" id="inspection-card">
             <div class="section-body">
               <div class="room-explorer">
-                <div class="interactive-room" aria-label="Entsegu-gela 01 esploratzeko irudia">
+                <div class="interactive-room" id="interactive-room" aria-label="Entsegu-gela 01 konpontzeko irudia">
                   <div class="room-intro-copy">
                     <div class="hero-label">ENTSEGU-GELA 01</div>
-                    <p>Gela isilik dago, baina sistemak arrastoak utzi ditu. Mugi zaitez poliki: elementu batzuek erantzuten dute gerturatzen zarenean.</p>
+                    <p>ITZALA_08k ez du gela itxi: ordena hautsi du. Sakatu desorekatuta dagoen edozein gune; konponketa bakoitzak hurrengo araua irekiko du.</p>
+                    <div class="repair-progress" aria-label="Gelaren egonkortze aurrerapena">
+                      <div class="repair-progress-label">
+                        <span>Gela egonkortzen</span>
+                        <span><span id="repair-count">0</span>/4</span>
+                      </div>
+                      <div class="repair-track" aria-hidden="true"></div>
+                    </div>
                   </div>
 
                   <button class="inspect-hotspot inspect-card hotspot-mirror" type="button"
-                    aria-label="Ispilu digitala aztertu"
+                    aria-label="Ispilu digitala egonkortu"
                     data-inspect="ispilu"
-                    data-title="Ispilu digitala"
-                    data-body="Ispilu digitalak mugimenduak zatika erakusten ditu. Siluetak eten egiten dira parentesiak irekitzen direnean."
+                    data-title="Ispilu digitala desfasatuta"
+                    data-body="Ispiluak mugimenduak zatika erakusten ditu. Siluetak eten egiten dira parentesiak irekitzen direnean."
+                    data-fixed-title="Ispilu digitala egonkortuta"
+                    data-fixed-body="Isla berriro lotu da. Pausoak taldeka irakurtzen hasi dira, parentesiek eskatzen duten bezala."
                     data-hint="Gogoratu: parentesi barrukoa lehenengo konpondu behar da. Taldeka doazen pausoak ezin dira banandu."><span class="sr-only">Ispilu digitala</span></button>
 
                   <button class="inspect-hotspot inspect-card hotspot-speakers" type="button"
-                    aria-label="Bozgorailuak aztertu"
+                    aria-label="Bozgorailuak egonkortu"
                     data-inspect="bozgorailuak"
-                    data-title="Bozgorailuak"
-                    data-body="Bozgorailuak etenka ari dira. Seinaleak norabidea galtzen du zeinuak gaizki erabiltzen direnean."
+                    data-title="Bozgorailuak alderantziz"
+                    data-body="Bozgorailuak etenka ari dira. Taupadak norabidea galtzen du zeinuak gaizki erabiltzen direnean."
+                    data-fixed-title="Soinua lerrokatuta"
+                    data-fixed-body="Baxua eta klik nagusia berriro batera doaz. Zeinuek norabidea markatzen dute, eta erritmoak erantzun egin du."
                     data-hint="Gogoratu: - eta - ez dira apaingarriak. Norabidea markatzen dute. Dantzan bezala: aurrera eta atzera ez dira gauza bera."><span class="sr-only">Bozgorailuak</span></button>
 
                   <button class="inspect-hotspot inspect-card hotspot-floor" type="button"
-                    aria-label="Lurreko markak aztertu"
+                    aria-label="Lurreko markak egonkortu"
                     data-inspect="markak"
-                    data-title="Lurreko markak"
-                    data-body="Lurreko markak ez daude ausaz jarrita. Pauso batzuk lehenago egiten dira, beste batzuk ondoren."
+                    data-title="Lurreko markak desplazatuta"
+                    data-body="Zintak eta pauso-markak lekuz kanpo daude. Pauso batzuk lehenago egin behar dira, beste batzuk ondoren."
+                    data-fixed-title="Markak berriro ordenatuta"
+                    data-fixed-body="Lurreko lerroak egonkortu dira. Entseguak badu berriro sekuentzia: lehenengo oinarria, gero mugimendua."
                     data-hint="Ordena: 1. Parentesiak 2. Biderketak eta zatiketak 3. Batuketak eta kenketak."><span class="sr-only">Lurreko markak</span></button>
 
                   <button class="inspect-hotspot inspect-card hotspot-lights" type="button"
-                    aria-label="Argi-kontrola aztertu"
+                    aria-label="Argi-kontrola egonkortu"
                     data-inspect="argiak"
-                    data-title="Argi-kontrola"
-                    data-body="Fokuak pultsuka ari dira. Sistemak erritmo azkarra eskatuko du: kalkulu laburrak, baina presiopean."
+                    data-title="Argiak erritmotik kanpo"
+                    data-body="Fokuak desberdin pultsuka ari dira. Sistemak erritmo azkarra eskatuko du: kalkulu laburrak, baina presiopean."
+                    data-fixed-title="Argi-pultsua egonkortuta"
+                    data-fixed-body="Fokuak taupada bakarrean sartu dira. Gela prest dago hurrengo probara pasatzeko."
                     data-hint="Argi-panela irekitzen denean, ez galdu ordena. Seinale bakoitza pauso bat da; akats batek ez du entsegua amaitzen, baina erritmoa hausten du."><span class="sr-only">Argi-kontrola</span></button>
 
                   <div class="room-caption">
-                    Ez dago markarik agerian. Bilatu erreakzionatzen duten guneak: soinua, isla, lurra eta argia.
+                    Seinaleak ez daude zenbakituta. Gela bera begiratu: islak, soinua, zoruaren ordena eta argien pultsua.
                   </div>
 
                   <div class="inspection-output" id="inspection-output" aria-live="polite">
-                    <h3>Seinalea hautatu gabe</h3>
-                    <p>Gela behatzen ari zara. Objektu batzuek erantzun txiki bat emango dute gerturatzen zarenean.</p>
-                    <p class="inspect-hint">Seinale guztiak aurkitzean fitxarako sarbidea aktibatuko da.</p>
+                    <span class="repair-state">Konponketa hasi gabe</span>
+                    <h3>Gela desorekatuta</h3>
+                    <span class="math-rule-kicker">Laguntza matematikoa</span>
+                    <p>Elementu batzuk lekuz kanpo daude. Lehen konponketak lehen araua erakutsiko du, sakatzen duzun gunea edozein izanda ere.</p>
+                    <p class="inspect-hint">Lau arauak jasotzean fitxarako sarbidea aktibatuko da.</p>
                   </div>
 
                   <div class="room-actions">
-                    <div class="status-banner hidden" id="inspection-complete">Gela aztertuta. Oinarrizko seinaleak identifikatu dira, baina sistema oraindik blokeatuta dago. Lehen taupada ez da pantailan asmatuko. Fitxan eraiki behar da.</div>
+                    <div class="status-banner hidden" id="inspection-complete">Gela egonkortuta. Lau arauak jasota daude, baina lehen taupada ez da pantailan asmatuko. Fitxan eraiki behar da.</div>
                     <div class="card-actions hidden" id="open-worksheet-area">
                       <button id="open-worksheet" class="btn btn-primary">Aste 1eko fitxa ireki</button>
                     </div>

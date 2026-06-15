@@ -33,6 +33,52 @@ const LIGHT_PANEL_QUESTIONS = [
   { expression: "30 : (-5) + (-2) · (-4)", answer: 2 }
 ];
 
+const ITZALA_WEEK_MESSAGES = [
+  {
+    speaker: "itzala",
+    label: "ITZALA_08",
+    text: "Berreskuratze-panelak zure aukera bidali du.\n01: Lehen Taupada."
+  },
+  {
+    speaker: "itzala",
+    label: "ITZALA_08",
+    text: "Akademiaren protokoloa entsegu-gela 01 irekitzen saiatu da.\nNik seinalea hartu dut bidean."
+  },
+  {
+    speaker: "itzala",
+    label: "ITZALA_08",
+    text: "Ez dut atea itxi.\nOinarria desorekatu dut: zeinuak, parentesiak eta ordena."
+  },
+  {
+    speaker: "itzala",
+    label: "ITZALA_08",
+    text: "Zuzendariak seinale ofiziala berreskuratzen saiatuko da.\nEntzun ondo. Gela ez da bere kabuz konponduko."
+  }
+];
+
+const REPAIR_STEPS = [
+  {
+    title: "1. araua — Parentesiak lehenengo",
+    body: "Pauso bat taldekatuta badago, ezin da erdian moztu. Eragiketan ere berdin: parentesi barrukoa lehenengo konpondu behar da.",
+    hint: "Adibidea: 5 - (8 - 12). Lehenik 8 - 12 egin, eta gero kanpoko kenketa."
+  },
+  {
+    title: "2. araua — Zeinuek norabidea markatzen dute",
+    body: "Minus bat ez da apaingarria: mugimenduaren norabidea aldatzen du. Bi zeinu jarraian agertzen badira, arretaz irakurri behar dira.",
+    hint: "Gogoratu: -(-6) positibo bihurtzen da. Dantzan bezala: norabide-aldaketa bikoitzak berriro aurreko norabidera eramaten zaitu."
+  },
+  {
+    title: "3. araua — Biderketak eta zatiketak lehenago",
+    body: "Parentesiak amaitu ondoren, biderketak eta zatiketak egiten dira batuketak eta kenketak baino lehen.",
+    hint: "Adibidea: 6 + 2 · 5 ez da 8 · 5. Lehenik 2 · 5 egin, eta gero batu."
+  },
+  {
+    title: "4. araua — Ordena osoa mantendu",
+    body: "Koreografia batek pausoen ordena behar duen bezala, kalkulu batek hierarkia behar du: parentesiak, biderketak/zatiketak, eta azkenik batuketak/kenketak.",
+    hint: "Fitxako kodea eraikitzean ez asmatu. Emaitzak ordenan hartu, zeinuak errespetatu eta azken zifrak ondo kopiatu."
+  }
+];
+
 const state = {
   progress: {
     connected: false,
@@ -45,6 +91,7 @@ const state = {
   correctLights: 0,
   timeLeft: LIGHT_PANEL_CONFIG.totalTime,
   timerId: null,
+  chatTimerId: null,
   lightQuestions: [...LIGHT_PANEL_QUESTIONS]
 };
 
@@ -55,8 +102,13 @@ const elements = {
   itzalaBriefing: document.getElementById("itzala-briefing"),
   directorBriefing: document.getElementById("director-briefing"),
   continueBriefing: document.getElementById("continue-briefing"),
+  itzalaWeekChat: document.getElementById("itzala-week-chat"),
+  itzalaWeekActions: document.getElementById("itzala-week-actions"),
+  itzalaWeekStatus: document.getElementById("itzala-week-status"),
   startExploration: document.getElementById("start-exploration"),
   inspectionCard: document.getElementById("inspection-card"),
+  interactiveRoom: document.getElementById("interactive-room"),
+  repairCount: document.getElementById("repair-count"),
   inspectionComplete: document.getElementById("inspection-complete"),
   inspectionOutput: document.getElementById("inspection-output"),
   openWorksheetArea: document.getElementById("open-worksheet-area"),
@@ -172,6 +224,49 @@ function setRoomExplored() {
   updateStatusPanel();
 }
 
+function getRepairedRoomCount() {
+  return [...elements.inspectCards].filter((card) => card.classList.contains("open")).length;
+}
+
+function updateRepairProgress() {
+  const totalSignals = elements.inspectCards.length || 1;
+  const repairedSignals = getRepairedRoomCount();
+  const progress = Math.round((repairedSignals / totalSignals) * 100);
+
+  if (elements.repairCount) {
+    elements.repairCount.textContent = String(repairedSignals);
+  }
+
+  if (elements.interactiveRoom) {
+    elements.interactiveRoom.style.setProperty("--repair-progress", `${progress}%`);
+    elements.interactiveRoom.classList.toggle("room-fixed", repairedSignals === totalSignals);
+  }
+}
+
+function clearRepairReveals() {
+  if (!elements.interactiveRoom) return;
+  elements.interactiveRoom.querySelectorAll(".repair-reveal").forEach((reveal) => reveal.remove());
+}
+
+function addRepairReveal(card) {
+  if (!elements.interactiveRoom) return;
+
+  const roomRect = elements.interactiveRoom.getBoundingClientRect();
+  const cardRect = card.getBoundingClientRect();
+  const centerX = ((cardRect.left + cardRect.width / 2 - roomRect.left) / roomRect.width) * 100;
+  const centerY = ((cardRect.top + cardRect.height / 2 - roomRect.top) / roomRect.height) * 100;
+  const reveal = document.createElement("div");
+
+  reveal.className = "repair-reveal";
+  reveal.style.setProperty("--repair-x", `${centerX}%`);
+  reveal.style.setProperty("--repair-y", `${centerY}%`);
+  elements.interactiveRoom.appendChild(reveal);
+
+  window.requestAnimationFrame(() => {
+    reveal.classList.add("active");
+  });
+}
+
 function setFirstCodeDone() {
   state.progress.firstCode = true;
   saveProgress();
@@ -202,6 +297,7 @@ function resetProgress() {
   state.correctLights = 0;
   state.timeLeft = LIGHT_PANEL_CONFIG.totalTime;
   state.lightQuestions = LIGHT_PANEL_CONFIG.shuffleQuestions ? shuffleArray(LIGHT_PANEL_QUESTIONS) : [...LIGHT_PANEL_QUESTIONS];
+  clearChatTimer();
   document.body.classList.add("start-mode");
   elements.lightCorrectCount.textContent = "0";
   elements.lightTime.textContent = String(LIGHT_PANEL_CONFIG.totalTime);
@@ -217,12 +313,25 @@ function resetProgress() {
   document.body.classList.remove("room-mode");
   elements.itzalaBriefing.classList.add("active");
   elements.directorBriefing.classList.remove("active");
+  if (elements.itzalaWeekChat) elements.itzalaWeekChat.innerHTML = "";
+  if (elements.itzalaWeekActions) elements.itzalaWeekActions.classList.add("hidden");
+  setChatStatus("transmisioa irekitzen...");
   if (elements.inspectionOutput) {
     elements.inspectionOutput.innerHTML = `
-      <h3>Seinalea hautatu gabe</h3>
-      <p>Gela behatzen ari zara. Objektu batzuek erantzun txiki bat emango dute gerturatzen zarenean.</p>
-      <p class="inspect-hint">Seinale guztiak aurkitzean fitxarako sarbidea aktibatuko da.</p>
+      <span class="repair-state">Konponketa hasi gabe</span>
+      <h3>Gela desorekatuta</h3>
+      <span class="math-rule-kicker">Laguntza matematikoa</span>
+      <p>Elementu batzuk lekuz kanpo daude. Lehen konponketak lehen araua erakutsiko du, sakatzen duzun gunea edozein izanda ere.</p>
+      <p class="inspect-hint">Lau arauak jasotzean fitxarako sarbidea aktibatuko da.</p>
     `;
+  }
+  clearRepairReveals();
+  if (elements.interactiveRoom) {
+    elements.interactiveRoom.classList.remove("room-fixed", "repair-pulse");
+    elements.interactiveRoom.style.setProperty("--repair-progress", "0%");
+  }
+  if (elements.repairCount) {
+    elements.repairCount.textContent = "0";
   }
   saveProgress();
   updateStatusPanel();
@@ -233,6 +342,7 @@ function resetProgress() {
   hideSection(elements.lightPanelCard);
   hideSection(elements.finalCodeCard);
   elements.inspectCards.forEach((card) => card.classList.remove("open"));
+  updateRepairProgress();
 }
 
 function showSection(section) {
@@ -243,6 +353,91 @@ function hideSection(section) {
   section.classList.add("hidden");
 }
 
+function clearChatTimer() {
+  if (state.chatTimerId) {
+    clearTimeout(state.chatTimerId);
+    state.chatTimerId = null;
+  }
+}
+
+function setChatStatus(text) {
+  if (elements.itzalaWeekStatus) {
+    elements.itzalaWeekStatus.textContent = text;
+  }
+}
+
+function createWeekChatRow(message) {
+  const row = document.createElement("div");
+  row.className = `chat-row-full ${message.speaker}`;
+
+  const avatar = document.createElement("div");
+  avatar.className = "chat-avatar-large";
+  avatar.textContent = message.speaker === "alumna" ? "H08" : "I8";
+
+  const bubble = document.createElement("div");
+  bubble.className = `chat-bubble ${message.speaker === "alumna" ? "alumna" : "incoming"}`;
+
+  row.appendChild(avatar);
+  row.appendChild(bubble);
+
+  return { row, bubble };
+}
+
+function typeWeekChatBubble(bubble, text, onDone) {
+  let index = 0;
+  bubble.textContent = "";
+  clearChatTimer();
+
+  function typeNext() {
+    bubble.textContent += text.charAt(index);
+    index += 1;
+
+    if (index >= text.length) {
+      state.chatTimerId = null;
+      if (typeof onDone === "function") onDone();
+      return;
+    }
+
+    state.chatTimerId = setTimeout(typeNext, 34);
+  }
+
+  typeNext();
+}
+
+function startItzalaWeekChat() {
+  if (!elements.itzalaWeekChat) return;
+
+  clearChatTimer();
+  elements.itzalaWeekChat.innerHTML = "";
+  elements.itzalaWeekActions.classList.add("hidden");
+  setChatStatus("transmisioa irekitzen...");
+
+  let index = 0;
+
+  function nextMessage() {
+    if (index >= ITZALA_WEEK_MESSAGES.length) {
+      setChatStatus("seinale ofiziala aurkituta");
+      elements.itzalaWeekActions.classList.remove("hidden");
+      return;
+    }
+
+    const message = ITZALA_WEEK_MESSAGES[index];
+    setChatStatus("idazten...");
+
+    const { row, bubble } = createWeekChatRow(message);
+    elements.itzalaWeekChat.appendChild(row);
+    elements.itzalaWeekChat.scrollTop = elements.itzalaWeekChat.scrollHeight;
+
+    typeWeekChatBubble(bubble, message.text, () => {
+      elements.itzalaWeekChat.scrollTop = elements.itzalaWeekChat.scrollHeight;
+      index += 1;
+      state.chatTimerId = setTimeout(nextMessage, 760);
+    });
+  }
+
+  nextMessage();
+}
+
 function startRoomSequence() {
   setConnected();
   document.body.classList.remove("start-mode");
@@ -251,9 +446,11 @@ function startRoomSequence() {
   elements.directorBriefing.classList.remove("active");
   showSection(elements.roomSceneCard);
   hideSection(elements.connectCard);
+  startItzalaWeekChat();
 }
 
 function continueBriefing() {
+  clearChatTimer();
   elements.itzalaBriefing.classList.remove("active");
   elements.directorBriefing.classList.add("active");
 }
@@ -278,17 +475,47 @@ function openWorksheet() {
 }
 
 function markInspectCard(card) {
+  const wasAlreadyRepaired = card.classList.contains("open");
+  const nextStepIndex = Math.min(getRepairedRoomCount(), REPAIR_STEPS.length - 1);
+  const lastStepIndex = Math.max(Math.min(getRepairedRoomCount() - 1, REPAIR_STEPS.length - 1), 0);
+  const step = wasAlreadyRepaired ? REPAIR_STEPS[lastStepIndex] : REPAIR_STEPS[nextStepIndex];
+
+  if (wasAlreadyRepaired) {
+    if (elements.inspectionOutput) {
+      elements.inspectionOutput.innerHTML = `
+        <span class="repair-state">Dagoeneko egonkortuta</span>
+        <h3>${step.title}</h3>
+        <span class="math-rule-kicker">Laguntza matematikoa</span>
+        <p>${step.body}</p>
+        <p class="inspect-hint">${step.hint}</p>
+      `;
+    }
+    return;
+  }
+
   card.classList.add("open");
+  addRepairReveal(card);
+  updateRepairProgress();
+
+  if (elements.interactiveRoom) {
+    elements.interactiveRoom.classList.add("repair-pulse");
+    window.setTimeout(() => {
+      elements.interactiveRoom.classList.remove("repair-pulse");
+    }, 720);
+  }
+
   if (!elements.inspectionOutput) return;
 
-  const title = card.dataset.title || "Seinalea aktibatuta";
-  const body = card.dataset.body || "";
-  const hint = card.dataset.hint || "";
+  const repairedCount = getRepairedRoomCount();
+  const totalSignals = elements.inspectCards.length;
+  const stateLabel = `${repairedCount}/${totalSignals} arau jasota`;
 
   elements.inspectionOutput.innerHTML = `
-    <h3>${title}</h3>
-    <p>${body}</p>
-    <p class="inspect-hint">${hint}</p>
+    <span class="repair-state">${stateLabel}</span>
+    <h3>${step.title}</h3>
+    <span class="math-rule-kicker">Laguntza matematikoa</span>
+    <p>${step.body}</p>
+    <p class="inspect-hint">${step.hint}</p>
   `;
 }
 
@@ -299,6 +526,7 @@ function initInspectionCards() {
       const allOpen = [...elements.inspectCards].every((item) => item.classList.contains("open"));
       if (allOpen) {
         setRoomExplored();
+        updateRepairProgress();
         elements.inspectionComplete.classList.remove("hidden");
         elements.openWorksheetArea.classList.remove("hidden");
       }
@@ -486,15 +714,6 @@ function bindEvents() {
   elements.lastCodeButton.addEventListener("click", openLastCode);
   elements.submitFinalCode.addEventListener("click", submitFinalCode);
   elements.resetProgress.addEventListener("click", resetProgress);
-
-  document.addEventListener("click", (event) => {
-    const action = event.target.closest("#enter-room, #continue-briefing, #start-exploration");
-    if (!action) return;
-
-    if (action.id === "enter-room") startRoomSequence();
-    if (action.id === "continue-briefing") continueBriefing();
-    if (action.id === "start-exploration") startExploration();
-  });
 }
 
 function initFromProgress() {
@@ -510,19 +729,24 @@ function initFromProgress() {
     document.body.classList.add("cinematic-mode");
     showSection(elements.roomSceneCard);
     hideSection(elements.connectCard);
+    startItzalaWeekChat();
   }
   if (state.progress.roomExplored) {
+    clearChatTimer();
     document.body.classList.remove("start-mode");
     document.body.classList.remove("cinematic-mode");
     document.body.classList.add("room-mode");
     hideSection(elements.roomSceneCard);
     showSection(elements.inspectionCard);
     elements.inspectCards.forEach((card) => card.classList.add("open"));
+    updateRepairProgress();
     if (elements.inspectionOutput) {
       elements.inspectionOutput.innerHTML = `
-        <h3>Gela aztertuta</h3>
-        <p>Lau seinaleak identifikatuta daude. Orain lehen kodea ez da gelan asmatuko: fitxako kalkuluetatik eraiki behar da.</p>
-        <p class="inspect-hint">Fitxara joan eta kodearen lehen zatia prestatu.</p>
+        <span class="repair-state">Gela egonkortuta</span>
+        <h3>Oinarria berriro martxan</h3>
+        <span class="math-rule-kicker">4 arauak jasota</span>
+        <p>Lau arauak aktibo daude: parentesiak lehenengo, zeinuak arretaz, biderketak/zatiketak lehenago, eta ordena osoa mantenduta.</p>
+        <p class="inspect-hint">Fitxara joan eta kodearen lehen zatia arau horiekin prestatu.</p>
       `;
     }
     elements.inspectionComplete.classList.remove("hidden");

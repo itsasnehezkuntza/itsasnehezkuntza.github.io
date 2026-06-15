@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="eu">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Taupada Akademia | 1. ataza — Lehen entsegu-gela</title>
+  <link rel="stylesheet" href="../../assets/css/panel.css" />
+  <style>
+    .stage-grid {
+      display: grid;
+      grid-template-columns: minmax(260px, 320px) 1fr;
+      gap: 20px;
+      align-items: start;
+    }
+
+    .status-panel {
+      position: sticky;
+      top: 18px;
+      align-self: start;
+      min-width: 260px;
+      border-radius: 28px;
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(5,7,19,0.36);
+      box-shadow: 0 24px 60px rgba(0,0,0,0.24);
+      backdrop-filter: blur(14px);
+    }
+
+    .status-panel .panel-inner {
+      display: grid;
+      gap: 18px;
+      padding: 24px;
+    }
+
+    .status-list {
+      display: grid;
+      gap: 12px;
+    }
+
+    .status-item {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 12px;
+      align-items: center;
+      padding: 14px 16px;
+      border-radius: 20px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      color: rgba(255,255,255,0.76);
+      font-size: 0.96rem;
+    }
+
+    .status-item.completed {
+      background: rgba(229,139,119,0.16);
+      border-color: rgba(229,139,119,0.28);
+      color: white;
+    }
+
+    .status-item.active {
+      border-color: rgba(229,139,119,0.30);
+    }
+
+    .status-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.18);
+      box-shadow: inset 0 0 0 2px rgba(255,255,255,0.18);
+    }
+
+    .status-item.completed .status-dot {
+      background: var(--soft-peach);
+      box-shadow: none;
+    }
+
+    .status-item.active .status-dot {
+      background: var(--peach);
+    }
+
+    .mission-card,
+    .scene-card,
+    .inspect-section,
+    .worksheet-card,
+    .light-panel,
+    .final-code-card {
+      border-radius: 28px;
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(5,7,19,0.30);
+      box-shadow: 0 24px 60px rgba(0,0,0,0.22);
+      backdrop-filter: blur(14px);
+      padding: 26px;
+      margin-bottom: 18px;
+    }
+
+    .mission-card p,
+    .scene-card p,
+    .worksheet-card p,
+    .light-panel p,
+    .final-code-card p {
+      color: rgba(255,255,255,0.78);
+      line-height: 1.75;
+      margin: 0;
+    }
+
+    .mission-card .hero-label,
+    .scene-card .hero-label,
+    .worksheet-card .hero-label,
+    .light-panel .hero-label,
+    .final-code-card .hero-label {
+      margin-bottom: 14px;
+      color: var(--soft-peach);
+      font-size: 0.82rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      font-weight: 900;
+    }
+
+    .mission-card h1,
+    .scene-card h1,
+    .worksheet-card h1,
+    .light-panel h1,
+    .final-code-card h1 {
+      margin: 0 0 16px 0;
+      font-size: clamp(2.1rem, 4vw, 3.4rem);
+      line-height: 1.05;
+      letter-spacing: -0.05em;
+      color: white;
+    }
+
+    .mission-card h2,
+    .scene-card h2,
+    .worksheet-card h2,
+    .light-panel h2,
+    .final-code-card h2 {
+      margin: 0 0 16px 0;
+      font-size: 1.1rem;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: rgba(255,255,255,0.72);
+    }
+
+    .section-body {
+      display: grid;
+      gap: 20px;
+    }
+
+    .scene-card .message-box {
+      padding: 18px;
+      border-radius: 22px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.10);
+    }
+
+    .scene-card .message-box p {
+      margin: 0;
+      color: rgba(255,255,255,0.85);
+      font-size: 0.98rem;
+    }
+
+    .inspect-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+    }
+
+    .inspect-card {
+      padding: 18px;
+      border-radius: 22px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      cursor: pointer;
+      transition: transform 0.16s ease, border-color 0.16s ease;
+    }
+
+    .inspect-card:hover {
+      transform: translateY(-2px);
+      border-color: rgba(229,139,119,0.26);
+    }
+
+    .inspect-card.open {
+      background: rgba(229,139,119,0.10);
+      border-color: rgba(229,139,119,0.24);
+    }
+
+    .inspect-card h3 {
+      margin: 0 0 10px 0;
+      color: white;
+      font-size: 1rem;
+      line-height: 1.3;
+    }
+
+    .inspect-card p {
+      margin: 0;
+      color: rgba(255,255,255,0.76);
+      font-size: 0.95rem;
+      min-height: 5.4rem;
+    }
+
+    .inspect-card .inspect-hint {
+      margin-top: 12px;
+      color: rgba(255,255,255,0.62);
+      font-size: 0.88rem;
+      line-height: 1.5;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    .card-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 18px;
+    }
+
+    .code-panel {
+      display: grid;
+      gap: 18px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.10);
+      padding: 20px;
+      border-radius: 24px;
+    }
+
+    .code-preview {
+      display: grid;
+      gap: 8px;
+      padding: 18px;
+      border-radius: 20px;
+      background: rgba(16,23,53,0.72);
+      border: 1px solid rgba(255,255,255,0.10);
+    }
+
+    .code-preview .code-label {
+      color: rgba(255,255,255,0.65);
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+    }
+
+    .code-preview .code-sample {
+      font-family: "Courier New", Courier, monospace;
+      font-size: 1.2rem;
+      color: var(--soft-peach);
+      letter-spacing: 0.02em;
+    }
+
+    .field-row {
+      display: grid;
+      gap: 10px;
+    }
+
+    .field-row label {
+      color: rgba(255,255,255,0.72);
+      font-size: 0.92rem;
+      font-weight: 700;
+    }
+
+    .field-row input {
+      width: 100%;
+      min-height: 50px;
+      padding: 14px 16px;
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,0.14);
+      background: rgba(255,255,255,0.05);
+      color: white;
+      font-size: 1rem;
+      outline: none;
+    }
+
+    .field-row input:focus {
+      border-color: rgba(229,139,119,0.6);
+      box-shadow: 0 0 0 4px rgba(229,139,119,0.08);
+    }
+
+    .status-banner {
+      padding: 16px 18px;
+      border-radius: 20px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.10);
+      color: rgba(255,255,255,0.84);
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+
+    .result-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: rgba(229,139,119,0.16);
+      color: white;
+      font-weight: 800;
+      font-size: 0.92rem;
+    }
+
+    .light-panel .light-summary {
+      display: grid;
+      gap: 16px;
+      margin-bottom: 18px;
+    }
+
+    .light-grid {
+      display: grid;
+      grid-template-columns: repeat(10, minmax(0, 1fr));
+      gap: 8px;
+      margin-top: 10px;
+    }
+
+    .light-item {
+      width: 100%;
+      min-height: 40px;
+      border-radius: 14px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.10);
+      display: grid;
+      place-items: center;
+      color: rgba(255,255,255,0.72);
+      font-weight: 900;
+      font-size: 0.86rem;
+    }
+
+    .light-item.active {
+      background: rgba(229,139,119,0.24);
+      border-color: rgba(229,139,119,0.40);
+      color: white;
+    }
+
+    .light-item.correct {
+      background: rgba(167,216,201,0.22);
+      border-color: rgba(167,216,201,0.5);
+      color: white;
+    }
+
+    .light-item.incorrect {
+      background: rgba(255,255,255,0.08);
+      border-color: rgba(255,255,255,0.14);
+      color: rgba(255,255,255,0.7);
+    }
+
+    .light-panel .question-box {
+      display: grid;
+      gap: 12px;
+      padding: 18px;
+      border-radius: 20px;
+      background: rgba(16,23,53,0.72);
+      border: 1px solid rgba(255,255,255,0.10);
+    }
+
+    .light-panel .question-text {
+      font-size: 1.2rem;
+      color: white;
+      font-weight: 700;
+      margin: 0;
+    }
+
+    .light-score {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .light-score .score-card {
+      padding: 12px 14px;
+      border-radius: 16px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.10);
+      color: rgba(255,255,255,0.82);
+      font-weight: 700;
+      font-size: 0.95rem;
+    }
+
+    .final-code-card .final-message {
+      margin-top: 18px;
+      padding: 18px;
+      border-radius: 22px;
+      background: rgba(229,139,119,0.12);
+      border: 1px solid rgba(229,139,119,0.24);
+      color: white;
+      line-height: 1.7;
+    }
+
+    @media (max-width: 980px) {
+      .stage-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .status-panel {
+        position: relative;
+        top: auto;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .academy-page {
+        padding: 14px 14px 24px;
+      }
+
+      .light-grid {
+        grid-template-columns: repeat(5, minmax(0, 1fr));
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="academy-page">
+    <div class="academy-shell">
+      <header class="challenge-header">
+        <div class="challenge-content">
+          <div class="challenge-label">
+            <span class="system-dot"></span>
+            ASTEA 01
+          </div>
+          <h1 class="challenge-title">1. ataza — Lehen entsegu-gela</h1>
+          <p class="challenge-text">Erritmoaren oinarria aktibatu. Signos, parentesiak eta eragiketen hierarkia kontrolatu.</p>
+        </div>
+      </header>
+
+      <div class="stage-grid">
+        <aside class="status-panel">
+          <div class="panel-inner">
+            <div class="section-title">Aste 1eko aurrerapena</div>
+            <div class="status-list">
+              <div class="status-item" data-status="connected"><span class="status-dot"></span>Sarbidea konektatuta</div>
+              <div class="status-item" data-status="roomExplored"><span class="status-dot"></span>Gela aztertuta</div>
+              <div class="status-item" data-status="firstCode"><span class="status-dot"></span>Lehen taupada aktibatuta</div>
+              <div class="status-item" data-status="lightsSynced"><span class="status-dot"></span>Argi-panela sinkronizatuta</div>
+              <div class="status-item" data-status="finalCode"><span class="status-dot"></span>Lehen koreografia-zatia berreskuratuta</div>
+            </div>
+            <button id="reset-progress" class="btn btn-secondary">Aurrerapena berrabiarazi</button>
+          </div>
+        </aside>
+
+        <section class="mission-flow">
+          <section class="mission-card" id="connect-card">
+            <div class="hero-label">LEHEN TAUPADA // SARBIDEA ESKATZEN</div>
+            <div class="section-body">
+              <p>Koreografia berreskuratzeko panelak lehen seinalea aktibatu du.</p>
+              <p><strong>Aukeratutako zatia:</strong><br>01 — Lehen Taupada</p>
+              <p><strong>Egoera:</strong><br>sarrera blokeatua</p>
+              <p><strong>Arrazoia:</strong><br>oinarrizko erritmoa ez dago egonkor.</p>
+              <p class="status-banner">Entsegu-gela 01era konektatzen... Bozgorailuak egiaztatzen... Ispilu digitala pizten... Lurreko markak kalibratzen... Argi-panela kargatzen...</p>
+              <div class="card-actions">
+                <button id="enter-room" class="btn btn-primary">Entsegu-gelan sartu</button>
+                <a class="btn btn-secondary" href="../panel.html">Panela itzuli</a>
+              </div>
+            </div>
+          </section>
+
+          <section class="scene-card hidden" id="room-scene-card">
+            <div class="hero-label">ENTSEGU-GELA 01</div>
+            <div class="section-body">
+              <p>Entsegu-gela 01 ireki da.</p>
+              <p>Ez dago musikarik. Argiek etenka pizten dira. Ispilu digitalak silueta hautsi bat erakusten du, baina mugimenduak ez daude sinkronizatuta.</p>
+              <p>Lurrean, lehen pausoen markak ageri dira. Batzuk aurrera. Batzuk atzera. Batzuk ordenarik gabe.</p>
+              <p>Pantailaren erdian mezu bat agertu da:</p>
+              <div class="message-box">
+                <p><strong>Oinarria nahasten bada, koreografia osoa erortzen da.</strong><br><br>Lehen taupada berreskuratu nahi baduzu, zeinuak, parentesiak eta ordena kontrolatu beharko dituzu.</p>
+              </div>
+              <div class="card-actions">
+                <button id="inspect-room" class="btn btn-primary">Gela aztertu</button>
+              </div>
+            </div>
+          </section>
+
+          <section class="inspect-section hidden" id="inspection-card">
+            <div class="hero-label">GELAREN EXPLORAZIOA</div>
+            <div class="section-body">
+              <p>Gela ez da test bat; Taupada Akademiako sistema baten moduko sakonera du. Aztertu itzazu tresnak eta jaso lekukoak oinarri matematikoaren gakoaren inguruan.</p>
+              <div class="inspect-grid">
+                <article class="inspect-card" data-inspect="bozgorailuak">
+                  <h3>Bozgorailuak</h3>
+                  <p>Bozgorailuak etenka ari dira. Seinaleak norabidea galtzen du zeinuak gaizki erabiltzen direnean.</p>
+                  <div class="inspect-hint">Gogoratu: - eta - ez dira apaingarriak. Norabidea markatzen dute. Dantzan bezala: aurrera eta atzera ez dira gauza bera.</div>
+                </article>
+                <article class="inspect-card" data-inspect="ispilu">
+                  <h3>Ispilu digitala</h3>
+                  <p>Ispilu digitalak mugimenduak zatika erakusten ditu. Pantailan parentesiak agertu dira.</p>
+                  <div class="inspect-hint">Gogoratu: parentesi barrukoa lehenengo konpondu behar da. Taldeka doazen pausoak ezin dira banandu.</div>
+                </article>
+                <article class="inspect-card" data-inspect="markak">
+                  <h3>Lurreko markak</h3>
+                  <p>Lurreko markak ordenarik gabe daude. Pauso guztiak ez dira momentu berean egiten. Kalkuluetan ere ez.</p>
+                  <div class="inspect-hint">Ordena: 1. Parentesiak 2. Biderketak eta zatiketak 3. Batuketak eta kenketak</div>
+                </article>
+              </div>
+              <div class="status-banner hidden" id="inspection-complete">Gela aztertuta. Oinarrizko seinaleak identifikatu dira, baina sistema oraindik blokeatuta dago. Lehen taupada ez da pantailan asmatuko. Fitxan eraiki behar da.</div>
+              <div class="card-actions hidden" id="open-worksheet-area">
+                <button id="open-worksheet" class="btn btn-primary">Aste 1eko fitxa ireki</button>
+              </div>
+            </div>
+          </section>
+
+          <section class="worksheet-card hidden" id="worksheet-card">
+            <div class="hero-label">ASTE 1EKO FITXA</div>
+            <div class="section-body">
+              <p>Oinarriak aktibatzen: zeinuak, parentesiak eta eragiketen hierarkia. Egin fitxa arretaz. Ez idatzi emaitzak bakarrik: prozedurak ere behar dira.</p>
+              <p>Lehen kodea fitxako hasierako eta maila estandarreko ariketetatik aterako da. Azken kodea, berriz, DBH 4rako atean egongo da.</p>
+              <div class="code-panel">
+                <div class="code-preview">
+                  <div class="code-label">1. sarbidea — Oinarrizko taupada</div>
+                  <div class="code-sample">TAU-___</div>
+                </div>
+                <div class="field-row">
+                  <label for="first-code-input">Kodea sartu</label>
+                  <input id="first-code-input" type="text" placeholder="TAU-384" autocomplete="off" />
+                </div>
+                <div class="card-actions">
+                  <a class="btn btn-secondary" href="../fitxak/astea-01.pdf" target="_blank" rel="noreferrer noopener">Fitxa deskargatu</a>
+                  <button id="submit-first-code" class="btn btn-primary">Lehen kodea sartu</button>
+                </div>
+                <div class="status-banner hidden" id="first-code-message"></div>
+              </div>
+            </div>
+          </section>
+
+          <section class="light-panel hidden" id="light-panel-card">
+            <div class="hero-label">ARGI-PANELA</div>
+            <div class="section-body">
+              <h2>ARGI-PANELA // SINKRONIZAZIOA BEHAR DA</h2>
+              <p>Lehen taupada aktibatu da, baina entsegu-gelako argiak ez daude erritmoarekin sinkronizatuta. Panelak 20 seinale azkar bidaliko ditu. Seinale bakoitza kalkulu batekin egonkortu behar da.</p>
+              <p><strong>Helburua:</strong> gutxienez 16 argi egonkortzea. Denbora: 150 segundo.</p>
+              <div class="message-box">
+                <p>Orain ikusiko dugu benetan kontrolatzen duzun oinarria. Presiopean ere ordena mantentzen baduzu, agian lehen silueta ikusiko duzu.</p>
+              </div>
+
+              <div class="light-summary">
+                <div class="light-score">
+                  <div class="score-card">Aurkitu beharreko argiak: 16</div>
+                  <div class="score-card">Egindakoak: <span id="light-correct-count">0</span></div>
+                  <div class="score-card">Denbora: <span id="light-time">150</span>s</div>
+                </div>
+                <div class="question-box">
+                  <p class="question-text" id="light-question">Laster hasiko da lehen seinalea.</p>
+                  <div class="field-row">
+                    <label for="light-answer">Emaitza</label>
+                    <input id="light-answer" type="text" placeholder="-12" autocomplete="off" />
+                  </div>
+                  <div class="card-actions">
+                    <button id="submit-light-answer" class="btn btn-primary">Bidali</button>
+                    <button id="start-light-panel" class="btn btn-secondary">Sinkronizazioa hasi</button>
+                  </div>
+                  <div class="status-banner hidden" id="light-feedback"></div>
+                </div>
+              </div>
+
+              <div class="light-grid" id="light-grid"></div>
+              <div class="status-banner hidden" id="light-result"></div>
+              <div class="card-actions hidden" id="light-next-area">
+                <button id="last-code-button" class="btn btn-primary">Azken kodea sartu</button>
+                <button id="retry-light-button" class="btn btn-secondary hidden">Berriro saiatu</button>
+              </div>
+            </div>
+          </section>
+
+          <section class="final-code-card hidden" id="final-code-card">
+            <div class="hero-label">2. sarbidea — Lehen koreografia-zatia</div>
+            <div class="section-body">
+              <p>Ispiluan silueta agertu da, baina koreografia-zatia oraindik blokeatuta dago. Azken kodea ez da argi-panelean lortzen. Fitxako azken atalean dago: DBH 4rako atea.</p>
+              <p>Kodea eraikitzeko: erabili DBH 4rako ateko emaitzak; jarraitu fitxan emandako argibideak; gehitu <strong>KOREO-</strong> aurrizkia.</p>
+              <div class="code-panel">
+                <div class="code-preview">
+                  <div class="code-label">KODEA</div>
+                  <div class="code-sample">KOREO-____</div>
+                </div>
+                <div class="field-row">
+                  <label for="final-code-input">Azken kodea</label>
+                  <input id="final-code-input" type="text" placeholder="KOREO-1257" autocomplete="off" />
+                </div>
+                <div class="card-actions">
+                  <button id="submit-final-code" class="btn btn-primary">Azken kodea bidali</button>
+                </div>
+                <div class="status-banner hidden" id="final-code-message"></div>
+              </div>
+              <div class="final-message hidden" id="final-summary"></div>
+            </div>
+          </section>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <script src="../../assets/js/astea-01.js"></script>
+</body>
+</html>

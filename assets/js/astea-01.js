@@ -52,7 +52,10 @@ const elements = {
   connectCard: document.getElementById("connect-card"),
   enterRoomButton: document.getElementById("enter-room"),
   roomSceneCard: document.getElementById("room-scene-card"),
-  inspectRoomButton: document.getElementById("inspect-room"),
+  itzalaBriefing: document.getElementById("itzala-briefing"),
+  directorBriefing: document.getElementById("director-briefing"),
+  continueBriefing: document.getElementById("continue-briefing"),
+  startExploration: document.getElementById("start-exploration"),
   inspectionCard: document.getElementById("inspection-card"),
   inspectionComplete: document.getElementById("inspection-complete"),
   inspectionOutput: document.getElementById("inspection-output"),
@@ -209,11 +212,15 @@ function resetProgress() {
   elements.finalCodeMessage.classList.add("hidden");
   elements.finalSummary.classList.add("hidden");
   elements.lightGrid.innerHTML = "";
+  document.body.classList.remove("cinematic-mode");
+  document.body.classList.remove("room-mode");
+  elements.itzalaBriefing.classList.add("active");
+  elements.directorBriefing.classList.remove("active");
   if (elements.inspectionOutput) {
     elements.inspectionOutput.innerHTML = `
       <h3>Seinalea hautatu gabe</h3>
-      <p>Sakatu gelako puntu aktibo bat. Sistema entzuten hasiko da.</p>
-      <p class="inspect-hint">Seinale guztiak aztertu ondoren fitxara pasatzeko sarbidea aktibatuko da.</p>
+      <p>Gela behatzen ari zara. Objektu batzuek erantzun txiki bat emango dute gerturatzen zarenean.</p>
+      <p class="inspect-hint">Seinale guztiak aurkitzean fitxarako sarbidea aktibatuko da.</p>
     `;
   }
   saveProgress();
@@ -237,8 +244,23 @@ function hideSection(section) {
 
 function startRoomSequence() {
   setConnected();
+  document.body.classList.add("cinematic-mode");
+  elements.itzalaBriefing.classList.add("active");
+  elements.directorBriefing.classList.remove("active");
   showSection(elements.roomSceneCard);
   hideSection(elements.connectCard);
+}
+
+function continueBriefing() {
+  elements.itzalaBriefing.classList.remove("active");
+  elements.directorBriefing.classList.add("active");
+}
+
+function startExploration() {
+  document.body.classList.remove("cinematic-mode");
+  document.body.classList.add("room-mode");
+  hideSection(elements.roomSceneCard);
+  activateInspection();
 }
 
 function activateInspection() {
@@ -246,6 +268,7 @@ function activateInspection() {
 }
 
 function openWorksheet() {
+  document.body.classList.remove("room-mode");
   showSection(elements.worksheetCard);
   hideSection(elements.inspectionCard);
   window.scrollTo({ top: 0, behavior: "smooth" });
@@ -435,7 +458,8 @@ function submitFinalCode() {
 
 function bindEvents() {
   elements.enterRoomButton.addEventListener("click", startRoomSequence);
-  elements.inspectRoomButton.addEventListener("click", activateInspection);
+  elements.continueBriefing.addEventListener("click", continueBriefing);
+  elements.startExploration.addEventListener("click", startExploration);
   elements.openWorksheetButton.addEventListener("click", openWorksheet);
   elements.submitFirstCode.addEventListener("click", submitFirstCode);
   elements.startLightPanel.addEventListener("click", () => {
@@ -467,10 +491,14 @@ function initFromProgress() {
   loadProgress();
   updateStatusPanel();
   if (state.progress.connected) {
+    document.body.classList.add("cinematic-mode");
     showSection(elements.roomSceneCard);
     hideSection(elements.connectCard);
   }
   if (state.progress.roomExplored) {
+    document.body.classList.remove("cinematic-mode");
+    document.body.classList.add("room-mode");
+    hideSection(elements.roomSceneCard);
     showSection(elements.inspectionCard);
     elements.inspectCards.forEach((card) => card.classList.add("open"));
     if (elements.inspectionOutput) {
@@ -484,14 +512,22 @@ function initFromProgress() {
     elements.openWorksheetArea.classList.remove("hidden");
   }
   if (state.progress.firstCode) {
+    document.body.classList.remove("cinematic-mode");
+    document.body.classList.remove("room-mode");
     showSection(elements.lightPanelCard);
+    hideSection(elements.inspectionCard);
     hideSection(elements.worksheetCard);
   }
   if (state.progress.lightsSynced) {
+    document.body.classList.remove("cinematic-mode");
+    document.body.classList.remove("room-mode");
     showSection(elements.finalCodeCard);
+    hideSection(elements.inspectionCard);
     hideSection(elements.lightPanelCard);
   }
   if (!state.progress.connected) {
+    document.body.classList.remove("cinematic-mode");
+    document.body.classList.remove("room-mode");
     hideSection(elements.roomSceneCard);
     hideSection(elements.inspectionCard);
     hideSection(elements.worksheetCard);

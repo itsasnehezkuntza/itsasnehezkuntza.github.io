@@ -202,6 +202,7 @@ function resetProgress() {
   state.correctLights = 0;
   state.timeLeft = LIGHT_PANEL_CONFIG.totalTime;
   state.lightQuestions = LIGHT_PANEL_CONFIG.shuffleQuestions ? shuffleArray(LIGHT_PANEL_QUESTIONS) : [...LIGHT_PANEL_QUESTIONS];
+  document.body.classList.add("start-mode");
   elements.lightCorrectCount.textContent = "0";
   elements.lightTime.textContent = String(LIGHT_PANEL_CONFIG.totalTime);
   elements.lightFeedback.classList.add("hidden");
@@ -244,6 +245,7 @@ function hideSection(section) {
 
 function startRoomSequence() {
   setConnected();
+  document.body.classList.remove("start-mode");
   document.body.classList.add("cinematic-mode");
   elements.itzalaBriefing.classList.add("active");
   elements.directorBriefing.classList.remove("active");
@@ -268,6 +270,7 @@ function activateInspection() {
 }
 
 function openWorksheet() {
+  document.body.classList.remove("start-mode");
   document.body.classList.remove("room-mode");
   showSection(elements.worksheetCard);
   hideSection(elements.inspectionCard);
@@ -483,6 +486,15 @@ function bindEvents() {
   elements.lastCodeButton.addEventListener("click", openLastCode);
   elements.submitFinalCode.addEventListener("click", submitFinalCode);
   elements.resetProgress.addEventListener("click", resetProgress);
+
+  document.addEventListener("click", (event) => {
+    const action = event.target.closest("#enter-room, #continue-briefing, #start-exploration");
+    if (!action) return;
+
+    if (action.id === "enter-room") startRoomSequence();
+    if (action.id === "continue-briefing") continueBriefing();
+    if (action.id === "start-exploration") startExploration();
+  });
 }
 
 function initFromProgress() {
@@ -490,12 +502,17 @@ function initFromProgress() {
   updateSettingsView();
   loadProgress();
   updateStatusPanel();
+  if (!state.progress.connected) {
+    document.body.classList.add("start-mode");
+  }
   if (state.progress.connected) {
+    document.body.classList.remove("start-mode");
     document.body.classList.add("cinematic-mode");
     showSection(elements.roomSceneCard);
     hideSection(elements.connectCard);
   }
   if (state.progress.roomExplored) {
+    document.body.classList.remove("start-mode");
     document.body.classList.remove("cinematic-mode");
     document.body.classList.add("room-mode");
     hideSection(elements.roomSceneCard);
@@ -512,6 +529,7 @@ function initFromProgress() {
     elements.openWorksheetArea.classList.remove("hidden");
   }
   if (state.progress.firstCode) {
+    document.body.classList.remove("start-mode");
     document.body.classList.remove("cinematic-mode");
     document.body.classList.remove("room-mode");
     showSection(elements.lightPanelCard);
@@ -519,6 +537,7 @@ function initFromProgress() {
     hideSection(elements.worksheetCard);
   }
   if (state.progress.lightsSynced) {
+    document.body.classList.remove("start-mode");
     document.body.classList.remove("cinematic-mode");
     document.body.classList.remove("room-mode");
     showSection(elements.finalCodeCard);
@@ -526,6 +545,7 @@ function initFromProgress() {
     hideSection(elements.lightPanelCard);
   }
   if (!state.progress.connected) {
+    document.body.classList.add("start-mode");
     document.body.classList.remove("cinematic-mode");
     document.body.classList.remove("room-mode");
     hideSection(elements.roomSceneCard);

@@ -1,28 +1,234 @@
 <!DOCTYPE html>
 <html lang="eu">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Taupada Akademia | Panela</title>
-  <link rel="stylesheet" href="../assets/css/intro.css" />
-  <style>
-    body { min-height: 100vh; color: white; background: radial-gradient(circle at 75% 10%, rgba(229,139,119,.22), transparent 30%), linear-gradient(135deg, #101735, #1E254F); display: grid; place-items: center; padding: 28px; }
-    .panel-placeholder { width: min(860px, 100%); padding: clamp(24px, 5vw, 46px); border-radius: 30px; background: rgba(252,251,247,.95); color: var(--stage-navy); border: 1px solid rgba(216,206,232,.95); box-shadow: 0 34px 90px rgba(0,0,0,.34); }
-    .panel-placeholder h1 { color: var(--stage-navy); text-shadow: none; font-size: clamp(2.2rem, 6vw, 4.5rem); }
-    .panel-placeholder p { color: var(--graphite); text-shadow: none; }
-    .panel-actions { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 24px; }
-    .small-note { margin-top: 18px; color: var(--muted); font-size: .9rem; }
-  </style>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Taupada Akademia | Panela</title>
+
+<link rel="stylesheet" href="../assets/css/panel.css" />
 </head>
+
 <body>
-  <main class="panel-placeholder">
-    <div class="label">Taupada Akademia</div>
-    <h1>Panela prestatzeko orria</h1>
-    <p>Lehen orriko <strong>ONARTU</strong> botoia ondo dabil. Hurrengo pausoa hemen benetako misioen panela eraikitzea da: asteak, candadoak, aurrerapena eta koreografiaren zatiak.</p>
-    <div class="panel-actions">
-      <a class="btn btn-primary" href="../index.html" style="text-decoration:none;display:inline-flex;align-items:center;">Sarrerara itzuli</a>
-    </div>
-    <p class="small-note">Fitxategi hau ordezkatu ahal izango dugu gero panel osoarekin.</p>
-  </main>
+<main class="academy-page">
+  <div class="academy-shell">
+
+    <header class="top-system-bar">
+      <div class="brand-block">
+        <div class="brand-mark">TA</div>
+        <div>
+          <div class="brand-kicker">Barne sistema · sarbidea onartuta</div>
+          <div class="brand-title">Taupada Akademia</div>
+        </div>
+      </div>
+
+      <div class="system-chip">
+        <span class="system-dot"></span>
+        ERROR 08 · TAUPADA OSATU GABEA
+      </div>
+    </header>
+
+    <section class="hero-intro">
+      <div class="hero-label">Koreografia berreskuratzeko panela</div>
+      <h1 class="hero-title">Akademiaren Zortzi Taupadak</h1>
+      <p class="hero-text">
+        <strong>ITZALA_08</strong> sisteman sartu da eta azken koreografia zatituta utzi du.
+        Ez dago ezabatuta: <strong>8 taupadatan banatuta</strong> dago. Aste bakoitzean oinarri matematiko bat landuz,
+        koreografiaren zati bat berreskuratuko duzu.
+      </p>
+    </section>
+
+    <section class="main-grid">
+      <aside class="panel-card status-card">
+        <div class="panel-inner">
+          <h2 class="section-title">Sistemaren egoera <span class="tiny-code">SYS_08</span></h2>
+
+          <div class="status-stack">
+            <div class="status-row">
+              <span class="status-label">Koreografia</span>
+              <span class="status-value danger-value">Blokeatuta</span>
+            </div>
+
+            <div class="status-row">
+              <span class="status-label">Berreskuratutako taupadak</span>
+              <span class="status-value">0 / 8</span>
+            </div>
+
+            <div class="status-row">
+              <span class="status-label">Hurrengo sarbidea</span>
+              <span class="status-value">Lehen Taupada</span>
+            </div>
+
+            <div class="status-row">
+              <span class="status-label">Beharrezkoa</span>
+              <span class="status-value">Fitxa + kodeak</span>
+            </div>
+          </div>
+
+          <div class="progress-block">
+            <div class="progress-top">
+              <div class="progress-number">0/8</div>
+              <div class="progress-caption">koreografia<br>berreskuratuta</div>
+            </div>
+            <div class="progress-track">
+              <div class="progress-fill"></div>
+            </div>
+
+            <div class="mini-inventory" aria-label="Objektu narratiboak">
+              <div class="inventory-item active" title="Sarbide-txartela">▣</div>
+              <div class="inventory-item" title="Ispilua">◇</div>
+              <div class="inventory-item" title="Metronomoa">♪</div>
+              <div class="inventory-item" title="Fokua">◉</div>
+              <div class="inventory-item" title="Loop">∞</div>
+              <div class="inventory-item" title="Sinboloa">x</div>
+              <div class="inventory-item" title="Oreka">=</div>
+              <div class="inventory-item" title="Azken fokua">★</div>
+            </div>
+          </div>
+        </div>
+      </aside>
+
+      <section class="panel-card choreo-card">
+        <div class="panel-inner">
+          <h2 class="section-title">Koreografia zatitua <span class="tiny-code">TAUPADA_ZUZENA.lock</span></h2>
+
+          <div class="choreo-stage" aria-label="Koreografia zatitua">
+            <svg class="motion-svg" viewBox="0 0 720 480" preserveAspectRatio="none" aria-hidden="true">
+              <path class="motion-ghost" d="M350 126 C318 154 314 196 340 224 C368 254 403 249 421 221 C442 189 414 151 382 148 C366 146 356 150 350 126Z" />
+              <path class="motion-ghost" d="M357 225 C318 251 285 308 276 382 C315 358 342 326 365 277 C392 330 430 360 477 383 C461 314 426 253 386 225Z" />
+              <path class="motion-line" d="M96 244 C178 108 280 83 358 157 C435 230 552 200 638 89" />
+              <path class="motion-line motion-line-peach" d="M102 372 C210 310 263 382 361 316 C456 252 512 330 641 249" />
+              <path class="motion-line" d="M140 146 C260 192 253 286 358 283 C462 280 462 152 604 158" />
+            </svg>
+
+            <div class="recovery-node active node-1">01</div>
+            <div class="recovery-node node-2">02</div>
+            <div class="recovery-node node-3">03</div>
+            <div class="recovery-node node-4">04</div>
+            <div class="recovery-node node-5">05</div>
+            <div class="recovery-node node-6">06</div>
+            <div class="recovery-node node-7">07</div>
+            <div class="recovery-node node-8">08</div>
+
+            <div class="center-lock">
+              <div class="center-lock-icon">⌁</div>
+              <div class="center-lock-title">Coreografia ez dago osorik</div>
+              <div class="center-lock-text">
+                Lehen taupada aktibatzeko, oinarriak berreraiki behar dira.
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <aside class="panel-card itzala-card">
+        <div class="panel-inner">
+          <div class="itzala-visual"></div>
+
+          <div>
+            <h2 class="section-title">ITZALA_08 // Mezua <span class="tiny-code">LIVE</span></h2>
+
+            <div class="message-box">
+              <p class="message-text">
+                Ez dut koreografia ezabatu. <strong>Zatituta utzi dut.</strong><br><br>
+                Zati bakoitza ez da zortez irekiko. Oinarriak kontrolatu beharko dituzu:
+                zeinuak, ordena, zatiak, kodeak eta oreka.<br><br>
+                <strong>Lehen taupada</strong> zure aurrean dago. Ausartzen bazara, hasi.
+              </p>
+            </div>
+
+            <div class="action-stack">
+              <a class="btn btn-primary" href="./lehen-taupada.html">Lehen taupada hasi</a>
+              <button class="btn btn-secondary" onclick="showLockedMessage()">Blokeatutako gelak ikusi</button>
+            </div>
+          </div>
+        </div>
+      </aside>
+    </section>
+
+    <section class="module-section">
+      <h2 class="section-title">8 taupadak · Berreskuratze mapak <span class="tiny-code">0/8</span></h2>
+
+      <div class="module-grid">
+        <a class="taupada-card available" href="./lehen-taupada.html">
+          <div class="taupada-top">
+            <div class="taupada-number">01</div>
+            <div class="taupada-status">erabilgarri</div>
+          </div>
+          <div class="taupada-name">Lehen Taupada</div>
+          <div class="taupada-sub">Sarrera blokeatua · zeinuak, ordena eta hierarkia</div>
+        </a>
+
+        <div class="taupada-card locked" onclick="showLockedMessage()">
+          <div class="taupada-top">
+            <div class="taupada-number">02</div>
+            <div class="taupada-status">blokeatuta</div>
+          </div>
+          <div class="taupada-name">Ispiluen Gela</div>
+          <div class="taupada-sub">Eragiketen isla · parentesiak eta akatsak</div>
+        </div>
+
+        <div class="taupada-card locked" onclick="showLockedMessage()">
+          <div class="taupada-top">
+            <div class="taupada-number">03</div>
+            <div class="taupada-status">blokeatuta</div>
+          </div>
+          <div class="taupada-name">Erritmo Zatitua</div>
+          <div class="taupada-sub">Zatiak elkartzen · MKT, ZKH eta frakzioak</div>
+        </div>
+
+        <div class="taupada-card locked" onclick="showLockedMessage()">
+          <div class="taupada-top">
+            <div class="taupada-number">04</div>
+            <div class="taupada-status">blokeatuta</div>
+          </div>
+          <div class="taupada-name">Argien Kontrola</div>
+          <div class="taupada-sub">Fokuak doitzen · hamartarrak eta portzentajeak</div>
+        </div>
+
+        <div class="taupada-card locked" onclick="showLockedMessage()">
+          <div class="taupada-top">
+            <div class="taupada-number">05</div>
+            <div class="taupada-status">blokeatuta</div>
+          </div>
+          <div class="taupada-name">Power Loop</div>
+          <div class="taupada-sub">Errepikapenaren energia · berreturak eta erroak</div>
+        </div>
+
+        <div class="taupada-card locked" onclick="showLockedMessage()">
+          <div class="taupada-top">
+            <div class="taupada-number">06</div>
+            <div class="taupada-status">blokeatuta</div>
+          </div>
+          <div class="taupada-name">Kode Aljebraikoa</div>
+          <div class="taupada-sub">Sinboloen artxiboa · aljebra oinarrizkoa</div>
+        </div>
+
+        <div class="taupada-card locked" onclick="showLockedMessage()">
+          <div class="taupada-top">
+            <div class="taupada-number">07</div>
+            <div class="taupada-status">blokeatuta</div>
+          </div>
+          <div class="taupada-name">Oreka Proba</div>
+          <div class="taupada-sub">Atearen bi aldeak · ekuazioak eta problemak</div>
+        </div>
+
+        <div class="taupada-card locked" onclick="showLockedMessage()">
+          <div class="taupada-top">
+            <div class="taupada-number">08</div>
+            <div class="taupada-status">blokeatuta</div>
+          </div>
+          <div class="taupada-name">Azken Oholtza</div>
+          <div class="taupada-sub">Taupada Zuzena · azken berreskuratzea</div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <div id="toast" class="toast">
+    ITZALA_08: gela hau oraindik blokeatuta dago. Lehen taupada berreskuratu behar duzu.
+  </div>
+</main>
+
+<script src="../assets/js/panel.js"></script>
 </body>
 </html>

@@ -1,6 +1,3 @@
-/* Taupada Akademia — intro page styles */
-/* Migrated from the Wix HTML block to GitHub Pages. */
-
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&family=Sora:wght@400;500;600;700;800&display=swap');
 
     :root {
@@ -23,10 +20,10 @@
       --alert-top: 36%;
       --alert-width: 340px;
 
-      --alumna-avatar-url: url("https://static.wixstatic.com/media/22f1ea_d9aa2b4518d546ea8955f8d71c398bbf~mv2.png");
-      --itzala-avatar-url: url("https://static.wixstatic.com/media/22f1ea_888b71b756434004b247ce76b645c429~mv2.png");
-      --refuse-scene-url: url("https://static.wixstatic.com/media/22f1ea_c54aa05505e84033a49d654b12e4d295~mv2.png");
-      --academy-logo-url: url("https://static.wixstatic.com/media/22f1ea_fd63e07ab8244f3bad2fc4ef79823c85~mv2.png");
+      --alumna-avatar-url: url("../img/avatars/Ikaslea.png");
+      --itzala-avatar-url: url("../img/avatars/Itzala.png");
+      --refuse-scene-url: url("../img/backgrounds/4_Exit.png");
+      --academy-logo-url: url("../img/logos/TaupadaAkademiaLogoa.png");
     }
 
     * {

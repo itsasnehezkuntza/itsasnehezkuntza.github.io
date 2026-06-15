@@ -96,6 +96,10 @@
           <div class="action-stack">
             <a class="btn btn-primary" href="./asteak/astea-01.html">Lehen taupada hasi</a>
             <button class="btn btn-secondary" onclick="showLockedMessage()">Blokeatutako gelak ikusi</button>
+            <div class="panel-tool-row" aria-label="Panelaren tresnak">
+              <button id="open-settings" class="btn btn-secondary" type="button">Ezarpenak</button>
+              <button id="open-help" class="btn btn-secondary" type="button">Laguntza</button>
+            </div>
           </div>
         </div>
       </aside>
@@ -182,6 +186,64 @@
 
   <div id="toast" class="toast">
     ITZALA_08: gela hau oraindik blokeatuta dago. Lehen taupada berreskuratu behar duzu.
+  </div>
+
+  <div id="settings-modal" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="settings-title">
+    <section class="control-modal">
+      <div class="modal-header">
+        <div>
+          <div class="modal-kicker">Kontrol panela</div>
+          <h2 id="settings-title">Lehen taupadaren ezarpenak</h2>
+        </div>
+        <button class="modal-close" type="button" data-close-modal aria-label="Itxi">×</button>
+      </div>
+
+      <p class="settings-note">Ezarpen hauek aste 1eko argi-panelean erabiliko dira. Gailu honetan gordeko dira.</p>
+
+      <div class="settings-grid">
+        <div class="setting-control">
+          <label for="setting-total-time">Denbora segundoetan</label>
+          <input id="setting-total-time" type="number" min="60" max="300" step="10" />
+        </div>
+        <div class="setting-control">
+          <label for="setting-required-correct">Behar diren erantzun zuzenak</label>
+          <input id="setting-required-correct" type="number" min="8" max="20" step="1" />
+        </div>
+        <label class="setting-control toggle-control" for="setting-allow-retry">
+          <input id="setting-allow-retry" type="checkbox" />
+          <span>Sinkronizazioa huts eginez gero berriro saiatzeko aukera</span>
+        </label>
+        <label class="setting-control toggle-control" for="setting-shuffle">
+          <input id="setting-shuffle" type="checkbox" />
+          <span>Seinaleak ausaz nahastu</span>
+        </label>
+      </div>
+
+      <div class="settings-actions">
+        <button id="save-settings" class="btn btn-primary" type="button">Gorde</button>
+        <button id="restore-settings" class="btn btn-secondary" type="button">Lehenetsiak</button>
+      </div>
+    </section>
+  </div>
+
+  <div id="help-modal" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="help-title">
+    <section class="control-modal">
+      <div class="modal-header">
+        <div>
+          <div class="modal-kicker">Escape room</div>
+          <h2 id="help-title">Nola funtzionatzen du?</h2>
+        </div>
+        <button class="modal-close" type="button" data-close-modal aria-label="Itxi">×</button>
+      </div>
+
+      <p class="settings-note">Panelak koreografiaren 8 zatiak erakusten ditu. Astero fitxa matematikoa egin, kodeak eraiki eta dagokion gela digitala irekitzen da.</p>
+      <ul class="help-list">
+        <li><strong>1.</strong> Aukeratu erabilgarri dagoen taupada eta irakurri misioa.</li>
+        <li><strong>2.</strong> Egin fitxa arretaz. Kodeak hainbat emaitzarekin osatzen dira; ez dira pantailan asmatzekoak.</li>
+        <li><strong>3.</strong> Sartu kodeak candado digitaletan. Akatsa badago, berrikusi zeinuak, ordena eta eskatutako zifrak.</li>
+        <li><strong>4.</strong> Erronka gainditzean, koreografiaren zati bat eta pasaporterako froga berreskuratuko dira.</li>
+      </ul>
+    </section>
   </div>
 </main>
 

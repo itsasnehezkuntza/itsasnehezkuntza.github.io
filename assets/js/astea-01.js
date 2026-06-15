@@ -1,9 +1,13 @@
 const STORAGE_KEY = "astea-01-progress";
-const LIGHT_PANEL_CONFIG = {
+const SETTINGS_KEY = "astea-01-settings";
+const DEFAULT_LIGHT_PANEL_CONFIG = {
   totalTime: 150,
   requiredCorrect: 16,
   allowRetry: true,
   shuffleQuestions: false
+};
+const LIGHT_PANEL_CONFIG = {
+  ...DEFAULT_LIGHT_PANEL_CONFIG
 };
 
 const LIGHT_PANEL_QUESTIONS = [
@@ -51,6 +55,7 @@ const elements = {
   inspectRoomButton: document.getElementById("inspect-room"),
   inspectionCard: document.getElementById("inspection-card"),
   inspectionComplete: document.getElementById("inspection-complete"),
+  inspectionOutput: document.getElementById("inspection-output"),
   openWorksheetArea: document.getElementById("open-worksheet-area"),
   openWorksheetButton: document.getElementById("open-worksheet"),
   worksheetCard: document.getElementById("worksheet-card"),
@@ -77,8 +82,26 @@ const elements = {
   finalSummary: document.getElementById("final-summary"),
   inspectCards: document.querySelectorAll(".inspect-card"),
   statusItems: document.querySelectorAll(".status-item"),
-  resetProgress: document.getElementById("reset-progress")
+  resetProgress: document.getElementById("reset-progress"),
+  requiredCorrectText: document.getElementById("required-correct-text"),
+  totalTimeText: document.getElementById("total-time-text"),
+  requiredCorrectCount: document.getElementById("required-correct-count")
 };
+
+function clampNumber(value, min, max, fallback) {
+  const numberValue = Number(value);
+  if (Number.isNaN(numberValue)) return fallback;
+  return Math.min(Math.max(numberValue, min), max);
+}
+
+function shuffleArray(items) {
+  const shuffled = [...items];
+  for (let index = shuffled.length - 1; index > 0; index -= 1) {
+    const randomIndex = Math.floor(Math.random() * (index + 1));
+    [shuffled[index], shuffled[randomIndex]] = [shuffled[randomIndex], shuffled[index]];
+  }
+  return shuffled;
+}
 
 function saveProgress() {
   localStorage.setItem(STORAGE_KEY, JSON.stringify(state.progress));
@@ -94,6 +117,36 @@ function loadProgress() {
       console.warn("Astea 1eko aurrerapena ezin igo.", error);
     }
   }
+}
+
+function applySettings(settings) {
+  LIGHT_PANEL_CONFIG.totalTime = clampNumber(settings.totalTime, 60, 300, DEFAULT_LIGHT_PANEL_CONFIG.totalTime);
+  LIGHT_PANEL_CONFIG.requiredCorrect = clampNumber(settings.requiredCorrect, 8, LIGHT_PANEL_QUESTIONS.length, DEFAULT_LIGHT_PANEL_CONFIG.requiredCorrect);
+  LIGHT_PANEL_CONFIG.allowRetry = Boolean(settings.allowRetry);
+  LIGHT_PANEL_CONFIG.shuffleQuestions = Boolean(settings.shuffleQuestions);
+  state.timeLeft = LIGHT_PANEL_CONFIG.totalTime;
+}
+
+function loadSettings() {
+  const saved = localStorage.getItem(SETTINGS_KEY);
+  if (!saved) {
+    applySettings(DEFAULT_LIGHT_PANEL_CONFIG);
+    return;
+  }
+
+  try {
+    applySettings({ ...DEFAULT_LIGHT_PANEL_CONFIG, ...JSON.parse(saved) });
+  } catch (error) {
+    console.warn("Astea 1eko ezarpenak ezin igo.", error);
+    applySettings(DEFAULT_LIGHT_PANEL_CONFIG);
+  }
+}
+
+function updateSettingsView() {
+  elements.requiredCorrectText.textContent = String(LIGHT_PANEL_CONFIG.requiredCorrect);
+  elements.totalTimeText.textContent = String(LIGHT_PANEL_CONFIG.totalTime);
+  elements.requiredCorrectCount.textContent = String(LIGHT_PANEL_CONFIG.requiredCorrect);
+  elements.lightTime.textContent = String(LIGHT_PANEL_CONFIG.totalTime);
 }
 
 function updateStatusPanel() {
@@ -145,7 +198,7 @@ function resetProgress() {
   state.currentLightIndex = 0;
   state.correctLights = 0;
   state.timeLeft = LIGHT_PANEL_CONFIG.totalTime;
-  state.lightQuestions = [...LIGHT_PANEL_QUESTIONS];
+  state.lightQuestions = LIGHT_PANEL_CONFIG.shuffleQuestions ? shuffleArray(LIGHT_PANEL_QUESTIONS) : [...LIGHT_PANEL_QUESTIONS];
   elements.lightCorrectCount.textContent = "0";
   elements.lightTime.textContent = String(LIGHT_PANEL_CONFIG.totalTime);
   elements.lightFeedback.classList.add("hidden");
@@ -156,6 +209,13 @@ function resetProgress() {
   elements.finalCodeMessage.classList.add("hidden");
   elements.finalSummary.classList.add("hidden");
   elements.lightGrid.innerHTML = "";
+  if (elements.inspectionOutput) {
+    elements.inspectionOutput.innerHTML = `
+      <h3>Seinalea hautatu gabe</h3>
+      <p>Sakatu gelako puntu aktibo bat. Sistema entzuten hasiko da.</p>
+      <p class="inspect-hint">Seinale guztiak aztertu ondoren fitxara pasatzeko sarbidea aktibatuko da.</p>
+    `;
+  }
   saveProgress();
   updateStatusPanel();
   showSection(elements.connectCard);
@@ -182,9 +242,7 @@ function startRoomSequence() {
 }
 
 function activateInspection() {
-  setRoomExplored();
   showSection(elements.inspectionCard);
-  elements.openWorksheetArea.classList.remove("hidden");
 }
 
 function openWorksheet() {
@@ -195,6 +253,17 @@ function openWorksheet() {
 
 function markInspectCard(card) {
   card.classList.add("open");
+  if (!elements.inspectionOutput) return;
+
+  const title = card.dataset.title || "Seinalea aktibatuta";
+  const body = card.dataset.body || "";
+  const hint = card.dataset.hint || "";
+
+  elements.inspectionOutput.innerHTML = `
+    <h3>${title}</h3>
+    <p>${body}</p>
+    <p class="inspect-hint">${hint}</p>
+  `;
 }
 
 function initInspectionCards() {
@@ -203,6 +272,7 @@ function initInspectionCards() {
       markInspectCard(card);
       const allOpen = [...elements.inspectCards].every((item) => item.classList.contains("open"));
       if (allOpen) {
+        setRoomExplored();
         elements.inspectionComplete.classList.remove("hidden");
         elements.openWorksheetArea.classList.remove("hidden");
       }
@@ -229,7 +299,7 @@ function submitFirstCode() {
 
 function renderLightGrid() {
   elements.lightGrid.innerHTML = "";
-  for (let index = 0; index < LIGHT_PANEL_CONFIG.totalTime / 7; index++) {
+  for (let index = 0; index < state.lightQuestions.length; index++) {
     const light = document.createElement("div");
     light.className = "light-item";
     light.textContent = index + 1;
@@ -315,7 +385,7 @@ function endLightPanel() {
   } else {
     elements.lightResult.textContent = "Argi-panela ez da guztiz sinkronizatu. Ez da amaiera. Entsegu bat da. Begiratu berriro zeinuak eta eragiketen ordena, eta saiatu berriro.";
     elements.lightNextArea.classList.remove("hidden");
-    elements.retryLightButton.classList.remove("hidden");
+    elements.retryLightButton.classList.toggle("hidden", !LIGHT_PANEL_CONFIG.allowRetry);
   }
   elements.submitLightAnswer.disabled = true;
   elements.lightAnswer.disabled = true;
@@ -326,6 +396,7 @@ function initializeLightPanel() {
   state.currentLightIndex = 0;
   state.correctLights = 0;
   state.timeLeft = LIGHT_PANEL_CONFIG.totalTime;
+  state.lightQuestions = LIGHT_PANEL_CONFIG.shuffleQuestions ? shuffleArray(LIGHT_PANEL_QUESTIONS) : [...LIGHT_PANEL_QUESTIONS];
   elements.lightAnswer.value = "";
   elements.lightFeedback.classList.add("hidden");
   elements.lightResult.classList.add("hidden");
@@ -391,6 +462,8 @@ function bindEvents() {
 }
 
 function initFromProgress() {
+  loadSettings();
+  updateSettingsView();
   loadProgress();
   updateStatusPanel();
   if (state.progress.connected) {
@@ -399,6 +472,15 @@ function initFromProgress() {
   }
   if (state.progress.roomExplored) {
     showSection(elements.inspectionCard);
+    elements.inspectCards.forEach((card) => card.classList.add("open"));
+    if (elements.inspectionOutput) {
+      elements.inspectionOutput.innerHTML = `
+        <h3>Gela aztertuta</h3>
+        <p>Lau seinaleak identifikatuta daude. Orain lehen kodea ez da gelan asmatuko: fitxako kalkuluetatik eraiki behar da.</p>
+        <p class="inspect-hint">Fitxara joan eta kodearen lehen zatia prestatu.</p>
+      `;
+    }
+    elements.inspectionComplete.classList.remove("hidden");
     elements.openWorksheetArea.classList.remove("hidden");
   }
   if (state.progress.firstCode) {

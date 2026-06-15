@@ -14,6 +14,15 @@ document.documentElement.style.setProperty("--desk-url", `url("${DESK_IMAGE}")`)
 let introTimer = null;
 window.addEventListener("load", function () { applyAvatarImages(); startAutoIntro() });
 function startAutoIntro() {
+  // Si el usuario ya completó la intro, saltar directamente al panel.
+  try {
+    const seen = localStorage.getItem('taupada_intro_completed');
+    if (seen === 'true') {
+      window.open(ACCEPT_URL, '_self');
+      return;
+    }
+  } catch (e) { /* ignore storage errors */ }
+
   clearTimers(); resetTypedText("schoolTypedText");
   const storyCard = document.getElementById("storyCard");
   const autoProgress = document.getElementById("autoProgress");
@@ -34,20 +43,9 @@ function clearTimers() {
   }
 }
 function goToDesk() {
-  clearTimers(); const blackout = document.getElementById("blackout");
-  const emailAlert = document.getElementById("emailAlert");
-  if (emailAlert) emailAlert.classList.remove("ready");
-  resetTypedText("deskTypedText");
-  blackout.classList.add("show"); setTimeout(function () {
-    document.getElementById("schoolScene").classList.remove("active");
-    document.getElementById("deskScene").classList.add("active")
-  }, 700);
-  setTimeout(function () { blackout.classList.remove("show") }, 1250);
-  setTimeout(function () {
-    typeText("deskTypedText", 80, function () {
-      setTimeout(function () { if (emailAlert) emailAlert.classList.add("ready") }, 900)
-    })
-  }, 3200)
+  // Marca la intro como completada para futuras visitas y redirige al panel
+  try { localStorage.setItem('taupada_intro_completed', 'true'); } catch (e) {}
+  window.open(ACCEPT_URL, '_self');
 }
 function openComputer() {
   const computerWindow = document.getElementById("computerWindow");

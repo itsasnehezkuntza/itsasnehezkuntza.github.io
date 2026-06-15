@@ -44,7 +44,7 @@ function goToDesk() {
   }, 700);
   setTimeout(function () { blackout.classList.remove("show") }, 1250);
   setTimeout(function () {
-    typeText("deskTypedText", 50, function () {
+    typeText("deskTypedText", 20, function () {
       setTimeout(function () { if (emailAlert) emailAlert.classList.add("ready") }, 900)
     })
   }, 3200)
@@ -70,10 +70,10 @@ function openEmail() {
   if (emailDraftView) {
     emailDraftView.style.display = "block"; emailDraftView.classList.add("show");
     emailDraftView.classList.remove("corrupting")
-  } if (typedEmail) {
+    } if (typedEmail) {
     typedEmail.textContent = "";
     typedEmail.classList.remove("interrupted")
-  } typeEmailUntilError("academyEmailTyped", 200, 0.95, function () { triggerErrorAndChat() })
+  } typeEmailUntilError("academyEmailTyped", 420, 0.95, function () { triggerErrorAndChat() })
 }
 function triggerErrorAndChat() {
   const emailDraftView = document.getElementById("emailDraftView");

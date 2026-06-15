@@ -51,7 +51,7 @@
     position: relative;
     min-height: 100vh;
     overflow: hidden;
-    padding: clamp(18px, 3vw, 42px);
+    padding: clamp(8px, 1.5vw, 18px);
     background:
       radial-gradient(circle at 50% 12%, rgba(229,139,119,0.17), transparent 28%),
       radial-gradient(circle at 86% 20%, rgba(93,75,147,0.36), transparent 32%),
@@ -91,8 +91,10 @@
   .academy-shell {
     position: relative;
     z-index: 2;
-    max-width: 1280px;
+    max-width: 96vw;
     margin: 0 auto;
+    padding-left: 6px;
+    padding-right: 6px;
   }
 
   .top-system-bar {

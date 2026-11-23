@@ -5,7 +5,7 @@
 <meta name="theme-color" content="#173e32">
 <meta name="robots" content="noindex, nofollow">
 <meta name="description" content="Guía compartida de Londres del 6 al 12 de diciembre de 2026. Los tickets se almacenan solo en el navegador.">
-<title>London Travel Journal · Navidad 2026</title>
+<title>Londres en Navidad · Viaje 2026</title>
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="anonymous">
 <style>
 :root{--ink:#16312f;--ink2:#4c625e;--forest:#123b37;--forest2:#0c2928;--mint:#e5f3ed;--gold:#e7b56e;--paper:#f7f7f2;--white:#fff;--line:#dee7e0;--orange:#fff1df;--shadow:0 8px 30px rgba(17,46,42,.075);--radius:19px}
@@ -21,64 +21,37 @@
 <link rel="stylesheet" href="./map-v2.css?v=4">
 <link rel="stylesheet" href="./style-v3.css?v=4">
 <link rel="stylesheet" href="./style-v4.css?v=5">
+<link rel="stylesheet" href="./style-v6.css?v=6">
 </head>
 <body>
 <div class="app">
 <header class="hero">
 <div class="hero-inner">
 <div class="hero-content">
-<div class="hero-masthead"><span class="hero-crest" aria-hidden="true">LDN<br>✳</span><span>TRAVEL JOURNAL</span><span class="mast-rule"></span><span class="mast-date">WINTER • 2026</span></div>
-<p class="micro">EL VIAJE DE LOS TRES · DICIEMBRE 2026</p>
-<h1>London,<br><em>baby!</em> <span class="hero-twinkle" aria-hidden="true">✳</span></h1>
-<p class="subtitle">Calles iluminadas, dinosaurios, mercados y montañas rusas. Siete días, mil historias y una guía para llevarlo todo en el bolsillo.</p>
+<div class="hero-masthead"><span>GUÍA DE VIAJE</span><span class="mast-rule"></span><span class="mast-date">DICIEMBRE 2026</span></div>
+<p class="micro">LONDRES · 6–12 DICIEMBRE 2026</p>
+<h1>Londres<br><em>en Navidad</em></h1>
+<p class="subtitle">El recorrido de cada día, fotografías reales, horarios, mapas y reservas. Todo junto para consultar sobre la marcha.</p>
 <div class="hero-tags"><span>✈️ 6–12 dic</span><span>👥 3 viajeros</span><span>📍 Barbican</span><span>❄️ Edición navideña</span></div>
 <div class="top-actions"><button class="hero-btn" onclick="switchTab('bookings')">✓ Reservas</button><button class="hero-btn" onclick="switchTab('files')">🎟 Tickets</button><button class="hero-btn" onclick="exportBackup()">↗ Guardar copia</button></div>
 </div>
-<div class="hero-postcard" aria-hidden="true">
-<div class="postcard-top"><span>POSTCARD № 007</span><span>GREETINGS FROM LONDON ✳</span></div>
-<div class="postcard-art">
-<svg viewBox="0 0 440 170" xmlns="http://www.w3.org/2000/svg">
-<circle cx="366" cy="38" r="28" fill="#dbb77e" opacity=".72"/>
-<g fill="#879b8a" opacity=".6"><circle cx="18" cy="23" r="2"/><circle cx="105" cy="12" r="2"/><circle cx="283" cy="21" r="2"/><circle cx="426" cy="19" r="2"/><circle cx="315" cy="65" r="1.8"/><circle cx="153" cy="38" r="1.6"/><circle cx="223" cy="18" r="2"/></g>
-<path d="M8 142 L434 142" fill="none" stroke="#38614f" stroke-width="3"/>
-<g stroke="#2b5642" stroke-width="3" fill="none">
-<circle cx="65" cy="101" r="41"/><circle cx="65" cy="101" r="5"/>
-<path d="M65 60V142 M24 101H106 M36 72L94 130 M94 72L36 130 M47 64L84 139 M84 64L47 139 M65 142L40 166 M65 142L90 166"/>
-</g>
-<g fill="#456d56">
-<path d="M135 144V67H147V48H153V32L161 14L169 32V48H175V67H188V144Z"/>
-<path d="M145 66H179V79H145Z" fill="#d2c5a5"/>
-<path d="M153 85H169V107H153Z" fill="#d2c5a5"/>
-<path d="M154 116H160V138H154 M164 116H170V138H164" fill="#d2c5a5"/>
-<path d="M141 61H183V66H141Z"/>
-</g>
-<g stroke="#f5ecd2" stroke-width="2" fill="none"><circle cx="161" cy="73" r="7"/><path d="M161 69V73L165 75"/></g>
-<g fill="#36634b">
-<path d="M231 142V64H241V48H252V35H259V48H269V64H279V142Z"/>
-<path d="M340 142V64H350V48H361V35H368V48H378V64H388V142Z"/>
-<path d="M229 105H389V116H229Z"/>
-<path d="M278 106Q309 74 340 106L340 116H278Z" fill="#f6efdb"/>
-<path d="M221 141H396V147H221Z"/>
-</g>
-<g stroke="#2e6148" stroke-width="3" fill="none"><path d="M280 84Q308 103 339 84 M279 92H340 M280 99H339"/></g>
-<g stroke="#f3ecd5" stroke-width="2.5" fill="none"><path d="M251 77V93 M259 77V93 M251 116V131 M259 116V131 M361 77V93 M369 77V93 M361 116V131 M369 116V131"/></g>
-<path d="M0 151Q46 145 91 151T185 151T277 151T368 151T440 151" stroke="#72907b" stroke-width="2" fill="none"/>
-<path d="M0 161Q49 156 98 161T197 161T295 161T391 161T440 161" stroke="#72907b" stroke-width="2" fill="none"/>
-</svg>
-</div>
-<div class="postcard-caption"><strong>LONDON CALLING</strong><span>51°30′ N · 0°07′ W</span></div>
-</div>
+<figure class="hero-photo">
+<img src="https://commons.wikimedia.org/wiki/Special:FilePath/Christmas_lights_in_Regent_Street%2C_London%2C_2022.jpg?width=960"
+alt="Regent Street iluminada durante la Navidad en Londres" loading="eager" fetchpriority="high"
+referrerpolicy="no-referrer" onerror="this.style.display='none'">
+<figcaption>Regent Street en Navidad · Foto de archivo: <a href="https://commons.wikimedia.org/wiki/File:Christmas_lights_in_Regent_Street%2C_London%2C_2022.jpg" target="_blank" rel="noopener noreferrer" style="color:inherit">The wub / Wikimedia Commons</a></figcaption>
+</figure>
 </div>
 </header>
-<div class="journey-ribbon" aria-label="Resumen del viaje"><div class="journey-stat"><b>07</b><small>Días</small></div><div class="journey-stat"><b>03</b><small>Viajeros</small></div><div class="journey-stat"><b>01</b><small>Aventura</small></div></div>
+
 <main class="main">
 <section id="days-view" class="view active">
-<div class="kicker">DÍA A DÍA</div><h2 class="section-heading">El viaje, de un vistazo</h2><p class="lead">Elegid el día. Tocad una parada para leer curiosidades y abrid Google Maps para la navegación real.</p>
+<div class="kicker">DÍA A DÍA</div><h2 class="section-heading">Nuestro itinerario</h2><p class="lead">Elegid el día. Tocad una parada para leer curiosidades y abrid Google Maps para la navegación real.</p>
 <div class="date-strip" id="day-strip" aria-label="Seleccionar día"></div>
 <div id="day-header"></div>
 <div class="layout">
 <div class="map-side">
-<div class="surface" style="margin-bottom:15px"><div style="display:flex;justify-content:space-between;align-items:center;gap:8px"><h3 style="margin:0">🗺️ Mapa del recorrido</h3><span class="tag">Mapa interactivo</span></div>
+<div class="surface" style="margin-bottom:15px"><div style="display:flex;justify-content:space-between;align-items:center;gap:8px"><h3 style="margin:0">Mapa y recorrido</h3></div>
 <p class="tiny muted" style="margin:5px 0 10px">Puntos numerados en orden. Las líneas discontinuas solo indican el orden de visita, <b>no son calles ni indicaciones de navegación</b>.</p>
 <div id="map" class="map" hidden></div><div id="map-fallback" class="map-fallback"></div>
 <div id="map-actions" class="route-buttons"></div>
@@ -280,8 +253,9 @@ async function importBackup(event){let file=event.target.files?.[0];event.target
 // Auto-start. No remote service receives checklist or attachment data.
 (async()=>{await initDb();renderDay();renderBookings();renderFiles();if(dbError)toast('Para guardar PDFs usad un navegador que permita almacenamiento local.')})();
 </script>
-<script src="./map-v2.js?v=4" defer></script>
+<script src="./map-v2.js?v=6" defer></script>
 <script src="./app-v3.js?v=4" defer></script>
 <script src="./app-v4.js?v=5" defer></script>
+<script src="./editorial-v6.js?v=6" defer></script>
 </body>
 </html>

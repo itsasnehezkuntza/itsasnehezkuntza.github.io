@@ -1,0 +1,88 @@
+/* v10 · TRANSPORTES CLAROS | Londres Navidad 2026.
+   Todos los trazos del mapa tienen borde blanco para verse encima de las calles. */
+.trip-transport-legend{
+ display:flex;flex-wrap:wrap;align-items:center;gap:7px;
+ margin:2px 0 11px;padding:2px 0 3px;
+}
+.route-legend-item{
+ display:inline-flex;align-items:center;gap:7px;
+ font-size:10.5px;font-weight:850;white-space:nowrap;
+ color:#31493b;background:#fffefb;
+ border:1px solid #e3e7df;border-radius:9px;padding:7px 9px;
+ box-shadow:0 1px 0 #e8eae2;
+}
+.route-legend-line{
+ width:25px;height:0;display:inline-block;flex:none;
+ border-top:5px solid #006c4f;border-radius:10px;
+ box-shadow:0 1px 0 #ffffff;
+}
+.route-legend-metro .route-legend-line{border-top-color:#174fb5;border-top-style:dashed}
+.route-legend-train .route-legend-line{border-top-color:#ad305c;border-top-style:dotted}
+.route-legend-mixed .route-legend-line{border-top-color:#a46312;border-top-style:dashed}
+.route-legend-transport .route-legend-line{border-top-color:#7257a8;border-top-style:dashed}
+.route-legend-label{line-height:1.15}
+.transport-pin-wrap{background:transparent!important;border:0!important}
+.transport-route-pin{
+ width:30px;height:30px;border-radius:50%;display:grid;place-items:center;
+ font-size:16px;line-height:1;background:#fff!important;
+ border:3px solid #006c4f;box-shadow:0 2px 8px rgba(0,0,0,.3),0 0 0 2px #fff;
+}
+.transport-route-walk{color:#006c4f;font-size:20px;font-weight:900}
+.transport-route-metro{border-color:#174fb5}
+.transport-route-train{border-color:#ad305c}
+.transport-route-mixed{border-color:#a46312}
+.transport-route-transport{border-color:#7257a8}
+.route-leg-popup{display:grid;gap:8px;font-size:12px;line-height:1.45;min-width:160px}
+.route-leg-popup b{font-size:14px;color:#244734}
+.route-leg-popup span{color:#4e5f54}
+.route-leg-popup a{font-size:11px;color:#1b6151;font-weight:850}
+.trip-transfer{
+ position:relative;display:flex;align-items:center;justify-content:center;
+ gap:7px;padding:1px 7px 11px;margin:0 0 2px 42px;
+ color:#006c4f;font-size:10.5px;font-weight:850;
+}
+.trip-transfer-label{
+ display:inline-flex;align-items:center;gap:5px;
+ color:inherit;background:#f2faf4;padding:5px 11px;
+ border:1px solid currentColor;border-radius:99px;
+ font-weight:850;letter-spacing:.015em;
+ box-shadow:0 2px 0 #e8eae2;
+}
+.trip-transfer-metro{color:#174fb5}
+.trip-transfer-metro .trip-transfer-label{background:#f1f5ff}
+.trip-transfer-train{color:#ad305c}
+.trip-transfer-train .trip-transfer-label{background:#fff3f6}
+.trip-transfer-mixed{color:#a46312}
+.trip-transfer-mixed .trip-transfer-label{background:#fff9ed}
+.trip-transfer-transport{color:#7257a8}
+.trip-transfer-transport .trip-transfer-label{background:#f7f3ff}
+.trip-mode-info{
+ display:flex;align-items:center;gap:8px;margin:6px 0 1px;
+ font-size:10.5px;color:#69776c;line-height:1.4;
+}
+.trip-mode-info strong{color:#31523c}
+#map.map,#map-fallback.map-fallback{
+ border:2px solid #d8e0d8!important;
+ box-shadow:inset 0 0 0 1px #fff,0 1px 9px rgba(23,42,31,.08);
+}
+.leaflet-pane.leaflet-overlay-pane path{
+ vector-effect:non-scaling-stroke;
+}
+.leaflet-popup-content-wrapper{
+ border:1px solid #dce5db;
+ box-shadow:0 6px 19px rgba(15,35,22,.24)!important;
+}
+#map-status{font-size:10.5px;line-height:1.4}
+@media(max-width:390px){
+ .trip-transport-legend{gap:5px}
+ .route-legend-item{font-size:10px;padding:6px 7px;gap:4px}
+ .route-legend-line{width:18px}
+ .trip-transfer{margin-left:34px}
+}
+@media(prefers-reduced-motion:reduce){
+ .transport-route-pin{transition:none}
+}
+@media print{
+ .trip-transport-legend{display:flex!important}
+ .trip-transfer{break-inside:avoid}
+}

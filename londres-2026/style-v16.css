@@ -723,6 +723,12 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{ou
  .pp-bottom-nav:before{top:23px}
 }
 @media(max-width:879px){
+ .bottom-nav.pp-bottom-nav{
+  position:fixed!important;top:auto!important;bottom:0!important;
+  left:0!important;right:0!important;width:100%!important;max-width:none!important;
+  border-left:0!important;border-right:0!important;border-bottom:0!important;
+  border-radius:0!important;
+ }
  .pp-hero-body{grid-template-columns:minmax(0,.95fr) minmax(0,1.05fr);gap:18px}
  .pp-hero h1{font-size:clamp(39px,6vw,54px)}
  .pp-hero-poster{transform:rotate(.8deg)}

@@ -158,8 +158,12 @@ window.renderMap=function(d){
   document.getElementById("map").hidden=false;document.getElementById("map-fallback").hidden=true;
   if(!map){
    map=L.map("map",{zoomControl:true,scrollWheelZoom:false,attributionControl:true});
-   L.tileLayer("https://basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png",{maxZoom:19,attribution:"© OpenStreetMap contributors · © CARTO"}).addTo(map);
+   L.tileLayer("https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png",{maxZoom:19,attribution:"© OpenStreetMap contributors · © CARTO"}).addTo(map);
   }
+  // Sustituir teselas antiguas aunque el mapa ya exista.
+  let hasCarto=false;
+  map.eachLayer(layer=>{if(layer instanceof L.TileLayer){if(String(layer._url||"").includes("cartocdn.com"))hasCarto=true;else map.removeLayer(layer)}});
+  if(!hasCarto)L.tileLayer("https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png",{maxZoom:19,attribution:"© OpenStreetMap contributors · © CARTO"}).addTo(map);
   markers.forEach(m=>map.removeLayer(m));routeLines.forEach(l=>map.removeLayer(l));
   markers=[];routeLines=[];
   for(let i=0;i+1<currentStops.length;i++){

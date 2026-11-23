@@ -58,7 +58,7 @@ function setupPrivateDrive(){
   '<div class="private-actions"><button class="primary-btn" type="button" onclick="savePrivateDrive()">Guardar en este móvil</button>'+
   '<a class="small-btn" id="private-drive-open" href="#" target="_blank" rel="noopener noreferrer" hidden>📂 Abrir Drive ↗</a>'+
   '<button class="small-btn" id="private-drive-forget" type="button" onclick="forgetPrivateDrive()" hidden>Quitar enlace</button></div>'+
-  '<div class="private-warning">🔒 Importante: Drive debe tener «Acceso general → Restringido» y cada uno de vosotros acceso individual. Actualmente la carpeta tenía activado «Cualquiera con el enlace». Guardar aquí el enlace NO modifica esos permisos.</div>'+
+  '<div class="private-warning">🔒 Importante: Drive debe tener «Acceso general → Restringido» y cada uno de vosotros acceso individual. Comprobad los permisos de la carpeta y de cada documento antes de compartir. Guardar aquí el enlace NO modifica esos permisos.</div>'+
   '<p id="private-drive-status" role="status"></p>';
   const firstHelp=view.querySelector(".help-card");
   if(firstHelp)firstHelp.before(html);else view.prepend(html);

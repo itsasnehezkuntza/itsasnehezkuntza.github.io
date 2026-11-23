@@ -119,7 +119,9 @@ function showGallery(){
  '<div class="tip-cards">'+details.notes.map(([title,desc,link])=>'<div class="tip-card"><strong>'+textSafe(title)+'</strong><p>'+textSafe(desc)+'</p>'+
  (link?'<a href="'+textSafe(link)+'" target="_blank" rel="noopener noreferrer">Información oficial ↗</a>':"")+
  '</div>').join("")+'</div></section>';
- wrapper.innerHTML=gallery+tips;
+ wrapper.innerHTML=gallery;
+ const dayNote=document.getElementById('day-note');
+ if(dayNote)dayNote.insertAdjacentHTML('beforeend',tips);
  wrapper.querySelectorAll("[data-focus]").forEach(el=>el.addEventListener("click",()=>selectedStop(el.dataset.focus)));
  if(!details.photos.length)return;
  for(const [key,title,description] of details.photos){

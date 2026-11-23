@@ -1,0 +1,115 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 720" role="img" aria-labelledby="poster-title poster-desc">
+<title id="poster-title">Postal navideña de La Patrulla Polar en Londres</title>
+<desc id="poster-desc">Ilustración original de Tower Bridge en rosa y azul sobre un cielo melocotón, con nieve, un autobús rojo, decoración navideña y tres pequeños perros polares.</desc>
+<defs>
+<linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#F9C785"/><stop offset=".56" stop-color="#F3B49F"/><stop offset="1" stop-color="#B1AECF"/></linearGradient>
+<linearGradient id="tower" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#F37F93"/><stop offset=".46" stop-color="#CB527C"/><stop offset="1" stop-color="#744F8B"/></linearGradient>
+<linearGradient id="towerSide" x1="0" y1="0" x2="1" y2=".7"><stop stop-color="#B94475"/><stop offset="1" stop-color="#594478"/></linearGradient>
+<linearGradient id="river" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#866E9D"/><stop offset="1" stop-color="#353A73"/></linearGradient>
+<pattern id="halftone" patternUnits="userSpaceOnUse" width="22" height="22"><circle cx="3" cy="3" r="1" fill="#592C64" opacity=".12"/></pattern>
+<pattern id="masonry" width="60" height="28" patternUnits="userSpaceOnUse"><path d="M0 27H60M30 0V14M0 14H60M0 14V27M60 14V27" stroke="#813F78" stroke-width="1.2" opacity=".27"/></pattern>
+<filter id="soft"><feDropShadow dx="0" dy="7" stdDeviation="4" flood-color="#4F376E" flood-opacity=".18"/></filter>
+<g id="star"><path d="M0-10L2.4-2.4L10 0L2.4 2.4L0 10L-2.4 2.4L-10 0L-2.4-2.4Z" fill="#FFFCDB"/></g>
+<g id="snow"><path d="M0-7V7M-7 0H7M-5-5L5 5M-5 5L5-5" stroke="#FFF7E3" stroke-width="2.2" stroke-linecap="round"/></g>
+<g id="polarFace">
+<path d="M-33-20L-31-48Q-25-57-16-41L-8-31M33-20L31-48Q25-57 16-41L8-31" fill="#FFFAED" stroke="#4B6784" stroke-width="3.5" stroke-linejoin="round"/>
+<ellipse cx="0" cy="-12" rx="39" ry="38" fill="#FFFAED" stroke="#4B6784" stroke-width="3.8"/>
+<path d="M-35-25Q-28-43-14-40L-15-23M35-25Q28-43 14-40L15-23" fill="#BFD5D3" opacity=".75"/>
+<circle cx="-15" cy="-17" r="4.1" fill="#2D3855"/><circle cx="15" cy="-17" r="4.1" fill="#2D3855"/>
+<ellipse cy="-2" rx="7" ry="5.2" fill="#2D3855"/>
+<path d="M0 3V8M0 8Q-7 15-14 9M0 8Q7 15 14 9" stroke="#2D3855" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+<circle cx="-29" cy="-5" r="5" fill="#F1B7AC" opacity=".7"/><circle cx="29" cy="-5" r="5" fill="#F1B7AC" opacity=".7"/>
+</g>
+<g id="towerBlock">
+<!-- shadow and roof -->
+<path d="M0 318V95L13 83V68L25 57V26H39V0L55-20L72 0H87V26H101V57L113 68V83L126 95V318Z" fill="url(#tower)" stroke="#4A3168" stroke-width="7" stroke-linejoin="round"/>
+<path d="M70 0H87V26H101V57L113 68V83L126 95V318H69Z" fill="url(#towerSide)" opacity=".8"/>
+<path d="M0 318V95L13 83V68L25 57V26H39V0L55-20L72 0H87V26H101V57L113 68V83L126 95V318Z" fill="url(#masonry)" opacity=".8"/>
+<path d="M0 97H126M15 68H112M24 56H102M36 27H89M8 192H117M8 254H117" stroke="#52315E" stroke-width="7"/>
+<path d="M12 84L20 71H105L113 84" fill="none" stroke="#FFC79D" stroke-width="5"/>
+<path d="M14 193H112M13 255H113" stroke="#F2B5A6" stroke-width="5" opacity=".8"/>
+<g fill="#3C3D68" stroke="#F5BBA0" stroke-width="2.3">
+<path d="M20 126Q34 106 47 126V171H20Z"/><path d="M77 126Q91 106 105 126V171H77Z"/>
+<path d="M20 214Q34 194 47 214V239H20Z"/><path d="M77 214Q91 194 105 214V239H77Z"/>
+<path d="M44 281Q63 262 82 281V318H44Z"/>
+</g>
+<g fill="#F6D2AB"><rect x="29" y="135" width="8" height="26"/><rect x="86" y="135" width="8" height="26"/><rect x="29" y="219" width="8" height="15"/><rect x="86" y="219" width="8" height="15"/></g>
+<path d="M22 122V169M103 122V169M63 14V54" stroke="#FFD4B3" stroke-width="5" fill="none"/>
+<path d="M32 0L55-18L78 0" stroke="#FFD3B0" stroke-width="5" fill="none"/>
+<path d="M-10 89H136M-11 188H137M-12 250H138" stroke="#4A3168" stroke-width="5"/>
+</g>
+</defs>
+<rect width="1000" height="720" fill="url(#sky)"/>
+<rect width="1000" height="720" fill="url(#halftone)" opacity=".37"/>
+<circle cx="171" cy="146" r="80" fill="#F8D09B" opacity=".9"/>
+<g fill="#FBE2B9" opacity=".62">
+<path d="M-20 260Q22 216 93 244Q135 188 200 231Q230 201 278 227Q315 237 347 254V282H-20Z"/>
+<path d="M642 244Q675 218 724 234Q759 179 811 208Q862 179 913 220Q962 196 1040 239V267H642Z"/>
+</g>
+<g fill="#FEF3DB" opacity=".9">
+<circle cx="115" cy="73" r="3"/><circle cx="390" cy="88" r="3.5"/><circle cx="586" cy="62" r="2.7"/><circle cx="839" cy="89" r="4"/><circle cx="924" cy="154" r="2.7"/><circle cx="59" cy="371" r="3"/><circle cx="295" cy="317" r="2.8"/><circle cx="706" cy="160" r="2.5"/><circle cx="477" cy="291" r="3.2"/><circle cx="541" cy="124" r="3.4"/><circle cx="787" cy="348" r="2.7"/>
+</g>
+<use href="#star" x="255" y="129"/><use href="#star" x="709" y="86" transform="rotate(15 709 86)"/><use href="#star" x="915" y="298"/><use href="#star" x="92" y="321"/>
+<use href="#snow" x="406" y="153"/><use href="#snow" x="622" y="213"/><use href="#snow" x="848" y="220"/><use href="#snow" x="42" y="180"/>
+<!-- suspended Christmas light strands -->
+<path d="M0 49Q248 156 501 61Q732-26 1000 67" fill="none" stroke="#55416B" stroke-width="5" opacity=".88"/>
+<g stroke="#55416B" stroke-width="3">
+<path d="M48 66V82M113 85V99M191 100V114M270 106V120M348 99V114M421 81V95M501 62V78M581 43V58M661 34V48M739 34V47M821 41V54M904 56V71"/>
+</g>
+<g fill="#DE5471" stroke="#FCF1D4" stroke-width="2"><ellipse cx="48" cy="89" rx="8" ry="11"/><ellipse cx="191" cy="122" rx="8" ry="11"/><ellipse cx="348" cy="122" rx="8" ry="11"/><ellipse cx="501" cy="86" rx="8" ry="11"/><ellipse cx="661" cy="56" rx="8" ry="11"/><ellipse cx="821" cy="62" rx="8" ry="11"/></g>
+<g fill="#FFD382" stroke="#FCF1D4" stroke-width="2"><ellipse cx="113" cy="105" rx="8" ry="11"/><ellipse cx="270" cy="128" rx="8" ry="11"/><ellipse cx="421" cy="103" rx="8" ry="11"/><ellipse cx="581" cy="66" rx="8" ry="11"/><ellipse cx="739" cy="55" rx="8" ry="11"/><ellipse cx="904" cy="79" rx="8" ry="11"/></g>
+<!-- Tower bridge silhouette and suspension -->
+<g transform="translate(178 220)" filter="url(#soft)">
+<!-- behind bridge walkways -->
+<path d="M4 264L655 264V284L4 284Z" fill="#5B3C74" stroke="#47325E" stroke-width="7"/>
+<path d="M14 243L655 243V258H14Z" fill="#F48B94" stroke="#513263" stroke-width="6"/>
+<path d="M0 282Q132 283 219 255M655 282Q520 283 442 255" stroke="#5A426D" stroke-width="11" fill="none"/>
+<!-- suspension arch / steel trusses -->
+<path d="M116 164Q330 356 545 164" stroke="#4A3565" stroke-width="16" fill="none"/>
+<path d="M116 164Q330 326 545 164" stroke="#D47B8A" stroke-width="8" fill="none"/>
+<path d="M115 163L544 163M115 195L544 195" stroke="#48315F" stroke-width="12" fill="none"/>
+<path d="M116 171L175 205L238 171L296 205L354 171L412 205L481 171L544 205" stroke="#5C3A75" stroke-width="9" fill="none"/>
+<g stroke="#4F3C66" stroke-width="4"><path d="M167 171V204M227 171V204M286 171V204M354 171V204M413 171V204M477 171V204"/></g>
+<!-- towers -->
+<g transform="translate(40 -58)"><use href="#towerBlock"/></g>
+<g transform="translate(502 -58)"><use href="#towerBlock"/></g>
+<!-- snow on roof -->
+<path d="M69-43L94-68L118-43L134-40" fill="none" stroke="#FFF3DB" stroke-width="10" stroke-linecap="round"/>
+<path d="M531-43L555-68L582-43L597-40" fill="none" stroke="#FFF3DB" stroke-width="10" stroke-linecap="round"/>
+<!-- foundation -->
+<path d="M0 270L685 270V293H0Z" fill="#563A71"/>
+</g>
+<!-- water, foreground and walkway -->
+<path d="M0 540Q187 519 359 544Q531 560 698 543Q860 520 1000 547V720H0Z" fill="url(#river)"/>
+<path d="M0 550Q193 536 354 550Q536 566 692 550Q859 538 1000 550" fill="none" stroke="#F1C8B8" stroke-width="9" opacity=".72"/>
+<g stroke="#F9D5BE" opacity=".26" stroke-width="6" stroke-linecap="round">
+<path d="M47 580H232M278 591H440M492 568H676M741 589H929M18 654H166M192 675H380M464 639H644M722 679H933"/>
+</g>
+<path d="M0 614Q132 602 278 623Q409 628 535 605Q684 582 821 611Q931 626 1000 609V720H0Z" fill="#524477"/>
+<path d="M0 618Q146 606 278 627Q409 632 535 608Q684 586 821 614Q931 630 1000 613" fill="none" stroke="#D1A5AF" stroke-width="8"/>
+<!-- Snow-dusted red double decker bus -->
+<g transform="translate(688 577)" filter="url(#soft)">
+<rect x="0" y="-62" width="212" height="102" rx="18" fill="#CF445A" stroke="#65344E" stroke-width="7"/>
+<rect x="17" y="-51" width="178" height="41" rx="5" fill="#D7DFE4" stroke="#72405A" stroke-width="4"/>
+<path d="M58-50V-10M114-50V-10M157-50V-10" stroke="#6E415D" stroke-width="5"/>
+<rect x="19" y="2" width="118" height="24" rx="5" fill="#E4D6C8"/>
+<rect x="152" y="2" width="37" height="24" rx="5" fill="#F6D092"/>
+<circle cx="42" cy="43" r="20" fill="#303653" stroke="#F7D8B9" stroke-width="4"/>
+<circle cx="171" cy="43" r="20" fill="#303653" stroke="#F7D8B9" stroke-width="4"/>
+<path d="M21-63Q82-78 152-64" stroke="#FFF5E5" stroke-width="8" fill="none" stroke-linecap="round"/>
+<text x="87" y="-17" text-anchor="middle" font-size="16" font-weight="900" font-family="Georgia,serif" fill="#F6E6C8">LONDON</text>
+</g>
+<!-- Three miniature polar travellers -->
+<g transform="translate(112 615)">
+<g transform="translate(0 0) rotate(-9)"><use href="#polarFace"/><path d="M-33 16Q0 33 35 15" stroke="#B44657" stroke-width="13" fill="none" stroke-linecap="round"/><path d="M-31-39L-26-73Q-2-96 20-70L24-52" stroke="#C34B5B" stroke-width="20" fill="none"/><circle cx="29" cy="-56" r="13" fill="#FFF5E5"/></g>
+<g transform="translate(103 -12) rotate(3) scale(.95)"><use href="#polarFace"/><path d="M-33 16Q0 33 35 15" stroke="#3979AA" stroke-width="13" fill="none" stroke-linecap="round"/><path d="M-29-41Q0-72 29-42" stroke="#3D709F" stroke-width="18" fill="none"/><circle cx="0" cy="-68" r="13" fill="#FFF5E5"/></g>
+<g transform="translate(205 7) rotate(10) scale(.92)"><use href="#polarFace"/><path d="M-33 16Q0 33 35 15" stroke="#D5A34F" stroke-width="13" fill="none" stroke-linecap="round"/><path d="M-29-41Q0-72 29-42" stroke="#885278" stroke-width="18" fill="none"/><circle cx="0" cy="-68" r="12" fill="#FFF5E5"/></g>
+</g>
+<!-- postal hand lettered inscription, not essential for itinerary -->
+<g transform="translate(60 386) rotate(-9)">
+<rect x="-17" y="-51" width="171" height="73" rx="8" fill="#F7E3C6" opacity=".91"/>
+<text x="2" y="-19" fill="#654365" font-size="20" font-family="Georgia,serif" font-style="italic">Winter in</text>
+<text x="2" y="6" fill="#733C6B" font-size="29" font-family="Georgia,serif" font-weight="900">LONDON</text>
+</g>
+<path d="M0 709Q100 698 202 714M750 708Q879 702 1000 709" fill="none" stroke="#DBB6BB" stroke-width="3" opacity=".45"/>
+</svg>

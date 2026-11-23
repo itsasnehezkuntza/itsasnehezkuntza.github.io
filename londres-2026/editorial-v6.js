@@ -22,7 +22,7 @@ const DAYS_PLUS={
  ],
  notes:[
   ["Mercado de Navidad","Borough Market abre los lunes de diciembre de 2026. Id con algo de hambre.","https://boroughmarket.org.uk/events/christmas-at-borough-market/"],
-  ["Tower Bridge","La visita interior necesita entrada. Comprobad el horario exacto antes de organizar el resto.","https://www.towerbridge.org.uk/whats-on/entry-to-tower-bridge"],
+  ["Tower Bridge","Tenéis tres entradas confirmadas para las 10:30. Entrada por la Torre Norte; no se permiten maletas ni mochilas de gran tamaño.","https://www.towerbridge.org.uk/whats-on/entry-to-tower-bridge"],
   ["Mirador gratuito","The Garden at 120 es exterior: con lluvia o viento fuerte puede haber cambios."]
  ]
 },
@@ -35,9 +35,9 @@ const DAYS_PLUS={
   ["winter","Winter Wonderland","Las montañas rusas y las luces del recinto son la protagonista de la noche."]
  ],
  notes:[
-  ["Museo de dinosaurios","La entrada general es gratuita. Reservar con antelación ayuda a garantizar el acceso.","https://www.nhm.ac.uk/visit.html"],
-  ["Entrada a Winter Wonderland","Hace falta entrada para acceder al recinto. Las atracciones se reservan o pagan por separado, salvo que vuestro pase las incluya. Comprobad la franja exacta.","https://hydeparkwinterwonderland.com/tickets-guide/"],
-  ["Tiempo para las atracciones","Una vez dentro podéis quedaros hasta el cierre. Algunas colas terminan antes, así que subid primero a lo que más os interese.","https://hydeparkwinterwonderland.com/tickets-guide/"]
+  ["Museo de dinosaurios","Ya tenéis tres entradas confirmadas a las 11:15 en South Kensington. La hora es distinta de la propuesta inicial.","https://www.nhm.ac.uk/visit.html"],
+  ["Entrada a Winter Wonderland","Tenéis la entrada confirmada para 17:00–18:00 y tres Coaster Pass. Entrad dentro de esa hora.","https://hydeparkwinterwonderland.com/tickets-guide/"],
+  ["Tiempo para las atracciones","Cada Coaster Pass incluye cinco atracciones: Euro Coaster, Ice Mountain, Wilde Maus XXL, Time Machine y Munich Looping. Las colas pueden cerrar antes del final.","https://hydeparkwinterwonderland.com/tickets-guide/"]
  ]
 },
 "2026-12-09":{
@@ -50,7 +50,7 @@ const DAYS_PLUS={
  notes:[
   ["Cambio de guardia","Llegad con antelación a Wellington Barracks. El desfile depende del tiempo y de la programación oficial.","https://www.householddivision.org.uk/changing-the-guard-calendar"],
   ["Navidad en Covent Garden","En 2026 hay decoración especial y nevadas artificiales en la plaza; la programación es gratuita de ver.","https://www.coventgarden.london/experience/christmas-in-covent-garden"],
-  ["Sin patinaje obligatorio","Somerset House se puede disfrutar desde fuera. Así dejáis el presupuesto para las atracciones del martes."]
+  ["Patinaje nocturno confirmado","Tenéis sesión confirmada para los tres a las 21:00 en Somerset House. Llegad con tiempo después de Southbank."]
  ]
 },
 "2026-12-10":{

@@ -158,14 +158,14 @@ window.renderMap=function(d){
   document.getElementById("map").hidden=false;document.getElementById("map-fallback").hidden=true;
   if(!map){
    map=L.map("map",{zoomControl:true,scrollWheelZoom:false,attributionControl:true});
-   L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",{maxZoom:19,attribution:"© OpenStreetMap contributors"}).addTo(map);
+   L.tileLayer("https://basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png",{maxZoom:19,attribution:"© OpenStreetMap contributors · © CARTO"}).addTo(map);
   }
   markers.forEach(m=>map.removeLayer(m));routeLines.forEach(l=>map.removeLayer(l));
   markers=[];routeLines=[];
   for(let i=0;i+1<currentStops.length;i++){
    const a=currentStops[i],b=currentStops[i+1],train=transit(d,a,b),coords=[a.coords,b.coords];
-   routeLines.push(L.polyline(coords,{color:"#fff",weight:8,opacity:.9,interactive:false}).addTo(map));
-   routeLines.push(L.polyline(coords,{color:train?"#7956b9":"#148068",weight:4,opacity:.92,dashArray:train?"7 8":null,interactive:false}).addTo(map));
+   routeLines.push(L.polyline(coords,{color:"#fff",weight:6,opacity:.9,interactive:false}).addTo(map));
+   routeLines.push(L.polyline(coords,{color:train?"#8a9690":"#526f60",weight:3,opacity:.9,dashArray:train?"5 6":null,interactive:false}).addTo(map));
    arrow(a,b,train);
   }
   currentStops.forEach((s,i)=>{

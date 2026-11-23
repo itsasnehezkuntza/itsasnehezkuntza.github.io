@@ -1,0 +1,138 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 800 445" role="img" aria-labelledby="polarTitle polarDesc">
+<title id="polarTitle">La Patrulla Polar en Londres</title>
+<desc id="polarDesc">Tres perros de aspecto husky, con gorros y bufandas navideñas, delante del Big Ben, el London Eye, un autobús rojo y Tower Bridge nevados.</desc>
+<defs>
+ <linearGradient id="sky" x1="0" y1="0" x2=".12" y2="1"><stop stop-color="#cadfdb"/><stop offset="1" stop-color="#f7eddd"/></linearGradient>
+ <linearGradient id="snow" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#fffefa"/><stop offset="1" stop-color="#e9e9dc"/></linearGradient>
+ <filter id="drop" x="-30%" y="-30%" width="160%" height="160%"><feDropShadow dx="0" dy="6" stdDeviation="4" flood-color="#345044" flood-opacity=".15"/></filter>
+ <g id="flake" fill="none" stroke="#fffdf4" stroke-width="2.5" stroke-linecap="round"><path d="M-7 0H7M0-7V7M-5-5L5 5M-5 5L5-5"/></g>
+ <g id="paw" fill="#ad6c62"><ellipse cx="-9" cy="3" rx="11" ry="8"/><circle cx="-20" cy="-8" r="4"/><circle cx="-9" cy="-12" r="4"/><circle cx="3" cy="-9" r="4"/><circle cx="12" cy="-1" r="4"/></g>
+ <g id="polarDog" stroke-linejoin="round">
+  <path d="M-46-12Q-68-26-73-7Q-79 9-54 21" fill="#f4f5ef" stroke="#64837d" stroke-width="4"/>
+  <ellipse cx="0" cy="3" rx="53" ry="68" fill="#fffefa" stroke="#5f8179" stroke-width="4"/>
+  <ellipse cx="-30" cy="59" rx="23" ry="14" fill="#fcfcf4" stroke="#68877f" stroke-width="3"/>
+  <ellipse cx="30" cy="59" rx="23" ry="14" fill="#fcfcf4" stroke="#68877f" stroke-width="3"/>
+  <path d="M-44-80L-42-127Q-40-138-29-123L-10-103M44-80L42-127Q40-138 29-123L10-103" fill="#fffefa" stroke="#60817a" stroke-width="4.8"/>
+  <path d="M-37-112L-34-124L-22-105M37-112L34-124L22-105" fill="#d7a79d" opacity=".8"/>
+  <path d="M-52-74Q-48-107-8-109Q35-111 50-78Q61-50 49-20Q37 7 0 9Q-37 7-49-20Q-61-50-52-74Z" fill="#fffefa" stroke="#60817a" stroke-width="4.5"/>
+  <path d="M-48-81Q-41-101-19-98Q-12-93-14-79L-31-63Q-43-60-48-72Z" fill="#c8d8d3" opacity=".85"/>
+  <path d="M48-81Q41-101 19-98Q12-93 14-79L31-63Q43-60 48-72Z" fill="#c8d8d3" opacity=".85"/>
+  <ellipse cx="-20" cy="-64" rx="5" ry="6.2" fill="#2e4741"/>
+  <ellipse cx="20" cy="-64" rx="5" ry="6.2" fill="#2e4741"/>
+  <circle cx="-18" cy="-67" r="1.7" fill="#fff"/>
+  <circle cx="22" cy="-67" r="1.7" fill="#fff"/>
+  <ellipse cx="0" cy="-37" rx="25" ry="19" fill="#f3f0e9"/>
+  <path d="M-11-42Q0-51 11-42Q10-33 0-31Q-10-33-11-42Z" fill="#31463d"/>
+  <path d="M0-31V-26M0-26Q-7-17-15-25M0-26Q7-17 15-25" fill="none" stroke="#52665b" stroke-width="3" stroke-linecap="round"/>
+  <ellipse cx="-38" cy="-38" rx="9" ry="6" fill="#efb2a6" opacity=".35"/>
+  <ellipse cx="38" cy="-38" rx="9" ry="6" fill="#efb2a6" opacity=".35"/>
+ </g>
+ <g id="scarf">
+   <path d="M-48-9Q0-24 48-9L36 5Q0 16-34 5Z" fill="currentColor" stroke="#5e5545" stroke-width="2.6"/>
+   <path d="M25 0L39 50L20 52L8 9Z" fill="currentColor" stroke="#5e5545" stroke-width="2.6"/>
+   <path d="M21 47L38 47M24 43L40 43" fill="none" stroke="#fff1de" stroke-width="3"/>
+ </g>
+</defs>
+<rect width="800" height="445" rx="7" fill="url(#sky)"/>
+<g opacity=".65" fill="#fff"><circle cx="95" cy="58" r="3"/><circle cx="194" cy="84" r="2.5"/><circle cx="310" cy="38" r="3"/><circle cx="567" cy="38" r="2.3"/><circle cx="738" cy="80" r="3"/><circle cx="643" cy="144" r="2.6"/><circle cx="282" cy="157" r="3"/><circle cx="481" cy="108" r="2.3"/><circle cx="41" cy="225" r="2.5"/><circle cx="770" cy="242" r="2.4"/></g>
+<g opacity=".7"><use href="#flake" x="186" y="49" transform="rotate(17 186 49)"/><use href="#flake" x="595" y="94"/><use href="#flake" x="745" y="151"/><use href="#flake" x="404" y="46" transform="rotate(14 404 46)"/><use href="#flake" x="29" y="119"/></g>
+<!-- String of Christmas lights -->
+<path d="M-7 35Q206 113 407 52Q600 2 809 54" fill="none" stroke="#4c7063" stroke-width="4" opacity=".67"/>
+<g stroke="#668775" stroke-width="2">
+<path d="M50 50V62M116 70V82M180 77V89M247 75V87M317 63V75M392 54V66M471 41V53M550 32V44M629 34V46M707 43V55M766 53V65"/>
+</g>
+<g stroke="#eddbc5" stroke-width="2">
+<circle cx="50" cy="65" r="6" fill="#ba544e"/><circle cx="116" cy="85" r="6" fill="#e8c36f"/>
+<circle cx="180" cy="92" r="6" fill="#3b8d65"/><circle cx="247" cy="90" r="6" fill="#ba544e"/>
+<circle cx="317" cy="78" r="6" fill="#e8c36f"/><circle cx="392" cy="69" r="6" fill="#3b8d65"/>
+<circle cx="471" cy="56" r="6" fill="#ba544e"/><circle cx="550" cy="47" r="6" fill="#e8c36f"/>
+<circle cx="629" cy="49" r="6" fill="#3b8d65"/><circle cx="707" cy="58" r="6" fill="#ba544e"/>
+<circle cx="766" cy="68" r="6" fill="#e8c36f"/>
+</g>
+<!-- The Elizabeth Tower / Big Ben -->
+<g transform="translate(74 97)" filter="url(#drop)">
+ <path d="M28 203V45H45V23L54 14L63 23V45H80V203Z" fill="#6c8174" stroke="#456156" stroke-width="4"/>
+ <path d="M41 46V28L54 20L67 28V46M35 47H73" fill="#dcbf88" stroke="#456156" stroke-width="3"/>
+ <rect x="36" y="64" width="37" height="43" rx="3" fill="#d8c398" stroke="#436254" stroke-width="3"/>
+ <circle cx="54" cy="85" r="15" fill="#f7efdc" stroke="#355b48" stroke-width="3.5"/>
+ <path d="M54 75V85L62 88" stroke="#355b48" stroke-width="3" fill="none" stroke-linecap="round"/>
+ <g fill="#d8c398"><rect x="39" y="116" width="9" height="25" rx="2"/><rect x="60" y="116" width="9" height="25" rx="2"/><rect x="39" y="154" width="9" height="26" rx="2"/><rect x="60" y="154" width="9" height="26" rx="2"/></g>
+ <path d="M21 202H87M31 10L54-10L77 10" stroke="#456156" stroke-width="5" fill="none"/>
+ <path d="M54-11V-23" stroke="#456156" stroke-width="3"/>
+</g>
+<!-- London Eye, distant -->
+<g transform="translate(359 228)" stroke="#72968b" stroke-width="5" fill="none" opacity=".79">
+ <circle cx="0" cy="-37" r="84"/>
+ <circle cx="0" cy="-37" r="8" fill="#faf7ec"/>
+ <path d="M0-121V47M-84-37H84M-59-96L59 22M59-96L-59 22M-34-114L34 40M34-114L-34 40M-72-80L72 6M72-80L-72 6"/>
+ <path d="M-13-29L-61 91H61L13-29" stroke-width="8"/>
+ <g fill="#e5e7da" stroke-width="2.5"><circle cx="-84" cy="-37" r="7"/><circle cx="84" cy="-37" r="7"/><circle cx="0" cy="-121" r="7"/><circle cx="-59" cy="-96" r="7"/><circle cx="59" cy="-96" r="7"/><circle cx="-59" cy="22" r="7"/><circle cx="59" cy="22" r="7"/></g>
+</g>
+<!-- Tower Bridge -->
+<g transform="translate(581 139)" filter="url(#drop)">
+ <g fill="#698b79" stroke="#426b59" stroke-width="3">
+ <path d="M26 163V41H40V29L53 14L66 29V41H81V163Z"/>
+ <path d="M139 163V41H153V29L166 14L179 29V41H194V163Z"/>
+ <path d="M16 127H204V142H16Z"/>
+ </g>
+ <g fill="#e7d9b7" stroke="#426b59" stroke-width="3">
+ <rect x="41" y="58" width="24" height="31" rx="3"/>
+ <rect x="154" y="58" width="24" height="31" rx="3"/>
+ <rect x="41" y="101" width="24" height="27" rx="3"/>
+ <rect x="154" y="101" width="24" height="27" rx="3"/>
+ </g>
+ <path d="M82 95Q111 121 139 95M82 105H139" stroke="#446d5c" stroke-width="6" fill="none"/>
+ <path d="M81 47Q108 62 139 47" stroke="#436957" stroke-width="4" fill="none"/>
+ <path d="M21 159H202" stroke="#e8e5d2" stroke-width="5"/>
+</g>
+<!-- Double-decker Christmas bus -->
+<g transform="translate(613 279)" filter="url(#drop)">
+ <rect x="0" y="11" width="116" height="69" rx="12" fill="#b74647" stroke="#813b3c" stroke-width="3.5"/>
+ <rect x="10" y="22" width="96" height="26" rx="5" fill="#c3dcdb"/>
+ <path d="M37 22V48M66 22V48M89 22V48" stroke="#8c4e49" stroke-width="4"/>
+ <rect x="10" y="55" width="69" height="14" rx="3" fill="#d4e4df"/>
+ <rect x="82" y="55" width="23" height="14" rx="3" fill="#e0c27b"/>
+ <rect x="5" y="12" width="44" height="12" rx="3" fill="#f2d7a1"/>
+ <circle cx="22" cy="80" r="10" fill="#324943"/><circle cx="92" cy="80" r="10" fill="#324943"/>
+ <circle cx="22" cy="80" r="4" fill="#e9e4d8"/><circle cx="92" cy="80" r="4" fill="#e9e4d8"/>
+ <path d="M106 16L118 23V64L108 70" fill="#bd4b49" stroke="#8c3b3c" stroke-width="3"/>
+</g>
+<!-- Snowy ground -->
+<path d="M0 344Q98 330 176 345Q285 360 370 339Q506 329 611 346Q716 365 800 341V445H0Z" fill="url(#snow)"/>
+<path d="M0 347Q98 335 176 349Q285 364 370 343Q506 334 611 351Q716 369 800 346" fill="none" stroke="#dde7dc" stroke-width="4"/>
+<!-- Christmas tree -->
+<g transform="translate(79 344)">
+ <path d="M0-125L-36-57H-23L-47-24H-29L-55 0H55L29-24H47L23-57H36Z" fill="#2f7455" stroke="#24563f" stroke-width="4" stroke-linejoin="round"/>
+ <path d="M-39-37L-18-31L6-37L26-26M-42-5L-19-13L10-2L40-11" fill="none" stroke="#d2b57c" stroke-width="4" stroke-linecap="round"/>
+ <circle cx="-18" cy="-64" r="6" fill="#bd5550"/><circle cx="23" cy="-48" r="6" fill="#e7cb79"/><circle cx="-29" cy="-18" r="6" fill="#d7b36d"/><circle cx="22" cy="-10" r="6" fill="#bd5550"/>
+ <path d="M0-139L5-129L16-128L8-120L10-108L0-114L-10-108L-8-120L-16-128L-5-129Z" fill="#e3b968" stroke="#a17a45" stroke-width="2"/>
+ <path d="M-8 0V16H8V0" fill="#7d6048"/>
+</g>
+<!-- Three polar dog friends -->
+<g filter="url(#drop)">
+ <g transform="translate(258 348) rotate(-5)">
+  <use href="#polarDog" xlink:href="#polarDog"/>
+  <g style="color:#b44949"><use href="#scarf" xlink:href="#scarf"/></g>
+  <path d="M-48-109Q-44-137-11-138L17-136L26-117" fill="#b44949" stroke="#854344" stroke-width="4"/>
+  <path d="M-43-113Q-29-134-9-135" stroke="#f7e5d8" stroke-width="5" fill="none"/>
+  <ellipse cx="26" cy="-117" rx="12" ry="12" fill="#fff"/>
+  <path d="M-28-128Q-1-143 21-128" stroke="#fff" stroke-width="6" fill="none" stroke-linecap="round"/>
+ </g>
+ <g transform="translate(412 345) scale(1.07)">
+  <use href="#polarDog" xlink:href="#polarDog"/>
+  <g style="color:#d0a04d"><use href="#scarf" xlink:href="#scarf"/></g>
+  <path d="M-52-107Q-46-146-8-151Q29-157 48-116L51-107Z" fill="#315f51" stroke="#22493f" stroke-width="4"/>
+  <rect x="-51" y="-117" width="103" height="16" rx="8" fill="#f8f2e4" stroke="#668078" stroke-width="2.5"/>
+  <circle cx="4" cy="-152" r="12" fill="#f8f2e4" stroke="#668078" stroke-width="2"/>
+ </g>
+ <g transform="translate(556 353) scale(.93) rotate(6)">
+  <use href="#polarDog" xlink:href="#polarDog"/>
+  <g style="color:#3b7b67"><use href="#scarf" xlink:href="#scarf"/></g>
+  <path d="M-42-106Q-15-143 19-133Q41-125 44-110" fill="#a74a45" stroke="#883d3b" stroke-width="4"/>
+  <path d="M-43-107Q0-119 45-108" fill="none" stroke="#fff7e8" stroke-width="8" stroke-linecap="round"/>
+ </g>
+</g>
+<!-- Paw prints in the snow -->
+<g opacity=".48"><use href="#paw" x="161" y="407" transform="rotate(-13 161 407) scale(.55)"/><use href="#paw" x="204" y="424" transform="rotate(15 204 424) scale(.45)"/><use href="#paw" x="676" y="410" transform="rotate(8 676 410) scale(.58)"/><use href="#paw" x="724" y="419" transform="rotate(-12 724 419) scale(.42)"/></g>
+<g fill="none" stroke="#fffefa" stroke-width="3" stroke-linecap="round" opacity=".72"><path d="M158 295L164 308M154 308L169 299M692 200L700 210M688 209L702 201"/></g>
+</svg>

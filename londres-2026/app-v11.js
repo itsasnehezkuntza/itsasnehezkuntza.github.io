@@ -27,7 +27,7 @@ function renderBoardingTickets(){
  '<div class="travel-flight-times"><div><small>SALIDA · HORA LOCAL</small><strong>'+ESC(f.depart)+'</strong></div>'+
  '<div><small>LLEGADA · HORA LOCAL</small><strong>'+ESC(f.arrive)+'</strong></div></div>'+
  '</div><div class="travel-flight-footer"><div><small>VUELO</small><strong>'+ESC(f.flight)+'</strong></div>'+
- '<span class="flight-confirmed '+(f.verified?"":"flight-pending")+'">'+(f.verified?"Confirmado en documento":"Pendiente de comprobar")+'</span></div>'+
+ '<span class="flight-confirmed '+(f.verified?"":"flight-pending")+'">'+(f.verified?"Horario en captura":"Falta justificante")+'</span></div>'+
  '<p class="flight-support">'+ESC(f.info)+'</p></article>').join("");
  host.innerHTML='<div class="travel-section-heading"><span class="travel-section-kicker">✈️ BILLETES DE VIAJE</span><h3>Vuelos, de un vistazo</h3>'+
  '<p>Tarjetas informativas basadas en los archivos de vuestra carpeta privada; no son tarjetas de embarque y no sirven para pasar el control.</p></div>'+

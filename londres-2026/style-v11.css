@@ -188,3 +188,44 @@
  .travel-flight-card{break-inside:avoid}
  .weather-day-grid{grid-template-columns:repeat(7,minmax(0,1fr))}
 }
+
+
+/* Billetes visibles dentro del día correspondiente */
+.day-flight-passes{
+ margin:0 0 15px;
+ padding:15px 13px 14px;
+ background:linear-gradient(115deg,#f7f1df,#fcfaf2);
+ border:1px solid #e8dbc7;border-radius:15px;
+ box-shadow:0 4px 17px #273e2810;
+}
+.day-flight-heading{
+ display:flex;align-items:center;gap:11px;
+ margin:0 0 12px;
+}
+.day-flight-figure{
+ display:grid;place-items:center;flex:none;
+ width:43px;height:43px;
+ color:#294e3c;background:#fffefa;
+ border:1px solid #e7d9c4;border-radius:11px;
+ font-size:21px;transform:rotate(-4deg);
+}
+.day-flight-heading small{
+ display:block;font-size:9px;letter-spacing:.16em;
+ font-weight:900;color:#9d7455;
+}
+.day-flight-heading h3{
+ font-family:"Fraunces",Georgia,serif;
+ font-size:21px;line-height:1.23;
+ color:#274a37;margin:3px 0 0;
+}
+.day-flight-grid{gap:10px}
+.day-flight-passes .travel-flight-card{box-shadow:0 3px 12px #2c382212}
+.day-flight-disclaimer{
+ margin:10px 3px 0;font-size:11px;
+ line-height:1.5;color:#756c5a;
+}
+@media(max-width:690px){
+ .day-flight-passes{padding:12px 10px}
+ .day-flight-heading h3{font-size:19px}
+ .day-flight-grid{grid-template-columns:1fr}
+}

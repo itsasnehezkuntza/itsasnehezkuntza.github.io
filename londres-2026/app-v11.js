@@ -128,12 +128,41 @@ async function loadForecast(){
  }catch(e){fetchFailed=true}
  finally{clearTimeout(timer);updateAll()}
 }
-function injectFlightShortcut(){
- const date=DAYS[state.day]?.date;if(!["2026-12-06","2026-12-10","2026-12-12"].includes(date))return;
- const host=document.getElementById("day-focus");if(!host||host.querySelector(".flight-today-shortcut"))return;
- const b=document.createElement("button");b.type="button";b.className="flight-today-shortcut";
- b.innerHTML='<span aria-hidden="true">✈️</span><span>Consultar vuelos y horarios</span><span aria-hidden="true">↗</span>';
- b.addEventListener("click",()=>switchTab("info"));host.append(b);
+function injectFlightsIntoDay(){
+ const date=DAYS[state.day]?.date;
+ const flightIndexes={
+  "2026-12-06":[0,1],
+  "2026-12-10":[2],
+  "2026-12-12":[3]
+ };
+ const indexes=flightIndexes[date];
+ if(!indexes)return;
+ const host=document.getElementById("day-focus");
+ const complete=[...document.querySelectorAll("#flight-passes .travel-flight-card")];
+ if(!host||!complete.length)return;
+ // El bloque se reconstruye al cambiar el día; no se duplican los billetes.
+ host.querySelector(".day-flight-passes")?.remove();
+ const section=document.createElement("section");
+ section.className="day-flight-passes";
+ section.setAttribute("aria-label","Vuelos del día");
+ const heading=document.createElement("div");
+ heading.className="day-flight-heading";
+ heading.innerHTML='<span class="day-flight-figure" aria-hidden="true">✈️</span>'+
+  '<div><small>EL VIAJE DE HOY</small><h3>'+(date==="2026-12-06"?"Nuestros vuelos de ida":"Vuelo de regreso")+'</h3></div>';
+ section.append(heading);
+ const grid=document.createElement("div");
+ grid.className="travel-flight-grid day-flight-grid";
+ for(const i of indexes){
+  if(complete[i])grid.append(complete[i].cloneNode(true));
+ }
+ section.append(grid);
+ const note=document.createElement("p");
+ note.className="day-flight-disclaimer";
+ note.textContent=date==="2026-12-12"?
+  "Horario apuntado en el plan; falta verificar la reserva del sábado. Este dibujo no es una tarjeta de embarque.":
+  "Horas locales de cada aeropuerto. El billete visual es informativo: llevad vuestra tarjeta de embarque real.";
+ section.append(note);
+ host.prepend(section);
 }
 function ensureReservedState(){
  // Actualiza estados antiguos pendientes, pero respeta si alguien descartó la actividad.
@@ -157,7 +186,7 @@ if(typeof prior==="function"){
  window.renderDay=function(){
   prior();
   renderDailyWeather();
-  injectFlightShortcut();
+  injectFlightsIntoDay();
  };
 }
 ensureReservedState();

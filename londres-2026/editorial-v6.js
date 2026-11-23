@@ -36,7 +36,7 @@ const DAYS_PLUS={
  ],
  notes:[
   ["Museo de dinosaurios","La entrada general es gratuita. Reservar con antelación ayuda a garantizar el acceso.","https://www.nhm.ac.uk/visit.html"],
-  ["Entrada a Winter Wonderland","La entrada estándar de £5,50 permite entrar en el recinto; las atracciones se pagan aparte. Comprobad vuestra franja exacta.","https://hydeparkwinterwonderland.com/tickets-guide/"],
+  ["Entrada a Winter Wonderland","Hace falta entrada para acceder al recinto. Las atracciones se reservan o pagan por separado, salvo que vuestro pase las incluya. Comprobad la franja exacta.","https://hydeparkwinterwonderland.com/tickets-guide/"],
   ["Tiempo para las atracciones","Una vez dentro podéis quedaros hasta el cierre. Algunas colas terminan antes, así que subid primero a lo que más os interese.","https://hydeparkwinterwonderland.com/tickets-guide/"]
  ]
 },

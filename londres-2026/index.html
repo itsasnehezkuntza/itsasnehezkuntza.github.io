@@ -2,10 +2,10 @@
 <html lang="es">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#453747">
+<meta name="theme-color" content="#132D44">
 <meta name="robots" content="noindex, nofollow">
 <meta name="description" content="Guía compartida de Londres del 6 al 12 de diciembre de 2026. Los tickets se almacenan solo en el navegador.">
-<title>La Patrulla Polar en Londres · Navidad 2026</title>
+<title>La Patrulla Polar en Londres · Postales de Navidad 2026</title>
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="anonymous">
 <style>
 :root{--ink:#16312f;--ink2:#4c625e;--forest:#123b37;--forest2:#0c2928;--mint:#e5f3ed;--gold:#e7b56e;--paper:#f7f7f2;--white:#fff;--line:#dee7e0;--orange:#fff1df;--shadow:0 8px 30px rgba(17,46,42,.075);--radius:19px}
@@ -25,65 +25,47 @@
 <link rel="stylesheet" href="./style-v9.css?v=9">
 <link rel="stylesheet" href="./style-v10.css?v=10">
 <link rel="stylesheet" href="./style-v11.css?v=13">
-<link rel="stylesheet" href="./style-v15.css?v=15">
+<link rel="stylesheet" href="./style-v16.css?v=16">
 </head>
 <body>
 <div class="app">
-<header class="hero">
-<div class="hero-inner">
-<div class="hero-content">
-<div class="hero-masthead"><span class="hero-crest" aria-hidden="true">🐾</span><span>DIARIO DE VIAJE</span><span class="mast-rule"></span><span class="mast-date">DICIEMBRE 2026</span></div>
-<p class="micro">EDICIÓN 01 · NAVIDAD 2026</p>
-<h1><span class="hero-series" data-series="La Patrulla Polar">La Patrulla Polar</span><br><em class="hero-destination" data-destination="Londres">en Londres</em><span class="hero-twinkle" aria-hidden="true">✳</span></h1>
-<p class="subtitle">6–12 diciembre · El plan de nuestro viaje</p>
-<div class="polar-countdown" id="polar-countdown" role="timer" aria-label="Cuenta atrás hasta el vuelo de ida">
+<header class="pp-hero">
+ <div class="pp-masthead">
+  <span class="pp-mastbrand">✦ LA PATRULLA POLAR</span>
+  <span class="pp-mastedition">ARCHIVO DE VIAJES <b>•</b> Nº 01</span>
+  <span class="pp-mastdate">6–12 DIC. 2026</span>
+ </div>
+ <div class="pp-hero-body">
+  <div class="pp-hero-copy">
+   <div class="pp-kicker"><span class="pp-kicker-line"></span> NAVIDAD EN LONDRES <span class="pp-kicker-line"></span></div>
+   <h1><span class="pp-brandline">La Patrulla<br>Polar</span><span class="pp-cityline">en <em>Londres.</em></span></h1>
+   <p class="pp-hero-desc">3 viajeros · 7 días · 1 cuaderno de viaje</p>
+   <div class="pp-hero-journey"><span><b>BIO</b> Bilbao</span><svg viewBox="0 0 100 18" aria-hidden="true"><path d="M2 9 H98" stroke="currentColor" stroke-width="1.5" stroke-dasharray="4 5" fill="none"/><path d="M82 3L98 9L82 15" stroke="currentColor" stroke-width="1.5" fill="none"/></svg><span><b>LGW</b> Londres</span></div>
+   <div class="polar-countdown" id="polar-countdown" role="timer" aria-label="Cuenta atrás hasta el vuelo de ida">
    <div class="polar-countdown-label"><span aria-hidden="true">✈</span> Despegamos de Bilbao en…</div>
    <div class="polar-clock-face"><div><strong id="polar-cd-days" class="polar-clock-number">--</strong><span>DÍAS</span></div><span class="polar-clock-sep">:</span><div><strong id="polar-cd-hours" class="polar-clock-number">--</strong><span>HORAS</span></div><span class="polar-clock-sep">:</span><div><strong id="polar-cd-mins" class="polar-clock-number">--</strong><span>MIN</span></div><span class="polar-clock-sep">:</span><div><strong id="polar-cd-secs" class="polar-clock-number">--</strong><span>SEG</span></div></div>
    <div id="polar-cd-caption" class="polar-cd-caption">Domingo 6 · 14:35 (hora de Bilbao)</div>
   </div>
-  <div class="hero-tags"><span>✈️ 6–12 dic</span><span>🐾 3 viajeros</span><span>📍 Barbican</span></div>
-<div class="top-actions"><a class="hero-btn hero-jump" href="#days-view">Ver el itinerario ↓</a><button class="hero-btn" onclick="switchTab('bookings')">✓ Reservas</button><button class="hero-btn" onclick="switchTab('files')">🎟 Tickets</button><button class="hero-btn" onclick="exportBackup()">↗ Guardar copia</button></div>
+  
+   <div class="pp-hero-actions"><a href="#days-view" class="pp-primary-link">Abrir el diario <span aria-hidden="true">↗</span></a><button type="button" class="pp-secondary-link" onclick="switchTab('files')">Ver tickets <span aria-hidden="true">✉</span></button></div>
+  </div>
+  <figure class="pp-hero-poster">
+   <div class="pp-poster-sheet"><img src="./postcard-hero-v16.svg?v=1" alt="Ilustración original de Tower Bridge rosa y azul durante una Navidad nevada, con autobús rojo y tres perritos polares" width="1000" height="720" loading="eager">
+   <div class="pp-poster-corner" aria-hidden="true"><span>WINTER<br>LONDON</span><b>26</b></div></div>
+   <figcaption><span>POSTAL Nº 001</span><span>LONDON · DECEMBER 2026</span></figcaption>
+  </figure>
+ </div>
+ <div class="pp-hero-perf" aria-hidden="true"></div>
+</header><div class="pp-stamp-strip" aria-label="Guía de Londres por La Patrulla Polar">
+ <span class="pp-stamp pp-stamp-red"><span class="pp-stamp-illustration" aria-hidden="true">✉</span><b>POSTALES</b><small>01 · LONDON</small></span>
+ <span class="pp-stamp pp-stamp-blue"><span class="pp-stamp-illustration" aria-hidden="true">♜</span><b>LONDRES</b><small>CHRISTMAS '26</small></span>
+ <span class="pp-stamp pp-stamp-gold"><span class="pp-stamp-illustration" aria-hidden="true">✦</span><b>RUTA</b><small>06 — 12 DIC</small></span>
+ <span class="pp-stamp pp-stamp-rose"><span class="pp-stamp-illustration" aria-hidden="true">❄</span><b>POLAR CLUB</b><small>TRAVEL FILE</small></span>
 </div>
-<div class="hero-postcard" aria-hidden="true">
-<div class="postcard-top"><span>LA PATRULLA POLAR</span><span>CHRISTMAS IN LONDON</span></div>
-<div class="postcard-art">
-<svg viewBox="0 0 440 170" xmlns="http://www.w3.org/2000/svg">
-<circle cx="366" cy="38" r="28" fill="#dbb77e" opacity=".72"/>
-<g fill="#879b8a" opacity=".6"><circle cx="18" cy="23" r="2"/><circle cx="105" cy="12" r="2"/><circle cx="283" cy="21" r="2"/><circle cx="426" cy="19" r="2"/><circle cx="315" cy="65" r="1.8"/><circle cx="153" cy="38" r="1.6"/><circle cx="223" cy="18" r="2"/></g>
-<path d="M8 142 L434 142" fill="none" stroke="#38614f" stroke-width="3"/>
-<g stroke="#2b5642" stroke-width="3" fill="none">
-<circle cx="65" cy="101" r="41"/><circle cx="65" cy="101" r="5"/>
-<path d="M65 60V142 M24 101H106 M36 72L94 130 M94 72L36 130 M47 64L84 139 M84 64L47 139 M65 142L40 166 M65 142L90 166"/>
-</g>
-<g fill="#456d56">
-<path d="M135 144V67H147V48H153V32L161 14L169 32V48H175V67H188V144Z"/>
-<path d="M145 66H179V79H145Z" fill="#d2c5a5"/>
-<path d="M153 85H169V107H153Z" fill="#d2c5a5"/>
-<path d="M154 116H160V138H154 M164 116H170V138H164" fill="#d2c5a5"/>
-<path d="M141 61H183V66H141Z"/>
-</g>
-<g stroke="#f5ecd2" stroke-width="2" fill="none"><circle cx="161" cy="73" r="7"/><path d="M161 69V73L165 75"/></g>
-<g fill="#36634b">
-<path d="M231 142V64H241V48H252V35H259V48H269V64H279V142Z"/>
-<path d="M340 142V64H350V48H361V35H368V48H378V64H388V142Z"/>
-<path d="M229 105H389V116H229Z"/>
-<path d="M278 106Q309 74 340 106L340 116H278Z" fill="#f6efdb"/>
-<path d="M221 141H396V147H221Z"/>
-</g>
-<g stroke="#2e6148" stroke-width="3" fill="none"><path d="M280 84Q308 103 339 84 M279 92H340 M280 99H339"/></g>
-<g stroke="#f3ecd5" stroke-width="2.5" fill="none"><path d="M251 77V93 M259 77V93 M251 116V131 M259 116V131 M361 77V93 M369 77V93 M361 116V131 M369 116V131"/></g>
-<path d="M0 151Q46 145 91 151T185 151T277 151T368 151T440 151" stroke="#72907b" stroke-width="2" fill="none"/>
-<path d="M0 161Q49 156 98 161T197 161T295 161T391 161T440 161" stroke="#72907b" stroke-width="2" fill="none"/>
-</svg>
-</div>
-<div class="postcard-caption"><strong>LONDON CHRISTMAS</strong><span>2026 · POSTAL 01</span></div>
-</div>
-</div>
-</header><div class="journey-ribbon" aria-label="Resumen del viaje"><div class="journey-stat"><b>07</b><small>Días</small></div><div class="journey-stat"><b>03</b><small>Viajeros</small></div><div class="journey-stat"><b>LDN</b><small>Navidad</small></div></div>
 
 <main class="main">
 <section id="days-view" class="view active">
-<div class="kicker">EL PLAN DE LA PATRULLA</div><h2 class="section-heading">¿Qué hacemos hoy?</h2><p class="lead">Elegid el día para ver el mapa, las paradas importantes y el plan completo.</p>
+<div class="pp-page-index"><span class="pp-index-mark">01</span><div><div class="kicker">EL DIARIO DE LONDRES</div><h2 class="section-heading">Un día, una postal</h2><p class="lead">Escoged la fecha. Lo importante primero; el resto se abre cuando haga falta.</p></div><span class="pp-index-decor" aria-hidden="true">✳</span></div>
 <div class="date-strip" id="day-strip" aria-label="Seleccionar día"></div>
 <div id="day-header"></div>
 
@@ -123,22 +105,36 @@
 </div>
 </section>
 <section id="bookings-view" class="view">
-<div class="kicker">TICKETS DE LA PATRULLA</div><h2 class="section-heading">Reservas</h2><p class="lead">Aquí están las entradas confirmadas y lo que queda pendiente. Los cambios se guardan en este navegador.</p>
+<div class="pp-page-index"><span class="pp-index-mark">04</span><div><div class="kicker">EL CONTROL DE RESERVAS</div><h2 class="section-heading">Todo reservado</h2><p class="lead">Entradas confirmadas, horarios y gestiones que siguen pendientes.</p></div></div>
 <div class="counterbar" style="margin:16px 0"><b id="booking-progress-label">0 completadas</b><div class="progress"><span id="booking-progress-bar" style="width:0"></span></div></div>
 <div class="warning">🔐 No enviéis códigos de reserva, pasaportes ni billetes a una web desconocida. Esta guía no sube nada a servidores: los documentos se guardan localmente en vuestro navegador.</div>
 <div id="booking-list"></div>
-<h2 class="section-heading" style="margin-top:27px">✅ Checklist del viaje</h2><p class="lead">Marcáis las gestiones que ya habéis hecho. Podéis cambiarlo cuando queráis.</p>
-<div id="checklist"></div>
+
 </section>
 <section id="files-view" class="view">
-<div class="kicker">CARPETA PERSONAL</div><h2 class="section-heading">Todos los tickets en un lugar</h2><p class="lead">Guardad aquí tarjetas de embarque, entradas, confirmaciones, PDFs o capturas. No es una nube: cada móvil tiene su propia copia.</p>
+<div class="pp-page-index"><span class="pp-index-mark">02</span><div><div class="kicker">EL SOBRE DE VIAJE</div><h2 class="section-heading">Nuestros tickets</h2><p class="lead">Billetes, entradas y confirmaciones. Drive es la carpeta compartida; los archivos añadidos aquí se guardan en este dispositivo.</p></div><span class="pp-index-decor" aria-hidden="true">✉</span></div>
 <div class="help-card" style="margin:17px 0"><h3>📲 ¿Cómo compartirlo entre los tres?</h3><p class="tiny">Una persona actualiza la checklist y adjunta los tickets. Después pulsa <b>Exportar copia</b>, envía el archivo de copia por WhatsApp, AirDrop o Drive y las otras dos personas lo cargan con <b>Importar copia</b>. No hay sincronización automática.</p>
 <div class="route-buttons"><button class="primary-btn" onclick="exportBackup()">⬇ Exportar copia con tickets</button><button class="ghost-btn" onclick="document.getElementById('backup-import').click()">⬆ Importar copia</button></div><input id="backup-import" class="file-input" type="file" accept="application/json,.json" onchange="importBackup(event)"><p class="tiny muted" style="margin:10px 0 0">Las copias incluyen archivos adjuntos, notas y estados. Tratad el archivo exportado como documentación privada.</p></div>
-<div class="surface"><h3>➕ Añadir un documento</h3><div class="doc-toolbar"><select id="free-file-cat" aria-label="Tipo de documento"><option value="flights">✈️ Vuelos / embarque</option><option value="lodging">🏠 Alojamiento</option><option value="other">📎 Otros documentos</option><option value="tower">🌉 Tower Bridge</option><option value="science">🔬 Science Museum</option><option value="natural">🦖 Natural History Museum</option><option value="winter">🎢 Winter Wonderland</option><option value="skate">⛸️ Patinaje (opcional)</option></select><button class="primary-btn" onclick="document.getElementById('free-file-input').click()">Seleccionar archivos</button></div><input class="file-input" id="free-file-input" type="file" accept=".pdf,image/*,.pkpass" multiple onchange="uploadFiles(event,document.getElementById('free-file-cat').value)"><p class="tiny muted">Podéis guardar varios archivos por reserva, por ejemplo un ticket para cada persona.</p></div>
+<div class="surface"><h3>➕ Añadir un documento</h3><div class="doc-toolbar"><select id="free-file-cat" aria-label="Tipo de documento"><option value="flights">✈️ Vuelos / embarque</option><option value="lodging">🏠 Alojamiento</option><option value="other">📎 Otros documentos</option><option value="tower">🌉 Tower Bridge</option><option value="science">🔬 Science Museum</option><option value="natural">🦖 Natural History Museum</option><option value="winter">🎢 Winter Wonderland</option><option value="skate">⛸️ Somerset House</option></select><button class="primary-btn" onclick="document.getElementById('free-file-input').click()">Seleccionar archivos</button></div><input class="file-input" id="free-file-input" type="file" accept=".pdf,image/*,.pkpass" multiple onchange="uploadFiles(event,document.getElementById('free-file-cat').value)"><p class="tiny muted">Podéis guardar varios archivos por reserva, por ejemplo un ticket para cada persona.</p></div>
 <div class="surface" style="margin-top:14px"><div style="display:flex;justify-content:space-between;align-items:center"><h3 style="margin:0">📁 Documentos guardados</h3><span id="file-count" class="tag">0 archivos</span></div><div id="file-list"></div></div>
 </section>
+<section id="checklist-view" class="view">
+ <div class="pp-page-index"><span class="pp-index-mark">03</span><div><div class="kicker">LA LISTA DE EQUIPAJE</div><h2 class="section-heading">Maleta y pendientes</h2><p class="lead">Lo necesario para Londres y lo que queda por preparar.</p></div><span class="pp-index-decor" aria-hidden="true">✓</span></div>
+ <section id="packing-board" class="pp-packing-board" aria-label="Checklist de maleta">
+  <div class="pp-packing-header"><div class="pp-packing-heading"><span class="pp-packing-icon" aria-hidden="true">🧳</span><div><small>LISTA Nº 001</small><h3>¿Está todo en la maleta?</h3></div></div><div class="pp-packing-count"><strong id="packing-count">0/0</strong><span>PREPARADO</span></div></div>
+  <div class="pp-packing-filter" role="group" aria-label="Ver lista de maleta">
+   <button type="button" class="pp-packing-filter-on" data-packing-filter="all">Todo</button>
+   <button type="button" data-packing-filter="personal">Mi maleta</button>
+   <button type="button" data-packing-filter="shared">Compartido</button>
+  </div>
+  <div id="packing-list"></div>
+  <div class="pp-packing-add"><label for="packing-custom-input">¿Falta algo?</label><div><input id="packing-custom-input" type="text" maxlength="70" placeholder="Añadir a la lista" autocomplete="off"><button type="button" id="packing-add-btn">+ Añadir</button></div></div>
+ </section>
+ <div class="pp-checklist-sheet"><div class="pp-checklist-caption"><span>✓</span><div><small>ANTES DE IRNOS</small><h3>Checklist del viaje</h3></div></div><div id="checklist"></div></div>
+ <div class="pp-sync-note"><strong>☁️ ¿Cómo lo compartimos entre los tres?</strong><p>Por ahora, la checklist se guarda en cada navegador. En <b>Tickets</b> podéis exportar o importar una copia completa, incluida la maleta. Para sincronizar por código automáticamente hace falta conectar un servicio privado, no basta con la web pública.</p><button type="button" onclick="switchTab('files')">Ir a Tickets y copias ↗</button></div>
+</section>
 <section id="info-view" class="view">
-<div class="kicker">CUADERNO DE VIAJE</div><h2 class="section-heading">Lo que conviene saber</h2>
+<div class="pp-page-index"><span class="pp-index-mark">05</span><div><div class="kicker">DATOS DE VIAJE</div><h2 class="section-heading">Antes de salir</h2></div><span class="pp-index-decor" aria-hidden="true">✦</span></div>
 <section id="flight-passes" class="flight-pass-section" aria-label="Billetes visuales y horarios de los vuelos"></section>
 <section id="weather-week" class="weather-week-section" aria-label="El tiempo previsto durante el viaje"></section>
 <div class="facts">
@@ -159,11 +155,12 @@
 <footer class="foot">La Patrulla Polar en Londres · Diciembre 2026. Los tickets guardados se quedan en vuestro dispositivo. Comprobad los horarios oficiales.</footer>
 </main>
 </div>
-<nav class="bottom-nav" aria-label="Navegación principal">
-<button data-tab="days" class="on" onclick="switchTab('days')"><span class="nav-icon">🧭</span>Viaje</button>
-<button data-tab="bookings" onclick="switchTab('bookings')"><span class="nav-icon">🎫</span>Reservas</button>
-<button data-tab="files" onclick="switchTab('files')"><span class="nav-icon">🧳</span>Tickets</button>
-<button data-tab="info" onclick="switchTab('info')"><span class="nav-icon">☕</span>Info</button>
+<nav class="bottom-nav pp-bottom-nav" aria-label="Navegación principal">
+<button data-tab="days" class="on" onclick="switchTab('days')"><span class="nav-icon">✧</span><span>Días</span></button>
+<button data-tab="files" onclick="switchTab('files')"><span class="nav-icon">✉</span><span>Tickets</span></button>
+<button data-tab="checklist" onclick="switchTab('checklist')"><span class="nav-icon">✓</span><span>Maleta</span></button>
+<button data-tab="bookings" onclick="switchTab('bookings')"><span class="nav-icon">★</span><span>Reservas</span></button>
+<button data-tab="info" onclick="switchTab('info')"><span class="nav-icon">⌁</span><span>Guía</span></button>
 </nav>
 <div id="toast" role="status" class="toast"></div>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" async onload="if(typeof renderDay==='function')renderDay()" crossorigin="anonymous"></script>
@@ -325,5 +322,6 @@ async function importBackup(event){let file=event.target.files?.[0];event.target
 <script src="./app-v10.js?v=10" defer></script>
 <script src="./app-v11.js?v=13" defer></script>
 <script src="./app-v14.js?v=14" defer></script>
+<script src="./app-v16.js?v=16" defer></script>
 </body>
 </html>

@@ -1,0 +1,95 @@
+/* LA PATRULLA POLAR — espacio compartido seguro, activación Firebase opcional.
+   Mismo estilo álbum/postal del resto del sitio. */
+.polar-shared-space{
+ position:relative;margin:14px 0 19px;
+ background:linear-gradient(120deg,#f8f0df,#fffaf0);
+ border:1px solid #dfcdb9;border-top:5px solid #417f9c;
+ border-radius:7px;padding:17px clamp(13px,2vw,22px);
+ box-shadow:0 5px 17px #1831470b;
+}
+.polar-shared-space:after{
+ content:"";position:absolute;right:18px;top:12px;
+ border:2px dashed #e1b3ab;border-radius:50%;
+ width:64px;height:64px;opacity:.34;pointer-events:none;
+}
+.polar-shared-header{
+ display:flex;align-items:center;gap:12px;
+ position:relative;z-index:1;margin-bottom:9px;
+}
+.polar-shared-mark{
+ flex:none;display:grid;place-items:center;width:49px;height:49px;
+ background:#e0eaf0;color:#19445b;border:4px solid #fffefa;
+ outline:1px dashed #7796a5;transform:rotate(-5deg);
+ font-size:25px;box-shadow:0 2px 7px #17364c19;
+}
+.polar-shared-header small{
+ color:#9d5260;font-weight:900;letter-spacing:.11em;
+ font-size:9px;line-height:1.3;display:block;
+}
+.polar-shared-header h3{
+ color:#1c3e57!important;font-family:"Fraunces",Georgia,serif;
+ font-size:clamp(19px,3vw,24px);line-height:1.17;
+ margin:3px 0 0!important;
+}
+.polar-shared-explain{
+ margin:4px 0 12px;color:#566b74;max-width:720px;
+ font-size:12px;line-height:1.52;
+}
+.polar-shared-form{
+ display:grid;gap:6px;max-width:650px;
+}
+.polar-shared-form label{
+ font-size:10px;color:#19465c;font-weight:900;letter-spacing:.04em;
+}
+.polar-shared-inputs{display:flex;gap:8px}
+.polar-shared-inputs input{
+ background:#fffefa;min-width:0;flex:1;min-height:44px;
+ border:1px solid #d9c8b4;border-radius:5px;
+ padding:10px 12px;font-size:12px;letter-spacing:.045em;
+ color:#194055;font-weight:800;text-transform:uppercase;
+}
+.polar-shared-inputs button{
+ background:#1a465f;color:#fffdfa;min-height:44px;
+ border:0;border-radius:5px;padding:10px 16px;
+ font-size:12px;font-weight:900;cursor:pointer;
+}
+.polar-shared-inputs button:disabled{
+ color:#7f8c94;background:#dce1e1;cursor:not-allowed;
+}
+.polar-shared-status{
+ margin:12px 0 0;max-width:780px;
+ display:flex;align-items:start;gap:9px;padding:9px 11px;
+ background:#edf2f2;color:#486779;border:1px solid #dce7eb;
+ border-radius:5px;font-size:11px;line-height:1.5;
+ overflow-wrap:anywhere;
+}
+.polar-shared-status:before{content:"◉";color:#5489a2;font-size:12px}
+.polar-shared-status[data-state="error"]{background:#fbede8;border-color:#ebd0c4;color:#8f4456}
+.polar-shared-status[data-state="error"]:before{color:#bc4e5c}
+.polar-shared-status[data-state="ready"]{background:#edf6ee;border-color:#cddccf;color:#2a684b}
+.polar-shared-status[data-state="ready"]:before{color:#3e9a70}
+.polar-shared-status[data-state="pending"]{background:#fff5e5;border-color:#efdfbe;color:#826448}
+.polar-shared-status[data-state="pending"]:before{color:#bc8751}
+.polar-shared-connected{
+ margin:11px 0 0;display:flex;gap:9px;align-items:center;flex-wrap:wrap;
+}
+.polar-shared-connected[hidden]{display:none!important}
+.polar-shared-connected>span{
+ color:#34576d;font-size:11px;font-weight:800;flex:1;min-width:180px;
+}
+.polar-shared-connected button{
+ padding:9px 11px;border:1px solid #cfc1ad;
+ border-radius:4px;background:#fffdfa;color:#23475c;
+ font-size:10px;font-weight:900;cursor:pointer;
+}
+.polar-shared-connected button:disabled{opacity:.5;cursor:not-allowed}
+.polar-shared-foot{
+ font-size:10px;color:#897e77;margin:10px 0 0;
+ line-height:1.5;max-width:740px;
+}
+@media(max-width:520px){
+ .polar-shared-inputs{flex-direction:column}
+ .polar-shared-inputs button{width:100%}
+ .polar-shared-space{padding:13px 12px}
+ .polar-shared-header h3{font-size:20px}
+}

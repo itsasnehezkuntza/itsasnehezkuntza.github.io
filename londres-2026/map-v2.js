@@ -157,31 +157,97 @@ window.focusStop=function(i){
  selectStop(currentStops.find(x=>x.place===s.place)||{...s,num:i},true);
  document.querySelector(".map-side")?.scrollIntoView({behavior:"smooth",block:"start"});
 };
+/* Los colores distinguen el modo, no representan las líneas oficiales del metro. */
+const ROUTE_STYLE={
+ walk:{name:"A pie",icon:"🚶",color:"#006C4F",dash:null},
+ metro:{name:"Metro",icon:"🚇",color:"#174FB5",dash:"11 8"},
+ train:{name:"Tren",icon:"🚆",color:"#AD305C",dash:"4 9"},
+ mixed:{name:"Tren + metro",icon:"🚆",color:"#A46312",dash:"12 6 3 6"},
+ transport:{name:"Transporte",icon:"🚌",color:"#7257A8",dash:"8 7"}
+};
 function distanceKm(a,b){
  const r=Math.PI/180,x=(b[1]-a[1])*r*Math.cos((a[0]+b[0])*r/2)*6371,y=(b[0]-a[0])*r*6371;
  return Math.hypot(x,y);
 }
-function transit(d,a,b){
- if(distanceKm(a.coords,b.coords)>2.6)return true;
- return (d.legs||[]).some(l=>l.mode==="transit"&&l.ids.some((id,i)=>id===a.place&&l.ids[i+1]===b.place));
+function transportBetween(d,a,b){
+ const key=a.place+">"+b.place;
+ const override={
+  "gatwick>farringdon":"train","farringdon>gatwick":"train",
+  "farringdon>stalbansstation":"train","stalbansstation>farringdon":"train",
+  "harrods>piccadilly":"metro",
+  "home>kings":"metro","farringdon>kings":"metro",
+  "kings>coaldrops":"walk","stalbansstation>camden":"mixed"
+ };
+ if(override[key])return override[key];
+ const leg=(d.legs||[]).find(l=>l.ids.some((id,i)=>id===a.place&&l.ids[i+1]===b.place));
+ if(leg){
+  if(leg.mode==="walking")return "walk";
+  if(leg.mode==="transit"){
+   if(/gatwick|st albans|tren/i.test(leg.label))return "train";
+   if(distanceKm(a.coords,b.coords)<.65)return "walk";
+   return "metro";
+  }
+ }
+ // Cuando no se especifica un medio, nunca asumir que el tramo largo es andando.
+ return distanceKm(a.coords,b.coords)>2.8?"transport":"walk";
 }
-function arrow(a,b,isTrain){
- const lat=a.coords[0]+(b.coords[0]-a.coords[0])*.57,
- lng=a.coords[1]+(b.coords[1]-a.coords[1])*.57;
- const dy=b.coords[0]-a.coords[0],dx=(b.coords[1]-a.coords[1])*Math.cos(lat*Math.PI/180);
- const angle=-Math.atan2(dy,dx)*180/Math.PI;
- const icon=L.divIcon({className:"",html:'<span class="route-arrow'+(isTrain?" transit":"")+'" style="display:inline-block;transform:rotate('+angle+'deg)">➤</span>',iconSize:[16,16],iconAnchor:[8,8]});
- routeLines.push(L.marker([lat,lng],{icon,interactive:false,keyboard:false,zIndexOffset:-400}).addTo(map));
+window.londonTransportBetween=transportBetween;
+function modeLegend(modes){
+ let key=document.getElementById("trip-transport-legend");
+ if(!key){
+  key=document.createElement("div");key.id="trip-transport-legend";
+  key.className="trip-transport-legend";
+  key.setAttribute("aria-label","Leyenda de los medios de transporte");
+  const mapEl=document.getElementById("map");
+  mapEl?.before(key);
+ }
+ key.innerHTML=["walk","metro","train","mixed","transport"].filter(m=>modes.has(m)).map(m=>{
+  const st=ROUTE_STYLE[m];
+  return '<span class="route-legend-item route-legend-'+m+'"><i class="route-legend-line" aria-hidden="true"></i><span class="route-legend-label">'+st.icon+' '+st.name+'</span></span>';
+ }).join("");
+}
+function transferPin(a,b,mode,i){
+ const st=ROUTE_STYLE[mode],p=mode==="walk"?.55:.53;
+ const mid=[a.coords[0]+(b.coords[0]-a.coords[0])*p,a.coords[1]+(b.coords[1]-a.coords[1])*p];
+ if(mode==="walk"){
+  if(i%3!==1||distanceKm(a.coords,b.coords)<.38)return;
+ }
+ const html='<div class="transport-route-pin transport-route-'+mode+'" aria-label="'+st.name+'">'+
+  (mode==="walk"?"➜":st.icon)+'</div>';
+ const icon=L.divIcon({className:"transport-pin-wrap",html,iconSize:[30,30],iconAnchor:[15,15]});
+ routeLines.push(L.marker(mid,{icon,interactive:false,keyboard:false,zIndexOffset:-250}).addTo(map));
+}
+function drawRouteSegment(a,b,mode,i){
+ const st=ROUTE_STYLE[mode],line=[a.coords,b.coords];
+ const casing=L.polyline(line,{color:"#FFFFFF",weight:12,opacity:1,lineJoin:"round",lineCap:"round",interactive:false}).addTo(map);
+ routeLines.push(casing);
+ const path=L.polyline(line,{color:st.color,weight:6.5,opacity:1,dashArray:st.dash,lineJoin:"round",lineCap:"round",interactive:true}).addTo(map);
+ routeLines.push(path);
+ const mapMode=mode==="walk"?"walking":"transit",url=routeUrl([a.place,b.place],mapMode);
+ path.bindPopup('<div class="route-leg-popup"><b>'+st.icon+' '+st.name+'</b>'+
+   '<span>'+esc(a.title)+' → '+esc(b.title)+'</span>'+
+   (url?'<a target="_blank" rel="noopener noreferrer" href="'+url+'">Ver trayecto real en Google Maps ↗</a>':"")+'</div>',{closeButton:true,maxWidth:210});
+ transferPin(a,b,mode,i);
 }
 window.renderMap=function(d){
  ensureExtras();
  const actions=document.getElementById("map-actions"),legs=d.legs||[];
  actions.innerHTML=legs.map(l=>'<a class="small-btn" target="_blank" rel="noopener" href="'+routeUrl(l.ids,l.mode)+'">'+(l.mode==="transit"?"🚆":"🚶")+' '+esc(l.label)+' ↗</a>').join("");
  const seen=new Set();currentStops=[];
+ const routeStops=[];
  d.stops.forEach((s,i)=>{
-  if(!PLACE[s.place]||seen.has(s.place))return;
-  seen.add(s.place);currentStops.push({...s,num:i+1,coords:PLACE[s.place]});
+  if(!PLACE[s.place])return;
+  const item={...s,num:i+1,coords:PLACE[s.place]};
+  // Repeticiones separadas por otras paradas sí forman parte del recorrido (St Albans).
+  if(routeStops[routeStops.length-1]?.place!==s.place)routeStops.push(item);
+  if(!seen.has(s.place)){seen.add(s.place);currentStops.push(item);}
  });
+ const routeSegments=[];
+ for(let i=0;i+1<routeStops.length;i++){
+  const a=routeStops[i],b=routeStops[i+1];
+  routeSegments.push({a,b,mode:transportBetween(d,a,b)});
+ }
+ modeLegend(new Set(routeSegments.map(s=>s.mode)));
  document.getElementById("map-stop-chips").innerHTML=currentStops.map(s=>
   '<button class="map-stop-chip" type="button" data-place="'+esc(s.place)+'" onclick="focusStop('+s.num+')" aria-label="Ver fotografía de '+esc(s.title)+'">'+
   number(s)+' '+(EMOJI[s.place]||"📍")+' <span>'+esc(s.title)+'</span></button>').join("");
@@ -206,12 +272,7 @@ window.renderMap=function(d){
   if(!hasOsm)L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png",{maxZoom:19,attribution:'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'}).addTo(map);
   markers.forEach(m=>map.removeLayer(m));routeLines.forEach(l=>map.removeLayer(l));
   markers=[];routeLines=[];
-  for(let i=0;i+1<currentStops.length;i++){
-   const a=currentStops[i],b=currentStops[i+1],train=transit(d,a,b),coords=[a.coords,b.coords];
-   routeLines.push(L.polyline(coords,{color:"#fff",weight:6,opacity:.9,interactive:false}).addTo(map));
-   routeLines.push(L.polyline(coords,{color:train?"#8a9690":"#526f60",weight:3,opacity:.9,dashArray:train?"5 6":null,interactive:false}).addTo(map));
-   arrow(a,b,train);
-  }
+  routeSegments.forEach(({a,b,mode},i)=>drawRouteSegment(a,b,mode,i));
   currentStops.forEach((s,i)=>{
    const cls=i===0?" first":i===currentStops.length-1?" last":"";
    const html='<div class="iconpin'+cls+'" data-place="'+esc(s.place)+'"><span class="symbol">'+(EMOJI[s.place]||"📍")+'</span><span class="counter">'+number(s)+'</span></div>';
@@ -222,7 +283,7 @@ window.renderMap=function(d){
   });
   if(currentStops.length)map.fitBounds(currentStops.map(s=>s.coords),{padding:[48,48],maxZoom:14});
   setTimeout(()=>map&&map.invalidateSize(),150);
-  document.getElementById("map-status").textContent="Orden orientativo con flechas. Pulsa «Google Maps» para ver el recorrido real por las calles.";
+  document.getElementById("map-status").textContent="Líneas orientativas entre paradas, no siguen las calles. Toca un tramo para ver el transporte y abrir la ruta real.";
  }catch(e){
   document.getElementById("map").hidden=true;document.getElementById("map-fallback").hidden=false;
   document.getElementById("map-status").textContent="Mapa esquemático; abrid Google Maps para navegar.";

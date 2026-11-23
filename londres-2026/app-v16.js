@@ -145,7 +145,7 @@ function mountTickets(){
 }
 function fixOutdatedHelp(){
  const p=document.querySelector("#files-view .help-card p");
- if(p)p.innerHTML='Para compartir las entradas, usad <b>la carpeta restringida de Drive</b> con vuestras tres cuentas. También podéis exportar una copia local para pasarla a otro móvil; <b>la web todavía no sincroniza automáticamente por código</b>.';
+ if(p)p.innerHTML='Para compartir las entradas, usad <b>la carpeta restringida de Drive</b> con vuestras tres cuentas. También podéis exportar una copia local para pasarla a otro móvil; <b>si Firebase no está activado, podéis seguir usando las copias manuales. Con Firebase, el código va acompañado de una cuenta autorizada</b>.';
  const panel=document.querySelector("#private-drive-panel .private-warning");
  if(panel)panel.innerHTML='🔒 Solo deben tener acceso las tres personas autorizadas. Compartir una carpeta con un código escrito en la web no protege los documentos: los permisos reales se gestionan en Google Drive.';
  const line=document.querySelector("#files-view .help-card h3");

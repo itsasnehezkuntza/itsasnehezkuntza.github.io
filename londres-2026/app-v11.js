@@ -135,7 +135,7 @@ function injectFlightShortcut(){
 }
 function ensureReservedState(){
  // Actualiza estados antiguos pendientes, pero respeta si alguien descartó la actividad.
- if(localStorage.getItem("london2026.confirmed.v11"))return;
+ try{if(localStorage.getItem("london2026.confirmed.v11"))return;}catch(e){return;}
  const times={tower:"10:30",natural:"11:15",winter:"17:00–18:00",skate:"21:00"};
  for(const [id,time] of Object.entries(times)){
    const prior=state.booking[id]||{};

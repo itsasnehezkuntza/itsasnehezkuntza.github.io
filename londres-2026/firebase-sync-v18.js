@@ -148,8 +148,8 @@ loginBtn.addEventListener("click",async()=>{
  try{
   const provider=new SDK.GoogleAuthProvider();
   provider.setCustomParameters({prompt:"select_account"});
-  const result=await SDK.signInWithPopup(auth,provider);
-  await authorize(result.user);
+  await SDK.signInWithPopup(auth,provider);
+  // onAuthStateChanged autoriza y suscribe una sola vez.
  }catch(e){
   setStatus(e.code==="auth/popup-blocked"?
    "El navegador ha bloqueado el inicio de sesión. Permite las ventanas emergentes para este sitio.":

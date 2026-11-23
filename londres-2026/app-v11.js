@@ -65,9 +65,11 @@ function readForecast(date){
 }
 function weatherText(f){
  if(!f)return "Previsión no disponible";
- if(f.rain>=75)return "Riesgo alto de lluvia";
- if(f.rain>=40)return "Posibilidad de lluvia";
- if(f.rain>=0&&f.rain<=25)return "Poca lluvia prevista";
+ if(Number.isFinite(f.rain)){
+  if(f.rain>=75)return "Riesgo alto de lluvia";
+  if(f.rain>=40)return "Posibilidad de lluvia";
+  if(f.rain<=25)return "Poca lluvia prevista";
+ }
  return f.label;
 }
 function dayLabel(date){

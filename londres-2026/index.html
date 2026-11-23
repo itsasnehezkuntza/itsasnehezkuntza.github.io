@@ -144,7 +144,7 @@
   <div class="pp-packing-add"><label for="packing-custom-input">¿Falta algo?</label><div><input id="packing-custom-input" type="text" maxlength="70" placeholder="Añadir a la lista" autocomplete="off"><button type="button" id="packing-add-btn">+ Añadir</button></div></div>
  </section>
  <div class="pp-checklist-sheet"><div class="pp-checklist-caption"><span>✓</span><div><small>ANTES DE IRNOS</small><h3>Checklist del viaje</h3></div></div><div id="checklist"></div></div>
- <div class="pp-sync-note"><strong>☁️ ¿Cómo lo compartimos entre los tres?</strong><p>Por ahora, la checklist se guarda en cada navegador. En <b>Tickets</b> podéis exportar o importar una copia completa, incluida la maleta. Para sincronizar por código automáticamente hace falta conectar un servicio privado, no basta con la web pública.</p><button type="button" onclick="switchTab('files')">Ir a Tickets y copias ↗</button></div>
+ <div class="pp-sync-note"><strong>☁️ ¿Cómo lo compartimos entre los tres?</strong><p>Sin Firebase conectado, la checklist se guarda en cada navegador. En <b>Tickets</b> podéis exportar o importar una copia. Al activar el espacio compartido de Firebase, los estados se sincronizan entre las cuentas autorizadas; los documentos originales siguen en Drive privado.</p><button type="button" onclick="switchTab('files')">Ir a Tickets y copias ↗</button></div>
 </section>
 <section id="info-view" class="view">
 <div class="pp-page-index"><span class="pp-index-mark">05</span><div><div class="kicker">DATOS DE VIAJE</div><h2 class="section-heading">Antes de salir</h2></div><span class="pp-index-decor" aria-hidden="true">✦</span></div>
@@ -334,7 +334,7 @@ async function importBackup(event){let file=event.target.files?.[0];event.target
 <script src="./app-v10.js?v=10" defer></script>
 <script src="./app-v11.js?v=13" defer></script>
 <script src="./app-v14.js?v=14" defer></script>
-<script src="./app-v16.js?v=18" defer></script>
+<script src="./app-v16.js?v=19" defer></script>
 <script src="./firebase-config.js?v=18" defer></script>
 <script src="./firebase-bridge-v18.js?v=18" defer></script>
 <script type="module" src="./firebase-sync-v18.js?v=19"></script>

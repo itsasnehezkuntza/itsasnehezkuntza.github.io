@@ -6,7 +6,7 @@ const FOCUS={
  "2026-12-06":{keys:["gatwick","farringdon","home"],notice:"Llegada por la noche: lo prioritario es llegar al apartamento antes del cierre del check-in."},
  "2026-12-07":{keys:["bridge","borough","garden"],notice:"Tower Bridge necesita entrada para el interior. Revisad su hora antes de salir."},
  "2026-12-08":{keys:["natural","carnaby","winter"],notice:"Winter Wonderland: entrad dentro de vuestra franja. Las atracciones no están incluidas en la entrada estándar."},
- "2026-12-09":{keys:["buckingham","covent","southbank"],notice:"El cambio de guardia depende del tiempo. El patinaje queda como actividad opcional."},
+ "2026-12-09":{keys:["buckingham","covent","somerset"],notice:"El cambio de guardia depende del tiempo. Tenéis patinaje confirmado en Somerset House a las 21:00."},
  "2026-12-10":{keys:["brick","spital","farringdon"],notice:"Una persona tiene vuelo esa tarde. Volved al apartamento con tiempo para recoger su equipaje."},
  "2026-12-11":{keys:["stalbans","stalbansmarket","camden"],notice:"La excursión a St Albans va en tren. Camden es opcional si os sobra tiempo."},
  "2026-12-12":{keys:["home","farringdon","gatwick"],notice:"Salid con margen hacia Gatwick y llevad las tarjetas de embarque descargadas."}

@@ -52,19 +52,22 @@ function cleanCredit(raw){
 async function commonsPicture(key){
  const file=COMMONS_PHOTOS[key];if(!file)return null;
  const url="https://commons.wikimedia.org/w/api.php?origin=*&action=query&format=json&prop=imageinfo&iiprop=url%7Cextmetadata&iiurlwidth=900&titles="+encodeURIComponent("File:"+file);
+ const fallback={src:"https://commons.wikimedia.org/wiki/Special:FilePath/"+encodeURIComponent(file.replaceAll(" ","_"))+"?width=900",
+  page:"https://commons.wikimedia.org/wiki/File:"+encodeURIComponent(file.replaceAll(" ","_")),
+  credit:"Wikimedia Commons · autor y licencia en la ficha"};
  const ctrl=new AbortController(),timer=setTimeout(()=>ctrl.abort(),7500);
  try {
   const r=await fetch(url,{signal:ctrl.signal,credentials:"omit"});
-  if(!r.ok)return null;
+  if(!r.ok)return fallback;
   const data=await r.json();
-  const info=Object.values(data.query?.pages||{})[0]?.imageinfo?.[0];if(!info)return null;
+  const info=Object.values(data.query?.pages||{})[0]?.imageinfo?.[0];if(!info)return fallback;
   const src=info.thumburl||info.url;
-  if(!src||!src.startsWith("https://upload.wikimedia.org/"))return null;
+  if(!src||!src.startsWith("https://upload.wikimedia.org/"))return fallback;
   const meta=info.extmetadata||{};
   const author=cleanCredit(meta.Artist?.value).replace(/\\[.*?\\]/g,"")||"Wikimedia Commons";
   const license=cleanCredit(meta.LicenseShortName?.value)||"Licencia libre";
   return {src,page:"https://commons.wikimedia.org/wiki/File:"+encodeURIComponent(file.replaceAll(" ","_")),credit:author+" · "+license};
- }catch(e){return null}finally{clearTimeout(timer)}
+ }catch(e){return fallback}finally{clearTimeout(timer)}
 }
 const cache=new Map();
 const sourceLink=key=>"https://en.wikipedia.org/wiki/"+encodeURIComponent((WIKI[key]||"London").replaceAll(" ","_"));

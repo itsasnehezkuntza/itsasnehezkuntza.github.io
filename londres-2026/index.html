@@ -18,6 +18,7 @@
 @media print{.bottom-nav,.top-actions,.date-strip,.route-buttons,.book-actions,.hero-btn,button{display:none!important}.hero{background:#123b37!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}.app{max-width:none}.view{display:block!important;break-before:page}.day-head,.stop-body{break-inside:avoid}.map{display:none}.map-fallback{display:none}.layout{display:block}.surface{box-shadow:none;margin:14px 0}}
 </style>
 <link rel="stylesheet" href="./map-v2.css?v=2">
+<link rel="stylesheet" href="./style-v3.css?v=3">
 </head>
 <body>
 <div class="app">
@@ -238,5 +239,6 @@ async function importBackup(event){let file=event.target.files?.[0];event.target
 (async()=>{await initDb();renderDay();renderBookings();renderFiles();if(dbError)toast('Para guardar PDFs usad un navegador que permita almacenamiento local.')})();
 </script>
 <script src="./map-v2.js?v=2" defer></script>
+<script src="./app-v3.js?v=3" defer></script>
 </body>
 </html>

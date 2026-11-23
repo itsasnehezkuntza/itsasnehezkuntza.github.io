@@ -138,11 +138,11 @@
 const PLACE={
  gatwick:[51.1537,-0.1821],home:[51.52405,-0.09265],farringdon:[51.5203,-0.1047],tower:[51.5081,-0.0761],docks:[51.5066,-0.0722],bridge:[51.5055,-0.0754],hays:[51.5048,-0.0813],borough:[51.5055,-0.0910],monument:[51.5101,-0.0863],dunstan:[51.5096,-0.0825],garden:[51.5114,-0.0803],leaden:[51.5128,-0.0835],stpaul:[51.5138,-0.0984],millennium:[51.5102,-0.0985],science:[51.4978,-0.1745],natural:[51.4967,-0.1764],harrods:[51.4993,-0.1633],piccadilly:[51.5099,-0.1342],fortnum:[51.5088,-0.1383],carnaby:[51.5133,-0.1393],hamleys:[51.5130,-0.1395],oxford:[51.5152,-0.1418],winter:[51.5076,-0.1643],wellington:[51.5000,-0.1348],buckingham:[51.5014,-0.1419],stjames:[51.5025,-0.1345],westminster:[51.4993,-0.1273],bigben:[51.5007,-0.1246],horseguards:[51.5047,-0.1281],trafalgar:[51.5080,-0.1281],lego:[51.5108,-0.1335],mm:[51.5109,-0.1329],china:[51.5117,-0.1310],neals:[51.5148,-0.1269],covent:[51.5118,-0.1228],somerset:[51.5111,-0.1172],southbank:[51.5067,-0.1164],columbia:[51.5290,-0.0710],shoreditch:[51.5242,-0.0763],brick:[51.5219,-0.0710],beigel:[51.5244,-0.0714],spital:[51.5198,-0.0756],kings:[51.5310,-0.1238],coaldrops:[51.5350,-0.1255],platform:[51.5309,-0.1233],stalbansstation:[51.7509,-0.3279],stalbans:[51.7502,-0.3422],stalbansclock:[51.7523,-0.3398],stalbansmarket:[51.7535,-0.3372],camden:[51.5410,-0.1466],greenwich:[51.4812,-0.0099]};
 const BOOK=[
-{id:'tower',icon:'🌉',name:'Tower Bridge · entrada interior',day:'2026-12-07',time:'10:30',price:'≈16 € estudiante',url:'https://www.towerbridge.org.uk/whats-on/entry-to-tower-bridge',desc:'3 entradas de estudiante (si aplica). Verificar la disponibilidad del lunes 7.',optional:false},
+{id:'tower',icon:'🌉',name:'Tower Bridge · entrada interior',day:'2026-12-07',time:'10:30',price:'Entrada',url:'https://www.towerbridge.org.uk/whats-on/entry-to-tower-bridge',desc:'3 entradas de estudiante (si aplica). Verificar la disponibilidad del lunes 7.',optional:false},
 {id:'science',icon:'🔬',name:'Science Museum',day:'2026-12-08',time:'10:00',price:'Gratis',url:'https://tickets.sciencemuseum.org.uk/',desc:'3 entradas gratuitas, preferiblemente 10:00.',optional:false},
 {id:'natural',icon:'🦖',name:'Natural History Museum',day:'2026-12-08',time:'11:30',price:'Gratis',url:'https://www.nhm.ac.uk/visit.html',desc:'3 entradas gratuitas; la hora propuesta depende de lo que quede disponible.',optional:false},
 {id:'winter',icon:'🎢',name:'Winter Wonderland',day:'2026-12-08',time:'17:00–18:00',price:'Entrada o pase, variable',url:'https://hydeparkwinterwonderland.com/tickets-guide/',desc:'3 personas. Entrada sola ≠ atracciones. Si compráis Explorer / Coaster Pass, incluye acceso.',optional:false},
-{id:'skate',icon:'⛸️',name:'Somerset House · patinaje',day:'2026-12-09',time:'17:00',price:'≈17–36 €',url:'https://www.somersethouse.org.uk/whats-on/skate-somerset-house',desc:'Opcional: por ahora priorizáis las atracciones de Winter Wonderland.',optional:true},
+{id:'skate',icon:'⛸️',name:'Somerset House · patinaje',day:'2026-12-09',time:'17:00',price:'Opcional',url:'https://www.somersethouse.org.uk/whats-on/skate-somerset-house',desc:'Opcional: por ahora priorizáis las atracciones de Winter Wonderland.',optional:true},
 {id:'flight',icon:'✈️',name:'Billetes Vueling y tarjetas de embarque',day:'2026-12-06',time:'Comprobar',price:'Ya contratado',url:'https://www.vueling.com',desc:'Ida de los tres y vueltas del 10 y 12. Adjuntad los PDF cuando los tengáis.',optional:false},
 {id:'lodging',icon:'🏠',name:'Barbican Apartments',day:'2026-12-06',time:'Antes de 23:00',price:'Ya contratado',url:'https://www.booking.com',desc:'Reserva del 6 al 12. Condiciones de edad ya gestionadas por vosotros.',optional:false},
 ];
@@ -175,9 +175,9 @@ S('22:00','Check-in en Barbican Apartments','home','30 min','El inmueble se sit�
 {date:'2026-12-07',n:'7',short:'Lun',long:'Lunes',emoji:'🌉',title:'Tower Bridge, Borough y la City',scope:'3 personas',budget:'',subtitle:'Rincones históricos, mercado gastronómico, mirador gratuito y paseo junto al Támesis.',food:'Comer en Borough Market (opciones de street food) y cenar en casa o cerca de Barbican.',weather:'Lluvia: más tiempo bajo techo en Hay’s Galleria y Leadenhall Market; el mirador puede cerrar con mal tiempo.',notes:'Borough Market abre excepcionalmente los lunes de diciembre de 2026. Sky Garden queda fuera; The Garden at 120 es la alternativa gratuita y sin reserva.',stops:[
 S('09:15','Tower of London · exterior','tower','30 min','Fortaleza histórica, hogar de las Joyas de la Corona. Hoy la vemos desde fuera.','Gratis','', 'Entrar al interior requiere una entrada aparte y bastante más tiempo.'),
 S('09:45','St Katharine Docks','docks','30 min','Pequeño puerto junto al puente, fotogénico y menos concurrido.','Gratis'),
-S('10:30','Tower Bridge · interior','bridge','75 min','Pasarelas elevadas con suelo de cristal y antiguas salas de máquinas.','≈16 € estudiante','tower','La entrada de estudiante depende de carnet válido. Hora pendiente de confirmar.','https://www.towerbridge.org.uk/whats-on/entry-to-tower-bridge'),
+S('10:30','Tower Bridge · interior','bridge','75 min','Pasarelas elevadas con suelo de cristal y antiguas salas de máquinas.','Entrada','tower','La entrada de estudiante depende de carnet válido. Hora pendiente de confirmar.','https://www.towerbridge.org.uk/whats-on/entry-to-tower-bridge'),
 S('11:50','Hay’s Galleria','hays','20 min','Galería cubierta y antigua zona portuaria con una bonita estructura de hierro.','Gratis'),
-S('12:15','Borough Market · comer','borough','75 min','Uno de los mercados gastronómicos más conocidos de Londres.','Comida 8–15 €','', 'En diciembre de 2026 está previsto que abra también los lunes.','https://boroughmarket.org.uk/events/christmas-at-borough-market/'),
+S('12:15','Borough Market · comer','borough','75 min','Uno de los mercados gastronómicos más conocidos de Londres.','Comida','', 'En diciembre de 2026 está previsto que abra también los lunes.','https://boroughmarket.org.uk/events/christmas-at-borough-market/'),
 S('13:40','London Bridge y The Monument','monument','20 min','El Monument recuerda el Gran Incendio de Londres de 1666. Desde fuera no hay coste.','Gratis'),
 S('14:05','St Dunstan in the East','dunstan','20 min','Ruinas de una iglesia convertidas en un jardín entre edificios de oficinas.','Gratis'),
 S('14:30','The Garden at 120','garden','35 min','Azotea con vistas de la City, acceso gratuito y sin reserva.','Gratis','', 'El acceso depende de condiciones meteorológicas y aforo.','https://fen-court.com/garden-at-120/'),
@@ -202,7 +202,7 @@ S('11:00','Cambio de guardia','buckingham','45–60 min','Ceremonia militar fren
 S('12:00','Buckingham y St James’s Park','stjames','35 min','Jardines históricos con vistas del palacio y caminos junto al lago.','Gratis'),
 S('12:40','Westminster Abbey + Big Ben','bigben','50 min','Abadía y Parlamento por fuera. La entrada interior a la abadía no está incluida.','Gratis exterior'),
 S('13:35','Horse Guards y Whitehall','horseguards','25 min','Zona de edificios gubernamentales; Downing Street se ve desde la reja.','Gratis'),
-S('14:00','Trafalgar Square + comer','trafalgar','40 min','Plaza de Nelson y gran árbol navideño.','Comida 8–14 €'),
+S('14:00','Trafalgar Square + comer','trafalgar','40 min','Plaza de Nelson y gran árbol navideño.','Comida'),
 S('14:45','LEGO Store + M&M’s','lego','40 min','Dos tiendas muy populares en Leicester Square, prácticamente enfrente.','Gratis salvo compras'),
 S('15:30','Chinatown','china','20 min','Arcos rojos, farolillos y restaurantes asiáticos en el corazón del West End.','Gratis'),
 S('16:00','Neal’s Yard, Seven Dials y Covent Garden','covent','60 min','Rincones coloridos, puestos, tiendas y decoración navideña clásica.','Gratis','', 'Neal’s Yard está a pocos minutos a pie de Covent Garden.'),
@@ -212,7 +212,7 @@ S('18:00','Southbank Winter Market','southbank','60–90 min','Puestos junto al 
 {date:'2026-12-10',n:'10',short:'Jue',long:'Jueves',emoji:'🎨',title:'Shoreditch y primera despedida',scope:'3 por la mañana · luego 2',budget:'',subtitle:'Street art, tiendas vintage y mercado, sin alejarse demasiado de la base.',food:'Bagels de Brick Lane, puestos de Spitalfields y cena en King’s Cross para quienes se quedan.',weather:'Si hace mal tiempo, concentrad el paseo en Old Spitalfields Market y tiendas cubiertas.',notes:'Una persona vuela desde Gatwick a las 19:45. Proponemos salir hacia el aeropuerto sobre las 15:15–15:30; comprobar el tren y margen real según equipaje.',stops:[
 S('09:30','Shoreditch · murales','shoreditch','60 min','Uno de los barrios más creativos de Londres. Murales, cafés y tiendas diferentes.','Gratis'),
 S('10:30','Brick Lane','brick','70 min','Street art, tiendas vintage y mezcla cultural.','Gratis'),
-S('11:45','Beigel Bake · comida rápida','beigel','40 min','Panadería famosa por sus bagels tradicionales.','≈7–14 € comida'),
+S('11:45','Beigel Bake · comida rápida','beigel','40 min','Panadería famosa por sus bagels tradicionales.','Comida'),
 S('12:30','Old Spitalfields Market','spital','60 min','Mercado cubierto de diseño, moda, objetos y comida.','Gratis salvo compras'),
 S('13:30','Volver al apartamento','home','60–90 min','Descansar, recoger equipaje y hacer la despedida.','Gratis'),
 S('15:15','Sale 1 persona hacia Gatwick','farringdon','Tren + controles','Vuelta del primer viajero, vuelo previsto a las 19:45.','Tren aparte','flight'),
@@ -224,7 +224,7 @@ S('09:00','Farringdon · salida en tren','farringdon','30–40 min de tren','Tom
 S('10:00','Llegar a St Albans City','stalbansstation','20 min a pie','Desde la estación, paseo hacia el centro histórico.','—'),
 S('10:30','St Albans Cathedral','stalbans','60 min','Gran catedral con mucha historia; acceso general gratuito y donación sugerida.','Gratis/donación'),
 S('11:30','Clock Tower y calles históricas','stalbansclock','50 min','Callejones y edificios antiguos, con ambiente inglés de pueblo.','Gratis'),
-S('12:20','Mercado y almuerzo','stalbansmarket','90 min','Mercado adicional del 11 de diciembre, de 9:00 a 15:00, más puestos festivos.','Comida 8–14 €'),
+S('12:20','Mercado y almuerzo','stalbansmarket','90 min','Mercado adicional del 11 de diciembre, de 9:00 a 15:00, más puestos festivos.','Comida'),
 S('14:30','Regreso en tren','stalbansstation','45–60 min','Vuelta hacia Londres.','Billete aparte'),
 S('15:45','Camden Market · opcional','camden','90 min','Mercado alternativo, puestos y tiendas junto al canal.','Gratis salvo compras'),
 ],legs:[{label:'Farringdon → St Albans',ids:['farringdon','stalbansstation'],mode:'transit'},{label:'Paseo por St Albans',ids:['stalbansstation','stalbans','stalbansclock','stalbansmarket'],mode:'walking'},{label:'Regreso a Camden (opcional)',ids:['stalbansstation','camden'],mode:'transit'}],alternative:{title:'Si preferís Greenwich',desc:'Podéis cambiar la excursión por Greenwich Market, el Cutty Sark por fuera y el National Maritime Museum gratuito.',place:'greenwich',url:'https://www.rmg.co.uk/national-maritime-museum'}},
@@ -284,6 +284,6 @@ async function importBackup(event){let file=event.target.files?.[0];event.target
 <script src="./map-v2.js?v=7" defer></script>
 <script src="./app-v3.js?v=4" defer></script>
 <script src="./app-v4.js?v=5" defer></script>
-<script src="./editorial-v6.js?v=7" defer></script>
+<script src="./editorial-v6.js?v=8" defer></script>
 </body>
 </html>

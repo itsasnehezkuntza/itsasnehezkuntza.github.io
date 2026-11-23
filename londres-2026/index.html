@@ -26,6 +26,7 @@
 <link rel="stylesheet" href="./style-v10.css?v=10">
 <link rel="stylesheet" href="./style-v11.css?v=13">
 <link rel="stylesheet" href="./style-v16.css?v=17">
+<link rel="stylesheet" href="./firebase-shared-v18.css?v=18">
 </head>
 <body>
 <div class="app">
@@ -120,7 +121,18 @@
 </section>
 <section id="checklist-view" class="view">
  <div class="pp-page-index"><span class="pp-index-mark">03</span><div><div class="kicker">LA LISTA DE EQUIPAJE</div><h2 class="section-heading">Maleta y pendientes</h2><p class="lead">Lo necesario para Londres y lo que queda por preparar.</p></div><span class="pp-index-decor" aria-hidden="true">✓</span></div>
- <section id="packing-board" class="pp-packing-board" aria-label="Checklist de maleta">
+ <section id="polar-shared-space" class="polar-shared-space" aria-label="Espacio compartido con Firebase">
+ <div class="polar-shared-header"><span class="polar-shared-mark" aria-hidden="true">☁</span><div><small>LA PATRULLA POLAR · ESPACIO COMPARTIDO</small><h3>Nuestra lista, en los tres móviles</h3></div></div>
+ <p class="polar-shared-explain">Cuando esté activado Firebase, cada uno podrá entrar con su cuenta de Google y el código del viaje para sincronizar la checklist. Los PDFs siguen en Drive privado.</p>
+ <div class="polar-shared-form">
+  <label for="polar-trip-code">Código de nuestro viaje</label>
+  <div class="polar-shared-inputs"><input id="polar-trip-code" type="text" autocapitalize="characters" autocomplete="off" spellcheck="false" placeholder="Código del viaje" maxlength="40" aria-describedby="polar-shared-status"><button id="polar-login-btn" type="button" disabled>Entrar con Google</button></div>
+ </div>
+ <div id="polar-shared-status" class="polar-shared-status" role="status" aria-live="polite">Preparando la conexión. De momento, las listas se guardan solo en este dispositivo.</div>
+ <div id="polar-shared-connected" class="polar-shared-connected" hidden><span id="polar-shared-user"></span><button id="polar-sync-push" type="button" disabled title="Subir una copia de los estados de este móvil al espacio compartido">Publicar mis cambios locales</button><button id="polar-signout-btn" type="button">Salir</button></div>
+ <p class="polar-shared-foot">El código sirve para encontrar el viaje; la protección real depende de la cuenta autorizada y de los permisos de Firebase.</p>
+</section>
+<section id="packing-board" class="pp-packing-board" aria-label="Checklist de maleta">
   <div class="pp-packing-header"><div class="pp-packing-heading"><span class="pp-packing-icon" aria-hidden="true">🧳</span><div><small>LISTA Nº 001</small><h3>¿Está todo en la maleta?</h3></div></div><div class="pp-packing-count"><strong id="packing-count">0/0</strong><span>PREPARADO</span></div></div>
   <div class="pp-packing-filter" role="group" aria-label="Ver lista de maleta">
    <button type="button" class="pp-packing-filter-on" data-packing-filter="all">Todo</button>
@@ -272,7 +284,7 @@ S('12:45','Vuelo de regreso','gatwick','—','Horario comunicado para las otras 
 const DEFAULT={day:0,task:{},booking:{}};
 let state=loadState();
 let db=null,dbError=false,files=[];let map=null,markers=[],routeLines=[];let activeTab='days';
-function loadState(){let b;try{b=JSON.parse(localStorage.getItem('london2026.v2')||'null')}catch(e){};return {day:(b?.day??0),task:b?.task||{},booking:b?.booking||{}}}
+function loadState(){let b;try{b=JSON.parse(localStorage.getItem('london2026.v2')||'null')}catch(e){};return {day:(b?.day??0),task:b?.task||{},booking:b?.booking||{},packing:b?.packing||{},packingExtra:Array.isArray(b?.packingExtra)?b.packingExtra:[]}}
 function save(){try{localStorage.setItem('london2026.v2',JSON.stringify(state))}catch(e){toast('Este navegador no permite guardar estado. Exportad una copia para conservarlo.')}}
 function esc(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
 function toast(msg){let el=document.getElementById('toast');el.textContent=msg;el.style.display='block';clearTimeout(toast._t);toast._t=setTimeout(()=>el.style.display='none',3000)}
@@ -323,5 +335,8 @@ async function importBackup(event){let file=event.target.files?.[0];event.target
 <script src="./app-v11.js?v=13" defer></script>
 <script src="./app-v14.js?v=14" defer></script>
 <script src="./app-v16.js?v=17" defer></script>
+<script src="./firebase-config.js?v=18" defer></script>
+<script src="./firebase-bridge-v18.js?v=18" defer></script>
+<script type="module" src="./firebase-sync-v18.js?v=18"></script>
 </body>
 </html>

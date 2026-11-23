@@ -54,7 +54,7 @@
  display:block;font-size:clamp(32px,4.2vw,42px);letter-spacing:-.055em;
  font-weight:850;line-height:1.08;color:#224b36;margin:4px 0
 }
-.travel-flight-airports span:not(.flight-path span){
+.travel-flight-airports > div > span{
  display:block;color:#697a6d;font-size:11px;line-height:1.25;
 }
 .flight-path{display:flex;align-items:center;justify-content:center;position:relative}

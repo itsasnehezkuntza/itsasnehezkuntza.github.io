@@ -2,10 +2,10 @@
 <html lang="es">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#173e32">
+<meta name="theme-color" content="#204939">
 <meta name="robots" content="noindex, nofollow">
 <meta name="description" content="Guía compartida de Londres del 6 al 12 de diciembre de 2026. Los tickets se almacenan solo en el navegador.">
-<title>London, baby! 🎄 · Nuestro viaje</title>
+<title>La Patrulla Polar 🐾 · Londres Navidad 2026</title>
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="anonymous">
 <style>
 :root{--ink:#16312f;--ink2:#4c625e;--forest:#123b37;--forest2:#0c2928;--mint:#e5f3ed;--gold:#e7b56e;--paper:#f7f7f2;--white:#fff;--line:#dee7e0;--orange:#fff1df;--shadow:0 8px 30px rgba(17,46,42,.075);--radius:19px}
@@ -25,59 +25,37 @@
 <link rel="stylesheet" href="./style-v9.css?v=9">
 <link rel="stylesheet" href="./style-v10.css?v=10">
 <link rel="stylesheet" href="./style-v11.css?v=13">
+<link rel="stylesheet" href="./style-v14.css?v=14">
 </head>
 <body>
 <div class="app">
-<header class="hero">
+<header class="hero polar-hero">
+<div class="polar-snow polar-snow-one" aria-hidden="true"></div><div class="polar-snow polar-snow-two" aria-hidden="true"></div>
 <div class="hero-inner">
-<div class="hero-content">
-<div class="hero-masthead"><span class="hero-crest" aria-hidden="true">LDN<br>✳</span><span>TRAVEL JOURNAL</span><span class="mast-rule"></span><span class="mast-date">WINTER • 2026</span></div>
-<p class="micro">EL VIAJE DE LOS TRES · DICIEMBRE 2026</p>
-<h1>London,<br><em>baby!</em> <span class="hero-twinkle" aria-hidden="true">✳</span></h1>
-<p class="subtitle">Calles iluminadas, dinosaurios, mercados y montañas rusas. Siete días, mil historias y una guía para llevarlo todo en el bolsillo.</p>
-<div class="hero-tags"><span>✈️ 6–12 dic</span><span>👥 3 viajeros</span><span>📍 Barbican</span><span>❄️ Edición navideña</span></div>
-<div class="top-actions"><a class="hero-btn hero-jump" href="#days-view">Ver nuestro viaje ↓</a><button class="hero-btn" onclick="switchTab('bookings')">✓ Reservas</button><button class="hero-btn" onclick="switchTab('files')">🎟 Tickets</button><button class="hero-btn" onclick="exportBackup()">↗ Guardar copia</button></div>
+ <div class="hero-content">
+  <div class="hero-masthead"><span class="hero-crest" aria-hidden="true">🐾</span><span>LA PATRULLA POLAR</span><span class="mast-rule"></span><span class="mast-date">LONDRES · NAVIDAD 2026</span></div>
+  <p class="micro">MISIÓN NAVIDEÑA · 6–12 DICIEMBRE</p>
+  <h1>La Patrulla<br><em>Polar</em> <span class="hero-twinkle" aria-hidden="true">❄</span></h1>
+  <p class="subtitle">Tres perros polares sueltos por Londres. 🐾</p>
+  <div class="polar-countdown" id="polar-countdown" role="timer" aria-label="Cuenta atrás hasta el vuelo de ida">
+   <div class="polar-countdown-label"><span aria-hidden="true">✈</span> Despegamos de Bilbao en…</div>
+   <div class="polar-clock-face"><div><strong id="polar-cd-days" class="polar-clock-number">--</strong><span>DÍAS</span></div><span class="polar-clock-sep">:</span><div><strong id="polar-cd-hours" class="polar-clock-number">--</strong><span>HORAS</span></div><span class="polar-clock-sep">:</span><div><strong id="polar-cd-mins" class="polar-clock-number">--</strong><span>MIN</span></div><span class="polar-clock-sep">:</span><div><strong id="polar-cd-secs" class="polar-clock-number">--</strong><span>SEG</span></div></div>
+   <div id="polar-cd-caption" class="polar-cd-caption">Domingo 6 · 14:35 (hora de Bilbao)</div>
+  </div>
+  <div class="hero-tags"><span>✈️ 6–12 dic</span><span>🐾 3 viajeros</span><span>📍 Barbican</span></div>
+  <div class="top-actions"><a class="hero-btn hero-jump" href="#days-view">Ver los planes ↓</a><button class="hero-btn" onclick="switchTab('bookings')">🎟️ Reservas</button><button class="hero-btn" onclick="switchTab('files')">🧳 Entradas</button><button class="hero-btn" onclick="exportBackup()">↗ Guardar copia</button></div>
+ </div>
+ <figure class="hero-postcard polar-postcard" aria-label="Dibujo de tres perros polares en el Londres navideño">
+  <div class="postcard-top"><span>POSTAL DE LA PATRULLA</span><span>❄ LONDON, HERE WE COME! ❄</span></div>
+  <div class="postcard-art"><img src="./patrulla-polar.svg?v=1" alt="Tres perros polares con gorros y bufandas en Londres, con Big Ben, London Eye, Tower Bridge y autobús rojo decorado para Navidad" width="800" height="445" loading="eager"></div>
+  <figcaption class="postcard-caption"><strong>PERROS POLARES POR LONDRES</strong><span>DICIEMBRE · 2026</span></figcaption>
+ </figure>
 </div>
-<div class="hero-postcard" aria-hidden="true">
-<div class="postcard-top"><span>POSTCARD № 007</span><span>GREETINGS FROM LONDON ✳</span></div>
-<div class="postcard-art">
-<svg viewBox="0 0 440 170" xmlns="http://www.w3.org/2000/svg">
-<circle cx="366" cy="38" r="28" fill="#dbb77e" opacity=".72"/>
-<g fill="#879b8a" opacity=".6"><circle cx="18" cy="23" r="2"/><circle cx="105" cy="12" r="2"/><circle cx="283" cy="21" r="2"/><circle cx="426" cy="19" r="2"/><circle cx="315" cy="65" r="1.8"/><circle cx="153" cy="38" r="1.6"/><circle cx="223" cy="18" r="2"/></g>
-<path d="M8 142 L434 142" fill="none" stroke="#38614f" stroke-width="3"/>
-<g stroke="#2b5642" stroke-width="3" fill="none">
-<circle cx="65" cy="101" r="41"/><circle cx="65" cy="101" r="5"/>
-<path d="M65 60V142 M24 101H106 M36 72L94 130 M94 72L36 130 M47 64L84 139 M84 64L47 139 M65 142L40 166 M65 142L90 166"/>
-</g>
-<g fill="#456d56">
-<path d="M135 144V67H147V48H153V32L161 14L169 32V48H175V67H188V144Z"/>
-<path d="M145 66H179V79H145Z" fill="#d2c5a5"/>
-<path d="M153 85H169V107H153Z" fill="#d2c5a5"/>
-<path d="M154 116H160V138H154 M164 116H170V138H164" fill="#d2c5a5"/>
-<path d="M141 61H183V66H141Z"/>
-</g>
-<g stroke="#f5ecd2" stroke-width="2" fill="none"><circle cx="161" cy="73" r="7"/><path d="M161 69V73L165 75"/></g>
-<g fill="#36634b">
-<path d="M231 142V64H241V48H252V35H259V48H269V64H279V142Z"/>
-<path d="M340 142V64H350V48H361V35H368V48H378V64H388V142Z"/>
-<path d="M229 105H389V116H229Z"/>
-<path d="M278 106Q309 74 340 106L340 116H278Z" fill="#f6efdb"/>
-<path d="M221 141H396V147H221Z"/>
-</g>
-<g stroke="#2e6148" stroke-width="3" fill="none"><path d="M280 84Q308 103 339 84 M279 92H340 M280 99H339"/></g>
-<g stroke="#f3ecd5" stroke-width="2.5" fill="none"><path d="M251 77V93 M259 77V93 M251 116V131 M259 116V131 M361 77V93 M369 77V93 M361 116V131 M369 116V131"/></g>
-<path d="M0 151Q46 145 91 151T185 151T277 151T368 151T440 151" stroke="#72907b" stroke-width="2" fill="none"/>
-<path d="M0 161Q49 156 98 161T197 161T295 161T391 161T440 161" stroke="#72907b" stroke-width="2" fill="none"/>
-</svg>
-</div>
-<div class="postcard-caption"><strong>LONDON CALLING</strong><span>51°30′ N · 0°07′ W</span></div>
-</div>
-</div>
-</header><div class="journey-ribbon" aria-label="Resumen del viaje"><div class="journey-stat"><b>07</b><small>Días</small></div><div class="journey-stat"><b>03</b><small>Viajeros</small></div><div class="journey-stat"><b>01</b><small>Aventura</small></div></div>
+</header><div class="polar-journey-strip" aria-label="Resumen del viaje"><span>🐾 TRES PERROS POLARES</span><span>✈ 6 AL 12 DE DICIEMBRE</span><span>🎄 LONDRES EN NAVIDAD</span></div>
 
 <main class="main">
 <section id="days-view" class="view active">
-<div class="kicker">DÍA A DÍA</div><h2 class="section-heading">Nuestro itinerario</h2><p class="lead">Tres momentos clave a la vista. El itinerario completo, las fotos y los consejos se abren cuando los necesitáis.</p>
+<div class="kicker">EL PLAN DE LA PATRULLA</div><h2 class="section-heading">¿Qué hacemos hoy?</h2><p class="lead">Elegid el día para ver el mapa, las paradas importantes y el plan completo.</p>
 <div class="date-strip" id="day-strip" aria-label="Seleccionar día"></div>
 <div id="day-header"></div>
 
@@ -117,7 +95,7 @@
 </div>
 </section>
 <section id="bookings-view" class="view">
-<div class="kicker">ORGANIZACIÓN</div><h2 class="section-heading">Entradas y reservas</h2><p class="lead">Marcáis lo que ya tenéis, escribís la hora confirmada y adjuntáis el PDF o captura. Los datos se guardan en este navegador.</p>
+<div class="kicker">TICKETS DE LA PATRULLA</div><h2 class="section-heading">Reservas</h2><p class="lead">Aquí están las entradas confirmadas y lo que queda pendiente. Los cambios se guardan en este navegador.</p>
 <div class="counterbar" style="margin:16px 0"><b id="booking-progress-label">0 completadas</b><div class="progress"><span id="booking-progress-bar" style="width:0"></span></div></div>
 <div class="warning">🔐 No enviéis códigos de reserva, pasaportes ni billetes a una web desconocida. Esta guía no sube nada a servidores: los documentos se guardan localmente en vuestro navegador.</div>
 <div id="booking-list"></div>
@@ -132,7 +110,7 @@
 <div class="surface" style="margin-top:14px"><div style="display:flex;justify-content:space-between;align-items:center"><h3 style="margin:0">📁 Documentos guardados</h3><span id="file-count" class="tag">0 archivos</span></div><div id="file-list"></div></div>
 </section>
 <section id="info-view" class="view">
-<div class="kicker">TODO BAJO CONTROL</div><h2 class="section-heading">Consejos y datos útiles</h2>
+<div class="kicker">CUADERNO DE VIAJE</div><h2 class="section-heading">Lo que conviene saber</h2>
 <section id="flight-passes" class="flight-pass-section" aria-label="Billetes visuales y horarios de los vuelos"></section>
 <section id="weather-week" class="weather-week-section" aria-label="El tiempo previsto durante el viaje"></section>
 <div class="facts">
@@ -150,7 +128,7 @@
 <div class="surface" style="margin-top:15px"><h3>🔗 Fuentes oficiales y comprobaciones</h3><p class="tiny muted">Esta guía se ha preparado el 22 de noviembre de 2026. Los horarios son una propuesta y pueden cambiar. Las rutas reales se abren en Google Maps.</p><div class="route-buttons"><a class="small-btn" href="https://www.nhm.ac.uk/visit.html" target="_blank" rel="noopener">Museo de dinosaurios</a><a class="small-btn" href="https://www.sciencemuseum.org.uk/visit" target="_blank" rel="noopener">Science Museum</a><a class="small-btn" href="https://www.towerbridge.org.uk/whats-on/entry-to-tower-bridge" target="_blank" rel="noopener">Tower Bridge</a><a class="small-btn" href="https://hydeparkwinterwonderland.com/tickets-guide/" target="_blank" rel="noopener">Wonderland</a><a class="small-btn" href="https://fen-court.com/garden-at-120/" target="_blank" rel="noopener">Garden at 120</a><a class="small-btn" href="https://boroughmarket.org.uk/events/christmas-at-borough-market/" target="_blank" rel="noopener">Borough Market</a><a class="small-btn" href="https://www.nationalrail.co.uk/" target="_blank" rel="noopener">National Rail</a></div></div>
 <div class="surface" style="margin-top:15px"><h3>🖨️ Compartir la guía</h3><p class="tiny">Podéis enviar el archivo <b>HTML</b> tal cual a los otros dos y abrirlo en el móvil. Para conservar también los cambios y documentos, compartid una <b>copia exportada</b> desde la pestaña Tickets. Si preferís imprimir un resumen, usad la función de imprimir del navegador.</p><div class="route-buttons"><button class="ghost-btn" onclick="window.print()">🖨️ Imprimir / PDF</button><button class="primary-btn" onclick="exportBackup()">⬇ Exportar datos</button></div></div>
 </section>
-<footer class="foot">Hecho para vuestro viaje · Los documentos permanecen en el dispositivo y no se envían a ningún servidor · Comprobad cada hora de reserva en el ticket oficial. 💚</footer>
+<footer class="foot">🐾 La Patrulla Polar · Londres 2026. Los tickets guardados se quedan en vuestro dispositivo. Los horarios oficiales mandan.</footer>
 </main>
 </div>
 <nav class="bottom-nav" aria-label="Navegación principal">
@@ -318,5 +296,6 @@ async function importBackup(event){let file=event.target.files?.[0];event.target
 <script src="./app-v9.js?v=12" defer></script>
 <script src="./app-v10.js?v=10" defer></script>
 <script src="./app-v11.js?v=13" defer></script>
+<script src="./app-v14.js?v=14" defer></script>
 </body>
 </html>

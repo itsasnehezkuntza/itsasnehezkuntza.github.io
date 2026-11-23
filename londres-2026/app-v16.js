@@ -179,6 +179,8 @@ if(typeof originalTab==="function"){
   if(tab==="files"){renderTicketCollection();fixOutdatedHelp()}
  };
 }
+window.polarRenderPacking=renderPacking;
+window.polarRenderTicketCollection=renderTicketCollection;
 renderPacking();renderTicketCollection();
 // Rebuild the collection after an import of a private JSON backup.
 const originalImport=window.importBackup;

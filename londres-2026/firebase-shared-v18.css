@@ -127,3 +127,11 @@
  .pp-ticket-management>summary strong{font-size:17px}
  .pp-ticket-management-inside{padding:9px 10px 12px}
 }
+
+.pp-room-shortcut{margin:8px 0 2px;font-size:11px;color:#557184}
+.pp-room-shortcut button{
+ display:inline;background:transparent;border:0;
+ padding:3px 0;color:#276484;font-size:11px;font-weight:850;
+ text-decoration:underline;text-underline-offset:3px;cursor:pointer;
+}
+.pp-room-shortcut button:hover{color:#9d445a}

@@ -333,9 +333,10 @@ body{
 }
 .bottom-nav:before{
  content:"";position:absolute;top:27px;left:13%;right:13%;
- border-top:2px solid #b8aa91;z-index:-1;
+ border-top:2px solid #b8aa91;z-index:0;pointer-events:none;
 }
 .bottom-nav button{
+ position:relative;z-index:1;
  display:flex;align-items:center;flex-direction:column;gap:3px;
  flex:1 1 0;max-width:100px;min-width:0;
  border:0;border-radius:9px;color:#718275;

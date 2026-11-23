@@ -93,3 +93,37 @@
  .polar-shared-space{padding:13px 12px}
  .polar-shared-header h3{font-size:20px}
 }
+
+/* Estado de entradas en Tickets: disponible solo al desplegarlo. */
+.pp-ticket-management{
+ margin:20px 0 5px;background:#fffefa;
+ border:1px solid #e4d6c3;border-radius:6px;
+ box-shadow:0 5px 15px #1d34410b;overflow:hidden;
+}
+.pp-ticket-management>summary{
+ display:flex;align-items:center;gap:11px;cursor:pointer;
+ list-style:none;padding:15px 16px;min-height:73px;
+ background:linear-gradient(110deg,#faf1df,#fffaf2);color:#23435b;
+}
+.pp-ticket-management>summary::-webkit-details-marker{display:none}
+.pp-ticket-management>summary>span:nth-child(2){display:grid;gap:3px;flex:1}
+.pp-ticket-management>summary strong{
+ font-family:"Fraunces",Georgia,serif;font-size:19px;line-height:1.2;
+}
+.pp-ticket-management>summary small{font-size:11px;color:#7b7878}
+.pp-ticket-management-icon{
+ display:grid;place-items:center;width:43px;height:43px;font-size:21px;
+ background:#fffaf1;border:2px dashed #d8b7a1;transform:rotate(-6deg);
+}
+.pp-ticket-management>summary>span:last-child{
+ color:#ad4e60;font-size:21px;transition:transform .2s;
+}
+.pp-ticket-management[open]>summary>span:last-child{transform:rotate(180deg)}
+.pp-ticket-management-inside{padding:10px 15px 17px;border-top:1px dashed #dfcfba}
+.pp-ticket-management-inside .counterbar{margin:9px 0 12px!important}
+.pp-ticket-management-inside .book-row{margin:9px 0}
+@media(max-width:520px){
+ .pp-ticket-management>summary{padding:12px 10px;gap:8px}
+ .pp-ticket-management>summary strong{font-size:17px}
+ .pp-ticket-management-inside{padding:9px 10px 12px}
+}

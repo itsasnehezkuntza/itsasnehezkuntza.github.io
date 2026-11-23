@@ -36,6 +36,9 @@ camden:"Camden Market",greenwich:"Greenwich Market"
 /* Selección de fotografías reales, con fuente y autor en Wikimedia Commons. */
 const COMMONS_PHOTOS={
  bridge:"Tower Bridge-London, England, United Kingdom.jpg",
+ borough:"London - Borough Market.jpg",
+ brick:"Graffiti in Brick Lane.jpg",
+ spital:"Spitalfields Mkt 2020.jpg",
  natural:"Natural History Museum, London, Dinosaur Gallery.jpg",
  hamleys:"Christmas lights in Regent Street, London, 2022.jpg",
  winter:"Rollercoaster at Winter Wonderland, Hyde Park, London - geograph.org.uk - 5229912.jpg",

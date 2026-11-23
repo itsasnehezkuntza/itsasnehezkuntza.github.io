@@ -1,0 +1,56 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function signedIn() {
+      return request.auth != null;
+    }
+    function memberOf(tripId) {
+      return signedIn() &&
+        exists(/databases/$(database)/documents/trips/$(tripId)/members/$(request.auth.uid));
+    }
+
+    // Una membresía debe darla el administrador desde Firebase Console / Admin SDK.
+    // Nadie puede añadirse a sí mismo desde la página web.
+    match /trips/{tripId}/members/{uid} {
+      allow get: if signedIn() && request.auth.uid == uid;
+      allow list, create, update, delete: if false;
+    }
+
+    // Estados compartidos: checklist, maleta común y estado/hora de entradas.
+    match /trips/{tripId}/shared/{docId} {
+      allow get: if memberOf(tripId)
+        && docId in ["tasks", "packing", "bookings"];
+      allow list, delete: if false;
+      allow create, update: if memberOf(tripId)
+        && docId in ["tasks", "packing", "bookings"]
+        && request.resource.data.keys().hasOnly(["items", "extra", "modifiedAt"])
+        && request.resource.data.keys().hasAll(["items"])
+        && request.resource.data.items is map
+        && request.resource.data.items.keys().size() <= 140
+        && (!("extra" in request.resource.data) ||
+            (request.resource.data.extra is list &&
+             request.resource.data.extra.size() <= 50));
+    }
+
+    // Maleta privada por persona: nadie puede consultar la de otra.
+    match /trips/{tripId}/personal/{uid} {
+      allow get: if memberOf(tripId) && request.auth.uid == uid;
+      allow list, delete: if false;
+      allow create, update: if memberOf(tripId)
+        && request.auth.uid == uid
+        && request.resource.data.keys().hasOnly(["items", "extra", "modifiedAt"])
+        && request.resource.data.keys().hasAll(["items"])
+        && request.resource.data.items is map
+        && request.resource.data.items.keys().size() <= 140
+        && (!("extra" in request.resource.data) ||
+            (request.resource.data.extra is list &&
+             request.resource.data.extra.size() <= 50));
+    }
+
+    // Todo lo demás cerrado, incluidos los documentos raíz del viaje.
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

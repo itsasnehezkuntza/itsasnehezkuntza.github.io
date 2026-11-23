@@ -1,0 +1,796 @@
+/* LA PATRULLA POLAR — LONDON POSTCARD CLUB
+   Diseño propio: postales ilustradas, papel, sellos, rojo postal y azul tinta.
+   Mantener el contraste de los itinerarios y las rutas del mapa. */
+
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800;900&family=Fraunces:opsz,wght,SOFT,WONK@9..144,500,25,1;9..144,600,25,1;9..144,700,25,1&display=swap');
+
+:root{
+ --ink:#172F47;--ink2:#566b7d;--forest:#172f47;--forest2:#10263a;
+ --paper:#fbf8f0;--white:#fffefa;--line:#e6dfd2;
+ --accent:#bc4d59;--gold:#e3b46f;--shadow:0 9px 27px #1a2d3b0c;
+ --post-red:#b74954;--post-ink:#152d45;--post-blue:#438eaf;
+ --post-cornflower:#83b5c5;--post-peach:#f5c68c;--post-cream:#fff8e9;
+ --post-paper:#fbf8f0;--post-teal:#527f85;
+}
+html{scroll-padding-top:14px}
+body{
+ margin:0;
+ color:var(--post-ink)!important;
+ background:#fbf8f0!important;
+ background-image:radial-gradient(circle,#c5b6a11c .8px,transparent 1px)!important;
+ background-size:23px 23px!important;
+ font-family:"DM Sans",-apple-system,system-ui,sans-serif!important;
+ font-size:14px;line-height:1.55;
+}
+.app{max-width:1220px;padding-bottom:112px}
+main.main{padding:16px clamp(12px,3vw,28px) 44px}
+h2,h3{color:var(--post-ink)}
+a{color:#9f3d50}
+a:hover{color:#8a2d42}
+button,input,textarea,select{font:inherit}
+button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid #efa35f;outline-offset:2px}
+
+/* The Christmas illustrated cover, full editorial spread rather than a dark app banner */
+.pp-hero{
+ position:relative;isolation:isolate;overflow:hidden;
+ background:#f9edd9;
+ border-bottom:1px solid #e9d8bf;
+ box-shadow:0 5px 32px #49334a0e;
+ padding:0 clamp(16px,3.4vw,42px) 27px;
+ border-radius:0 0 30px 30px;
+}
+.pp-hero:before{
+ content:"";position:absolute;inset:0;pointer-events:none;opacity:.6;z-index:-1;
+ background-image:radial-gradient(circle at 1px 1px,#c48c7b0b 1px,transparent 1px);
+ background-size:9px 9px;
+}
+.pp-hero:after{
+ content:"";position:absolute;right:-44px;top:-56px;
+ width:188px;height:188px;border-radius:50%;
+ border:2px dashed #bb4d5a42;pointer-events:none;transform:rotate(18deg);
+}
+.pp-masthead{
+ display:flex;align-items:center;justify-content:space-between;gap:15px;
+ border-bottom:1px solid #192e422e;
+ padding:14px 1px 12px;
+ font-size:10px;font-weight:850;letter-spacing:.14em;color:#25364a;
+}
+.pp-mastbrand{white-space:nowrap;color:#a73d4d}
+.pp-mastedition{color:#6d7480}
+.pp-mastedition b{padding:0 7px;font-weight:500}
+.pp-mastdate{font-variant-numeric:tabular-nums;white-space:nowrap}
+.pp-hero-body{
+ display:grid;grid-template-columns:minmax(0,.87fr) minmax(0,1.13fr);
+ gap:clamp(19px,3.1vw,52px);align-items:center;padding:25px 0 4px;
+}
+.pp-hero-copy{position:relative;min-width:0;z-index:2}
+.pp-kicker{
+ display:flex;align-items:center;gap:10px;
+ color:#9d4a4e;font-size:10px;font-weight:900;letter-spacing:.15em;
+ margin-bottom:21px;white-space:nowrap;
+}
+.pp-kicker-line{height:1px;width:29px;background:#c98f83}
+.pp-hero h1{
+ font-family:"Fraunces",Georgia,serif;
+ font-size:clamp(47px,5.8vw,83px);
+ font-weight:700;line-height:.96;letter-spacing:-.062em;
+ margin:0;color:#122d45;max-width:630px;
+}
+.pp-brandline{display:block}
+.pp-cityline{
+ display:block;margin-top:11px;
+ color:#bc4e5b;font-size:.74em;
+ font-weight:600;letter-spacing:-.058em;
+}
+.pp-cityline em{font-style:italic}
+.pp-hero-desc{
+ color:#5c6174;font-size:13.5px;margin:19px 0 15px;
+ font-weight:700;letter-spacing:.004em;
+}
+.pp-hero-journey{
+ display:flex;align-items:center;gap:11px;
+ margin:0 0 15px;font-size:11px;color:#546477;font-weight:750;
+}
+.pp-hero-journey span{white-space:nowrap}
+.pp-hero-journey b{font-weight:900;color:#163a52;margin-right:4px}
+.pp-hero-journey svg{max-width:92px;flex:1;min-width:30px;color:#ba5061}
+.pp-hero .polar-countdown{
+ display:block;max-width:430px;margin:0 0 15px!important;
+ padding:13px 15px 10px!important;
+ border:1px solid #ead0b4!important;border-radius:13px!important;
+ background:linear-gradient(135deg,#fff9ec,#f9e8cf)!important;
+ box-shadow:0 5px 14px #794c2c0b!important;color:#15354c!important;
+}
+.pp-hero .polar-countdown-label{
+ font-size:10px;color:#a14852;font-weight:900;letter-spacing:.055em;
+ margin:0 0 8px;
+}
+.pp-hero .polar-clock-face{display:flex;align-items:start;justify-content:space-around;gap:5px}
+.pp-hero .polar-clock-face>div{display:grid;flex:1;min-width:0;gap:2px;text-align:center}
+.pp-hero .polar-clock-number{
+ display:block;width:100%;font-size:clamp(24px,3.4vw,34px);line-height:1.2;
+ font-weight:900;font-variant-numeric:tabular-nums;letter-spacing:-.035em;
+ color:#15344b!important;font-family:"DM Sans",sans-serif!important;
+}
+.pp-hero .polar-clock-face>div>span{color:#9f6d66;font-size:9px;font-weight:900;letter-spacing:.12em}
+.pp-hero .polar-clock-sep{font-size:21px;color:#b57d74;line-height:1.1}
+.pp-hero .polar-cd-caption{
+ color:#8e746f;font-size:10px;text-align:center;
+ margin-top:8px;font-weight:600;
+}
+.pp-hero-actions{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.pp-primary-link,.pp-secondary-link{
+ display:inline-flex;align-items:center;justify-content:center;gap:12px;
+ min-height:44px;text-decoration:none;font-size:12px;font-weight:850;
+ border-radius:7px;padding:10px 17px;cursor:pointer;
+}
+.pp-primary-link{
+ background:#193b55;color:#fffaf0;border:1px solid #193b55;
+ box-shadow:0 3px 0 #132a3a;
+}
+.pp-primary-link:hover{background:#28526b;color:#fffaf0;transform:translateY(-1px)}
+.pp-secondary-link{
+ background:#fdf6e9;color:#8b3e4d;border:1px solid #cb9b8b;
+}
+.pp-secondary-link:hover{background:#fffefa;color:#783647}
+.pp-hero-poster{margin:0;min-width:0;position:relative;transform:rotate(1.4deg)}
+.pp-poster-sheet{
+ border:10px solid #fffaf0;border-radius:4px;
+ background:#f2c293;box-shadow:0 16px 32px #283d4a26;
+ overflow:hidden;position:relative;
+}
+.pp-poster-sheet:after{
+ content:"";position:absolute;inset:7px;pointer-events:none;
+ border:1px dashed #fff9e58e;
+}
+.pp-poster-sheet img{display:block;width:100%;height:auto;aspect-ratio:1000/720;object-fit:cover}
+.pp-poster-corner{
+ position:absolute;right:17px;top:17px;
+ width:77px;height:83px;border:4px solid #fff8e0;
+ outline:1px solid #b34b5d;background:#f7edd5e8;
+ display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;
+ box-shadow:0 2px 6px #3a294d28;
+ clip-path:polygon(0 6%,6% 6%,6% 0,14% 0,14% 6%,22% 6%,22% 0,30% 0,30% 6%,38% 6%,38% 0,46% 0,46% 6%,54% 6%,54% 0,62% 0,62% 6%,70% 6%,70% 0,78% 0,78% 6%,86% 6%,86% 0,94% 0,94% 6%,100% 6%,100% 94%,94% 94%,94% 100%,86% 100%,86% 94%,78% 94%,78% 100%,70% 100%,70% 94%,62% 94%,62% 100%,54% 100%,54% 94%,46% 94%,46% 100%,38% 100%,38% 94%,30% 94%,30% 100%,22% 100%,22% 94%,14% 94%,14% 100%,6% 100%,6% 94%,0 94%);
+}
+.pp-poster-corner span{text-align:center;color:#933b51;font-size:9px;letter-spacing:.06em;line-height:1.05;font-weight:900}
+.pp-poster-corner b{font-size:22px;font-weight:900;color:#15394e;line-height:1}
+.pp-hero-poster figcaption{
+ display:flex;justify-content:space-between;gap:8px;
+ padding:9px 14px 0;color:#626779;font-weight:850;
+ font-size:9px;letter-spacing:.15em;
+}
+.pp-hero-perf{
+ position:absolute;height:12px;bottom:-6px;left:12px;right:12px;
+ background:radial-gradient(circle at 6px 6px,#fbf8f0 5px,transparent 5.6px) repeat-x;
+ background-size:18px 12px;pointer-events:none;
+}
+/* Collectible stamps that act as chapter dividers, not more dashboard cards */
+.pp-stamp-strip{
+ display:flex;align-items:stretch;justify-content:center;gap:clamp(11px,3vw,34px);
+ padding:18px 14px 12px;margin:0 auto;
+ max-width:850px;flex-wrap:wrap;
+}
+.pp-stamp{
+ display:grid;justify-items:center;align-content:center;gap:3px;
+ width:112px;height:106px;padding:14px 11px;
+ position:relative;overflow:hidden;
+ border:7px solid #fffefa;
+ outline:1px solid #e2d8c6;
+ box-shadow:0 5px 15px #22314912;
+ transform:rotate(var(--tilt,0deg));
+}
+.pp-stamp:before{
+ content:"";position:absolute;inset:3px;pointer-events:none;
+ border:1px dashed #ffffffad;
+}
+.pp-stamp-red{--tilt:-4deg;background:#c64e62;color:#fff7e5}
+.pp-stamp-blue{--tilt:3deg;background:#397da3;color:#fffaf0}
+.pp-stamp-gold{--tilt:-2deg;background:#ecc17d;color:#1a3b51}
+.pp-stamp-rose{--tilt:4deg;background:#e5a4a0;color:#62374a}
+.pp-stamp-illustration{font-size:28px;line-height:1.05;font-family:Georgia,serif}
+.pp-stamp b{font-size:11px;font-weight:950;letter-spacing:.11em;line-height:1.15}
+.pp-stamp small{font-size:8px;font-weight:800;letter-spacing:.08em;opacity:.85}
+
+/* Section titles as pages in a travel journal */
+.pp-page-index{
+ display:flex;align-items:start;gap:17px;position:relative;
+ margin:18px 0 17px;padding:0 2px 17px;
+ border-bottom:1px solid #dacbbd;
+}
+.pp-index-mark{
+ font-family:"Fraunces",Georgia,serif;
+ font-size:36px;line-height:1;letter-spacing:-.07em;
+ color:#b74a57;min-width:45px;font-weight:650;
+}
+.pp-page-index .kicker{
+ font-size:10px;font-weight:900;letter-spacing:.2em;
+ color:#b2525a!important;margin:0 0 3px;
+}
+.pp-page-index .section-heading{
+ font-family:"Fraunces",Georgia,serif!important;
+ font-size:clamp(26px,4vw,38px);font-weight:700;
+ color:#18354c!important;letter-spacing:-.048em;
+ margin:0 0 3px;
+}
+.pp-page-index .section-heading:before{display:none!important}
+.pp-page-index .lead{color:#657080;margin:4px 0 0;max-width:760px;font-size:12px}
+.pp-index-decor{
+ margin-left:auto;align-self:start;color:#c75664;font-size:43px;
+ font-family:Georgia,serif;line-height:1.05;transform:rotate(-17deg);
+}
+/* Date strip: little folded tickets with a clear active date */
+.date-strip{gap:9px;margin-bottom:5px;padding:3px 3px 17px}
+.day-chip{
+ position:relative;overflow:hidden;
+ min-width:72px;border:1px solid #ddc9b8!important;
+ border-radius:5px!important;
+ background:#fffaf1!important;color:#234058;
+ box-shadow:0 4px 0 #e9dbcb!important;
+ padding:13px 15px 12px 10px;
+}
+.day-chip:before{
+ display:block!important;
+ content:"";position:absolute;inset:5px;pointer-events:none;
+ border:1px dashed #d5c2af;opacity:.8;
+}
+.day-chip:after{display:none!important}
+.day-chip strong{
+ color:#1e4057;font-family:"Fraunces",Georgia,serif!important;
+ font-weight:800;font-size:26px!important;line-height:1.2;
+}
+.day-chip small{color:#887470;font-weight:800;font-size:10px;letter-spacing:.06em}
+.day-chip-symbol{
+ top:10px!important;right:7px!important;transform:none!important;
+ font-size:12px!important;opacity:.78;filter:saturate(.8);
+}
+.day-chip.on{
+ background:#ba4f60!important;color:#fff!important;
+ border-color:#a54859!important;
+ box-shadow:0 4px 0 #8d4255!important;
+}
+.day-chip.on:before{border-color:#fce5e0}
+.day-chip.on strong,.day-chip.on small{color:#fff!important}
+.day-chip:hover{transform:translateY(-2px);box-shadow:0 6px 0 #dfcbb8!important}
+
+/* Daily postcard, ink on warm paper */
+.day-head{
+ position:relative;overflow:hidden;
+ background:linear-gradient(120deg,#fffaf0,#f8eae3)!important;
+ border:1px solid #e7d8c9!important;border-radius:7px!important;
+ box-shadow:0 8px 22px #2530450b!important;
+ padding:21px 23px 20px!important;
+}
+.day-head:before{
+ content:"";display:block;width:5px!important;
+ background:repeating-linear-gradient(180deg,#c24c61 0 14px,#f8edda 14px 25px,#3e80a2 25px 40px,#f8edda 40px 50px)!important;
+}
+.day-head:after{
+ content:"";display:block!important;position:absolute;
+ right:20px;top:16px;width:87px;height:87px;
+ border:2px dashed #b58e86!important;border-radius:50%;
+ opacity:.21;transform:rotate(-16deg);
+ background:radial-gradient(circle,#a8546617 0 34px,transparent 35px);
+ pointer-events:none;
+}
+.day-head .chapter-tag{
+ border:1px solid #dec4b7;background:#fff3e6;color:#a9525e;
+ border-radius:3px;padding:4px 10px;font-size:10px;
+ letter-spacing:.12em;
+}
+.day-head .kicker{font-size:10px;color:#bd6671!important}
+.day-head h2{
+ color:#1e3b51!important;letter-spacing:-.035em;
+ font-family:"Fraunces",Georgia,serif;font-size:clamp(25px,4vw,35px);
+ line-height:1.15;position:relative;z-index:1;
+}
+.day-head .lead{color:#656878;max-width:620px}
+.day-head .head-stats .pill{
+ background:#fffaf5;border:1px solid #eadccc;
+ color:#536677;border-radius:5px;box-shadow:none;
+}
+.trip-weather-today{
+ margin:11px 0 0!important;border:0!important;
+ background:#edf3f5!important;border-radius:8px!important;
+ padding:10px 12px!important;
+}
+.weather-icon{background:#fff;border:0!important;border-radius:6px!important;box-shadow:none!important}
+.weather-current-text small{color:#5e8da2!important}
+.weather-current-text strong{color:#244960!important;font-size:16px}
+.weather-current-text span{color:#536a76}
+.weather-source{border:0!important;background:#fff!important;color:#316e8b!important}
+
+/* Highlights designed like a postcard address panel, not three equal cards */
+.day-focus{margin:15px 0}
+.focus-paper{
+ border:1px solid #e0d6cb!important;
+ border-radius:7px!important;
+ background:#fffef9!important;
+ padding:18px 20px!important;
+ box-shadow:0 6px 22px #2c36420a!important;
+}
+.focus-paper:before{
+ background:repeating-linear-gradient(90deg,#bd4f60 0 24px,#fffae9 24px 35px,#327c9b 35px 60px,#fffae9 60px 71px)!important;
+ height:5px!important;
+}
+.focus-paper:after{display:none!important}
+.focus-paper-top{gap:13px;border-bottom:1px dashed #d8ccbc;margin-bottom:9px;padding:4px 0 12px}
+.focus-paper-top h3{
+ font-size:24px;color:#203b52!important;font-family:"Fraunces",Georgia,serif;
+}
+.focus-mini-stamp{
+ border:2px dashed #b35362!important;border-radius:5px!important;
+ background:#fff7ec!important;color:#ae5160;
+ transform:rotate(-8deg);width:48px;height:47px;
+}
+.focus-mini-stamp b{color:#b35362!important}
+.focus-decor{color:#b65160;font-size:24px}
+.trip-section-label{color:#b45463!important;font-size:9px;font-weight:900;letter-spacing:.17em}
+.focus-stops{
+ display:grid;grid-template-columns:repeat(3,minmax(0,1fr));
+ gap:0;margin:0;
+}
+.focus-stop{
+ border:0!important;border-radius:0!important;background:transparent!important;
+ box-shadow:none!important;padding:12px 12px!important;transform:none!important;
+ min-width:0;
+}
+.focus-stop:not(:last-child){border-right:1px dashed #dfcfbd!important}
+.focus-stop:hover{background:#fff8ec!important}
+.focus-stop-icon{
+ display:grid;place-items:center;background:#fae6db!important;
+ width:39px;height:39px;flex-basis:39px;
+ border-radius:50%!important;border:1px solid #edd4c2!important;
+ font-size:20px;
+}
+.focus-stop:nth-child(2) .focus-stop-icon{background:#e6f1f4!important;border-color:#d2e0e4!important}
+.focus-stop:nth-child(3) .focus-stop-icon{background:#fff0cf!important;border-color:#f0ddb7!important}
+.focus-stop-copy small{font-size:11px;font-weight:900;color:#b24e5d}
+.focus-stop-copy strong{color:#213c52!important;font-size:12px}
+.focus-entry{background:#fae6df;color:#934257;border-radius:3px}
+.focus-stop-go{color:#b4515e}
+.focus-notice{
+ margin-top:6px;padding:11px 5px 0;
+ border-top:1px dashed #d6c5b5;color:#596b72;font-size:11px;
+}
+.focus-notice strong{color:#23475f}
+.focus-notice>span:first-child{color:#b54d5b}
+.flight-today-shortcut{border-radius:5px!important;background:#f5ede1!important;border:1px dashed #d8bba5!important}
+
+/* Map and day panels as open album pages */
+.trip-day-layout{gap:15px}
+.trip-map-surface,.trip-itinerary-paper{
+ position:relative;background:#fffefa!important;
+ border:1px solid #e7ded3!important;border-radius:8px!important;
+ box-shadow:0 7px 23px #2332480b!important;
+ padding:18px!important;
+}
+.trip-map-surface:before,.trip-itinerary-paper:before{display:block!important;left:0;right:0;top:0;height:5px!important;border:0!important;border-radius:0!important}
+.trip-map-surface:before{
+ background:linear-gradient(90deg,#a84e5f,#e6ad77,#448dae)!important
+}
+.trip-itinerary-paper:before{
+ background:repeating-linear-gradient(90deg,#ba4c60 0 25px,#fdf8eb 25px 36px,#448da7 36px 60px,#fdf8eb 60px 70px)!important
+}
+.trip-section-heading h3{
+ color:#1d3a52!important;font-family:"Fraunces",Georgia,serif;
+ font-size:21px;
+}
+.trip-section-heading h3:after{display:none!important}
+.trip-title-icon{
+ border:0!important;background:#f8e6df!important;
+ border-radius:5px!important;font-size:16px
+}
+.trip-route-button{
+ background:#1b4964!important;color:#fff!important;border-radius:6px!important;
+ min-height:43px;font-weight:900!important;letter-spacing:.01em;
+}
+.trip-route-button:hover{background:#285f7b!important}
+.trip-secondary-fold{border-top:1px dashed #ded5cb}
+.trip-secondary-fold>summary{color:#60758a}
+#map.map,#map-fallback.map-fallback{
+ border:2px solid #e7e6dc!important;border-radius:5px!important;
+ box-shadow:0 3px 12px #1d354313!important
+}
+.map-stop-chip{
+ background:#f5f3f1!important;border:1px solid #e7e4e0!important;
+ border-radius:4px!important;color:#394a59!important;
+ box-shadow:none!important
+}
+.map-stop-chip.active{background:#f7e1e0!important;color:#934d5b!important}
+.map-photo-card{
+ border:1px solid #e7ded1!important;background:#fffcf5!important;
+ border-radius:5px!important
+}
+.map-photo-body h4{color:#21455a!important}
+.map-photo-actions a{color:#955060}
+.trip-transport-legend{gap:7px}
+.route-legend-item{
+ background:#f7f4ed!important;border:1px solid #e4ded4!important;
+ border-radius:3px!important;box-shadow:none!important;
+}
+.trip-mode-info{color:#697b83}
+
+/* Itinerary reveal as an envelope flap */
+.trip-feature-fold{
+ border:1px solid #ecdcca!important;
+ border-radius:6px!important;
+ background:#faf0e2!important;
+}
+.trip-feature-fold>summary{
+ color:#7e4256!important;
+ min-height:55px;font-weight:900
+}
+.trip-feature-fold>summary:hover{background:#f7e8d5}
+.trip-fold-chevron{
+ background:#fff9ef!important;border:1px solid #e7d5c0!important;
+ color:#9b4c61!important;border-radius:50%!important
+}
+#timeline{border-top:1px dashed #e4d0c2;background:#fffefa}
+#timeline .stop-body{
+ background:#fffefa!important;border:1px solid #e8dfd5!important;
+ border-radius:6px!important;box-shadow:none!important;
+}
+#timeline .stop-time{border:0!important;color:#af4c61!important}
+#timeline .stop-name{color:#203b51!important}
+#timeline .stop-desc{color:#63727e}
+#timeline .stop-photo-button{color:#9f485d;background:#faeae7;border:0;border-radius:4px}
+.trip-art-accordion{
+ background:#fffdfa!important;border:1px solid #e6ded5!important;
+ border-radius:8px!important;box-shadow:0 5px 19px #2236470b!important
+}
+.trip-art-accordion>summary{min-height:74px}
+.trip-accordion-text strong{color:#25435a!important}
+.trip-accordion-text small{color:#a75160}
+.trip-accordion-figure{
+ background:#e9f1f2!important;border:1px solid #d9e6e7!important;
+ border-radius:5px!important;transform:rotate(-4deg)
+}
+#trip-gallery-fold .trip-accordion-figure{background:#fae8dd!important;border-color:#eed5c6!important}
+.trip-fold-content{border-top:1px dashed #e6dbcb}
+#day-note .tip-card{
+ background:#f9f6ef!important;border:1px solid #e8e2d8!important;
+ border-radius:5px!important
+}
+#day-note .tip-card strong{color:#26465c!important}
+#day-note .tip-card a{color:#b04e62!important}
+
+/* Ticket envelopes and reservation stubs */
+#files-view .help-card{
+ background:#f7ebdd!important;border:1px solid #e7d5c4!important;border-radius:7px!important
+}
+#files-view .help-card h3,#files-view .surface h3{font-family:"Fraunces",Georgia,serif;color:#173b56}
+#files-view .surface,#bookings-view .surface{
+ background:#fffefa;border:1px solid #e7dfd3;border-radius:8px
+}
+.private-drive-panel{
+ background:linear-gradient(105deg,#fff9ec,#f5e9d8)!important;
+ border:1px solid #e5d0b7!important;border-left:5px solid #b54f62!important;
+ border-radius:7px!important;box-shadow:0 5px 17px #232e3c0a;
+}
+.private-drive-panel h3{color:#244259!important}
+.private-drive-panel:before{content:"✉"!important;color:#b14d60!important}
+.private-warning{background:#fffefa!important;border-radius:5px;color:#755f59}
+.book-row{
+ position:relative;overflow:hidden;
+ background:#fffefa!important;
+ border:1px solid #e7d9cb!important;
+ border-left:5px solid #b74c60!important;
+ border-radius:6px!important;
+ box-shadow:0 4px 14px #24344a0b!important;
+}
+.book-row:before{
+ display:block!important;background:#fbf8f0!important;left:-10px!important;
+}
+.book-row:after{
+ display:block!important;background:#fbf8f0!important;right:-10px!important;
+}
+.book-row h3{color:#1c425a!important}
+.counterbar{color:#1a3b55}
+.progress{background:#edddd2}
+.progress span{background:#b84e60!important}
+.check-group h3{font-family:"Fraunces",Georgia,serif;color:#24465c}
+.check-group h3:before{content:"✦"!important;color:#b84e60!important}
+.check-row{
+ border:1px solid #e9ded4!important;background:#fffefa!important;
+ border-radius:5px!important;box-shadow:none!important
+}
+.check-row input{accent-color:#bd5062}
+.fact{
+ background:#fffefa!important;border:1px solid #e7dfd3!important;
+ border-radius:7px!important;box-shadow:0 5px 19px #25344a0b!important
+}
+.fact:before{height:4px;background:linear-gradient(90deg,#bd4f5d,#f2c285,#4b91b2)}
+.fact h3{color:#1d415a!important}
+.fact a{color:#ad4b60!important}
+.travel-flight-card{
+ background:#fffefa!important;border:1px solid #e8dbc9!important;
+ border-radius:7px!important;box-shadow:0 5px 16px #2130440a!important
+}
+.travel-flight-top{background:#193c59!important}
+.flight-confirmed{background:#e5f0f3!important;color:#235a74!important;border:0}
+.travel-flight-airports strong,.travel-flight-times strong,.travel-flight-footer strong{color:#173d56!important}
+.travel-travel-note{background:#f9efe2;border-radius:6px;border:1px solid #eedec8}
+.travel-section-heading h3{color:#183b54}
+.travel-section-kicker{color:#bb4b5c}
+.weather-day-card{
+ background:#fffefa!important;border:1px solid #e8ded2!important;
+ border-radius:6px!important;box-shadow:0 3px 11px #2836440a!important
+}
+.weather-day-date,.weather-day-temp{color:#24475d}
+.weather-rain{color:#4d8daf}
+
+/* Packing list as notebook paper, with big touch-friendly native checkboxes */
+.pp-packing-board{
+ background:#fffdf8;position:relative;overflow:hidden;
+ border:1px solid #e5d9ca;border-left:7px solid #b64d61;
+ padding:18px clamp(13px,2.3vw,26px) 20px;
+ box-shadow:0 7px 23px #28334610;
+ margin:14px 0 20px;
+}
+.pp-packing-board:before{
+ content:"";position:absolute;inset:0;
+ background:repeating-linear-gradient(0deg,transparent 0 39px,#b6cad224 39px 40px);
+ pointer-events:none;
+}
+.pp-packing-board>*{position:relative;z-index:1}
+.pp-packing-header{
+ display:flex;align-items:center;justify-content:space-between;gap:9px;
+ padding:0 0 12px;margin-bottom:15px;border-bottom:1px dashed #d4c2ae;
+}
+.pp-packing-heading{display:flex;align-items:center;gap:12px}
+.pp-packing-icon{
+ display:grid;place-items:center;width:54px;height:54px;flex:none;
+ font-size:25px;background:#f7e6de;border:2px dashed #d3a38e;transform:rotate(-6deg)
+}
+.pp-packing-heading small,.pp-checklist-caption small{
+ display:block;color:#b3525c;letter-spacing:.13em;font-size:10px;font-weight:900
+}
+.pp-packing-heading h3,.pp-checklist-caption h3{
+ font-family:"Fraunces",Georgia,serif;font-size:clamp(20px,3vw,27px);
+ line-height:1.13;margin:3px 0;color:#1c3b51
+}
+.pp-packing-count{display:grid;gap:1px;justify-items:end;flex:none}
+.pp-packing-count strong{font-size:24px;line-height:1.1;color:#ae4659;font-weight:900}
+.pp-packing-count span{font-size:9px;color:#777588;font-weight:850;letter-spacing:.11em}
+.pp-packing-filter{display:flex;gap:8px;flex-wrap:wrap;margin:4px 0 13px}
+.pp-packing-filter button{
+ border:1px solid #dfd2c7;background:#fffcf7;padding:7px 12px;
+ color:#746577;font-size:11px;font-weight:850;border-radius:4px
+}
+.pp-packing-filter button.pp-packing-filter-on{background:#153e58;border-color:#153e58;color:#fff}
+.pp-packing-group{margin:12px 0 15px}
+.pp-packing-group h4{
+ font-size:11px;font-weight:900;letter-spacing:.13em;text-transform:uppercase;
+ color:#a84959;margin:0 0 6px;border-bottom:1px solid #e6ded2;padding-bottom:6px
+}
+.pp-packing-items{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:14px;row-gap:2px}
+.pp-packing-item{
+ display:flex;gap:10px;align-items:center;padding:8px 3px;min-width:0;
+ font-size:12px;font-weight:650;line-height:1.35;color:#344c5f;cursor:pointer
+}
+.pp-packing-item input{
+ width:19px;height:19px;flex:none;accent-color:#bf4f61;cursor:pointer;margin:0
+}
+.pp-packing-item.pp-packing-checked span{text-decoration:line-through;color:#9a9aa3}
+.pp-packing-custom{display:flex;align-items:center;gap:6px}
+.pp-packing-custom button{
+ display:grid;place-items:center;width:27px;height:27px;flex:none;
+ border:0;background:#f8e5e4;color:#a34254;border-radius:4px;
+}
+.pp-packing-add{
+ display:grid;gap:6px;margin:16px 0 0;padding:13px 0 0;
+ border-top:1px dashed #d9c8b7
+}
+.pp-packing-add label{color:#314a60;font-size:11px;font-weight:900}
+.pp-packing-add>div{display:flex;gap:8px}
+.pp-packing-add input{
+ min-width:0;flex:1;background:#fffefa;border:1px solid #dac7b8;
+ border-radius:4px;padding:10px 12px;font-size:12px
+}
+.pp-packing-add button{
+ background:#b7475b;color:#fff;border:0;border-radius:4px;
+ font-size:11px;font-weight:900;padding:10px 13px
+}
+.pp-checklist-sheet{
+ background:#fffaf1;border:1px solid #e6d7c3;
+ padding:18px 19px;margin:0 0 17px;
+ border-radius:6px;box-shadow:0 5px 17px #2b39400a;
+}
+.pp-checklist-caption{display:flex;gap:14px;align-items:center;margin:0 0 14px}
+.pp-checklist-caption>span{
+ width:45px;height:48px;display:grid;place-items:center;
+ background:#488aae;color:#fff;font-size:26px;font-weight:900;
+ transform:rotate(-6deg);border:4px solid #fff;
+ box-shadow:0 2px 6px #1d3c421f
+}
+.pp-sync-note{
+ background:#eaf0f3;border:1px dashed #a6bfcc;padding:14px 16px;
+ border-radius:7px;color:#335468;font-size:12px;line-height:1.55
+}
+.pp-sync-note strong{font-size:12px;color:#1d425b}
+.pp-sync-note p{margin:5px 0 9px}
+.pp-sync-note button{
+ background:#193e59;color:#fff;font-weight:850;font-size:11px;
+ border:0;border-radius:4px;padding:8px 12px
+}
+
+/* Ticket collection: mini travel stamps with grounded confirmed status */
+.pp-ticket-collection{margin:15px 0 20px}
+.pp-ticket-collection-head{
+ display:flex;justify-content:space-between;align-items:end;gap:13px;
+ margin:0 0 12px
+}
+.pp-ticket-collection-head h3{
+ font-family:"Fraunces",Georgia,serif;font-size:24px;margin:0;color:#1a3e57;
+}
+.pp-ticket-collection-head small{
+ color:#a54e5f;font-weight:900;letter-spacing:.11em;font-size:10px;
+}
+.pp-ticket-collection-grid{
+ display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px
+}
+.pp-ticket-stamp{
+ position:relative;overflow:hidden;
+ border:6px solid #fffefa;background:var(--ticket-bg,#f9e5d5);
+ box-shadow:0 5px 18px #22334918;
+ padding:12px;min-width:0;text-align:left;
+ display:flex;align-items:start;gap:10px;
+}
+.pp-ticket-stamp:before{
+ content:"";inset:4px;position:absolute;pointer-events:none;
+ border:1px dashed #ffffffb3
+}
+.pp-ticket-stamp>span:first-child{
+ display:grid;place-items:center;
+ width:49px;height:49px;flex:none;
+ font-size:25px;background:#ffffff59;border:1px solid #ffffffb0
+}
+.pp-ticket-stamp-copy{display:grid;gap:5px;min-width:0;flex:1}
+.pp-ticket-stamp-copy small{font-size:9px;font-weight:900;color:#687079;letter-spacing:.07em}
+.pp-ticket-stamp-copy strong{font-size:12px;line-height:1.2;color:#1f3d53;font-weight:900}
+.pp-ticket-stamp-copy em{font-size:10px;color:#a04256;font-style:normal;font-weight:800}
+.pp-ticket-stamp button{
+ display:inline-block;align-self:end;
+ border:0;background:#fffefa;color:#8d3f54;
+ font-weight:900;font-size:10px;padding:7px 8px;cursor:pointer;
+}
+.pp-ticket-stamp button:hover{background:#fff2e8}
+.pp-ticket-stamp:nth-child(6n+1){--ticket-bg:#f8d7c2}
+.pp-ticket-stamp:nth-child(6n+2){--ticket-bg:#daeaf1}
+.pp-ticket-stamp:nth-child(6n+3){--ticket-bg:#f5db9d}
+.pp-ticket-stamp:nth-child(6n+4){--ticket-bg:#efcacf}
+.pp-ticket-stamp:nth-child(6n+5){--ticket-bg:#cfdfda}
+.pp-ticket-stamp:nth-child(6n+6){--ticket-bg:#ebddec}
+
+/* Mobile: fixed ticket navigation, five clear and usable destinations */
+.bottom-nav.pp-bottom-nav{
+ display:flex!important;justify-content:center;gap:3px!important;
+ background:#fffaf3f7!important;
+ border-top:4px solid #c75161!important;
+ box-shadow:0 -4px 28px #172f4521!important;
+ padding:6px 6px calc(7px + env(safe-area-inset-bottom))!important;
+}
+.pp-bottom-nav:before{
+ content:"";position:absolute;left:8%;right:8%;top:27px;
+ border-top:2px dashed #c8baa5!important;
+ z-index:0;pointer-events:none
+}
+.pp-bottom-nav button{
+ position:relative;z-index:1;
+ display:flex!important;flex-direction:column;align-items:center;
+ justify-content:center;gap:4px!important;
+ flex:1 1 0;min-width:0;max-width:100px;
+ padding:5px 2px!important;
+ background:transparent!important;border:0!important;
+ color:#6d7180!important;font-size:10px!important;
+ font-weight:900!important;border-radius:0!important
+}
+.pp-bottom-nav button .nav-icon{
+ width:36px;height:36px;display:grid;place-items:center;
+ border:3px solid #fff!important;outline:1px dashed #c7b4a8;
+ border-radius:3px!important;
+ background:#f3d4cf!important;filter:none!important;
+ font-size:22px!important;line-height:1!important;
+ box-shadow:0 2px 7px #17304316;
+ transition:transform .18s;
+}
+.pp-bottom-nav button:nth-child(2) .nav-icon{background:#e7bf9a!important}
+.pp-bottom-nav button:nth-child(3) .nav-icon{background:#d5e6e9!important}
+.pp-bottom-nav button:nth-child(4) .nav-icon{background:#d9bdd2!important}
+.pp-bottom-nav button:nth-child(5) .nav-icon{background:#efd795!important}
+.pp-bottom-nav button.on{color:#b4485d!important;background:transparent!important}
+.pp-bottom-nav button.on .nav-icon{
+ transform:translateY(-2px) rotate(-5deg);
+ background:#b84a5b!important;color:#fff!important;
+ outline:2px solid #b84a5b!important;
+ box-shadow:0 3px 8px #7232422a!important
+}
+.foot{
+ text-align:center;margin:26px auto 0;
+ color:#8b817c!important;font-size:10px;
+ border-top:1px solid #e3d8c7;padding-top:16px
+}
+@media(min-width:880px){
+ .bottom-nav.pp-bottom-nav{
+  position:fixed;bottom:auto;top:12px;right:max(12px,calc((100vw - 1180px)/2));
+  left:auto;width:auto;max-width:440px;
+  border:1px solid #e3d5c6!important;border-top:4px solid #c75161!important;
+  border-radius:4px!important;box-shadow:0 6px 23px #1b2d4023!important;
+  padding:5px 7px!important;gap:2px!important;
+ }
+ .pp-bottom-nav button{flex:0 0 65px!important;max-width:65px;font-size:9px!important}
+ .pp-bottom-nav button .nav-icon{height:30px;width:30px;font-size:19px!important}
+ .pp-bottom-nav:before{top:23px}
+}
+@media(max-width:879px){
+ .pp-hero-body{grid-template-columns:minmax(0,.95fr) minmax(0,1.05fr);gap:18px}
+ .pp-hero h1{font-size:clamp(39px,6vw,54px)}
+ .pp-hero-poster{transform:rotate(.8deg)}
+ .pp-poster-sheet{border-width:7px}
+ .pp-ticket-collection-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .focus-stops{grid-template-columns:1fr}
+ .focus-stop{padding:10px 8px!important}
+ .focus-stop:not(:last-child){border-right:0!important;border-bottom:1px dashed #e1d6c9!important}
+}
+@media(max-width:660px){
+ .pp-hero{padding:0 17px 20px;border-radius:0 0 20px 20px}
+ .pp-masthead{padding:12px 0;gap:7px;font-size:9px;letter-spacing:.09em;flex-wrap:wrap}
+ .pp-mastedition{display:none}
+ .pp-hero-body{display:flex;flex-direction:column;align-items:stretch;gap:18px;padding-top:22px}
+ .pp-kicker{margin-bottom:13px}
+ .pp-hero h1{font-size:clamp(44px,11.7vw,66px);line-height:.95}
+ .pp-cityline{margin-top:6px}
+ .pp-hero-desc{font-size:12px;margin:14px 0 10px}
+ .pp-hero-journey{margin-bottom:11px}
+ .pp-hero .polar-countdown{max-width:none;padding:10px 11px!important}
+ .pp-hero .polar-clock-number{font-size:clamp(24px,7vw,33px)}
+ .pp-hero .polar-clock-sep{font-size:18px}
+ .pp-hero-actions{gap:8px}
+ .pp-primary-link,.pp-secondary-link{flex:1;font-size:11px;padding:10px}
+ .pp-hero-poster{margin:0 4px;transform:rotate(1deg)}
+ .pp-poster-sheet{border-width:8px}
+ .pp-poster-corner{width:59px;height:69px;right:10px;top:10px}
+ .pp-poster-corner span{font-size:7px}
+ .pp-poster-corner b{font-size:18px}
+ .pp-stamp-strip{gap:9px;padding:17px 10px 9px}
+ .pp-stamp{width:calc(25% - 10px);min-width:67px;max-width:105px;height:92px;padding:8px 3px;border-width:5px}
+ .pp-stamp-illustration{font-size:24px}
+ .pp-stamp b{font-size:9px}
+ .pp-stamp small{font-size:7px}
+ .pp-page-index{gap:12px;margin:12px 0 13px;padding-bottom:12px}
+ .pp-index-mark{font-size:30px;min-width:34px}
+ .pp-page-index .section-heading{font-size:28px}
+ .pp-index-decor{font-size:32px}
+ .day-head{padding:16px 15px!important}
+ .focus-paper{padding:12px 11px!important}
+ .focus-paper-top{padding:4px 4px 12px;margin-bottom:0}
+ .focus-paper-top h3{font-size:22px}
+ .focus-stop-copy strong{font-size:12px}
+ .trip-map-surface,.trip-itinerary-paper{padding:13px!important}
+ #map.map,#map-fallback.map-fallback{height:320px!important}
+ .pp-packing-items{grid-template-columns:1fr}
+ .pp-packing-board{padding:12px 11px 14px}
+ .pp-packing-count strong{font-size:20px}
+ .pp-packing-heading h3{font-size:20px}
+ .pp-packing-icon{width:44px;height:44px;font-size:23px}
+ .pp-ticket-collection-grid{grid-template-columns:1fr;gap:9px}
+ .pp-ticket-stamp{padding:10px}
+}
+@media(max-width:365px){
+ .pp-hero h1{font-size:42px}
+ .pp-stamp b{font-size:8px}
+ .pp-stamp small{font-size:6px}
+ .pp-hero .polar-clock-number{font-size:22px}
+ .pp-hero .polar-clock-sep{font-size:16px}
+ .pp-page-index .section-heading{font-size:24px}
+ .pp-poster-corner{display:none}
+}
+@media(prefers-reduced-motion:reduce){
+ *,*:before,*:after{scroll-behavior:auto!important;transition:none!important}
+}
+@media print{
+ .pp-hero{background:#f8e9d3!important;break-after:avoid}
+ .pp-hero-poster{transform:none}
+ .bottom-nav.pp-bottom-nav,.pp-hero-actions,.pp-packing-add{display:none!important}
+ .pp-packing-board,.pp-ticket-stamp,.book-row,.focus-paper{break-inside:avoid}
+}

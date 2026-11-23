@@ -38,7 +38,6 @@ if(!bridge||typeof bridge.snapshot!=="function"){
  setStatus("No se pudo conectar la checklist al sistema compartido. Los cambios siguen siendo locales.","error");
  return;
 }
-const originLocal=bridge.snapshot(); // copia opcional anterior a la conexión
 let activeUser=null;
 let confirmedMember=false;
 let unsubscribers=[];
@@ -164,7 +163,7 @@ signoutBtn.addEventListener("click",async()=>{
 publishBtn.addEventListener("click",async()=>{
  if(!canWrite())return;
  if(!confirm("¿Subir los estados de este móvil al espacio compartido? Esto puede sustituir cambios más recientes de otras personas. Los PDFs NO se subirán."))return;
- const s=originLocal;
+ const s=bridge.snapshot(); // tomar el estado actual, no una copia antigua
  publishBtn.disabled=true;
  try{
   await Promise.all([

@@ -156,14 +156,15 @@ window.renderMap=function(d){
  }
  try{
   document.getElementById("map").hidden=false;document.getElementById("map-fallback").hidden=true;
-  if(!map){
-   map=L.map("map",{zoomControl:true,scrollWheelZoom:false,attributionControl:true});
-   L.tileLayer("https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png",{maxZoom:19,attribution:"© OpenStreetMap contributors · © CARTO"}).addTo(map);
-  }
-  // Sustituir teselas antiguas aunque el mapa ya exista.
-  let hasCarto=false;
-  map.eachLayer(layer=>{if(layer instanceof L.TileLayer){if(String(layer._url||"").includes("cartocdn.com"))hasCarto=true;else map.removeLayer(layer)}});
-  if(!hasCarto)L.tileLayer("https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png",{maxZoom:19,attribution:"© OpenStreetMap contributors · © CARTO"}).addTo(map);
+  if(!map)map=L.map("map",{zoomControl:true,scrollWheelZoom:false,attributionControl:true});
+  // OpenStreetMap standard tiles: no API key. Remove any obsolete CARTO layer.
+  let hasOsm=false;
+  map.eachLayer(layer=>{
+   if(!(layer instanceof L.TileLayer))return;
+   if(String(layer._url||"").includes("tile.openstreetmap.org"))hasOsm=true;
+   else map.removeLayer(layer);
+  });
+  if(!hasOsm)L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png",{maxZoom:19,attribution:'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'}).addTo(map);
   markers.forEach(m=>map.removeLayer(m));routeLines.forEach(l=>map.removeLayer(l));
   markers=[];routeLines=[];
   for(let i=0;i+1<currentStops.length;i++){

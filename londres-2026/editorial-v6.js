@@ -143,6 +143,24 @@ function showGallery(){
   });
  }
 }
+/* Recuperar también una miniatura con autoría para la portada si está disponible. */
+if(typeof window.londonTripPhoto==="function"){
+ window.londonTripPhoto("hamleys").then(photo=>{
+  const img=document.querySelector(".hero-photo img");
+  const caption=document.querySelector(".hero-photo figcaption");
+  if(!img||!photo?.src)return;
+  if(!photo.src.startsWith("https://upload.wikimedia.org/")&&!photo.src.startsWith("https://commons.wikimedia.org/wiki/Special:FilePath/"))return;
+  img.src=photo.src;
+  if(caption){
+   caption.textContent="Regent Street en Navidad · ";
+   const link=document.createElement("a");
+   link.href=photo.page||"https://commons.wikimedia.org/";
+   link.target="_blank";link.rel="noopener noreferrer";link.style.color="inherit";
+   link.textContent=photo.credit||"Wikimedia Commons";
+   caption.append(link);
+  }
+ }).catch(()=>{});
+}
 const oldRender=window.renderDay;
 if(typeof oldRender==="function"){
  window.renderDay=function(){oldRender();showGallery()};

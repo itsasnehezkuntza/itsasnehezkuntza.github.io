@@ -22,6 +22,7 @@
 <link rel="stylesheet" href="./style-v3.css?v=4">
 <link rel="stylesheet" href="./style-v4.css?v=5">
 <link rel="stylesheet" href="./style-v8.css?v=8">
+<link rel="stylesheet" href="./style-v9.css?v=9">
 </head>
 <body>
 <div class="app">
@@ -33,7 +34,7 @@
 <h1>London,<br><em>baby!</em> <span class="hero-twinkle" aria-hidden="true">✳</span></h1>
 <p class="subtitle">Calles iluminadas, dinosaurios, mercados y montañas rusas. Siete días, mil historias y una guía para llevarlo todo en el bolsillo.</p>
 <div class="hero-tags"><span>✈️ 6–12 dic</span><span>👥 3 viajeros</span><span>📍 Barbican</span><span>❄️ Edición navideña</span></div>
-<div class="top-actions"><button class="hero-btn" onclick="switchTab('bookings')">✓ Reservas</button><button class="hero-btn" onclick="switchTab('files')">🎟 Tickets</button><button class="hero-btn" onclick="exportBackup()">↗ Guardar copia</button></div>
+<div class="top-actions"><a class="hero-btn hero-jump" href="#days-view">Ver nuestro viaje ↓</a><button class="hero-btn" onclick="switchTab('bookings')">✓ Reservas</button><button class="hero-btn" onclick="switchTab('files')">🎟 Tickets</button><button class="hero-btn" onclick="exportBackup()">↗ Guardar copia</button></div>
 </div>
 <div class="hero-postcard" aria-hidden="true">
 <div class="postcard-top"><span>POSTCARD № 007</span><span>GREETINGS FROM LONDON ✳</span></div>
@@ -74,19 +75,43 @@
 
 <main class="main">
 <section id="days-view" class="view active">
-<div class="kicker">DÍA A DÍA</div><h2 class="section-heading">Nuestro itinerario</h2><p class="lead">Elegid el día. Tocad una parada para leer curiosidades y abrid Google Maps para la navegación real.</p>
+<div class="kicker">DÍA A DÍA</div><h2 class="section-heading">Nuestro itinerario</h2><p class="lead">Tres momentos clave a la vista. El itinerario completo, las fotos y los consejos se abren cuando los necesitáis.</p>
 <div class="date-strip" id="day-strip" aria-label="Seleccionar día"></div>
 <div id="day-header"></div>
-<div class="layout">
-<div class="map-side">
-<div class="surface" style="margin-bottom:15px"><div style="display:flex;justify-content:space-between;align-items:center;gap:8px"><h3 style="margin:0">Mapa y recorrido</h3></div>
-<p class="tiny muted" style="margin:5px 0 10px">Puntos numerados en orden. Las líneas discontinuas solo indican el orden de visita, <b>no son calles ni indicaciones de navegación</b>.</p>
-<div id="map" class="map" hidden></div><div id="map-fallback" class="map-fallback"></div>
-<div id="map-actions" class="route-buttons"></div>
-<div class="map-under"><span class="tiny muted" id="map-status">Para navegar, abre cada tramo en Google Maps.</span><a class="text-btn" href="https://www.google.com/maps" target="_blank" rel="noopener">Google Maps ↗</a></div></div>
-<div id="day-note" class="surface"></div>
-</div>
-<div class="surface"><h3>⏰ Horario y paradas</h3><p class="tiny muted" style="margin-top:-4px">Horarios propuestos. Si ya tenéis entrada, guardad su hora real en «Reservas».</p><div id="timeline" class="timeline"></div></div>
+
+<div id="day-focus" class="day-focus" aria-live="polite"></div>
+<div class="trip-day-layout">
+ <section class="map-side trip-map-side">
+  <div class="surface trip-map-surface">
+   <div class="trip-section-heading"><div class="trip-section-label">02 <span>·</span> EL RECORRIDO</div><h3><span class="trip-title-icon" aria-hidden="true">🗺️</span> Por dónde vamos</h3></div>
+   <div id="map" class="map" hidden></div>
+   <div id="map-fallback" class="map-fallback"></div>
+   <div class="trip-main-route"><a id="trip-main-route-link" class="trip-route-button" href="https://www.google.com/maps" target="_blank" rel="noopener noreferrer">↗ Abrir ruta en Google Maps</a></div>
+   <details id="trip-route-fold" class="trip-secondary-fold">
+    <summary>Otras rutas por tramos</summary>
+    <div id="map-actions" class="route-buttons"></div>
+   </details>
+   <div class="map-under"><span class="tiny muted" id="map-status">Seleccionad un punto para conocer la parada.</span></div>
+  </div>
+ </section>
+ <div class="trip-day-side">
+  <section class="surface trip-itinerary-paper">
+    <div class="trip-section-heading"><div class="trip-section-label">03 <span>·</span> HORARIOS</div><h3><span class="trip-title-icon" aria-hidden="true">🕰️</span> El plan completo</h3></div>
+    <p class="trip-fold-intro" id="trip-times-intro"></p>
+    <details id="trip-itinerary-fold" class="trip-feature-fold">
+      <summary><span>Desplegar itinerario por horas</span><span class="trip-fold-chevron" aria-hidden="true">⌄</span></summary>
+      <div id="timeline" class="timeline"></div>
+    </details>
+  </section>
+  <details id="trip-tips-fold" class="trip-art-accordion">
+   <summary><span class="trip-accordion-figure" aria-hidden="true">☕</span><span class="trip-accordion-text"><small>CONSEJOS DE VIAJE</small><strong>Antes de salir</strong></span><span class="trip-fold-chevron" aria-hidden="true">⌄</span></summary>
+   <div id="day-note" class="trip-fold-content"></div>
+  </details>
+  <details id="trip-gallery-fold" class="trip-art-accordion">
+   <summary><span class="trip-accordion-figure" aria-hidden="true">📸</span><span class="trip-accordion-text"><small>POSTALES DEL DÍA</small><strong>Fotos de los lugares</strong></span><span class="trip-fold-chevron" aria-hidden="true">⌄</span></summary>
+   <div id="trip-gallery-host" class="trip-fold-content"></div>
+  </details>
+ </div>
 </div>
 </section>
 <section id="bookings-view" class="view">
@@ -125,10 +150,10 @@
 </main>
 </div>
 <nav class="bottom-nav" aria-label="Navegación principal">
-<button data-tab="days" class="on" onclick="switchTab('days')"><span class="nav-icon">🗺️</span>Itinerario</button>
-<button data-tab="bookings" onclick="switchTab('bookings')"><span class="nav-icon">✅</span>Reservas</button>
-<button data-tab="files" onclick="switchTab('files')"><span class="nav-icon">🎟️</span>Tickets</button>
-<button data-tab="info" onclick="switchTab('info')"><span class="nav-icon">ℹ️</span>Info</button>
+<button data-tab="days" class="on" onclick="switchTab('days')"><span class="nav-icon">🧭</span>Viaje</button>
+<button data-tab="bookings" onclick="switchTab('bookings')"><span class="nav-icon">🎫</span>Reservas</button>
+<button data-tab="files" onclick="switchTab('files')"><span class="nav-icon">🧳</span>Tickets</button>
+<button data-tab="info" onclick="switchTab('info')"><span class="nav-icon">☕</span>Info</button>
 </nav>
 <div id="toast" role="status" class="toast"></div>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" async onload="if(typeof renderDay==='function')renderDay()" crossorigin="anonymous"></script>
@@ -285,5 +310,6 @@ async function importBackup(event){let file=event.target.files?.[0];event.target
 <script src="./app-v3.js?v=4" defer></script>
 <script src="./app-v4.js?v=5" defer></script>
 <script src="./editorial-v6.js?v=8" defer></script>
+<script src="./app-v9.js?v=9" defer></script>
 </body>
 </html>

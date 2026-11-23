@@ -53,6 +53,13 @@ body{
 }
 .day-chip.on:after{background:#f0deb2;border-color:#f0deb2}
 .day-chip.on strong{color:#fff7e0}
+.day-chip{padding-right:21px}
+.day-chip-symbol{
+ position:absolute;right:5px;top:50%;transform:translateY(-50%);
+ font-size:14px;opacity:.64;filter:saturate(.62);pointer-events:none
+}
+.day-chip.on .day-chip-symbol{opacity:.96;filter:saturate(.9)}
+
 .day-head{
  margin-top:2px;margin-bottom:13px;border:1px solid #e6e1d6;
  background:linear-gradient(102deg,#fffdf8,#fcf6e9 86%);

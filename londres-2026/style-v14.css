@@ -1,0 +1,349 @@
+/* LA PATRULLA POLAR · DICIEMBRE 2026
+   Temática unificada de Navidad londinense. No alterar la semántica de mapas ni tickets.
+   Acentos: verde abeto, rojo abrigo, dorado antiguo, crema nieve. */
+:root{
+ --pp-forest:#204939;
+ --pp-evergreen:#173d31;
+ --pp-holly:#b54948;
+ --pp-holly-deep:#8e373d;
+ --pp-gold:#d2ab64;
+ --pp-snow:#fffdfa;
+ --pp-paper:#faf7ef;
+ --pp-frost:#eff4ec;
+ --pp-line:#e5dfd2;
+ --pp-ink:#274435;
+ --ink:#274435;--forest:#204939;--forest2:#16382d;
+ --paper:#faf8f1;--gold:#d2ab64;
+}
+body{
+ background-color:#faf8f1;
+ background-image:radial-gradient(circle at 3px 3px,#deccad39 1px,transparent 1.5px);
+ background-size:26px 26px;color:var(--pp-ink);
+}
+.hero.polar-hero{
+ isolation:isolate;
+ background:radial-gradient(ellipse at 89% 10%,#527a60 0,#204b39 39%,#12362b 100%)!important;
+ border:0!important;border-bottom:7px solid #a84143!important;
+ border-radius:0 0 28px 28px;
+ box-shadow:0 12px 25px #11322724;
+ padding:30px 18px 26px!important;
+ position:relative;overflow:hidden;
+}
+.hero.polar-hero:before,.hero.polar-hero:after{display:none!important}
+.polar-snow{
+ position:absolute;inset:0;z-index:-1;pointer-events:none;
+ background-repeat:repeat;
+ background-image:
+ radial-gradient(circle at center,#fff8ed96 1.5px,transparent 2.1px),
+ radial-gradient(circle at center,#f9eedb6a 1.2px,transparent 1.7px);
+ background-size:84px 91px,122px 107px;
+ background-position:25px 11px,69px 52px;
+}
+.polar-snow-two{opacity:.4;transform:rotate(8deg)}
+.hero.polar-hero .hero-inner{gap:21px;align-items:center;position:relative;z-index:1}
+.hero.polar-hero .hero-content{min-width:0}
+.hero.polar-hero .hero-masthead{
+ display:flex;gap:10px;align-items:center;max-width:600px;
+ margin:0 0 21px;color:#f5e5b9;font-size:10px;letter-spacing:.15em;
+}
+.hero.polar-hero .hero-crest{
+ display:grid;place-items:center;width:42px;height:42px;flex:0 0 42px;
+ background:#f4e6c6;color:#204636;font-size:19px;
+ border:2px dashed #e4ba77;box-shadow:0 0 0 3px #173f31;
+ transform:rotate(-9deg);border-radius:50%;
+}
+.hero.polar-hero .mast-rule{background:#e6cb96a1;flex:1;min-width:10px}
+.hero.polar-hero .mast-date{color:#e7d7b6;font-weight:800;font-size:9px;white-space:nowrap}
+.hero.polar-hero .micro{
+ font-size:11px;letter-spacing:.11em;color:#eedbb7;
+ font-weight:850;margin:0 0 8px;
+}
+.hero.polar-hero h1{
+ font-family:"Fraunces",Georgia,serif;
+ color:#fff9e9;font-size:clamp(46px,9.5vw,86px);
+ font-weight:700;letter-spacing:-.06em;line-height:1.02;
+ text-wrap:balance;margin:0 0 12px;
+}
+.hero.polar-hero h1 em{color:#f5c1a6;font-weight:600;font-style:italic}
+.hero.polar-hero .hero-twinkle{color:#e2c278;font-size:.5em;vertical-align:top;letter-spacing:0}
+.hero.polar-hero .subtitle{
+ color:#fff4da;font-size:15px;font-weight:500;line-height:1.46;
+ margin:4px 0 13px;max-width:520px;
+}
+.hero.polar-hero .hero-tags span{
+ background:#ffffff11!important;color:#fff7e7;
+ border:1px solid #e2e8cc65!important;
+ border-radius:9px;font-size:11px;padding:6px 9px;
+}
+.hero.polar-hero .top-actions{margin-top:16px;gap:8px}
+.hero.polar-hero .hero-btn{
+ background:#f9edd5!important;border:1px solid #fff9e5!important;
+ color:#244b37!important;padding:9px 12px!important;min-height:40px;
+ border-radius:9px!important;
+ font-weight:850!important;box-shadow:0 2px 0 #08271b67!important;
+}
+.hero.polar-hero .hero-btn:hover{
+ background:#fff9ee!important;transform:translateY(-1px);color:#234533!important;
+}
+.hero.polar-hero .polar-postcard{
+ background:#fffaf0;border:8px solid #fffaf0;
+ width:100%;max-width:520px;min-height:0;height:auto;
+ transform:rotate(2deg);overflow:hidden;display:flex;flex-direction:column;
+ border-radius:8px;
+ box-shadow:0 20px 34px #0a261b3f,0 0 0 1px #f2dfb7;
+}
+.hero.polar-hero .polar-postcard:before{inset:5px;border:1px dashed #b9a780;z-index:0}
+.polar-postcard .postcard-top{
+ font-size:9px;color:#597362;letter-spacing:.11em;
+ font-weight:900;display:flex;justify-content:space-between;gap:6px;
+ padding:11px 11px 5px;
+}
+.polar-postcard .postcard-art{
+ margin:0 6px;position:relative;height:auto;z-index:1;
+ border-radius:3px;overflow:hidden;background:#e3e9df;
+ border:1px solid #d8dfd3;
+}
+.polar-postcard .postcard-art img{
+ display:block;width:100%;height:auto;aspect-ratio:800/445;
+ object-fit:cover;object-position:center;
+}
+.polar-postcard .postcard-caption{
+ margin:5px 11px 7px;padding:6px 1px 0;
+ border-top:1px dashed #d0c2a0;color:#395a46;
+ display:flex;gap:5px;justify-content:space-between;align-items:center;
+}
+.polar-postcard .postcard-caption strong{
+ font-family:"Fraunces",Georgia,serif;
+ font-size:clamp(13px,2.2vw,21px);letter-spacing:-.025em;line-height:1.2;
+}
+.polar-postcard .postcard-caption span{
+ font-family:"DM Sans",sans-serif;letter-spacing:.08em;font-size:9px;
+ font-weight:900;white-space:nowrap;
+}
+.polar-countdown{
+ max-width:480px;margin:13px 0 4px;
+ background:linear-gradient(110deg,#102d25,#1e4637);
+ border:1px solid #e2c79484;border-radius:13px;
+ box-shadow:inset 0 0 0 3px #ffffff0b,0 6px 13px #0b281c22;
+ padding:11px 13px 10px;color:#fff7e7;
+}
+.polar-countdown-label{
+ font-size:11px;font-weight:850;color:#f9dc9d;
+ display:flex;gap:6px;align-items:center;margin-bottom:7px;
+}
+.polar-clock-face{
+ display:flex;gap:7px;align-items:start;justify-content:space-around;
+ font-variant-numeric:tabular-nums;font-feature-settings:"tnum" 1;
+}
+.polar-clock-face>div{display:grid;gap:2px;justify-items:center;min-width:0;flex:1}
+.polar-clock-number{
+ display:block;width:100%;font-size:clamp(23px,3.9vw,34px);
+ line-height:1.13;font-family:"DM Sans",system-ui,sans-serif;font-weight:850;
+ text-align:center;letter-spacing:-.055em;color:#fff9e8;
+}
+.polar-clock-face>div>span{
+ font-size:9px;font-weight:850;letter-spacing:.1em;color:#ceb99c;
+}
+.polar-clock-sep{
+ font-size:22px;font-weight:700;color:#d3ac78;line-height:1.1;opacity:.8;flex:none;
+}
+.polar-cd-caption{
+ text-align:center;font-size:10px;color:#eadaba;margin:7px 0 0;
+}
+.polar-journey-strip{
+ display:flex;justify-content:center;align-items:center;flex-wrap:wrap;gap:8px;
+ margin:-4px auto 9px;padding:9px 12px;
+ max-width:1090px;color:#556a5a;
+}
+.polar-journey-strip span{
+ font-size:9px;font-weight:850;letter-spacing:.07em;
+ padding:6px 11px;border-radius:99px;
+ border:1px solid #e7e0d0;background:#fffefa;
+}
+#days-view>.section-heading:before,
+#bookings-view>.section-heading:before,
+#files-view>.section-heading:before,
+#info-view>.section-heading:before{
+ content:"🐾"!important;transform:rotate(-14deg);
+ color:#b94f49;filter:saturate(.85);
+ font-family:system-ui,sans-serif;
+}
+.day-chip{background:#fffefa;border-color:#decfc0;box-shadow:0 3px 0 #e1ddcd}
+.day-chip.on{background:#264e3a;border-color:#1d4332;box-shadow:0 3px 0 #173c2c}
+.day-chip-symbol{font-size:15px}
+.day-head{
+ background:linear-gradient(115deg,#fffdf8,#fff6e4)!important;
+ border-color:#eadbc4!important;
+ box-shadow:0 3px 18px #70572c0e;
+}
+.day-head:before{
+ background:repeating-linear-gradient(180deg,#b74947 0 18px,#f3eddb 18px 27px,#306e4d 27px 45px,#f3eddb 45px 53px)!important;
+ width:6px!important;
+}
+.day-head:after{
+ content:"❄"!important;
+ font-family:Georgia,serif;font-size:50px!important;opacity:.13;
+ border:2px dashed #9cae94!important;border-radius:50%;
+}
+.day-head .chapter-tag{
+ background:#f5e7d4;color:#8b5146;
+ border:1px solid #e9d4bc;border-radius:7px;
+}
+.trip-weather-today{border-color:#cfded0}
+.focus-paper{
+ background:linear-gradient(115deg,#fffef9,#fff7e8)!important;
+ border:1px solid #dfd2bc!important;
+}
+.focus-paper:after{content:"🐾";font-size:54px;color:#8c9c85;display:grid;place-items:center;border:0!important;opacity:.1!important}
+.focus-paper-top h3{color:#264934}
+.focus-mini-stamp{background:#fef4dc}
+.focus-mini-stamp b{color:#b94c45}
+.focus-stop{background:#fffefa;border-color:#e8e2d5}
+.focus-stop:hover{border-color:#c1a978}
+.focus-stop-icon{background:#f1f4e9}
+.focus-notice{border-color:#d6cbbb}
+.trip-map-surface,.trip-itinerary-paper{
+ background:#fffefa!important;border-color:#e4dfd4!important;
+}
+.trip-map-surface:before{border-top:3px solid #37664b}
+.trip-itinerary-paper:before{border-top:3px solid #b64e49}
+.trip-section-heading h3{
+ color:#294b38;
+}
+.trip-section-heading h3:after{content:" ❄";font-size:14px;color:#c2a476;opacity:.75}
+.trip-section-label{color:#8c5648}
+.trip-art-accordion{
+ background:#fffdfa;
+ border:1px solid #e3dfd1;
+ box-shadow:0 3px 15px #2a3b2909;
+}
+.trip-accordion-figure{
+ background:#ebf2e8;
+ border:1px solid #dbe7d8;
+ box-shadow:inset 0 0 0 2px #fffef8;
+}
+.trip-feature-fold{background:#fff8e9;border-color:#e9d6b8}
+.trip-feature-fold>summary{color:#6c5339}
+#timeline .stop-body{
+ background:#fffefa;border:1px solid #e5dfd3!important;
+}
+#timeline .stop-time{
+ border-top:2px solid #d4b481;
+ color:#50634e;
+}
+#timeline .trip-transfer-label{
+ border-radius:9px;background:#f7faf4;
+}
+.trip-route-button{
+ background:#266247!important;
+ font-weight:850;
+}
+.trip-transport-legend .route-legend-item{
+ border-color:#e6e4dd;
+}
+.book-row{
+ background:#fffaf2;border:1px solid #e8dfcd;
+ border-left:4px solid #ac4b48;
+ box-shadow:0 3px 0 #e7ddc8;
+}
+.book-row:before{background:#faf8f1}
+.book-row:after{background:#faf8f1}
+.book-top h3:before{
+ content:"";display:inline-block;
+}
+.check-row{background:#fffefa;border-color:#e8e1d5}
+.check-group h3:before{content:"🐾"!important;color:#af5a4d}
+.private-drive-panel{background:linear-gradient(120deg,#fffdfa,#f9f0e0)}
+.fact{background:#fffdfa!important;border-color:#e9dfcf!important}
+.fact:before{background:repeating-linear-gradient(90deg,#b74444 0 25px,#f5eacb 25px 36px,#34664b 36px 60px)}
+.travel-flight-card{
+ border:1px solid #d7d5c8;
+ background:linear-gradient(140deg,#fffefa,#fff5e2);
+}
+.travel-flight-top{
+ background:repeating-linear-gradient(115deg,#22523b 0 20px,#22523b 20px 24px,#2a6548 24px 41px);
+}
+.weather-day-card{background:#fffefa;border-color:#e8dfd1}
+.bottom-nav{
+ border-top:4px solid #af4b49!important;
+ background:#fffcf6fa!important;
+ box-shadow:0 -4px 24px #213b281c!important;
+}
+.bottom-nav:before{
+ border-top:3px dotted #cbb49d!important;
+}
+.bottom-nav button .nav-icon{
+ border:2px solid #cfbd9f!important;
+ background:#fffaf0!important;
+ filter:none!important;
+}
+.bottom-nav button.on .nav-icon{
+ background:#e7f0df!important;
+ border-color:#3e7551!important;
+ box-shadow:0 0 0 3px #fffdf9,0 0 0 5px #c7d8c7!important;
+}
+.bottom-nav button.on{color:#245b3d!important}
+.bottom-nav button:nth-child(1) .nav-icon{background:#eef4e8!important}
+.bottom-nav button:nth-child(2) .nav-icon{background:#fff0df!important}
+.bottom-nav button:nth-child(3) .nav-icon{background:#f0eef6!important}
+.bottom-nav button:nth-child(4) .nav-icon{background:#fcefe9!important}
+.foot{color:#869282}
+.polar-day-subnote{
+ display:flex;gap:7px;align-items:center;
+ font-size:11px;font-weight:750;color:#8b6954;
+ margin:8px 0 0;line-height:1.45;
+}
+.polar-day-subnote .polar-paw{font-size:16px}
+.polar-snowflakes{
+ pointer-events:none;position:absolute;inset:0;opacity:.14;
+ background-image:radial-gradient(circle,#ffffff 1px,transparent 1.5px);
+ background-size:39px 34px;
+}
+@media(min-width:720px){
+ .hero.polar-hero{padding:35px 26px 32px!important}
+ .hero.polar-hero .hero-inner{grid-template-columns:minmax(0,1.06fr) minmax(330px,.94fr);gap:24px}
+ .hero.polar-hero .polar-postcard{max-width:530px}
+ .hero.polar-hero .hero-masthead{margin-bottom:26px}
+}
+@media(max-width:719px){
+ .hero.polar-hero{padding:23px 14px 22px!important}
+ .hero.polar-hero .hero-inner{gap:17px}
+ .hero.polar-hero h1{font-size:clamp(43px,11vw,64px)}
+ .hero.polar-hero .hero-masthead{margin-bottom:13px}
+ .hero.polar-hero .hero-masthead .mast-date{font-size:8px}
+ .hero.polar-hero .polar-postcard{
+  margin:0 auto;max-width:420px;
+  transform:rotate(1.3deg);
+ }
+ .polar-postcard .postcard-top{font-size:8px;padding:8px 8px 4px}
+ .polar-postcard .postcard-caption{margin:5px 7px 5px}
+ .polar-postcard .postcard-caption strong{font-size:14px}
+ .polar-postcard .postcard-caption span{font-size:8px}
+ .polar-countdown{padding:10px 11px}
+ .polar-clock-number{font-size:clamp(25px,6.7vw,34px)}
+ .polar-journey-strip{margin:1px 0 5px;gap:5px;padding:7px 10px}
+ .polar-journey-strip span{font-size:8px;padding:5px 7px}
+ .hero.polar-hero .top-actions{margin-top:12px}
+ .hero.polar-hero .hero-btn{font-size:11px!important;padding:8px 10px!important}
+}
+@media(max-width:390px){
+ .hero.polar-hero h1{font-size:43px}
+ .hero.polar-hero .hero-masthead{font-size:9px}
+ .hero.polar-hero .hero-masthead .mast-rule{display:none}
+ .hero.polar-hero .hero-masthead .mast-date{margin-left:auto}
+ .polar-clock-face{gap:4px}
+ .polar-clock-sep{font-size:17px}
+ .polar-clock-number{font-size:23px}
+ .polar-postcard .postcard-top span:last-child{max-width:160px;text-align:right}
+ .polar-postcard .postcard-caption strong{font-size:12px}
+ .polar-postcard .postcard-caption span{font-size:7px}
+}
+@media(prefers-reduced-motion:reduce){
+ .polar-postcard{transform:none!important}
+}
+@media print{
+ .hero.polar-hero{background:#204939!important;color:#fff!important}
+ .polar-countdown{display:none}
+ .polar-postcard{transform:none!important}
+ .polar-journey-strip{display:none}
+}

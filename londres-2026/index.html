@@ -4,7 +4,7 @@
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#132D44">
 <meta name="robots" content="noindex, nofollow">
-<meta name="description" content="Guía compartida de Londres del 6 al 12 de diciembre de 2026. Los tickets se almacenan solo en el navegador.">
+<meta name="description" content="Guía de La Patrulla Polar en Londres. Los PDFs añadidos se guardan en este dispositivo; la checklist puede sincronizarse con Firebase al autorizar las cuentas.">
 <title>La Patrulla Polar en Londres · Postales de Navidad 2026</title>
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="anonymous">
 <style>
@@ -26,7 +26,7 @@
 <link rel="stylesheet" href="./style-v10.css?v=10">
 <link rel="stylesheet" href="./style-v11.css?v=13">
 <link rel="stylesheet" href="./style-v16.css?v=17">
-<link rel="stylesheet" href="./firebase-shared-v18.css?v=18">
+<link rel="stylesheet" href="./firebase-shared-v18.css?v=19">
 </head>
 <body>
 <div class="app">
@@ -107,7 +107,7 @@
 </section>
 
 <section id="files-view" class="view">
-<div class="pp-page-index"><span class="pp-index-mark">02</span><div><div class="kicker">EL SOBRE DE VIAJE</div><h2 class="section-heading">Nuestros tickets</h2><p class="lead">Billetes, entradas y confirmaciones. Drive es la carpeta compartida; los archivos añadidos aquí se guardan en este dispositivo.</p></div><span class="pp-index-decor" aria-hidden="true">✉</span></div>
+<div class="pp-page-index"><span class="pp-index-mark">02</span><div><div class="kicker">EL SOBRE DE VIAJE</div><h2 class="section-heading">Nuestros tickets</h2><p class="lead">Billetes, entradas y confirmaciones. Drive es la carpeta compartida; los archivos añadidos aquí se guardan en este dispositivo.</p><p class="pp-room-shortcut">☁️ <button type="button" onclick="switchTab('checklist');document.getElementById('polar-shared-space')?.scrollIntoView({behavior:'smooth'})">Conectar el espacio compartido de los tres ↗</button></p></div><span class="pp-index-decor" aria-hidden="true">✉</span></div>
 <div class="help-card" style="margin:17px 0"><h3>📲 ¿Cómo compartirlo entre los tres?</h3><p class="tiny">Una persona actualiza la checklist y adjunta los tickets. Después pulsa <b>Exportar copia</b>, envía el archivo de copia por WhatsApp, AirDrop o Drive y las otras dos personas lo cargan con <b>Importar copia</b>. No hay sincronización automática.</p>
 <div class="route-buttons"><button class="primary-btn" onclick="exportBackup()">⬇ Exportar copia con tickets</button><button class="ghost-btn" onclick="document.getElementById('backup-import').click()">⬆ Importar copia</button></div><input id="backup-import" class="file-input" type="file" accept="application/json,.json" onchange="importBackup(event)"><p class="tiny muted" style="margin:10px 0 0">Las copias incluyen archivos adjuntos, notas y estados. Tratad el archivo exportado como documentación privada.</p></div>
 <div class="surface"><h3>➕ Añadir un documento</h3><div class="doc-toolbar"><select id="free-file-cat" aria-label="Tipo de documento"><option value="flights">✈️ Vuelos / embarque</option><option value="lodging">🏠 Alojamiento</option><option value="other">📎 Otros documentos</option><option value="tower">🌉 Tower Bridge</option><option value="science">🔬 Science Museum</option><option value="natural">🦖 Natural History Museum</option><option value="winter">🎢 Winter Wonderland</option><option value="skate">⛸️ Somerset House</option></select><button class="primary-btn" onclick="document.getElementById('free-file-input').click()">Seleccionar archivos</button></div><input class="file-input" id="free-file-input" type="file" accept=".pdf,image/*,.pkpass" multiple onchange="uploadFiles(event,document.getElementById('free-file-cat').value)"><p class="tiny muted">Podéis guardar varios archivos por reserva, por ejemplo un ticket para cada persona.</p></div>
@@ -115,7 +115,7 @@
 <details id="ticket-management" class="pp-ticket-management"><summary><span class="pp-ticket-management-icon" aria-hidden="true">🎟️</span><span><strong>Ver estado y horarios de las entradas</strong><small>Entradas confirmadas, pendientes y cambios</small></span><span aria-hidden="true">⌄</span></summary><div class="pp-ticket-management-inside">
 
 <div class="counterbar" style="margin:16px 0"><b id="booking-progress-label">0 completadas</b><div class="progress"><span id="booking-progress-bar" style="width:0"></span></div></div>
-<div class="warning">🔐 No enviéis códigos de reserva, pasaportes ni billetes a una web desconocida. Esta guía no sube nada a servidores: los documentos se guardan localmente en vuestro navegador.</div>
+<div class="warning">🔐 No compartáis aquí localizadores, pasaportes ni códigos de embarque. Al activar Firebase solo se sincronizan estados y horarios; los PDFs guardados en esta página siguen siendo locales.</div>
 <div id="booking-list"></div>
 
 </div></details>
@@ -334,9 +334,9 @@ async function importBackup(event){let file=event.target.files?.[0];event.target
 <script src="./app-v10.js?v=10" defer></script>
 <script src="./app-v11.js?v=13" defer></script>
 <script src="./app-v14.js?v=14" defer></script>
-<script src="./app-v16.js?v=17" defer></script>
+<script src="./app-v16.js?v=18" defer></script>
 <script src="./firebase-config.js?v=18" defer></script>
 <script src="./firebase-bridge-v18.js?v=18" defer></script>
-<script type="module" src="./firebase-sync-v18.js?v=18"></script>
+<script type="module" src="./firebase-sync-v18.js?v=19"></script>
 </body>
 </html>

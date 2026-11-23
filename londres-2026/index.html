@@ -17,6 +17,7 @@
 @media(max-width:420px){.hero h1{font-size:36px}.main{padding:16px 11px}.surface{padding:13px}.day-head{padding:16px}.day-head h2{font-size:24px}.stop{grid-template-columns:47px 1fr}.stop:not(:last-child):before{left:44px}.book-fields{grid-template-columns:1fr}.book-fields .wide{grid-column:auto}.bottom-nav button{min-width:65px;padding:6px}.map{height:325px}.map-fallback{height:325px}}
 @media print{.bottom-nav,.top-actions,.date-strip,.route-buttons,.book-actions,.hero-btn,button{display:none!important}.hero{background:#123b37!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}.app{max-width:none}.view{display:block!important;break-before:page}.day-head,.stop-body{break-inside:avoid}.map{display:none}.map-fallback{display:none}.layout{display:block}.surface{box-shadow:none;margin:14px 0}}
 </style>
+<link rel="stylesheet" href="./map-v2.css?v=2">
 </head>
 <body>
 <div class="app">
@@ -236,5 +237,6 @@ async function importBackup(event){let file=event.target.files?.[0];event.target
 // Auto-start. No remote service receives checklist or attachment data.
 (async()=>{await initDb();renderDay();renderBookings();renderFiles();if(dbError)toast('Para guardar PDFs usad un navegador que permita almacenamiento local.')})();
 </script>
+<script src="./map-v2.js?v=2" defer></script>
 </body>
 </html>

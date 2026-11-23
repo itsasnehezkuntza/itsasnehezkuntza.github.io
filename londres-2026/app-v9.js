@@ -100,8 +100,18 @@ function movePhotoGallery(){
   if(fold)fold.hidden=!child||!child.querySelector(".day-photo-item");
  }
 }
+function decorateDayTabs(){
+ document.querySelectorAll("#day-strip .day-chip").forEach((tab,i)=>{
+  if(tab.querySelector(".day-chip-symbol"))return;
+  const symbol=document.createElement("span");
+  symbol.className="day-chip-symbol";symbol.setAttribute("aria-hidden","true");
+  symbol.textContent=DAYS[i]?.emoji||"✳";
+  tab.appendChild(symbol);
+ });
+}
 function renderUI(){
  const d=DAYS[state.day]||DAYS[0];if(!d)return;
+ decorateDayTabs();
  const changed=d.date!==renderedDay;
  renderFocus(d);
  renderRoute(d);

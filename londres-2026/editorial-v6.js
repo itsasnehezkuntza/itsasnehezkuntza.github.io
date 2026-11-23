@@ -129,7 +129,7 @@ function showGallery(){
     if(serial!==renderCounter)return;
     const item=[...wrapper.querySelectorAll(".day-photo-item")].find(x=>x.dataset.place===key);if(!item)return;
     const photoSpace=item.querySelector(".day-photo-image"),credit=item.querySelector(".day-photo-credit");
-    if(photo?.src&&photo?.src.startsWith("https://upload.wikimedia.org/")){
+    if(photo?.src&&(photo.src.startsWith("https://upload.wikimedia.org/")||photo.src.startsWith("https://commons.wikimedia.org/wiki/Special:FilePath/"))){
       photoSpace.innerHTML='<img src="'+textSafe(photo.src)+'" alt="'+textSafe(title)+'" loading="lazy" referrerpolicy="no-referrer"><span class="photo-zoom">Ver parada ↗</span>';
       photoSpace.querySelector("img").addEventListener("error",()=>{photoSpace.classList.add("image-unavailable");photoSpace.innerHTML='<span>Foto temporalmente no disponible</span>'});
       credit.innerHTML='<a href="'+textSafe(photo.page)+'" target="_blank" rel="noopener noreferrer">'+textSafe(photo.credit||"Fotografía en Wikimedia Commons")+' ↗</a>';

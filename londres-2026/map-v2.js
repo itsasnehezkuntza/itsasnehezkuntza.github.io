@@ -33,12 +33,43 @@ stalbansstation:"St Albans City railway station",stalbans:"St Albans Cathedral",
 stalbansclock:"Clock Tower, St Albans",stalbansmarket:"St Albans",
 camden:"Camden Market",greenwich:"Greenwich Market"
 };
+/* Selección de fotografías reales, con fuente y autor en Wikimedia Commons. */
+const COMMONS_PHOTOS={
+ bridge:"Tower Bridge-London, England, United Kingdom.jpg",
+ natural:"Natural History Museum, London, Dinosaur Gallery.jpg",
+ hamleys:"Christmas lights in Regent Street, London, 2022.jpg",
+ winter:"Rollercoaster at Winter Wonderland, Hyde Park, London - geograph.org.uk - 5229912.jpg",
+ covent:"Covent Garden Christmas decorations 2025-12-09.jpg",
+ stalbans:"St Albans Cathedral Exterior from west, Herfordshire, UK - Diliff.jpg",
+};
+function cleanCredit(raw){
+ const el=document.createElement("div");el.innerHTML=String(raw||"").slice(0,2400);
+ return (el.textContent||"").replace(/\\s+/g," ").trim().slice(0,85);
+}
+async function commonsPicture(key){
+ const file=COMMONS_PHOTOS[key];if(!file)return null;
+ const url="https://commons.wikimedia.org/w/api.php?origin=*&action=query&format=json&prop=imageinfo&iiprop=url%7Cextmetadata&iiurlwidth=900&titles="+encodeURIComponent("File:"+file);
+ const ctrl=new AbortController(),timer=setTimeout(()=>ctrl.abort(),7500);
+ try {
+  const r=await fetch(url,{signal:ctrl.signal,credentials:"omit"});
+  if(!r.ok)return null;
+  const data=await r.json();
+  const info=Object.values(data.query?.pages||{})[0]?.imageinfo?.[0];if(!info)return null;
+  const src=info.thumburl||info.url;
+  if(!src||!src.startsWith("https://upload.wikimedia.org/"))return null;
+  const meta=info.extmetadata||{};
+  const author=cleanCredit(meta.Artist?.value).replace(/\\[.*?\\]/g,"")||"Wikimedia Commons";
+  const license=cleanCredit(meta.LicenseShortName?.value)||"Licencia libre";
+  return {src,page:"https://commons.wikimedia.org/wiki/File:"+encodeURIComponent(file.replaceAll(" ","_")),credit:author+" · "+license};
+ }catch(e){return null}finally{clearTimeout(timer)}
+}
 const cache=new Map();
 const sourceLink=key=>"https://en.wikipedia.org/wiki/"+encodeURIComponent((WIKI[key]||"London").replaceAll(" ","_"));
 const pointLink=key=>"https://www.google.com/maps/search/?api=1&query="+encodeURIComponent((PLACE[key]||[51.51,-.12]).join(","));
 async function getPicture(key){
  if(cache.has(key))return cache.get(key);
  const job=(async()=>{
+  const cc=await commonsPicture(key);if(cc)return cc;
   const title=WIKI[key];if(!title)return null;
   const url="https://en.wikipedia.org/w/api.php?origin=*&action=query&format=json&redirects=1&prop=pageimages&piprop=thumbnail&pithumbsize=720&pilicense=free&titles="+encodeURIComponent(title);
   const ctrl=new AbortController(),timer=setTimeout(()=>ctrl.abort(),8000);
@@ -52,6 +83,7 @@ async function getPicture(key){
  })();
  cache.set(key,job);return job;
 }
+window.londonTripPhoto=getPicture;
 let currentStops=[],markerMap=new Map(),selectedKey="";
 const number=s=>String(s.num).padStart(2,"0");
 function photoHtml(s,pic,small){
@@ -64,7 +96,7 @@ function bigCard(s,pic){
  '<div class="map-photo-body"><span class="label">PARADA '+number(s)+' · '+esc(s.time)+' · '+esc(s.duration)+'</span>'+
  '<h4>'+(EMOJI[s.place]||"📍")+' '+esc(s.title)+'</h4><p>'+esc(s.desc)+'</p>'+
  '<div class="map-photo-actions"><a href="'+pointLink(s.place)+'" target="_blank" rel="noopener">📍 Google Maps ↗</a>'+
- '<a href="'+(pic?esc(pic.page):sourceLink(s.place))+'" target="_blank" rel="noopener">'+(pic?"📷 Origen de la foto ↗":"ℹ️ Más información ↗")+'</a></div></div>';
+ '<a href="'+(pic?esc(pic.page):sourceLink(s.place))+'" target="_blank" rel="noopener">'+(pic?"Fuente de la fotografía ↗":"Más información ↗")+'</a></div>'+(pic&&pic.credit?'<p class="photo-credit">Foto: '+esc(pic.credit)+'</p>':'')+'</div>';
 }
 function popupCard(s,pic){
  return '<div class="spot-popup">'+photoHtml(s,pic,true)+

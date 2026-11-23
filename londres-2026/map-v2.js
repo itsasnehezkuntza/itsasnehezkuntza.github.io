@@ -46,8 +46,9 @@ const COMMONS_PHOTOS={
  stalbans:"St Albans Cathedral Exterior from west, Herfordshire, UK - Diliff.jpg",
 };
 function cleanCredit(raw){
- const el=document.createElement("div");el.innerHTML=String(raw||"").slice(0,2400);
- return (el.textContent||"").replace(/\\s+/g," ").trim().slice(0,85);
+ const text=String(raw||"").slice(0,2400);
+ const parsed=new DOMParser().parseFromString(text,"text/html");
+ return (parsed.body.textContent||"").replace(/\s+/g," ").trim().slice(0,85);
 }
 async function commonsPicture(key){
  const file=COMMONS_PHOTOS[key];if(!file)return null;
@@ -64,7 +65,7 @@ async function commonsPicture(key){
   const src=info.thumburl||info.url;
   if(!src||!src.startsWith("https://upload.wikimedia.org/"))return fallback;
   const meta=info.extmetadata||{};
-  const author=cleanCredit(meta.Artist?.value).replace(/\\[.*?\\]/g,"")||"Wikimedia Commons";
+  const author=cleanCredit(meta.Artist?.value).replace(/\[.*?\]/g,"")||"Wikimedia Commons";
   const license=cleanCredit(meta.LicenseShortName?.value)||"Licencia libre";
   return {src,page:"https://commons.wikimedia.org/wiki/File:"+encodeURIComponent(file.replaceAll(" ","_")),credit:author+" · "+license};
  }catch(e){return fallback}finally{clearTimeout(timer)}

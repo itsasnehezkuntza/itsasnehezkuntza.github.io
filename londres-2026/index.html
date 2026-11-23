@@ -130,7 +130,7 @@
   <div class="polar-shared-inputs"><input id="polar-trip-code" type="text" autocapitalize="characters" autocomplete="off" spellcheck="false" placeholder="Código del viaje" maxlength="40" aria-describedby="polar-shared-status"><button id="polar-login-btn" type="button" disabled>Entrar con Google</button></div>
  </div>
  <div id="polar-shared-status" class="polar-shared-status" role="status" aria-live="polite">Preparando la conexión. De momento, las listas se guardan solo en este dispositivo.</div>
- <div id="polar-shared-connected" class="polar-shared-connected" hidden><span id="polar-shared-user"></span><button id="polar-sync-push" type="button" disabled title="Subir una copia de los estados de este móvil al espacio compartido">Publicar mis cambios locales</button><button id="polar-signout-btn" type="button">Salir</button></div>
+ <div id="polar-shared-connected" class="polar-shared-connected" hidden><span id="polar-shared-user"></span><button id="polar-sync-push" type="button" disabled title="Enviar los estados actuales de este móvil al espacio compartido">Publicar lista actual</button><button id="polar-signout-btn" type="button">Salir</button></div>
  <p class="polar-shared-foot">El código sirve para encontrar el viaje; la protección real depende de la cuenta autorizada y de los permisos de Firebase.</p>
 </section>
 <section id="packing-board" class="pp-packing-board" aria-label="Checklist de maleta">
@@ -337,6 +337,6 @@ async function importBackup(event){let file=event.target.files?.[0];event.target
 <script src="./app-v16.js?v=19" defer></script>
 <script src="./firebase-config.js?v=18" defer></script>
 <script src="./firebase-bridge-v18.js?v=18" defer></script>
-<script type="module" src="./firebase-sync-v18.js?v=19"></script>
+<script type="module" src="./firebase-sync-v18.js?v=20"></script>
 </body>
 </html>

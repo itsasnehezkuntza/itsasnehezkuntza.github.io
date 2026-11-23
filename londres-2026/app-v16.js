@@ -155,6 +155,14 @@ function adaptMenus(){
  const oldBookings=document.querySelector("#bookings-view .warning");
  if(oldBookings)oldBookings.textContent="🔒 Las reservas se guardan en este navegador. Para compartir los archivos originales, usad vuestra carpeta privada de Drive.";
 }
+window.openTicketManagement=function(){
+ window.switchTab("files");
+ const accordion=document.getElementById("ticket-management");
+ if(accordion){
+  accordion.open=true;
+  accordion.scrollIntoView({behavior:"smooth",block:"start"});
+ }
+};
 function styleBookkeeping(){
  const str=document.querySelector("#bookings-view .pp-page-index .lead");
  if(str)str.textContent="Estado de las reservas, horarios y entradas confirmadas.";

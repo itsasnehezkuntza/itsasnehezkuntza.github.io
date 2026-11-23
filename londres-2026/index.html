@@ -21,7 +21,7 @@
 <link rel="stylesheet" href="./map-v2.css?v=4">
 <link rel="stylesheet" href="./style-v3.css?v=4">
 <link rel="stylesheet" href="./style-v4.css?v=5">
-<link rel="stylesheet" href="./style-v6.css?v=6">
+<link rel="stylesheet" href="./style-v6.css?v=7">
 </head>
 <body>
 <div class="app">
@@ -253,9 +253,9 @@ async function importBackup(event){let file=event.target.files?.[0];event.target
 // Auto-start. No remote service receives checklist or attachment data.
 (async()=>{await initDb();renderDay();renderBookings();renderFiles();if(dbError)toast('Para guardar PDFs usad un navegador que permita almacenamiento local.')})();
 </script>
-<script src="./map-v2.js?v=6" defer></script>
+<script src="./map-v2.js?v=7" defer></script>
 <script src="./app-v3.js?v=4" defer></script>
 <script src="./app-v4.js?v=5" defer></script>
-<script src="./editorial-v6.js?v=6" defer></script>
+<script src="./editorial-v6.js?v=7" defer></script>
 </body>
 </html>

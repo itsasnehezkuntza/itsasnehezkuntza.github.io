@@ -1,54 +1,113 @@
 rules_version = '2';
 
+// Modelo asumido:
+// - trips/{tripId}/members/{uid}: creado solo desde Console/Admin SDK.
+// - shared/tasks: items booleanos conocidos + modifiedAt timestamp.
+// - shared/bookings: items {status,time} conocidos + modifiedAt timestamp.
+// - shared/packing y personal/{uid}: items booleanos, extra opcional y timestamp.
+// No se guardan PDFs, localizadores, notas, correos ni enlaces de Drive.
 service cloud.firestore {
   match /databases/{database}/documents {
-    function signedIn() {
+    function isAuthenticated() {
       return request.auth != null;
     }
-    function memberOf(tripId) {
-      return signedIn() &&
+    function isOwner(uid) {
+      return isAuthenticated() && request.auth.uid == uid;
+    }
+    function uidUnchanged(uid) {
+      return isOwner(uid);
+    }
+    function uidNotModified(uid) {
+      return isOwner(uid);
+    }
+    function isTripMember(tripId) {
+      return isAuthenticated() &&
         exists(/databases/$(database)/documents/trips/$(tripId)/members/$(request.auth.uid));
     }
+    function hasBaseFields(data) {
+      return data.keys().hasAll(['items', 'modifiedAt']) &&
+        data.keys().hasOnly(['items', 'extra', 'modifiedAt']) &&
+        data.items is map &&
+        data.modifiedAt is timestamp &&
+        data.modifiedAt == request.time;
+    }
+    function isValidBooleanItems(items) {
+      return items.keys().size() <= 140 &&
+        items.values().hasOnly([true, false]);
+    }
+    function isValidExtras(data) {
+      return !('extra' in data) ||
+        (data.extra is list && data.extra.size() <= 50);
+    }
+    function isValidTasks(data) {
+      return hasBaseFields(data) &&
+        data.items.keys().hasOnly([
+          'passports', 'etas', 'cards', 'flightDone', 'lodgingDone',
+          'towerDone', 'scienceDone', 'naturalDone', 'winterDone',
+          'skateDone', 'transfer', 'stalbansTrain', 'guard', 'roaming',
+          'weather', 'tickets'
+        ]) &&
+        isValidBooleanItems(data.items) &&
+        !('extra' in data);
+    }
+    function isValidBooking(value) {
+      return value is map &&
+        value.keys().hasAll(['status', 'time']) &&
+        value.keys().hasOnly(['status', 'time']) &&
+        value.status in ['todo', 'done', 'skip'] &&
+        value.time is string &&
+        value.time.size() <= 40;
+    }
+    function isValidBookings(data) {
+      return hasBaseFields(data) &&
+        data.items.keys().hasOnly([
+          'tower', 'science', 'natural', 'winter', 'skate', 'flight', 'lodging'
+        ]) &&
+        (!('tower' in data.items) || isValidBooking(data.items.tower)) &&
+        (!('science' in data.items) || isValidBooking(data.items.science)) &&
+        (!('natural' in data.items) || isValidBooking(data.items.natural)) &&
+        (!('winter' in data.items) || isValidBooking(data.items.winter)) &&
+        (!('skate' in data.items) || isValidBooking(data.items.skate)) &&
+        (!('flight' in data.items) || isValidBooking(data.items.flight)) &&
+        (!('lodging' in data.items) || isValidBooking(data.items.lodging)) &&
+        !('extra' in data);
+    }
+    function isValidPacking(data) {
+      return hasBaseFields(data) &&
+        isValidBooleanItems(data.items) &&
+        isValidExtras(data);
+    }
 
-    // Una membresía debe darla el administrador desde Firebase Console / Admin SDK.
-    // Nadie puede añadirse a sí mismo desde la página web.
     match /trips/{tripId}/members/{uid} {
-      allow get: if signedIn() && request.auth.uid == uid;
+      allow get: if isOwner(uid);
       allow list, create, update, delete: if false;
     }
-
-    // Estados compartidos: checklist, maleta común y estado/hora de entradas.
-    match /trips/{tripId}/shared/{docId} {
-      allow get: if memberOf(tripId)
-        && docId in ["tasks", "packing", "bookings"];
+    match /trips/{tripId}/shared/tasks {
+      allow get: if isTripMember(tripId);
       allow list, delete: if false;
-      allow create, update: if memberOf(tripId)
-        && docId in ["tasks", "packing", "bookings"]
-        && request.resource.data.keys().hasOnly(["items", "extra", "modifiedAt"])
-        && request.resource.data.keys().hasAll(["items"])
-        && request.resource.data.items is map
-        && request.resource.data.items.keys().size() <= 140
-        && (!("extra" in request.resource.data) ||
-            (request.resource.data.extra is list &&
-             request.resource.data.extra.size() <= 50));
+      allow create: if isTripMember(tripId) && isValidTasks(request.resource.data);
+      allow update: if isTripMember(tripId) && isValidTasks(request.resource.data);
     }
-
-    // Maleta privada por persona: nadie puede consultar la de otra.
+    match /trips/{tripId}/shared/bookings {
+      allow get: if isTripMember(tripId);
+      allow list, delete: if false;
+      allow create: if isTripMember(tripId) && isValidBookings(request.resource.data);
+      allow update: if isTripMember(tripId) && isValidBookings(request.resource.data);
+    }
+    match /trips/{tripId}/shared/packing {
+      allow get: if isTripMember(tripId);
+      allow list, delete: if false;
+      allow create: if isTripMember(tripId) && isValidPacking(request.resource.data);
+      allow update: if isTripMember(tripId) && isValidPacking(request.resource.data);
+    }
     match /trips/{tripId}/personal/{uid} {
-      allow get: if memberOf(tripId) && request.auth.uid == uid;
+      allow get: if isTripMember(tripId) && isOwner(uid);
       allow list, delete: if false;
-      allow create, update: if memberOf(tripId)
-        && request.auth.uid == uid
-        && request.resource.data.keys().hasOnly(["items", "extra", "modifiedAt"])
-        && request.resource.data.keys().hasAll(["items"])
-        && request.resource.data.items is map
-        && request.resource.data.items.keys().size() <= 140
-        && (!("extra" in request.resource.data) ||
-            (request.resource.data.extra is list &&
-             request.resource.data.extra.size() <= 50));
+      allow create: if isTripMember(tripId) && uidUnchanged(uid) &&
+        isValidPacking(request.resource.data);
+      allow update: if isTripMember(tripId) && uidNotModified(uid) &&
+        isValidPacking(request.resource.data);
     }
-
-    // Todo lo demás cerrado, incluidos los documentos raíz del viaje.
     match /{document=**} {
       allow read, write: if false;
     }

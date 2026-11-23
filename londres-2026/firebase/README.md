@@ -7,7 +7,7 @@ La web sigue alojada en GitHub Pages, y la carpeta de tickets continúa en Googl
 - `firebase-config.js`: `null` (sin proyecto enlazado). La interfaz muestra **Pendiente de activar** y no intenta autenticar ni sincronizar.
 - `firebase-bridge-v18.js`: detecta cambios locales y permite aplicar datos de la nube sin crear bucles. Los datos locales se siguen guardando como antes.
 - `firebase-sync-v18.js`: inicio de sesión con Google, comprobación de membresía, actualizaciones puntuales y escucha de cambios.
-- `firebase/firestore.rules`: **denegación por defecto** salvo usuarios autorizados. No publicar reglas `allow read, write: if true`.
+- `firebase/firestore.rules`: prototipo con **denegación por defecto**, membresía por UID y validación de los campos sincronizados. Debe revisarse y probarse antes de compartir la aplicación de forma amplia. No publicar reglas `allow read, write: if true`.
 
 ## Activación (requiere propietario del proyecto)
 
@@ -51,7 +51,8 @@ trips/londres-2026/personal/UID_3
 
 ## Límites y decisiones técnicas
 
-- Cada cambio de casilla se escribe como un campo individual para reducir conflictos entre los tres móviles.
+- Cada cambio de casilla se escribe como un campo individual para reducir conflictos entre los tres móviles. Al eliminar un elemento personalizado también se elimina su estado remoto.
+- «Publicar lista actual» sustituye los estados remotos por la copia actual del móvil, después de pedir confirmación; no conserva claves antiguas invisibles.
 - Los cambios de listas personalizadas se almacenan como arreglos y pueden necesitar resolución manual si varias personas editan el mismo arreglo simultáneamente.
 - El modo local funciona aunque no haya conexión o el Firebase no esté aún activado.
 - Los PDFs siguen en IndexedDB (dispositivo) o en Drive (compartido mediante las cuentas de Google). **No** se suben a Firestore ni a GitHub.

@@ -77,8 +77,9 @@ try{
  setStatus("La configuración de Firebase necesita revisarse. La información local está a salvo.","error");
  return;
 }
+const normalizedCode=()=>codeInput.value.trim().toUpperCase().replace(/\s/g,"");
 const tripCodeReady=()=>{
- const userCode=codeInput.value.trim().toUpperCase().replace(/\s/g,"");
+ const userCode=normalizedCode();
  if(userCode!==CODE){setStatus("El código no coincide con el de este viaje.","error");return false}
  try{localStorage.setItem("polar-trip-selected",TRIP)}catch(e){}
  return true;
@@ -104,10 +105,10 @@ function withoutChanges(before,after){
  }
  return out;
 }
-async function upsert(ref,items,extras){
+async function upsert(ref,items,extras,replace=false){
  const body={items,modifiedAt:SDK.serverTimestamp()};
  if(extras!==undefined)body.extra=extras;
- return SDK.setDoc(ref,body,{merge:true});
+ return replace?SDK.setDoc(ref,body):SDK.setDoc(ref,body,{merge:true});
 }
 function subscribe(ref,type){
  return SDK.onSnapshot(ref,snapshot=>{
@@ -143,6 +144,10 @@ async function authorize(user){
 loginBtn.disabled=false;
 loginBtn.addEventListener("click",async()=>{
  if(!tripCodeReady())return;
+ if(auth.currentUser){
+  await authorize(auth.currentUser);
+  return;
+ }
  setStatus("Abriendo el inicio de sesión de Google…","info");
  try{
   const provider=new SDK.GoogleAuthProvider();
@@ -167,10 +172,10 @@ publishBtn.addEventListener("click",async()=>{
  publishBtn.disabled=true;
  try{
   await Promise.all([
-   upsert(paths.tasks,s.tasks),
-   upsert(paths.bookings,s.bookings),
-   upsert(paths.packingShared,s.packingShared,s.extrasShared),
-   upsert(personalRef(activeUser.uid),s.packingPersonal,s.extrasPersonal)
+   upsert(paths.tasks,s.tasks,undefined,true),
+   upsert(paths.bookings,s.bookings,undefined,true),
+   upsert(paths.packingShared,s.packingShared,s.extrasShared,true),
+   upsert(personalRef(activeUser.uid),s.packingPersonal,s.extrasPersonal,true)
   ]);
   setStatus("Estados locales publicados en el espacio compartido. Los PDFs siguen en Drive.","ready");
  }catch(e){
@@ -182,16 +187,24 @@ window.addEventListener("polar:local-change",async e=>{
  const before=e.detail?.before,after=e.detail?.after;
  if(!before||!after)return;
  const writes=[];
- const dt=withoutChanges(before.tasks,after.tasks);
+ const deleted=SDK.deleteField();
+ const withDeletions=(oldItems,newItems)=>{
+  const changes=withoutChanges(oldItems,newItems);
+  for(const key of Object.keys(oldItems||{})){
+   if(!Object.prototype.hasOwnProperty.call(newItems||{},key))changes[key]=deleted;
+  }
+  return changes;
+ };
+ const dt=withDeletions(before.tasks,after.tasks);
  if(Object.keys(dt).length)writes.push(upsert(paths.tasks,dt));
- const dbk=withoutChanges(before.bookings,after.bookings);
+ const dbk=withDeletions(before.bookings,after.bookings);
  if(Object.keys(dbk).length)writes.push(upsert(paths.bookings,dbk));
- const dsh=withoutChanges(before.packingShared,after.packingShared);
+ const dsh=withDeletions(before.packingShared,after.packingShared);
  if(Object.keys(dsh).length||JSON.stringify(before.extrasShared)!==JSON.stringify(after.extrasShared)){
   writes.push(upsert(paths.packingShared,dsh,
    JSON.stringify(before.extrasShared)!==JSON.stringify(after.extrasShared)?after.extrasShared:undefined));
  }
- const dpe=withoutChanges(before.packingPersonal,after.packingPersonal);
+ const dpe=withDeletions(before.packingPersonal,after.packingPersonal);
  if(Object.keys(dpe).length||JSON.stringify(before.extrasPersonal)!==JSON.stringify(after.extrasPersonal)){
   writes.push(upsert(personalRef(activeUser.uid),dpe,
    JSON.stringify(before.extrasPersonal)!==JSON.stringify(after.extrasPersonal)?after.extrasPersonal:undefined));
@@ -204,7 +217,7 @@ window.addEventListener("polar:local-change",async e=>{
  }
 });
 SDK.onAuthStateChanged(auth,user=>{
- if(user&&codeInput.value===CODE)authorize(user);
+ if(user&&normalizedCode()===CODE.replace(/\s/g,""))authorize(user);
  else if(user){
   loginBtn.textContent="Entrar en el viaje";
   setStatus("Cuenta de Google iniciada. Introduce el código para abrir el viaje.","info");

@@ -63,7 +63,7 @@ function changePacking(items,group){
   if(!validBool(flag)||typeof id!=="string"||id.length>75)continue;
   const isShared=SHARED_PACK_IDS.has(id)||extras.some(x=>x.id===id&&x.kind==="shared");
   if(group==="shared"&&!isShared&&id.indexOf("extra-")!==0)continue;
-  if(group==="personal"&&SHARED_PACK_IDS.has(id))continue;
+  if(group==="personal"&&isShared)continue;
   state.packing[id]=flag;
  }
 }
@@ -97,12 +97,14 @@ function applyRemote(type,data){
   }
   if(type==="packingShared"||type==="packingPersonal"){
    const kind=type==="packingShared"?"shared":"personal";
-   changePacking(data.items,kind);
    const remote=cleanRemoteExtra(data.extra,kind);
    if(remote!==null){
     if(!Array.isArray(state.packingExtra))state.packingExtra=[];
     state.packingExtra=state.packingExtra.filter(x=>x.kind!==kind).concat(remote);
    }
+   // Apply the custom-item definitions first so their checkbox values are
+   // classified as shared/personal using the newly received list.
+   changePacking(data.items,kind);
   }
   originalSave();
   previous=snapshot();
